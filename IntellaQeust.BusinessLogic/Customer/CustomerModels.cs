@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace IntellaQeust.BusinessLogic.Customer
 {
-
-    public class CustomerModels
+    public class CustomerViewModel
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
     }
 }

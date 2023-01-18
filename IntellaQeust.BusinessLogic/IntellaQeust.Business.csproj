@@ -71,6 +71,11 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\IntellaQuest.Repository\IntellaQuest.Repository.csproj">
+      <Project>{D0193F54-8483-4254-A44E-8F95319485D9}</Project>
+      <Name>IntellaQuest.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

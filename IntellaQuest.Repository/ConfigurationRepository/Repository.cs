@@ -23,19 +23,17 @@ namespace IntellaQuest.Repository.Repositories
     }
     public class Repository<T> : NHibernateContext, IRepository<T> where T : class
     {
-        private readonly ISession _session;
-
-        public Repository(ISession session)
+        private readonly IUnitOfWork _unitOfWork;
+        public Repository(IUnitOfWork unitOfWork)
         {
-            _session = session;
+            _unitOfWork = unitOfWork;
         }
 
         #region Implementation of IRepository<T>
 
         public bool Add(T entity)
         {
-            _session.Save(entity);
-
+            _unitOfWork.Session.Save(entity);
             return true;
         }
 
@@ -43,7 +41,7 @@ namespace IntellaQuest.Repository.Repositories
         {
             foreach (T item in items)
             {
-                _session.Save(item);
+                _unitOfWork.Session.Save(item);
             }
 
             return true;
@@ -51,7 +49,7 @@ namespace IntellaQuest.Repository.Repositories
 
         public bool Update(T entity)
         {
-            _session.Update(entity);
+            _unitOfWork.Session.Update(entity);
 
             return true;
         }
@@ -60,7 +58,7 @@ namespace IntellaQuest.Repository.Repositories
         {
             foreach (T item in items)
             {
-                _session.Update(item);
+                _unitOfWork.Session.Update(item);
             }
 
             return true;
@@ -68,7 +66,7 @@ namespace IntellaQuest.Repository.Repositories
 
         public bool Delete(T entity)
         {
-            _session.Delete(entity);
+            _unitOfWork.Session.Delete(entity);
 
             return true;
         }
@@ -77,7 +75,7 @@ namespace IntellaQuest.Repository.Repositories
         {
             foreach (T entity in entities)
             {
-                _session.Delete(entity);
+                _unitOfWork.Session.Delete(entity);
             }
 
             return true;
@@ -85,7 +83,7 @@ namespace IntellaQuest.Repository.Repositories
 
         public IQueryable<T> All()
         {
-            return _session.Query<T>();
+            return _unitOfWork.Session.Query<T>();
         }
 
         public T FindBy(Expression<Func<T, bool>> expression)
@@ -95,7 +93,7 @@ namespace IntellaQuest.Repository.Repositories
 
         public T FindBy(int id)
         {
-            return _session.Get<T>(id);
+            return _unitOfWork.Session.Get<T>(id);
         }
 
         public IQueryable<T> FilterBy(Expression<Func<T, bool>> expression)

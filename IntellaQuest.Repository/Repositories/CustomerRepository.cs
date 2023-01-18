@@ -14,8 +14,11 @@ namespace IntellaQuest.Repository.Repositories
     }
     public class CustomerRepository : Repository<Customer>,ICustomerRepository 
     {
-        public CustomerRepository(ISession session) : base(session)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CustomerRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
     }
 }

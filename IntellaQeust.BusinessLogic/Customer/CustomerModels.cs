@@ -1,10 +1,11 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntellaQeust.BusinessLogic.Customer
+namespace IntellaQuest.BusinessLogic.Models
 {
     public class CustomerViewModel
     {
@@ -12,5 +13,14 @@ namespace IntellaQeust.BusinessLogic.Customer
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
+        public class CustomerViewModelValidator: AbstractValidator<CustomerViewModel>
+        {
+            public CustomerViewModelValidator()
+            {
+
+            }
+        }
 }

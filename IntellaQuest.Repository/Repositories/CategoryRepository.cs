@@ -14,8 +14,11 @@ namespace IntellaQuest.Repository.Repositories
     }
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
-        public CategoryRepository(ISession session) : base(session)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CategoryRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
     }
 }

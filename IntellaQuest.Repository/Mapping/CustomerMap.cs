@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntellaQuest.Mapping
+namespace IntellaQuest.Repository.Mapping
 {
     public class CustomerMap : ClassMap<Customer>
     {

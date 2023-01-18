@@ -10,6 +10,8 @@ namespace IntellaQuest.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
+        ISession Session { get; }
+        ITransaction BeginTransaction();
         void Commit();
         void Rollback();
     }
@@ -17,19 +19,15 @@ namespace IntellaQuest.Repository
     {
         private readonly ISessionFactory _sessionFactory;
 
-        private readonly ITransaction _transaction;
+        private ITransaction _transaction;
 
-        public ISession Session { get; private set; }
+        public ISession Session { get; set; }
 
-        public UnitOfWork(ISessionFactory sessionFactory)
+        public UnitOfWork()
         {
-            _sessionFactory = sessionFactory;
-
+            _sessionFactory = NHibernateContext.BuildSessionFactory();
             Session = _sessionFactory.OpenSession();
-
             Session.FlushMode = FlushMode.Auto;
-
-            _transaction = Session.BeginTransaction(IsolationLevel.ReadCommitted);
         }
 
         public void Dispose()
@@ -56,6 +54,12 @@ namespace IntellaQuest.Repository
             {
                 _transaction.Rollback();
             }
+        }
+
+        public ITransaction BeginTransaction()
+        {
+            _transaction = Session.BeginTransaction();
+            return _transaction;
         }
     }
 }

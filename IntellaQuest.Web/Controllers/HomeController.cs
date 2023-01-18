@@ -1,18 +1,20 @@
-﻿using IntellaQuest.Domain;
-using IntellaQuest.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using IntellaQeust.BusinessLogic.Services;
 using System.Web.Mvc;
-using static System.Collections.Specialized.BitVector32;
 
 namespace IntellaQuest.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly ICustomerService _customerService;
+
+        public HomeController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
         public ActionResult Index()
         {
+            var models = _customerService.GetAll();
             return View();
         }
 

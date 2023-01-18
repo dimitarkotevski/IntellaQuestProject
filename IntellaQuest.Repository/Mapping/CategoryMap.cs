@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 using IntellaQuest.Domain;
 
-namespace IntellaQuest.Mapping
+namespace IntellaQuest.Repository.Mapping
 {
     public class CategoryMap : ClassMap<Category>
     {
         public CategoryMap() {
             Schema("dbo");
             Table("Category");
-            Id(c => c.Id);
+            Id(c => c.Id)
+                .Column("CategoryId")
+                .Access.CamelCaseField(Prefix.Underscore);
             Map(c => c.Name);
         }
     }

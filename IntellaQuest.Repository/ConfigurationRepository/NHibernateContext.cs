@@ -1,6 +1,6 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using IntellaQuest.Mapping;
+using IntellaQuest.Repository.Mapping;
 using NHibernate;
 using System;
 using System.Collections.Generic;
@@ -12,15 +12,15 @@ namespace IntellaQuest.Repository
 {
     public class NHibernateContext
     {
-        private static string _connectionString = "Data Source=ANTONIOA-LT;Initial Catalog=shop;Integrated Security=SSPI;";
-        static ISessionFactory BuildSessionFactory()
+        private static string _connectionString = "Data Source=DIMITARK-LT;Initial Catalog=ShopDb;Integrated Security=SSPI;";
+        public static ISessionFactory BuildSessionFactory()
         {
             return Fluently.Configure()
              .Database(MsSqlConfiguration.MsSql2005.ConnectionString(_connectionString))
              .Mappings(m =>
              {
                  m.FluentMappings
-                    .AddFromAssemblyOf<CustomerMap>();
+                    .AddFromAssembly(typeof(CategoryMap).Assembly);
              })
              .BuildSessionFactory();
         }

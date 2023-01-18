@@ -37,6 +37,9 @@
     <Reference Include="FluentNHibernate, Version=3.1.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentNHibernate.3.1.0\lib\net461\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.11.4.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -52,7 +55,13 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -72,8 +81,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IntellaQuest.Domain\IntellaQuest.Domain.csproj">
+      <Project>{859ce134-6624-4f0d-a40a-67aed9bb0cf0}</Project>
+      <Name>IntellaQuest.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IntellaQuest.Repository\IntellaQuest.Repository.csproj">
-      <Project>{D0193F54-8483-4254-A44E-8F95319485D9}</Project>
+      <Project>{d0193f54-8483-4254-a44e-8f95319485d9}</Project>
       <Name>IntellaQuest.Repository</Name>
     </ProjectReference>
   </ItemGroup>

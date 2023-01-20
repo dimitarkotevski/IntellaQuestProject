@@ -8,10 +8,11 @@ namespace IntellaQuest.Repository.Mapping
         public CategoryMap() {
             Schema("dbo");
             Table("Category");
-            Id(c => c.Id)
-                .Column("CategoryId")
-                .Access.CamelCaseField(Prefix.Underscore);
-            Map(c => c.Name);
+            Id(c => c.Id).GeneratedBy.Guid();
+            Map(c => c.Name)
+                .Column("Name")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic.Services;
 using IntellaQuest.BusinessLogic.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,73 +20,47 @@ namespace IntellaQuest.Web.Controllers
         }
 
         // GET: Customer
-        public ActionResult Index()
+        [System.Web.Http.HttpGet]
+        public ActionResult All()
         {
             var models = _customerService.GetAll();
-            return View();
+            return Json(models, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Customer/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Get(Guid id)
         {
-            return View();
+            var model=_customerService.Get(id);
+            return Json(model,JsonRequestBehavior.AllowGet);
         }
 
         // GET: Customer/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Customer/Create
         [HttpPost]
         public ActionResult Create(CustomerViewModel model)
         {
-            return View();
+            var customer = _customerService.Create(model);
+            return Json(customer, JsonRequestBehavior.AllowGet);
         }
-
-        // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Customer/Edit/5
+        // GET: Customer/Edit
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public void Edit(CustomerViewModel model)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _customerService.Update(model);
         }
 
-        // GET: Customer/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Customer/Delete/5
+        // GET: Customer/Delete
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public void Delete(CustomerViewModel model)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _customerService.Delete(model);
         }
+        //POST Customer/DeleteById/5
+        [HttpPost]
+        public void DeleteById(Guid id)
+        {
+            _customerService.Delete(id);
+        }
+
     }
 }

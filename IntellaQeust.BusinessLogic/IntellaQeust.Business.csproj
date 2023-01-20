@@ -71,6 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category\CategoryMappers.cs" />
+    <Compile Include="Category\CategoryModels.cs" />
+    <Compile Include="Category\CategoryService.cs" />
     <Compile Include="Customer\CustomerMappers.cs" />
     <Compile Include="Customer\CustomerModels.cs" />
     <Compile Include="Customer\CustomerService.cs" />

@@ -15,7 +15,7 @@ namespace IntellaQuest.Repository
         private static string _connectionString = "Data Source=DIMITARK-LT;Initial Catalog=ShopDb;Integrated Security=SSPI;";
         public static ISessionFactory BuildSessionFactory()
         {
-            return Fluently.Configure()
+            var build= Fluently.Configure()
              .Database(MsSqlConfiguration.MsSql2005.ConnectionString(_connectionString))
              .Mappings(m =>
              {
@@ -23,6 +23,7 @@ namespace IntellaQuest.Repository
                     .AddFromAssembly(typeof(CategoryMap).Assembly);
              })
              .BuildSessionFactory();
+            return build;
         }
     }
 }

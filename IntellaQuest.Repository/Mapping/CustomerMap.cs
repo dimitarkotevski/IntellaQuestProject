@@ -13,7 +13,7 @@ namespace IntellaQuest.Repository.Mapping
         public CustomerMap() {
             Schema("dbo");
             Table("Customer");
-            Id(c => c.Id);
+            Id(c => c.Id).GeneratedBy.Guid();
             Map(c => c.Name)
                 .Column("Name")
                 .Access.CamelCaseField(Prefix.Underscore)

@@ -15,10 +15,11 @@ namespace IntellaQuest.Repository.Repositories
         bool Update(T entity);
         bool Update(IEnumerable<T> items);
         bool Delete(T entity);
+        bool Delete(Guid id);
         bool Delete(IEnumerable<T> entities);
         IQueryable<T> All();
         T FindBy(Expression<Func<T, bool>> expression);
-        T FindBy(int id);
+        T FindBy(Guid id);
         IQueryable<T> FilterBy(Expression<Func<T, bool>> expression);
     }
     public class Repository<T> : NHibernateContext, IRepository<T> where T : class
@@ -91,7 +92,7 @@ namespace IntellaQuest.Repository.Repositories
             return FilterBy(expression).Single();
         }
 
-        public T FindBy(int id)
+        public T FindBy(Guid id)
         {
             return _unitOfWork.Session.Get<T>(id);
         }
@@ -99,6 +100,13 @@ namespace IntellaQuest.Repository.Repositories
         public IQueryable<T> FilterBy(Expression<Func<T, bool>> expression)
         {
             return All().Where(expression).AsQueryable();
+        }
+
+        public bool Delete(Guid id)
+        {
+            var entity = _unitOfWork.FindBy(id);
+            _unitOfWork.Session.Delete(id);
+            return true;
         }
 
         #endregion

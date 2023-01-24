@@ -1,10 +1,7 @@
-﻿using NHibernate;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntellaQuest.Repository.Repositories
 {
@@ -104,8 +101,8 @@ namespace IntellaQuest.Repository.Repositories
 
         public bool Delete(Guid id)
         {
-            var entity = _unitOfWork.FindBy(id);
-            _unitOfWork.Session.Delete(id);
+            var entity = _unitOfWork.Session.Get<T>(id);
+            _unitOfWork.Session.Delete(entity);
             return true;
         }
 

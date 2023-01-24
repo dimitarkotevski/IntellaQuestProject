@@ -1,7 +1,4 @@
-﻿using FluentNHibernate.Mapping;
-using IntellaQuest.Domain;
-
-namespace IntellaQuest.Repository.Mapping
+﻿namespace IntellaQuest.Repository.Mapping
 {
     public class ProductMap //: ClassMap<Product>
     {

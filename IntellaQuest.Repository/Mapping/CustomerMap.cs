@@ -1,19 +1,16 @@
 ﻿using FluentNHibernate.Mapping;
 using IntellaQuest.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntellaQuest.Repository.Mapping
 {
-    public class CustomerMap : ClassMap<Customer>
+    public class CustomerMap : ClassMap<Customers>
     {
         public CustomerMap() {
             Schema("dbo");
-            Table("Customer");
+            Table("Customers");
+            //Id
             Id(c => c.Id).GeneratedBy.Guid();
+            //Other attribute
             Map(c => c.Name)
                 .Column("Name")
                 .Access.CamelCaseField(Prefix.Underscore)

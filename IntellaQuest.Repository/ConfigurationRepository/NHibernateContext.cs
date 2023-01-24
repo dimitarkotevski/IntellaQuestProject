@@ -2,11 +2,6 @@
 using FluentNHibernate.Cfg.Db;
 using IntellaQuest.Repository.Mapping;
 using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntellaQuest.Repository
 {
@@ -20,7 +15,7 @@ namespace IntellaQuest.Repository
              .Mappings(m =>
              {
                  m.FluentMappings
-                    .AddFromAssembly(typeof(CategoryMap).Assembly);
+                    .AddFromAssembly(typeof(CategoriesMap).Assembly);
              })
              .BuildSessionFactory();
             return build;

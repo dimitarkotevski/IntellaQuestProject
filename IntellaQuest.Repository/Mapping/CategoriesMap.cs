@@ -3,12 +3,14 @@ using IntellaQuest.Domain;
 
 namespace IntellaQuest.Repository.Mapping
 {
-    public class CategoryMap : ClassMap<Category>
+    public class CategoriesMap : ClassMap<Categories>
     {
-        public CategoryMap() {
+        public CategoriesMap() {
             Schema("dbo");
-            Table("Category");
-            Id(c => c.Id).GeneratedBy.Guid();
+            Table("Categories");
+
+            Id(c => c.Id);
+
             Map(c => c.Name)
                 .Column("Name")
                 .Access.CamelCaseField(Prefix.Underscore)

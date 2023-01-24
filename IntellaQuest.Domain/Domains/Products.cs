@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IntellaQuest.Domain
+﻿namespace IntellaQuest.Domain
 {
-    public class Product : BaseEntity
+    public class Products : BaseEntity
     {
         string _name;
         string _description;
-        public Product() { }
+        public Products() { }
 
-        public Product(string title, string description)
+        public Products(string title, string description)
         {
             _name = title;
             _description = description;

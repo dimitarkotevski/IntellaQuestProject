@@ -71,12 +71,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category\CategoryMappers.cs" />
-    <Compile Include="Category\CategoryModels.cs" />
-    <Compile Include="Category\CategoryService.cs" />
-    <Compile Include="Customer\CustomerMappers.cs" />
-    <Compile Include="Customer\CustomerModels.cs" />
-    <Compile Include="Customer\CustomerService.cs" />
+    <Compile Include="Categories\CategoriesMappers.cs" />
+    <Compile Include="Categories\CategoriesModels.cs" />
+    <Compile Include="Categories\CategoriesService.cs" />
+    <Compile Include="Customers\CustomersMappers.cs" />
+    <Compile Include="Customers\CustomersModels.cs" />
+    <Compile Include="Customers\CustomersService.cs" />
+    <Compile Include="Exceptions\CustomerNotFoundException.cs" />
+    <Compile Include="Exceptions\ExceptionMassages\CustomersExceptionMassage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,5 +95,6 @@
       <Name>IntellaQuest.Repository</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

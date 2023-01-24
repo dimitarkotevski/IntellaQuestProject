@@ -72,10 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domains\BaseEntity.cs" />
-    <Compile Include="Domains\Category.cs" />
-    <Compile Include="Domains\Customer.cs" />
-    <Compile Include="Domains\Order.cs" />
-    <Compile Include="Domains\Product.cs" />
+    <Compile Include="Domains\Categories.cs" />
+    <Compile Include="Domains\Customers.cs" />
+    <Compile Include="Domains\Orders.cs" />
+    <Compile Include="Domains\Products.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

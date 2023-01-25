@@ -1,6 +1,7 @@
 ﻿using IntellaQeust.BusinessLogic.Services;
 using IntellaQuest.BusinessLogic.Models;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
@@ -8,6 +9,7 @@ namespace IntellaQuest.Web.Controllers
     public class CustomersController : Controller
     {
         private readonly ICustomersService _customersService;
+        private readonly CustomerViewModelValidator rules=new CustomerViewModelValidator();
         public CustomersController() { }
         public CustomersController(ICustomersService customersService)
         {
@@ -32,13 +34,22 @@ namespace IntellaQuest.Web.Controllers
         [HttpPost]
         public ActionResult Create(CustomerViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Values);
+            }
             return Json(_customersService.Create(model));
         }
         // GET: Customer/Edit
         [HttpPost]
-        public void Edit(CustomerViewModel model)
+        public ActionResult Edit(CustomerViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Values);
+            }
             _customersService.Update(model);
+            return Json(true);
         }
 
         // GET: Customer/Delete

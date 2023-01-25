@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate.Mapping.ByCode;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -105,6 +106,7 @@ namespace IntellaQuest.Repository.Repositories
             _unitOfWork.Session.Delete(entity);
             return true;
         }
+
 
         #endregion
     }

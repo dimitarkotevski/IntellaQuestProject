@@ -1,13 +1,15 @@
-﻿using System.Web.Mvc;
-using System.Web.Optimization;
+﻿
 using Autofac;
 using Autofac.Integration.Mvc;
 using IntellaQuest.Repository;
 using IntellaQuest.Repository.Repositories;
+
+using IntellaQeust.BusinessLogic.Services;
+using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Http;
 using System.Web.Routing;
-using IntellaQeust.BusinessLogic.Services;
-
+using FluentValidation.Mvc;
 
 namespace IntellaQuest.Web
 {
@@ -30,7 +32,11 @@ namespace IntellaQuest.Web
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
+            
             builder.RegisterModelBinderProvider();
+            FluentValidationModelValidatorProvider.Configure();
+
+
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -40,7 +46,6 @@ namespace IntellaQuest.Web
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-           
 
         }
     }

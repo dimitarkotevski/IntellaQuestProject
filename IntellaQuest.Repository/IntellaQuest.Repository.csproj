@@ -81,6 +81,7 @@
     <Compile Include="ConfigurationRepository\Repository.cs" />
     <Compile Include="ConfigurationRepository\UnitOfWork.cs" />
     <Compile Include="ConfigurationRepository\NHibernateContext.cs" />
+    <Compile Include="Repositories\ProductsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntellaQuest.Domain\IntellaQuest.Domain.csproj">

@@ -1,5 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic.CategoryModels;
 using IntellaQeust.BusinessLogic.Exceptions;
+using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Domain;
 using IntellaQuest.Repository;
@@ -18,8 +19,8 @@ namespace IntellaQeust.BusinessLogic.CategoryService
         void Update(CategoriesViewModel model);
         void DeleteById(Guid Id);
         void Delete(CategoriesViewModel model);
-        bool CheckEmailExists(CategoriesViewModel model);
-        bool CheckUsernameExists(CategoriesViewModel model);
+        bool CheckCategoryNameExists(String Name);
+        bool CheckCategoryStatus(bool status);
     }
 
     public class CategoriesService : ICategoriesService
@@ -33,25 +34,26 @@ namespace IntellaQeust.BusinessLogic.CategoryService
             _unitOfWork = unitOfWork;
         }
 
-        public bool CheckEmailExists(CategoriesViewModel model)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool CheckUsernameExists(CategoriesViewModel model)
+        public bool CheckCategoryNameExists(String Name)
         {
-            throw new NotImplementedException();
+            return _categoryRepository.FilterBy(x=>x.Name==Name).ToList().Any();
+        }
+        public bool CheckCategoryStatus(bool status)
+        {
+            return _categoryRepository.FilterBy(x => x.Status == status).ToList().Any();
         }
 
         public Guid Create(CategoriesViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var categoryEntity = new Categories
+                if (CheckCategoryNameExists(model.Name))
                 {
-                    Name = model.Name,
-                };
-                _categoryRepository.Add(categoryEntity);
+                    throw new BllException(ShopExceptionsMassages.CategoriesExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
+                }
+                var categoryEntity = model.MapToModel();
+                _categoryRepository.Add(model.MapToModel());
                 _unitOfWork.Commit();
                 return categoryEntity.Id;
             }
@@ -61,12 +63,7 @@ namespace IntellaQeust.BusinessLogic.CategoryService
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var category = new Categories
-                {
-                    Id = model.Id,
-                    Name = model.Name,
-                };
-                _categoryRepository.Delete(category);
+                _categoryRepository.Delete(model.MapToModel());
                 _unitOfWork.Commit();
             }
         }
@@ -82,36 +79,48 @@ namespace IntellaQeust.BusinessLogic.CategoryService
 
         public CategoriesViewModel Get(Guid Id)
         {
-            _unitOfWork.BeginTransaction();
+            using (_unitOfWork.BeginTransaction())
+            {
+                var category = _categoryRepository.FindBy(Id);
+                if(category == null)
+                {
+                    throw new BllException(ShopExceptionsMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+                _unitOfWork.Commit();
+                _unitOfWork.Rollback();
 
-            var result = _categoryRepository.FindBy(Id);
-            
-            _unitOfWork.Commit();
-            _unitOfWork.Rollback();
-            
-            return result.MapToViewModel();
+                return category.MapToViewModel();
+            }
         }
 
         public List<CategoriesViewModel> GetAll()
         {
-            _unitOfWork.BeginTransaction();
-            var result = _categoryRepository.All().Select(x => x.MapToViewModel()).ToList();
-            _unitOfWork.Commit();
-            return result;
+            using (_unitOfWork.BeginTransaction())
+            {
+                var listCategories = _categoryRepository.All().Select(x => x.MapToViewModel()).ToList();
+                _unitOfWork.Commit();
+                return listCategories;
+            }
         }
 
         public void Update(CategoriesViewModel model)
         {
-            var category = _categoryRepository.FindBy(model.Id) ?? throw new CustomerNotFoundException("User not found");
-            // TODO : if not found throw exception
-            _unitOfWork.BeginTransaction();
+            using(_unitOfWork.BeginTransaction())
+            {
+                var category = _categoryRepository.FindBy(model.Id);
+                if (category == null)
+                {
+                    throw new BllException(ShopExceptionsMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+                // TODO : if not found throw exception
 
-            category.Name = model.Name;
+                category.Name= model.Name;
+                category.Status = model.Status;
 
-            
-            _categoryRepository.Update(category);
-            _unitOfWork.Commit();
+                _categoryRepository.Update(category);
+                _unitOfWork.Commit();
 
+            }
         }
     }
 }

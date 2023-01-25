@@ -14,5 +14,14 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 Status=category.Status,
             };
         }
+        public static Categories MapToModel(this CategoriesViewModel category)
+        {
+            return new Categories
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Status = category.Status,
+            };
+        }
     }
 }

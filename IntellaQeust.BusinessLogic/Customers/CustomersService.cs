@@ -93,8 +93,11 @@ namespace IntellaQeust.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var customer = _customerRepository.FindBy(customerId) 
-                    ?? throw new CustomerNotFoundException(String.Format(CustomersExceptionMassage._customerIdException, customerId));
+                var customer = _customerRepository.FindBy(customerId);
+                if (customer == null)
+                {
+                    throw new BllException(String.Format(ShopExceptionsMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION));
+                }
                 _unitOfWork.Commit();
                 return CustomersMappers.MapToViewModel(customer);
 
@@ -115,17 +118,10 @@ namespace IntellaQeust.BusinessLogic.Services
 
         public void Update(CustomerViewModel model)
         {
-            Get(model.Id);
+            
             using (_unitOfWork.BeginTransaction())
             {
-                /*var entity = Get(model.Id);
-                entity.Id = model.Id;
-                entity.Name = model.Name;
-                entity.Email = model.Email;
-                entity.Username = model.Username;
-                entity.Password = model.Password;
-                Customers result = entity.MapToModel();*/
-                
+                _customerRepository.Update(model.MapToModel());
                 var entity = new Customers
                 {
                     Id = model.Id,

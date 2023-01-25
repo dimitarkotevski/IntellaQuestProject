@@ -32,6 +32,10 @@ namespace IntellaQuest.Web.Controllers
         [HttpPost]
         public ActionResult Create(CategoriesViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json("Validation");
+            }
             return Json(_categoriesService.Create(model));
         }
         // POST: Categories/Edit/5

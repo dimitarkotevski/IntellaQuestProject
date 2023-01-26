@@ -1,6 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic.Models;
+using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Domain;
-using System.Runtime.CompilerServices;
 
 namespace IntellaQeust.BusinessLogic.Mappers
 {
@@ -13,7 +13,11 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                Category = product.Category
+                Category = new LookupViewModel
+                {
+                    Id= product.Category.Id,
+                    Name = product.Category.Name,
+                }
             };
         }
     }

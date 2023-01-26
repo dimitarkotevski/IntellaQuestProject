@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IntellaQeust.BusinessLogic.CategoryService
+namespace IntellaQeust.BusinessLogic.Services
 {
     public interface ICategoriesService
     {

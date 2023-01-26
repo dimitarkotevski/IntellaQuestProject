@@ -3,9 +3,9 @@ using IntellaQuest.Domain;
 
 namespace IntellaQuest.Repository.Mapping
 {
-    public class CustomerMap : ClassMap<Customers>
+    public class CustomersMap : ClassMap<Customers>
     {
-        public CustomerMap() {
+        public CustomersMap() {
             Schema("dbo");
             Table("Customers");
             //Id

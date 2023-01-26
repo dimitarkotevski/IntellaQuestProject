@@ -8,7 +8,6 @@ namespace IntellaQuest.Repository.Repositories
     }
     public class CategoriesRepository : Repository<Categories>, ICategoriesRepository
     {
-
         public CategoriesRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }

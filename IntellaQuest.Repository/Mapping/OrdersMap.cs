@@ -1,6 +1,6 @@
 ﻿namespace IntellaQuest.Repository.Mapping
 {
-    public class OrderMap //: ClassMap<Order>
+    public class OrdersMap //: ClassMap<Order>
     {
         //public OrderMap() {
         //    Table("Order");

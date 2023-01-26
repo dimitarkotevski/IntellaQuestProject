@@ -1,5 +1,7 @@
-﻿using IntellaQeust.BusinessLogic.CategoryModels;
+﻿using IntellaQeust.BusinessLogic;
+using IntellaQeust.BusinessLogic.CategoryModels;
 using IntellaQuest.Domain;
+using System.Linq;
 
 namespace IntellaQuest.BusinessLogic.Mappers
 {
@@ -14,6 +16,20 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 Status=category.Status,
             };
         }
+        public static CategoriesViewModel MapToViewModelWithProducts(this Categories categories)
+        {
+            return new CategoriesViewModel
+            {
+                Id = categories.Id,
+                Name = categories.Name,
+                Status= categories.Status,
+                Products= categories.Products.Select(x=> new LookupViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).ToList(),
+            };
+        }
         public static Categories MapToModel(this CategoriesViewModel category)
         {
             return new Categories
@@ -21,7 +37,17 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 Id = category.Id,
                 Name = category.Name,
                 Status = category.Status,
+                //Products = category.Products
             };
         }
+        public static Categories MapToModelWithoutProducts(this Categories categories)
+        {
+            return new Categories
+            {
+                Id = categories.Id,
+                Name = categories.Name,
+            };
+        }
+       
     }
 }

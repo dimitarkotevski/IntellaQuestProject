@@ -1,4 +1,4 @@
-﻿using IntellaQeust.BusinessLogic.Service;
+﻿using IntellaQuest.BusinessLogic.Services;
 using System;
 using System.Web.Mvc;
 
@@ -12,23 +12,21 @@ namespace IntellaQuest.Web.Controllers
         {
             _productsService = productsService;
         }
-
-        // GET: Products
+        // POST: Products
         [HttpPost]
         public ActionResult All()
         {
-            
-            var result=_productsService.GetAll();
-            return Json(result);
+            return Json(_productsService.GetAll());
         }
 
-        // GET: Products/Details/5
-        public ActionResult Details(Guid Id)
+        // POST: Products/get/5
+        public ActionResult Get(Guid Id)
         {
             return View();
         }
 
-        // GET: Products/Create
+        // POST: Products/Create
+        [HttpPost]
         public ActionResult Create()
         {
             return View();
@@ -50,48 +48,18 @@ namespace IntellaQuest.Web.Controllers
             }
         }
 
-        // GET: Products/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
         // POST: Products/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Products/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Edit(Guid Id)
         {
             return View();
         }
 
         // POST: Products/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid Id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
     }
 }

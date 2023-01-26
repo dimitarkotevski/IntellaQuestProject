@@ -3,9 +3,9 @@ using IntellaQuest.Domain;
 
 namespace IntellaQuest.Repository.Mapping
 {
-    public class ProductMap : ClassMap<Products>
+    public class ProductsMap : ClassMap<Products>
     {
-        public ProductMap()
+        public ProductsMap()
         {
             Schema("dbo");
             Table("Products");
@@ -17,7 +17,8 @@ namespace IntellaQuest.Repository.Mapping
 
             References(x => x.Category)
                 .Column("CategoryId")
-                .Not.LazyLoad();
+                .Cascade.SaveUpdate();
+            
         }
     }
 }

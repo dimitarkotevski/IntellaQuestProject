@@ -8,7 +8,6 @@ namespace IntellaQuest.Repository.Repositories
     }
     public class CustomersRepository : Repository<Customers>,ICustomersRepository 
     {
-
         public CustomersRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }

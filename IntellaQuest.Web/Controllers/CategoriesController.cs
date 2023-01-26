@@ -1,5 +1,5 @@
 ﻿using IntellaQeust.BusinessLogic.CategoryModels;
-using IntellaQeust.BusinessLogic.CategoryService;
+using IntellaQeust.BusinessLogic.Services;
 using System;
 using System.Web.Mvc;
 
@@ -16,7 +16,7 @@ namespace IntellaQuest.Web.Controllers
 
         // GET: Categories
         [HttpPost]
-        public ActionResult GetAll()
+        public ActionResult All()
         {
             return Json(_categoriesService.GetAll());
         }
@@ -34,7 +34,7 @@ namespace IntellaQuest.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Json("Validation");
+                return Json(ModelState.Values);
             }
             return Json(_categoriesService.Create(model));
         }

@@ -1,9 +1,7 @@
-﻿
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
 using IntellaQuest.Repository;
 using IntellaQuest.Repository.Repositories;
-
 using IntellaQeust.BusinessLogic.Services;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -32,7 +30,7 @@ namespace IntellaQuest.Web
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
-            
+
             builder.RegisterModelBinderProvider();
             FluentValidationModelValidatorProvider.Configure();
 

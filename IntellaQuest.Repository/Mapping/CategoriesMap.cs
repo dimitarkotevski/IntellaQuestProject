@@ -24,6 +24,7 @@ namespace IntellaQuest.Repository.Mapping
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
                 .KeyColumn("CategoryId");
+
         }
     }
 }

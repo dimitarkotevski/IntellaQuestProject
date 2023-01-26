@@ -7,6 +7,8 @@
             public static string NOT_FOUND_EXCEPTION = "User not found";
             public static string ID_NOT_FOUND_EXCEPTION = "User with Id: {0} not found";
             public static string EMAIL_NOT_FOUND_EXCEPTION = "User with email: '{0}' not found";
+            public static string USERNAME_ALREADY_EXIST = "Username '{0}'  already exist";
+            public static string EMAIL_ALREADY_EXIST = "Email '{0}'  already exist";
             public static string USERNAME_NOT_FOUND_EXCEPTION = "User with username: '{0}' not found";
         }
         public static class CategoriesExceptionMassages

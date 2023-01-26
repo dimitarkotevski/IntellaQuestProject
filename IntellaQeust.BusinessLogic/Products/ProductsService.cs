@@ -1,12 +1,11 @@
-﻿using IntellaQuest.Repository.Repositories;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
 using IntellaQeust.BusinessLogic.Models;
-using IntellaQuest.Repository;
 using System.Linq;
 using IntellaQeust.BusinessLogic.Mappers;
+using IntellaQuest.Repository;
+using IntellaQuest.Repository.Repositories;
 
-namespace IntellaQeust.BusinessLogic.Service
+namespace IntellaQuest.BusinessLogic.Services
 {
     public interface IProductsService
     {
@@ -22,9 +21,9 @@ namespace IntellaQeust.BusinessLogic.Service
     public class ProductsService : IProductsService
     {
         private readonly IProductsRepository _productsRepository;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductsService(IProductsRepository productsRepository, UnitOfWork unitOfWork)
+        public ProductsService(IProductsRepository productsRepository, IUnitOfWork unitOfWork)
         {
             _productsRepository = productsRepository;
             _unitOfWork = unitOfWork;

@@ -13,8 +13,8 @@ namespace IntellaQeust.BusinessLogic.Services
 {
     public interface ICustomersService
     {
-        CustomerViewModel Get(Guid customerId);
         List<CustomerViewModel> GetAll();
+        CustomerViewModel Get(Guid customerId);
         Guid Create(CustomerViewModel model);
         void Update(CustomerViewModel model);
         void Delete(Guid customerId);

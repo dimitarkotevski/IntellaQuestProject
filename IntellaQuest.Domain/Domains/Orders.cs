@@ -20,6 +20,12 @@
             _quantity = quantity;
             _status = Status.Active;
         }
+
+        public Orders(Products product, Customers customer, float quantity, Status status) : this(product, customer, quantity)
+        {
+            _status = status;
+        }
+
         public virtual Products Product { get { return _product; } set { _product = value; } }
         public virtual Customers Customer { get { return _customer; } set { _customer = value; } }
         public virtual float Quantity { get { return _quantity; } set { _quantity = value; } }

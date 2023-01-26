@@ -89,6 +89,7 @@
     <Compile Include="Customers\CustomersService.cs" />
     <Compile Include="Exceptions\BllException.cs" />
     <Compile Include="Exceptions\ExceptionMassages\ShopExceptionsMassages.cs" />
+    <Compile Include="LookupViewModel.cs" />
     <Compile Include="Products\ProductsMapper.cs" />
     <Compile Include="Products\ProductsModels.cs" />
     <Compile Include="Products\ProductsService.cs" />

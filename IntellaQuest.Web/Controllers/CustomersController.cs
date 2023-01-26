@@ -9,14 +9,13 @@ namespace IntellaQuest.Web.Controllers
     public class CustomersController : Controller
     {
         private readonly ICustomersService _customersService;
-        private readonly CustomerViewModelValidator rules=new CustomerViewModelValidator();
         public CustomersController() { }
         public CustomersController(ICustomersService customersService)
         {
             _customersService = customersService;
         }
 
-        // GET: Customer
+        // GET: Customers
         [HttpPost]
         public ActionResult All()
         {
@@ -56,9 +55,13 @@ namespace IntellaQuest.Web.Controllers
         [HttpPost]
         public void Delete(CustomerViewModel model)
         {
+            if(!ModelState.IsValid)
+            {
+                Json(ModelState.Values);
+            }
             _customersService.Delete(model);
         }
-        //POST Customer/DeleteById/5
+        //POST Customers/DeleteById/5
         [HttpPost]
         public void DeleteById(Guid id)
         {

@@ -83,16 +83,16 @@
   <ItemGroup>
     <Compile Include="Categories\CategoriesMappers.cs" />
     <Compile Include="Categories\CategoriesModels.cs" />
-    <Compile Include="Categories\CategoriesService.cs" />
+    <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Customers\CustomersMappers.cs" />
     <Compile Include="Customers\CustomersModels.cs" />
-    <Compile Include="Customers\CustomersService.cs" />
+    <Compile Include="Customers\CustomerService.cs" />
     <Compile Include="Exceptions\BllException.cs" />
-    <Compile Include="Exceptions\ExceptionMassages\ShopExceptionsMassages.cs" />
+    <Compile Include="Exceptions\ExceptionMassages\ShopExceptionMassages.cs" />
     <Compile Include="LookupViewModel.cs" />
     <Compile Include="Products\ProductsMapper.cs" />
     <Compile Include="Products\ProductsModels.cs" />
-    <Compile Include="Products\ProductsService.cs" />
+    <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +104,9 @@
       <Project>{859ce134-6624-4f0d-a40a-67aed9bb0cf0}</Project>
       <Name>IntellaQuest.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntellaQuest.Repository\IntellaQuest.Repository.csproj">
+    <ProjectReference Include="..\IntellaQuest.Repository\IntellaQuest.Data.NHibernate.csproj">
       <Project>{d0193f54-8483-4254-a44e-8f95319485d9}</Project>
-      <Name>IntellaQuest.Repository</Name>
+      <Name>IntellaQuest.Data.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -8,9 +8,9 @@ namespace IntellaQuest.Web.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly ICustomersService _customersService;
+        private readonly ICustomerService _customersService;
         public CustomersController() { }
-        public CustomersController(ICustomersService customersService)
+        public CustomersController(ICustomerService customersService)
         {
             _customersService = customersService;
         }
@@ -50,23 +50,11 @@ namespace IntellaQuest.Web.Controllers
             _customersService.Update(model);
             return Json(true);
         }
-
-        // GET: Customer/Delete
-        [HttpPost]
-        public void Delete(CustomerViewModel model)
-        {
-            if(!ModelState.IsValid)
-            {
-                Json(ModelState.Values);
-            }
-            _customersService.Delete(model);
-        }
         //POST Customers/DeleteById/5
         [HttpPost]
         public void DeleteById(Guid id)
         {
             _customersService.Delete(id);
         }
-
     }
 }

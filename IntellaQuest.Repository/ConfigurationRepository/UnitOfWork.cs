@@ -1,7 +1,7 @@
 ﻿using NHibernate;
 using System;
 
-namespace IntellaQuest.Repository
+namespace IntellaQuest.Data.NHibernate.ConfigurationRepository
 {
     public interface IUnitOfWork : IDisposable
     {

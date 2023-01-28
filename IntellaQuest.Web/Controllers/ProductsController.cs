@@ -1,4 +1,5 @@
-﻿using IntellaQuest.BusinessLogic.Services;
+﻿using IntellaQeust.BusinessLogic.Models;
+using IntellaQuest.BusinessLogic.Services;
 using System;
 using System.Web.Mvc;
 
@@ -6,9 +7,9 @@ namespace IntellaQuest.Web.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly IProductsService _productsService;
+        private readonly IProductService _productsService;
 
-        public ProductsController(IProductsService productsService)
+        public ProductsController(IProductService productsService)
         {
             _productsService = productsService;
         }
@@ -20,46 +21,42 @@ namespace IntellaQuest.Web.Controllers
         }
 
         // POST: Products/get/5
+        
         public ActionResult Get(Guid Id)
         {
-            return View();
+            return Json(_productsService.Get(Id));
         }
 
         // POST: Products/Create
         [HttpPost]
-        public ActionResult Create()
+        public ActionResult Create(ProductViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Values);
+            }
+            return Json(_productsService.Create(model));
         }
 
-        // POST: Products/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // POST: Products/Edit/5
         [HttpPost]
-        public ActionResult Edit(Guid Id)
+        public ActionResult Edit(ProductViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Values);
+            }
+            _productsService.Update(model);
+            return Json(true);
         }
 
         // POST: Products/Delete/5
         [HttpPost]
-        public ActionResult Delete(Guid Id)
+        public void Delete(Guid Id)
         {
-            return View();
+            _productsService.Delete(Id);
         }
     }
 }

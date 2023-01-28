@@ -1,11 +1,11 @@
 ﻿using FluentNHibernate.Mapping;
 using IntellaQuest.Domain;
 
-namespace IntellaQuest.Repository.Mapping
+namespace IntellaQuest.Data.NHibernate.Mapping
 {
-    public class CategoriesMap : ClassMap<Categories>
+    public class CategoryMap : ClassMap<Category>
     {
-        public CategoriesMap() {
+        public CategoryMap() {
             Schema("dbo");
             Table("Categories");
 
@@ -23,7 +23,7 @@ namespace IntellaQuest.Repository.Mapping
             HasMany(x => x.Products)
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
-                .KeyColumn("CategoryId");
+                .KeyColumn("CategoryId").LazyLoad();
 
         }
     }

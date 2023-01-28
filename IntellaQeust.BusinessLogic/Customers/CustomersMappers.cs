@@ -5,7 +5,7 @@ namespace IntellaQuest.BusinessLogic.Mappers
 {
     public static class CustomersMappers
     {
-        public static CustomerViewModel MapToViewModel(this Customers customer)
+        public static CustomerViewModel MapToViewModel(this Customer customer)
         {
             return new CustomerViewModel
             {
@@ -17,9 +17,9 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 Password= customer.Password,
             };
         }
-        public static Customers MapToModel(this CustomerViewModel model)
+        public static Customer MapToModel(this CustomerViewModel model)
         {
-            return new Customers
+            return new Customer
             {
                 Id = model.Id,
                 Name = model.Name,

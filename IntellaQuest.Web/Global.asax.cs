@@ -1,13 +1,13 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using IntellaQuest.Repository;
-using IntellaQuest.Repository.Repositories;
-using IntellaQeust.BusinessLogic.Services;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Http;
 using System.Web.Routing;
 using FluentValidation.Mvc;
+using IntellaQuest.Data.NHibernate.ConfigurationRepository;
+using IntellaQuest.Data.NHibernate.Repositories;
+using IntellaQeust.BusinessLogic.Services;
 
 namespace IntellaQuest.Web
 {
@@ -20,12 +20,12 @@ namespace IntellaQuest.Web
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(typeof(ICustomersRepository).Assembly)
+            builder.RegisterAssemblyTypes(typeof(ICustomerRepository).Assembly)
                 .Where(x => x.FullName.EndsWith("Repository"))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(typeof(ICustomersService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(ICustomerService).Assembly)
                 .Where(x => x.FullName.EndsWith("Service"))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();

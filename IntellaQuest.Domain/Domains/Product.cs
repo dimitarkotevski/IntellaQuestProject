@@ -1,15 +1,14 @@
-﻿using System;
-
+﻿
 namespace IntellaQuest.Domain
 {
-    public class Products : BaseEntity
+    public class Product : BaseEntity
     {
         private string _name;
         private string _description;
-        private Categories _category;
-        public Products() { }
+        private Category _category;
+        public Product() { }
 
-        public Products(string title, string description, Categories category)
+        public Product(string title, string description, Category category)
         {
             _name = title;
             _description = description;
@@ -18,6 +17,6 @@ namespace IntellaQuest.Domain
 
         public virtual string Name { get => _name; set => _name = value; }
         public virtual string Description { get => _description; set => _description = value; }
-        public virtual Categories Category { get => _category; set => _category = value; }
+        public virtual Category Category { get => _category; set => _category = value; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using IntellaQuest.Repository.Mapping;
+using IntellaQuest.Data.NHibernate.Mapping;
 using NHibernate;
 
-namespace IntellaQuest.Repository
+namespace IntellaQuest.Data.NHibernate.ConfigurationRepository
 {
     public class NHibernateContext
     {
@@ -15,7 +15,7 @@ namespace IntellaQuest.Repository
              .Mappings(m =>
              {
                  m.FluentMappings
-                    .AddFromAssembly(typeof(CategoriesMap).Assembly);
+                    .AddFromAssembly(typeof(CategoryMap).Assembly);
              })
              .BuildSessionFactory();
             return build;

@@ -1,11 +1,11 @@
 ﻿using FluentNHibernate.Mapping;
 using IntellaQuest.Domain;
 
-namespace IntellaQuest.Repository.Mapping
+namespace IntellaQuest.Data.NHibernate.Mapping
 {
-    public class ProductsMap : ClassMap<Products>
+    public class ProductMap : ClassMap<Product>
     {
-        public ProductsMap()
+        public ProductMap()
         {
             Schema("dbo");
             Table("Products");
@@ -17,7 +17,8 @@ namespace IntellaQuest.Repository.Mapping
 
             References(x => x.Category)
                 .Column("CategoryId")
-                .Cascade.SaveUpdate();
+                .Access
+                .CamelCaseField();
             
         }
     }

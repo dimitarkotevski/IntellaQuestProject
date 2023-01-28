@@ -1,11 +1,11 @@
 ﻿using FluentNHibernate.Mapping;
 using IntellaQuest.Domain;
 
-namespace IntellaQuest.Repository.Mapping
+namespace IntellaQuest.Data.NHibernate.Mapping
 {
-    public class CustomersMap : ClassMap<Customers>
+    public class CustomerMap : ClassMap<Customer>
     {
-        public CustomersMap() {
+        public CustomerMap() {
             Schema("dbo");
             Table("Customers");
             //Id

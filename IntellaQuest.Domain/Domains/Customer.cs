@@ -1,15 +1,15 @@
 ﻿namespace IntellaQuest.Domain
 {
-    public class Customers : BaseEntity
+    public class Customer : BaseEntity
     {
         private string _name;
         private string _surname;
         private string _email;
         private string _username;
         private string _password;
-        public Customers() { }
+        public Customer() { }
 
-        public Customers(string name, string surname, string email, string username, string password)
+        public Customer(string name, string surname, string email, string username, string password)
         {
             _name = name;
             _surname = surname;

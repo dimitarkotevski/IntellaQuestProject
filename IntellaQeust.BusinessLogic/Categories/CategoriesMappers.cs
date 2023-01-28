@@ -1,51 +1,36 @@
 ﻿using IntellaQeust.BusinessLogic;
-using IntellaQeust.BusinessLogic.CategoryModels;
+using IntellaQeust.BusinessLogic.CategoryModel;
 using IntellaQuest.Domain;
+using NHibernate.Mapping;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IntellaQuest.BusinessLogic.Mappers
 {
     public static class CategoriesMappers
     {
-        public static CategoriesViewModel MapToViewModel(this Categories category)
+        public static CategoryViewModel MapToViewModel(this Category category)
         {
-            return new CategoriesViewModel
-            {
-                Id = category.Id,
-                Name = category.Name,
-                Status=category.Status,
-            };
-        }
-        public static CategoriesViewModel MapToViewModelWithProducts(this Categories categories)
-        {
-            return new CategoriesViewModel
-            {
-                Id = categories.Id,
-                Name = categories.Name,
-                Status= categories.Status,
-                Products= categories.Products.Select(x=> new LookupViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                }).ToList(),
-            };
-        }
-        public static Categories MapToModel(this CategoriesViewModel category)
-        {
-            return new Categories
+            return new CategoryViewModel
             {
                 Id = category.Id,
                 Name = category.Name,
                 Status = category.Status,
-                //Products = category.Products
+                Products = category.Products.Select(
+                    product=> new LookupViewModel { 
+                        Id=product.Id ,
+                        Name=product.Name,
+                    }).ToList()
             };
         }
-        public static Categories MapToModelWithoutProducts(this Categories categories)
+        public static Category MapToModel(this CategoryViewModel category)
         {
-            return new Categories
+            return new Category
             {
-                Id = categories.Id,
-                Name = categories.Name,
+                Id = category.Id,
+                Name = category.Name,
+                Status = category.Status,
+                Products= new List<Product>()
             };
         }
        

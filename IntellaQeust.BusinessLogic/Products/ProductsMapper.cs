@@ -1,14 +1,13 @@
 ﻿using IntellaQeust.BusinessLogic.Models;
-using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Domain;
 
 namespace IntellaQeust.BusinessLogic.Mappers
 {
     public static class ProductsMappers
     {
-        public static ProductsViewModel MapToViewModel(this Products product)
+        public static ProductViewModel MapToViewModel(this Product product)
         {
-            return new ProductsViewModel
+            return new ProductViewModel
             {
                 Id = product.Id,
                 Name = product.Name,

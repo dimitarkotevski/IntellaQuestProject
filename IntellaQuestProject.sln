@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntellaQeust.Business", "IntellaQeust.BusinessLogic\IntellaQeust.Business.csproj", "{A3E72784-21C5-4957-858C-E872B80AF7D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntellaQuest.Repository", "IntellaQuest.Repository\IntellaQuest.Repository.csproj", "{D0193F54-8483-4254-A44E-8F95319485D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntellaQuest.Data.NHibernate", "IntellaQuest.Repository\IntellaQuest.Data.NHibernate.csproj", "{D0193F54-8483-4254-A44E-8F95319485D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntellaQuest.Web", "IntellaQuest.Web\IntellaQuest.Web.csproj", "{23A51142-C70E-471F-835E-08EC3E365017}"
 EndProject

@@ -2,33 +2,32 @@
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.BusinessLogic.Models;
+using IntellaQuest.Data.NHibernate.ConfigurationRepository;
+using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
-using IntellaQuest.Repository;
-using IntellaQuest.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace IntellaQeust.BusinessLogic.Services
 {
-    public interface ICustomersService
+    public interface ICustomerService
     {
         List<CustomerViewModel> GetAll();
         CustomerViewModel Get(Guid customerId);
         Guid Create(CustomerViewModel model);
         void Update(CustomerViewModel model);
         void Delete(Guid customerId);
-        void Delete(CustomerViewModel model);
         bool CheckEmailExists(CustomerViewModel model);
         bool CheckUsernameExists(CustomerViewModel model);
     }
-    public class CustomersService : ICustomersService
+    public class CustomerService : ICustomerService
     {
-        private readonly ICustomersRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         //private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CustomersService(ICustomersRepository customerRepository, IUnitOfWork unitOfWork)
+        public CustomerService(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
             _unitOfWork = unitOfWork;
@@ -48,7 +47,7 @@ namespace IntellaQeust.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var customerEntity = new Customers
+                var customerEntity = new Customer
                 {
                     Name = model.Name,
                     Surname = model.Surname,
@@ -62,11 +61,11 @@ namespace IntellaQeust.BusinessLogic.Services
             }
         }
 
-        public void Delete(CustomerViewModel model)
+        /*public void Delete(CustomerViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var entity = new Customers
+                var entity = new Customer
                 {
                     Id = model.Id,
                     Name = model.Name,
@@ -78,7 +77,7 @@ namespace IntellaQeust.BusinessLogic.Services
                 _customerRepository.Delete(entity);
                 _unitOfWork.Commit();
             }
-        }
+        }*/
 
         public void Delete(Guid customerId)
         {
@@ -96,7 +95,7 @@ namespace IntellaQeust.BusinessLogic.Services
                 var customer = _customerRepository.FindBy(customerId);
                 if (customer == null)
                 {
-                    throw new BllException(String.Format(ShopExceptionsMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION));
+                    throw new BllException(String.Format(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION));
                 }
                 _unitOfWork.Commit();
                 return CustomersMappers.MapToViewModel(customer);
@@ -122,7 +121,7 @@ namespace IntellaQeust.BusinessLogic.Services
             using (_unitOfWork.BeginTransaction())
             {
                 _customerRepository.Update(model.MapToModel());
-                var entity = new Customers
+                var entity = new Customer
                 {
                     Id = model.Id,
                     Name = model.Name,

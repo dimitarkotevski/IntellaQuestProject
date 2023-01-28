@@ -3,34 +3,23 @@ using System.Collections.Generic;
 
 namespace IntellaQuest.Domain
 {
-    public class Categories : BaseEntity
+    public class Category : BaseEntity
     {
         private string _name;
         private bool _status;
-        private IList<Products> _products;
+        private IList<Product> _products;
         
 
-        public Categories(string name, bool status)
+        public Category(string name, bool status)
         {
             _name = name;
             _status = status;
-            _products= new List<Products>();
+            _products= new List<Product>();
         }
-        public Categories(string name)
+        public Category()
         {
-            _name = name;
-            _status = true;
+            _products = new List<Product>();
         }
-        public Categories()
-        {
-            _products = new List<Products>();
-        }
-
-        public Categories(string name, bool status, IList<Products> products) : this(name, status)
-        {
-            _products = products;
-        }
-
         public virtual string Name
         {
             get => _name;
@@ -41,7 +30,7 @@ namespace IntellaQuest.Domain
             get => _status;
             set => _status = value;
         }
-        public virtual IList<Products> Products
+        public virtual IList<Product> Products
         {
             get => _products;
             set => _products = value;

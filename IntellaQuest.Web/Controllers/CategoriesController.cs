@@ -1,15 +1,16 @@
-﻿using IntellaQeust.BusinessLogic.CategoryModels;
-using IntellaQeust.BusinessLogic.Services;
+﻿using IntellaQeust.Business.Services;
+using IntellaQeust.BusinessLogic.CategoryModel;
 using System;
+using System.IO;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly ICategoriesService _categoriesService;
+        private readonly ICategoryService _categoriesService;
 
-        public CategoriesController(ICategoriesService categoryService)
+        public CategoriesController(ICategoryService categoryService)
         {
             _categoriesService = categoryService;
         }
@@ -21,7 +22,7 @@ namespace IntellaQuest.Web.Controllers
             return Json(_categoriesService.GetAll());
         }
 
-        // GET: Categories/Get/5
+        // GET: Categories/Get/5/
         [HttpPost]
         public ActionResult Get(Guid id)
         {
@@ -30,7 +31,7 @@ namespace IntellaQuest.Web.Controllers
 
         // POST: Categories/Create
         [HttpPost]
-        public ActionResult Create(CategoriesViewModel model)
+        public ActionResult Create(CategoryViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -40,7 +41,7 @@ namespace IntellaQuest.Web.Controllers
         }
         // POST: Categories/Edit/5
         [HttpPost]
-        public void Edit(CategoriesViewModel model)
+        public void Edit(CategoryViewModel model)
         {
             _categoriesService.Update(model);
         }
@@ -51,12 +52,6 @@ namespace IntellaQuest.Web.Controllers
         public void DeleteById(Guid id)
         {
             _categoriesService.DeleteById(id);
-        }
-        // POST: Categories/Delete
-        [HttpPost]
-        public void Delete(CategoriesViewModel model)
-        {
-            _categoriesService.Delete(model);
         }
     }
 }

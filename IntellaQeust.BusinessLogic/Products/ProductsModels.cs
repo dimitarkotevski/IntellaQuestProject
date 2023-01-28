@@ -7,14 +7,14 @@ using System;
 namespace IntellaQeust.BusinessLogic.Models
 {
     [Validator(typeof(ProductsViewModelValidator))]
-    public class ProductsViewModel
+    public class ProductViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public LookupViewModel Category { get; set; }
     }
-    public class ProductsViewModelValidator : AbstractValidator<ProductsViewModel>
+    public class ProductsViewModelValidator : AbstractValidator<ProductViewModel>
     {
         public ProductsViewModelValidator()
         {

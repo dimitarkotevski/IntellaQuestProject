@@ -1,5 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic.Models;
 using IntellaQuest.Domain;
+using System.Linq;
 
 namespace IntellaQeust.BusinessLogic.Mappers
 {
@@ -16,7 +17,12 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 {
                     Id= product.Category.Id,
                     Name = product.Category.Name,
-                }
+                },
+                Orders = product.Orders.Select(order => new LookupViewModel
+                {
+                    Id= order.Id,
+                    Name=order.Customer.Name + " " + order.Customer.Surname,
+                }).ToList(),
             };
         }
     }

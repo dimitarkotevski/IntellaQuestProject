@@ -4,6 +4,7 @@ using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
+using IntellaQuest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,22 +52,27 @@ namespace IntellaQeust.Business.Services
                 {
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
                 }
-                _categoryRepository.Add(model.MapToModel());
+                var entity = new Category
+                {
+                    Name = model.Name,
+                    Status = model.Status,
+                };
+                _categoryRepository.Add(entity);
                 _unitOfWork.Commit();
 
-                return model.Id;
+                return entity.Id;
             }
         }
         public void DeleteById(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var categoryEntity = Get(Id);
+                var categoryEntity = _categoryRepository.FindBy(Id);
                 if (_categoryRepository.FindBy(Id) == null)
                 {
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-                _categoryRepository.Delete(Id);
+                _categoryRepository.Delete(categoryEntity);
                 _unitOfWork.Commit();
             }
         }
@@ -104,7 +110,7 @@ namespace IntellaQeust.Business.Services
                 var category = _categoryRepository.FindBy(model.Id);
                 if (category == null)
                 {
-                    throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
+                    throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
 
                 category.Name= model.Name;

@@ -54,9 +54,10 @@ namespace IntellaQuest.Web.Controllers
 
         // POST: Products/Delete/5
         [HttpPost]
-        public void Delete(Guid Id)
+        public ActionResult Delete(Guid Id)
         {
             _productsService.Delete(Id);
+            return Json(true);
         }
     }
 }

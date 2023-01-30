@@ -1,5 +1,8 @@
-﻿using IntellaQuest.BusinessLogic.Models;
+﻿using IntellaQeust.BusinessLogic;
+using IntellaQeust.BusinessLogic.Orders;
+using IntellaQuest.BusinessLogic.Models;
 using IntellaQuest.Domain;
+using System.Linq;
 
 namespace IntellaQuest.BusinessLogic.Mappers
 {
@@ -15,6 +18,11 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 Email= customer.Email,
                 Username= customer.Username,
                 Password= customer.Password,
+                Orders = customer.Orders.Select(order=> new LookupViewModel
+                {
+                    Id= order.Id,
+                    Name=order.Product.Name
+                }).ToList(),
             };
         }
         public static Customer MapToModel(this CustomerViewModel model)

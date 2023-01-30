@@ -1,4 +1,7 @@
-﻿namespace IntellaQuest.Domain
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace IntellaQuest.Domain
 {
     public class Customer : BaseEntity
     {
@@ -7,6 +10,7 @@
         private string _email;
         private string _username;
         private string _password;
+        private IList<Order> _orders;
         public Customer() { }
 
         public Customer(string name, string surname, string email, string username, string password)
@@ -42,6 +46,11 @@
         {
             get => _password;
             set => _password = value;
+        }
+        public virtual IList<Order> Orders 
+        { 
+            get => _orders; 
+            set=> _orders = value;
         }
     }
 }

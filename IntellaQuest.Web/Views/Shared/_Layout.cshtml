@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div ng-app="IntellaQuestApp" class="container body-content">
         @RenderBody()
         <hr />
         <footer>
@@ -38,5 +38,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render(new string[] {"~/js"})
 </body>
 </html>
+

@@ -41,17 +41,23 @@ namespace IntellaQuest.Web.Controllers
         }
         // POST: Categories/Edit/5
         [HttpPost]
-        public void Edit(CategoryViewModel model)
+        public ActionResult Edit(CategoryViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Values);
+            }
             _categoriesService.Update(model);
+            return Json(true);
         }
 
 
         // POST: Categories/DeleteById/5
         [HttpPost]
-        public void DeleteById(Guid id)
+        public ActionResult DeleteById(Guid id)
         {
             _categoriesService.DeleteById(id);
+            return Json(true);
         }
     }
 }

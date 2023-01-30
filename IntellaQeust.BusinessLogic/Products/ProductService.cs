@@ -35,7 +35,7 @@ namespace IntellaQuest.BusinessLogic.Services
 
         public bool CheckNameExists(string Name)
         {
-            return _productsRepository.FilterBy(x => x.Name == Name).Any();
+            return _productsRepository.CheckExist(x => x.Name == Name);
         }
 
         public Guid Create(ProductViewModel model)
@@ -43,7 +43,7 @@ namespace IntellaQuest.BusinessLogic.Services
             using (_unitOfWork.BeginTransaction())
             {
                 // Need exception for model.Id 
-                if (_productsRepository.CheckExist(model.Name))
+                if (_productsRepository.CheckExist(x=>x.Name==model.Name))
                 {
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
                 }
@@ -121,11 +121,12 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-                _productsRepository
+                //exception need
                 product.Name = model.Name;
                 product.Description = model.Description;
                 product.Category = category;
                 _productsRepository.Update(product);
+                _unitOfWork.Commit();
             }
         }
     }

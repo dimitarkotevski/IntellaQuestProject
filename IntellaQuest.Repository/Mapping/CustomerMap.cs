@@ -31,6 +31,11 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Column("Password")
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
+
+            HasMany(x => x.Orders)
+                .Inverse()
+                .Cascade.AllDeleteOrphan()
+                .KeyColumn("CustomerId").LazyLoad();
         }
     }
 }

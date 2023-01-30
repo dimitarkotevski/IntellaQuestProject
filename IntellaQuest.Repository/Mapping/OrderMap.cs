@@ -3,10 +3,11 @@ using IntellaQuest.Domain;
 
 namespace IntellaQuest.Data.NHibernate.Mapping
 {
-    public class OrderMap// : ClassMap<Order>
+    public class OrderMap : ClassMap<Order>
     {
-        /*public OrderMap() {
-            *//*Schema("dbo");
+        public OrderMap()
+        {
+            Schema("dbo");
             Table("Orders");
 
             Id(o => o.Id);
@@ -15,11 +16,11 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             References(x => x.Product)
                 .Column("ProductId")
-                .Cascade.SaveUpdate();
+                .Cascade.SaveUpdate().LazyLoad();
             References(x => x.Customer)
                  .Column("CustomerId")
-                 .Cascade.SaveUpdate();*//*
-        }*/
+                 .Cascade.SaveUpdate().LazyLoad();
+        }
 
     }
 }

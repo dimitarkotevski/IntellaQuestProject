@@ -5,6 +5,7 @@ using IntellaQuest.BusinessLogic.Models;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
+using IntellaQuest.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,35 +19,36 @@ namespace IntellaQeust.BusinessLogic.Services
         Guid Create(CustomerViewModel model);
         void Update(CustomerViewModel model);
         void Delete(Guid customerId);
-        bool CheckEmailExists(CustomerViewModel model);
-        bool CheckUsernameExists(CustomerViewModel model);
+
     }
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-        //private readonly IOrderRepository _orderRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CustomerService(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
+        public CustomerService(ICustomerRepository customerRepository, 
+                            IOrderRepository orderRepository, 
+                            IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
+            _orderRepository = orderRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public bool CheckEmailExists(CustomerViewModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CheckUsernameExists(CustomerViewModel model)
-        {
-            throw new NotImplementedException();
-        }
 
         public Guid Create(CustomerViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
+                if (_customerRepository.CheckExist(x=>x.Email==model.Email))
+                {
+                    throw new BllException(string.Format(ShopExceptionMassages.CustomerExceptionMassages.EMAIL_ALREADY_EXIST,model.Email));
+                }
+                if(_customerRepository.CheckExist(x => x.Username == model.Username))
+                {
+                    throw new BllException(string.Format(ShopExceptionMassages.CustomerExceptionMassages.USERNAME_ALREADY_EXIST, model.Username));
+                }
                 var customerEntity = new Customer
                 {
                     Name = model.Name,
@@ -120,17 +122,18 @@ namespace IntellaQeust.BusinessLogic.Services
             
             using (_unitOfWork.BeginTransaction())
             {
-                _customerRepository.Update(model.MapToModel());
-                var entity = new Customer
+                var customer = _customerRepository.FindBy(model.Id);
+                if (customer == null)
                 {
-                    Id = model.Id,
-                    Name = model.Name,
-                    Surname = model.Surname,
-                    Email = model.Email,
-                    Username = model.Username,
-                    Password = model.Password
+                    throw new BllException(
+                                ShopExceptionMassages
+                                    .CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
                 };
-                _customerRepository.Update(entity);
+                customer.Surname = model.Surname;
+                customer.Name = model.Name;
+                customer.Email = model.Email;
+                customer.Password = model.Password;
+                _customerRepository.Update(customer);
                 _unitOfWork.Commit();
             }
         }

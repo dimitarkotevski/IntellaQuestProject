@@ -90,6 +90,9 @@
     <Compile Include="Exceptions\BllException.cs" />
     <Compile Include="Exceptions\ExceptionMassages\ShopExceptionMassages.cs" />
     <Compile Include="LookupViewModel.cs" />
+    <Compile Include="Orders\OrderMappers.cs" />
+    <Compile Include="Orders\OrderModels.cs" />
+    <Compile Include="Orders\OrderService.cs" />
     <Compile Include="Products\ProductsMapper.cs" />
     <Compile Include="Products\ProductsModels.cs" />
     <Compile Include="Products\ProductService.cs" />

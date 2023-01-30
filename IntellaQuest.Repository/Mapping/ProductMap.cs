@@ -18,8 +18,12 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             References(x => x.Category)
                 .Column("CategoryId")
                 .Access
-                .CamelCaseField();
-            
+                .CamelCaseField(Prefix.Underscore).LazyLoad();
+
+            HasMany(x => x.Orders)
+                .Inverse()
+                .Cascade.AllDeleteOrphan()
+                .KeyColumn("ProductId").LazyLoad();
         }
     }
 }

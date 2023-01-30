@@ -10,11 +10,12 @@ namespace IntellaQuest.Domain
         private IList<Product> _products;
         
 
-        public Category(string name, bool status)
+        public Category(string name, bool status, IList<Product> products)
         {
             _name = name;
             _status = status;
             _products= new List<Product>();
+            _products= products;
         }
         public Category()
         {

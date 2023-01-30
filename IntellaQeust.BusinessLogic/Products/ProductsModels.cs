@@ -3,6 +3,8 @@ using FluentValidation.Attributes;
 using IntellaQuest.BusinessLogic.Models;
 using IntellaQuest.Domain;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace IntellaQeust.BusinessLogic.Models
 {
@@ -13,6 +15,7 @@ namespace IntellaQeust.BusinessLogic.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public LookupViewModel Category { get; set; }
+        public IList<LookupViewModel> Orders { get; set; }
     }
     public class ProductsViewModelValidator : AbstractValidator<ProductViewModel>
     {

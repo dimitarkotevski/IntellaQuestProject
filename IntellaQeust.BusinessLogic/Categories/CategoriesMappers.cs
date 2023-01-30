@@ -23,16 +23,5 @@ namespace IntellaQuest.BusinessLogic.Mappers
                     }).ToList()
             };
         }
-        public static Category MapToModel(this CategoryViewModel category)
-        {
-            return new Category
-            {
-                Id = category.Id,
-                Name = category.Name,
-                Status = category.Status,
-                Products= new List<Product>()
-            };
-        }
-       
     }
 }

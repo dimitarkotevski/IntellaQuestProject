@@ -22,7 +22,7 @@ namespace IntellaQuest.Web.Controllers
             return Json(_categoriesService.GetAll());
         }
 
-        // GET: Categories/Get/5/
+        // GET: Categories/Get/5
         [HttpPost]
         public ActionResult Get(Guid id)
         {

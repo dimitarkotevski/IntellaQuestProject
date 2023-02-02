@@ -1,4 +1,4 @@
-﻿var IntellaQuest = angular.module("IntellaQuest", [
+﻿var app = angular.module("app", [
     "ngMessages",
     "ui.bootstrap",
     "ui.router"

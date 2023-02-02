@@ -550,9 +550,14 @@
     <Content Include="app\app.js" />
     <Content Include="app\components\category\categories.html" />
     <Content Include="app\components\category\category-controller.js" />
-    <Content Include="app\rounting.js" />
+    <Content Include="app\components\customer\customer-controller.js" />
+    <Content Include="app\components\customer\customers.html" />
+    <Content Include="app\components\order\order-controller.js" />
+    <Content Include="app\components\order\orders.html" />
+    <Content Include="app\components\product\product-controller.js" />
+    <Content Include="app\components\product\products.html" />
+    <Content Include="app\routes.js" />
     <Content Include="app\services\category-service.js" />
-    <Content Include="app\test.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

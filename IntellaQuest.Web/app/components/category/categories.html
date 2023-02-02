@@ -1,3 +1,40 @@
 ﻿<div>
-
+    <script type="text/ng-template" id="modalEdit">
+        <div class="modal-header">
+          <h3 class="modal-title">Customer:</h3>
+        </div>
+        <div class="modal-body">
+          
+          Customer: <b>{{ customer }}</b>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+          <button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+      </script>
+    <h3>{{ greeting }}</h3></br>
+    <form class="d-flex">
+        <input class="form-control me-sm-2" type="search" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Category Name</th>
+                <!--<th scope="col">Category Status</th>-->
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="category in categories">
+            <td scope="row">{{category.Name}}</td>
+            <!--<td scope="row">{{category.Status}}</td>-->
+            <td scope="row"> <button value="{{category.Id}}" ng-click="open(value)" class="btn btn-primary">Edit</button>  </td>
+            <td scope="row"><button value="{{category.Id}}" class="btn btn-danger">Delete</button></td>
+        </tr>
+    </table>
+    <div class="text-center">
+        pagination
+    </div>
 </div>
+    

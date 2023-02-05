@@ -1,12 +1,13 @@
-app.controller('DeleteController',function ($uibModalInstance,item){
-    $ctrl.items = items;
+app.controller('editController', ['$scope', '$uibModalInstance', 'category', 'CategoryService',
+    function ($scope,$uibModalInstance,category,CategoryService){
+        $scope.category = category;
+        $scope.ok = function (catEdited) {
+            CategoryService.edit(catEdited).then(function () {
+                $uibModalInstance.close();
+            })
+    }
 
-
-    $ctrl.ok = function () {
-        $uibModalInstance.close($ctrl.selected.item);
-    };
-
-    $ctrl.cancel = function () {
+    $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
-    };
-})
+    }
+}])

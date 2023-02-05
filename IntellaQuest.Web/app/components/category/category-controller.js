@@ -1,30 +1,67 @@
-﻿app.controller('CategoryController', ['$scope','$uibModal','$log', 'CategoryService', function ($scope, $uibModal,$log ,CategoryService) {
-    $scope.greeting = "Category table";
-    var $ctrl = this;
-    $scope.items = ['item1', 'item2', 'item3'];
-    $scope.categories = [];
-    CategoryService.getAll().then(function (response) {
-        $scope.categories = response.data;
-    });
-    $scope.open = function () {
-        console.log('opened')
-        var modalInstance = $uibModal.open({
-          animation: $ctrl.animationsEnabled,
-          ariaLabelledBy: 'modal-title',
-          ariaDescribedBy: 'modal-body',
-          templateUrl: 'modalEdit',
-          controller: 'CategoryController',
-          resolve: {
-            items: function () {
-              return CategoryService.getAll();
-            }
-          }
-        });
-        console.log(modalInstance.items)
-        /*modalInstance.result.then(function (selectedItem) {
-          $ctrl.selected = selectedItem;
-        }, function () {
-          $log.info('Modal dismissed at: ' + new Date());
-        });*/
-      };
-}]);
+﻿app.controller('CategoryController', ['$scope', '$uibModal', 'CategoryService','Flash',
+    function ($scope, $uibModal, CategoryService, Flash) {
+        $scope.title = "Category table";
+        $scope.categories = [];
+
+        $scope.success = function () {
+            var message = '<strong>Success</strong><div>You successfully create category.</div>';
+            Flash.create('success', message);
+        };
+
+        //CategoryService.getAll().then(function (response) {
+        //    $scope.categories = response.data;
+        //});
+
+        $scope.refresh = function () {
+            CategoryService.getAll().then(function (response) {
+                $scope.categories = response.data;
+            });
+        }
+        $scope.refresh();
+        $scope.openEdit = function (category) {
+            $uibModal.open({
+                templateUrl: 'app/components/category/edit-controller.html',
+                controller: 'editController',
+                resolve: {
+                    category: CategoryService.get(category.Id).then(function (res) {
+                        return res.data;
+                    })
+                }
+            }).result.then(function () {
+                $scope.refresh();
+                $scope.success();
+            });
+        };
+
+        $scope.openDelete = function (Id) {
+            $uibModal.open({
+                templateUrl: 'app/components/category/delete-controller.html',
+                controller: 'deleteController',
+                resolve: {
+                    category: CategoryService.get(Id).then(function (res) {
+                        return res.data;
+                    })
+                }
+            }).result.then(function () {
+                $scope.refresh();
+                $scope.success();
+            });
+        };
+
+        $scope.openNew = function () {
+            $uibModal.open({
+                templateUrl: 'app/components/category/add-controller.html',
+                controller: 'addController',
+                resolve: {
+                    category: {
+                        Name: '',
+                        Status: null
+                        }
+                }
+            }).result.then(function () {
+                $scope.refresh();
+                $scope.success();
+            });
+        };
+
+    }]);

@@ -546,18 +546,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.constants.js" />
     <Content Include="app\app.js" />
+    <Content Include="app\components\category\add-controller.html" />
+    <Content Include="app\components\category\add-controller.js" />
     <Content Include="app\components\category\categories.html" />
     <Content Include="app\components\category\category-controller.js" />
+    <Content Include="app\components\category\delete-controller.html" />
+    <Content Include="app\components\category\delete-controller.js" />
+    <Content Include="app\components\category\edit-controller.html" />
+    <Content Include="app\components\category\edit-controller.js" />
     <Content Include="app\components\customer\customer-controller.js" />
     <Content Include="app\components\customer\customers.html" />
     <Content Include="app\components\order\order-controller.js" />
     <Content Include="app\components\order\orders.html" />
     <Content Include="app\components\product\product-controller.js" />
     <Content Include="app\components\product\products.html" />
+    <Content Include="app\Flash.js" />
     <Content Include="app\routes.js" />
     <Content Include="app\services\category-service.js" />
+    <Content Include="app\services\customer-service.js" />
+    <Content Include="app\services\product-service.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -614,6 +622,14 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
@@ -1393,14 +1409,6 @@
     <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />

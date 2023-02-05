@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title">Category:</h3>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label for="category">Category Name:</label>
+        <input class="form-control" type="text" ng-model="category.Name" />
+        <label for="category">Category Status:</label>
+            <select class="form-control" ng-model="category.Status">
+                <option ng-selected="category.Status===true" value=true>Active</option>
+                <option ng-selected="category.Status===false" value=false>Not Active</option>
+            </select>
+</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok(category)">OK</button>
+    <button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
+</div>

@@ -1,4 +1,5 @@
-﻿using IntellaQeust.BusinessLogic.CategoryModel;
+﻿using IntellaQeust.BusinessLogic.Categories;
+using IntellaQeust.BusinessLogic.CategoryModel;
 using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.BusinessLogic.Mappers;
@@ -6,21 +7,20 @@ using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace IntellaQeust.Business.Services
 {
     public interface ICategoryService
     {
         CategoryViewModel Get(Guid Id);
-        List<CategoryViewModel> GetAll();
+        CategoryResponse GetAll(CategoryRequest request);
         Guid Create(CategoryViewModel model);
         void Update(CategoryViewModel model);
         void DeleteById(Guid Id);
         bool CheckCategoryNameExists(String Name);
         bool CheckCategoryStatus(bool status);
+        CategoryResponse FilterAndPagination(CategoryRequest request);
     }
 
     public class CategoryService : ICategoryService
@@ -77,6 +77,7 @@ namespace IntellaQeust.Business.Services
             }
         }
 
+
         public CategoryViewModel Get(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
@@ -93,14 +94,34 @@ namespace IntellaQeust.Business.Services
             }
         }
 
-        public List<CategoryViewModel> GetAll()
+        public CategoryResponse GetAll(CategoryRequest request)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var listCategories = _categoryRepository.All().Select(x => x.MapToViewModel()).ToList();
+                CategoryResponse response= new CategoryResponse();
+                response.Size = request.Size;
+                response.CurrentPage = request.PageNeeded;
+                response.Items= _categoryRepository.All()
+                                    .Skip((response.CurrentPage - 1) * response.Size)
+                                    .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
+                response.TotalItems = _categoryRepository.All().Count();
                 _unitOfWork.Commit();
-                return listCategories;
+                return response;
             }
+        }
+        public CategoryResponse FilterAndPagination(CategoryRequest request)
+        {
+            /*using (_unitOfWork.BeginTransaction())
+            {
+                CategoryResponse response=new CategoryResponse();
+                response.Items = (List<CategoryViewModel>)_categoryRepository.FilterBy(x => x.Name.Contains(request.SearchString));
+                response.CurrentPage = request.Page;
+                response.TotalItems=response.Items.Count;
+                response.Size = request.Size;
+                _unitOfWork.Commit();
+                return response;
+            }*/
+            return null;
         }
 
         public void Update(CategoryViewModel model)

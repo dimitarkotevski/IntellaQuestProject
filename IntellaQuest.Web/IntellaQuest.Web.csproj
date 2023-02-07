@@ -547,6 +547,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\collapse.js" />
     <Content Include="app\components\category\add-controller.html" />
     <Content Include="app\components\category\add-controller.js" />
     <Content Include="app\components\category\categories.html" />

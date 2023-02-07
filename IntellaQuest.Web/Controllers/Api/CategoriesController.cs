@@ -1,4 +1,5 @@
 ﻿using IntellaQeust.Business.Services;
+using IntellaQeust.BusinessLogic.Categories;
 using IntellaQeust.BusinessLogic.CategoryModel;
 using System;
 using System.IO;
@@ -17,9 +18,9 @@ namespace IntellaQuest.Web.Controllers
 
         // GET: Categories
         [HttpPost]
-        public ActionResult All()
+        public ActionResult All(CategoryRequest request)
         {
-            return Json(_categoriesService.GetAll());
+            return Json(_categoriesService.GetAll(request));
         }
 
         // GET: Categories/Get/5

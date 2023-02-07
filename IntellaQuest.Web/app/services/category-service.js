@@ -4,8 +4,8 @@
     CategoryService.add = function (newCategory) {
         return $http.post(baseUrl + '/create', newCategory);
     };
-    CategoryService.getAll = function () {
-        return $http.post(baseUrl+'/all');
+    CategoryService.getAll = function (filterPage) {
+        return $http.post(baseUrl + '/all', filterPage);
     };
     CategoryService.get = function (guid) {
         return $http.post(baseUrl + '/get/' + guid)

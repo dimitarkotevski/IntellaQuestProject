@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Attributes;
-using IntellaQuest.BusinessLogic.Models;
-using IntellaQuest.Domain;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace IntellaQeust.BusinessLogic.Models

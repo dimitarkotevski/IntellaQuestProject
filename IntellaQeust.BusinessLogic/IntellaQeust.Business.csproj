@@ -83,7 +83,7 @@
   <ItemGroup>
     <Compile Include="Categories\CategoriesMappers.cs" />
     <Compile Include="Categories\CategoriesModels.cs" />
-    <Compile Include="Categories\CategoryRequest.cs" />
+    <Compile Include="Request.cs" />
     <Compile Include="Categories\CategoryResponse.cs" />
     <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Customers\CustomersMappers.cs" />

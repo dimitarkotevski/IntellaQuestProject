@@ -18,7 +18,6 @@ namespace IntellaQeust.BusinessLogic.CategoryModel
         public CategoriesViewModelValidator()
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.");
-            //RuleFor(x => x.Status).NotEmpty().WithMessage("Status is required.");
         }
     }
 }

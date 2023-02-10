@@ -5,6 +5,7 @@
         return $http.post(baseUrl + '/create', newCategory);
     };
     CategoryService.getAll = function (filterPage) {
+
         return $http.post(baseUrl + '/all', filterPage);
     };
     CategoryService.get = function (guid) {

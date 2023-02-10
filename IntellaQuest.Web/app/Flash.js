@@ -25,7 +25,7 @@
     });
 
     // Directive for closing the flash message
-    app.directive('closeFlash', function ($compile, Flash) {
+    /*app.directive('closeFlash', function ($compile, Flash) {
         return {
             link: function (scope, ele) {
                 ele.on('click', function () {
@@ -33,7 +33,7 @@
                 });
             }
         };
-    });
+    });*/
 
    
 

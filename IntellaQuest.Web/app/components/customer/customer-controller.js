@@ -3,6 +3,5 @@
     $scope.customers=[];
     CustomerService.getAll().then(function(response){
         $scope.customers = response.data;
-        console.log($scope.customers)
     });
 }]);

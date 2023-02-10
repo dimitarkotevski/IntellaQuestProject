@@ -1,11 +1,12 @@
 ﻿using IntellaQeust.BusinessLogic.Models;
 using IntellaQuest.BusinessLogic.Services;
+using IntellaQuest.Web.Controllers.Api;
 using System;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private readonly IProductService _productsService;
 

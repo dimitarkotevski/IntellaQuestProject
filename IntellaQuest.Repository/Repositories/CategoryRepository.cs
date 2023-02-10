@@ -5,7 +5,6 @@ namespace IntellaQuest.Data.NHibernate.Repositories
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-
     }
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {

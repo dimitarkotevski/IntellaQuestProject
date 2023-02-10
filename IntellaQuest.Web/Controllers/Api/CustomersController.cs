@@ -1,12 +1,13 @@
 ﻿using IntellaQeust.BusinessLogic.Services;
 using IntellaQuest.BusinessLogic.Models;
+using IntellaQuest.Web.Controllers.Api;
 using System;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : BaseController
     {
         private readonly ICustomerService _customersService;
         public CustomersController() { }

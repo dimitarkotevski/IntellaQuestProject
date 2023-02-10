@@ -83,13 +83,24 @@ textarea {
 }
 
 .btnAdd{
-    background-color: burlywood;
     border: 1px solid gray;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .inlineDisplay{
     display: block;
 }
+.errorMassage{
+    color: red;
+}
+tr:hover td {
+    background-color: lightgray;
+}
+ th a {
+    text-decoration: none;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 
 
 

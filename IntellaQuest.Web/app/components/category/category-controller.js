@@ -3,6 +3,10 @@
         $scope.title = "Category table";
         $scope.categories = [];
         $scope.filterPageRequest = {
+            SearchString: "",
+            SortName: "",
+            isAscending: "",
+            SearchStatus:"",
             PageNeeded: 1,
             Size: 5
         }
@@ -17,16 +21,6 @@
             Flash.create(type, message);
         };
 
-        $scope.info = function () {
-            var message = '<strong>Success</strong><div>You successfully edited category.</div>';
-            Flash.create('info', message);
-        };
-
-        $scope.warning = function () {
-            var message = '<strong>Success</strong><div>You successfully deleted category.</div>';
-            Flash.create('warning', message);
-        };
-
         $scope.refresh = function () {
             $scope.filterPageRequest.Size = $scope.filterPageResponse.Size;
             CategoryService.getAll($scope.filterPageRequest).then(function (response) {
@@ -39,16 +33,47 @@
                     CurrentPage: response.data.CurrentPage
                 }
                 //$scope.filterPageResponse.Size = $scope.filterPageResponse.Size.toString();
-                console.log($scope.filterPageResponse)
             });
+        }
+
+        $scope.reset = function () {
+            $scope.filterPageRequest = {
+                SearchString: "",
+                SearchStatus: "",
+                isAscending: "",
+                SearchStatus: "",
+                PageNeeded: 1,
+                Size: 5
+            }
+            $scope.refresh();
         }
 
         $scope.refresh();
 
+        $scope.openNew = function () {
+            $uibModal.open({
+                templateUrl: 'app/components/category/add-edit-controller.html',
+                controller: 'AddEditController',
+                resolve: {
+                    category: {
+                        Name: '',
+                        Status: "true"
+                    },
+
+                } 
+            }).result.then(function () {
+                $scope.refresh();
+                $scope.massage(
+                    'success',
+                    "<strong>CREATED</strong><div>You successfully create category.</div>"
+                );
+            });
+        };
+
         $scope.openEdit = function (category) {
             $uibModal.open({
-                templateUrl: 'app/components/category/edit-controller.html',
-                controller: 'editController',
+                templateUrl: 'app/components/category/add-edit-controller.html',
+                controller: 'AddEditController',
                 resolve: {
                     category: CategoryService.get(category.Id).then(function (res) {
                         return res.data;
@@ -56,7 +81,10 @@
                 }
             }).result.then(function () {
                 $scope.refresh();
-                $scope.info();
+                $scope.massage(
+                    'success',
+                    "<strong>EDITED</strong><div>You successfully edit category.</div>"
+                );
             });
         };
 
@@ -71,37 +99,34 @@
                 }
             }).result.then(function () {
                 $scope.refresh();
-                $scope.warning();
-            });
-        };
-
-        $scope.openNew = function () {
-            $uibModal.open({
-                templateUrl: 'app/components/category/add-controller.html',
-                controller: 'addController',
-                resolve: {
-                    category: {
-                        Name: '',
-                        Status: null
-                    }
-                }
-            }).result.then(function () {
-                $scope.refresh();
                 $scope.massage(
                     'success',
-                    "<strong>Success</strong><div>You successfully create category.</div>"
+                    "<strong>DELETED</strong><div>You successfully deleted category.</div>"
                 );
             });
         };
 
+        $scope.sort = function (order) {
+            $scope.filterPageRequest.SortName = order;
+            if ($scope.filterPageRequest.isAscending == '') {
+                $scope.filterPageRequest.isAscending = 'asc'
+            } else if ($scope.filterPageRequest.isAscending == 'asc') {
+                $scope.filterPageRequest.isAscending = 'desc'
+            } else {
+                $scope.filterPageRequest.isAscending = 'asc'
+            }
+            $scope.refresh();
+        }
+
         $scope.page = function () {
 
             $scope.filterPageRequest = {
+                SearchString: $scope.filterPageRequest.SearchString,
+                SearchStatus: $scope.filterPageRequest.Status,
                 PageNeeded: $scope.filterPageResponse.CurrentPage,
                 Size: $scope.filterPageResponse.Size
             }
             $scope.refresh();
-            console.log($scope.filterPageResponse)
         }
 
     }]);

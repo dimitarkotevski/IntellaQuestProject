@@ -1,10 +1,11 @@
 ﻿using IntellaQeust.BusinessLogic.Orders;
+using IntellaQuest.Web.Controllers.Api;
 using System;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
 {
-    public class OrdersController : Controller
+    public class OrdersController : BaseController
     {
         private readonly IOrderService _orderService;
 

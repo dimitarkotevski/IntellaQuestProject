@@ -564,6 +564,7 @@
     <Content Include="app\routes.js" />
     <Content Include="app\services\category-service.js" />
     <Content Include="app\services\customer-service.js" />
+    <Content Include="app\services\order-service.js" />
     <Content Include="app\services\product-service.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

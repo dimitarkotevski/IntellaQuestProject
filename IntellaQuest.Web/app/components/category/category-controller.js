@@ -32,7 +32,6 @@
                     TotalPages: response.data.TotalPages,
                     CurrentPage: response.data.CurrentPage
                 }
-                //$scope.filterPageResponse.Size = $scope.filterPageResponse.Size.toString();
             });
         }
 
@@ -123,6 +122,8 @@
             $scope.filterPageRequest = {
                 SearchString: $scope.filterPageRequest.SearchString,
                 SearchStatus: $scope.filterPageRequest.Status,
+                SortName: $scope.filterPageRequest.SortName,
+                isAscending: $scope.filterPageRequest.isAscending,
                 PageNeeded: $scope.filterPageResponse.CurrentPage,
                 Size: $scope.filterPageResponse.Size
             }

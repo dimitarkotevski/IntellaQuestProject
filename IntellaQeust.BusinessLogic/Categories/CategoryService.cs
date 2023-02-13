@@ -1,11 +1,13 @@
-﻿using IntellaQeust.BusinessLogic.Categories;
-using IntellaQeust.BusinessLogic.CategoryModel;
+﻿using IntellaQeust.BusinessLogic.CategoryModel;
 using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
+using IntellaQeust.BusinessLogic.Requests;
+using IntellaQeust.BusinessLogic.Responses;
 using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
+using NHibernate.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +17,14 @@ namespace IntellaQeust.Business.Services
     public interface ICategoryService
     {
         CategoryViewModel Get(Guid Id);
-        CategoryResponse GetAll(Request request);
+        CategoryResponse GetAll(CategoryRequest request);
+        List<CategoryViewModel> GetAll();
         bool Create(CategoryViewModel model);
-        void Update(CategoryViewModel model);
+        bool Update(CategoryViewModel model);
         void DeleteById(Guid Id);
         bool CheckCategoryNameExists(String Name);
         bool CheckCategoryStatus(bool status);
-        CategoryResponse FilterAndPage(Request request);
+        CategoryResponse FilterAndPage(CategoryRequest request);
     }
 
     public class CategoryService : ICategoryService
@@ -78,7 +81,7 @@ namespace IntellaQeust.Business.Services
             }
         }
 
-        public CategoryResponse FilterAndPage(Request request)
+        public CategoryResponse FilterAndPage(CategoryRequest request)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -138,6 +141,11 @@ namespace IntellaQeust.Business.Services
                         break;
                 }
                 //Pagination
+                if(request.Size == 0 && request.PageNeeded == 0)
+                {
+                    request.PageNeeded= 1;
+                    request.Size = listCategoryViewModelForFiltering.Count();
+                }
                 response.Size = request.Size;
                 response.CurrentPage = request.PageNeeded;
                 response.Items = listCategoryViewModelForFiltering
@@ -165,13 +173,19 @@ namespace IntellaQeust.Business.Services
             }
         }
 
-        public CategoryResponse GetAll(Request request)
+        public CategoryResponse GetAll(CategoryRequest request)
         {
             return FilterAndPage(request);
         }
+        public List<CategoryViewModel> GetAll()
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                return _categoryRepository.All().Select(x=>x.MapToViewModel()) .ToList();
+            }
+        }
 
-
-        public void Update(CategoryViewModel model)
+        public bool Update(CategoryViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -180,12 +194,17 @@ namespace IntellaQeust.Business.Services
                 {
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-
-                category.Name = model.Name;
+                if (_categoryRepository.CheckExist(x=>x.Id!=model.Id && x.Name==model.Name))
+                {
+                    throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
+                }
+                
                 category.Status = model.Status;
-
+                category.Name = model.Name;
                 _categoryRepository.Update(category);
+
                 _unitOfWork.Commit();
+                return true;
             }
         }
     }

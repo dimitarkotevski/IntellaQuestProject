@@ -10,15 +10,6 @@ namespace IntellaQuest.Domain
         private Category _category;
         private IList<Order> _orders;
         public Product() { }
-
-        public Product(string title, string description, Category category, IList<Order> orders)
-        {
-            _name = title;
-            _description = description;
-            _category = category;
-            _orders = orders;
-        }
-
         public virtual string Name 
         { 
             get => _name; 

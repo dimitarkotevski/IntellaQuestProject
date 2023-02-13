@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IntellaQeust.BusinessLogic.Models;
+﻿using IntellaQeust.BusinessLogic.Models;
 using System.Linq;
 using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
@@ -8,17 +7,21 @@ using System;
 using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.Domain;
+using IntellaQeust.BusinessLogic.Responses;
+using IntellaQeust.BusinessLogic.Requests;
+using System.Collections.Generic;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
     public interface IProductService
     {
-        List<ProductViewModel> GetAll();
+        ProductResponse GetAll(ProductRequest request);
         ProductViewModel Get(Guid Id);
         Guid Create(ProductViewModel model);
         void Update(ProductViewModel model);
         void Delete(Guid Id);
         bool CheckNameExists(string Name);
+        ProductResponse FilterAndPage(ProductRequest request);
     }
     public class ProductService : IProductService
     {
@@ -43,7 +46,7 @@ namespace IntellaQuest.BusinessLogic.Services
             using (_unitOfWork.BeginTransaction())
             {
                 // Need exception for model.Id 
-                if (_productsRepository.CheckExist(x=>x.Name==model.Name))
+                if (_productsRepository.CheckExist(x => x.Name == model.Name))
                 {
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
                 }
@@ -70,7 +73,6 @@ namespace IntellaQuest.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
-                //delete exception need
                 var productEntity = _productsRepository.FindBy(Id);
                 if (productEntity == null)
                 {
@@ -80,6 +82,76 @@ namespace IntellaQuest.BusinessLogic.Services
                 _unitOfWork.Commit();
             }
         }
+
+        public ProductResponse FilterAndPage(ProductRequest request)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                ProductResponse response = new ProductResponse();
+                IQueryable<Product> listProductViewForFiltering = _productsRepository.All();
+                
+                if (!string.IsNullOrEmpty(request.SearchString))
+                {
+                    listProductViewForFiltering = listProductViewForFiltering.Where(x => x.Name.Contains(request.SearchString));
+                }
+                if (request.CategoryId!=Guid.Empty)
+                {
+                    var category = _categoryRepository.FindBy(request.CategoryId);
+                    if (category == null)
+                    {
+                        throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
+                    }
+                    listProductViewForFiltering = listProductViewForFiltering.Where(x => x.Category == category);
+                }
+
+                switch (request.SortName)
+                {
+                    case "Name":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            listProductViewForFiltering = listProductViewForFiltering.OrderBy(x => x.Name);
+                        }
+                        else
+                        {
+                            listProductViewForFiltering = listProductViewForFiltering.OrderByDescending(x => x.Name);
+                        }
+                        break;
+                    case "Category":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            listProductViewForFiltering = listProductViewForFiltering.OrderBy(x => x.Category);
+                        }
+                        else
+                        {
+                            listProductViewForFiltering = listProductViewForFiltering.OrderByDescending(x => x.Category);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                response.Size = request.Size;
+                response.CurrentPage = request.PageNeeded;
+                response.Items = listProductViewForFiltering
+                                    .Skip((response.CurrentPage - 1) * response.Size)
+                                    .Take(response.Size).Select(x=>x.MapToViewModel()).ToList();
+                response.TotalItems = listProductViewForFiltering.Count();
+
+
+                _unitOfWork.Commit();
+
+                return response;
+            }
+        }
+
         public ProductViewModel Get(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
@@ -95,15 +167,9 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
-        public List<ProductViewModel> GetAll()
+        public ProductResponse GetAll(ProductRequest request)
         {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var result = _productsRepository.All().Select(x => ProductsMappers.MapToViewModel(x)).ToList();
-                _unitOfWork.Commit();
-
-                return result;
-            }
+            return FilterAndPage(request);
         }
 
         public void Update(ProductViewModel model)

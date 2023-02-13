@@ -8,7 +8,6 @@ namespace IntellaQuest.Data.NHibernate.Repositories
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
-        bool CheckExist(Expression<Func<Customer, bool>> expression);
     }
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
@@ -16,9 +15,6 @@ namespace IntellaQuest.Data.NHibernate.Repositories
         {
         }
 
-        public bool CheckExist(Expression<Func<Customer, bool>> expression)
-        {
-            return All().Where(expression).Any();
-        }
+        
     }
 }

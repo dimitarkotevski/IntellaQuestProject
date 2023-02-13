@@ -27,7 +27,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th ng-click="sort('Name')" scope="col">
+                <th  ng-click="sort('Name')" scope="col">
                     <a href="#">
                         Category Name
                     </a>
@@ -62,7 +62,7 @@
 
     <!--PAGINATION-->
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
                 <storng>
                     Showing
@@ -76,17 +76,17 @@
                     {{filterPageResponse.TotalItems}} items.
                 </storng><br />
                 <!--<label>
-                    CurrentPage: <span>{{filterPageResponse.CurrentPage}}</span> <br />
-                    Size: <span>{{filterPageResponse.Size}}</span> <br />
-                </label>-->
+                CurrentPage: <span>{{filterPageResponse.CurrentPage}}</span> <br />
+                Size: <span>{{filterPageResponse.Size}}</span> <br />
+            </label>-->
             </div>
         </div>
 
 
 
-        <div class="col-sm-6" style="margin: 0">
+        <div class="col-sm-8" style="margin: 0">
             <span class="col-sm-10">
-                <ul uib-pagination class="inlineDisplay" ng-change="page()" items-per-page="filterPageResponse.Size" total-items="filterPageResponse.TotalItems" ng-model="filterPageResponse.CurrentPage" boundary-links="true">
+                <ul uib-pagination class="inlineDisplay pagination-sm" ng-change="page()" items-per-page="filterPageResponse.Size" total-items="filterPageResponse.TotalItems" ng-model="filterPageResponse.CurrentPage" boundary-links="true">
                 </ul>
             </span>
             <span class="col-sm-2">
@@ -101,7 +101,6 @@
                 </span>
             </span>
         </div>
-
 
     </div>
 

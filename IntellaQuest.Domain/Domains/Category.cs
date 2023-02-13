@@ -8,15 +8,6 @@ namespace IntellaQuest.Domain
         private string _name;
         private bool _status;
         private IList<Product> _products;
-        
-
-        public Category(string name, bool status, IList<Product> products)
-        {
-            _name = name;
-            _status = status;
-            _products= new List<Product>();
-            _products= products;
-        }
         public Category()
         {
             _products = new List<Product>();

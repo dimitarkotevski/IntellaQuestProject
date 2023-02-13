@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IntellaQeust.BusinessLogic
+namespace IntellaQeust.BusinessLogic.Responses
 {
     public class ResponseModel<T>
     {

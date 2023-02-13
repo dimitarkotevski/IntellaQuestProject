@@ -1,6 +1,6 @@
 ﻿using IntellaQeust.Business.Services;
-using IntellaQeust.BusinessLogic.Categories;
 using IntellaQeust.BusinessLogic.CategoryModel;
+using IntellaQeust.BusinessLogic.Requests;
 using IntellaQuest.Web.Controllers.Api;
 using System;
 using System.Web.Mvc;
@@ -18,9 +18,14 @@ namespace IntellaQuest.Web.Controllers
 
         // GET: Categories
         [HttpPost]
-        public ActionResult All(Request request)
+        public ActionResult All(CategoryRequest request)
         {
             return Json(_categoriesService.GetAll(request));
+        }
+        [HttpGet]
+        public ActionResult GetAll(CategoryRequest request)
+        {
+            return Json(_categoriesService.GetAll());
         }
 
         // GET: Categories/Get/5
@@ -51,8 +56,8 @@ namespace IntellaQuest.Web.Controllers
             {
                 return ErrorNotAcceptable();
             }
-            _categoriesService.Update(model);
-            return Json(new { success = true });
+            
+            return Json(new { success = _categoriesService.Update(model)});
         }
 
 

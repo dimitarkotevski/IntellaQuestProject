@@ -10,7 +10,7 @@
         }
 
         $scope.cancel = function () {
-            $uibModalInstance.close();
+            $uibModalInstance.dismiss();
         }
     }
 ]);

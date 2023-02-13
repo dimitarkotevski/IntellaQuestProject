@@ -1,4 +1,5 @@
 ﻿using IntellaQeust.BusinessLogic.Models;
+using IntellaQeust.BusinessLogic.Requests;
 using IntellaQuest.BusinessLogic.Services;
 using IntellaQuest.Web.Controllers.Api;
 using System;
@@ -16,9 +17,9 @@ namespace IntellaQuest.Web.Controllers
         }
         // POST: Products
         [HttpPost]
-        public ActionResult All()
+        public ActionResult All(ProductRequest request)
         {
-            return Json(_productsService.GetAll());
+            return Json(_productsService.GetAll(request));
         }
 
         // POST: Products/get/5

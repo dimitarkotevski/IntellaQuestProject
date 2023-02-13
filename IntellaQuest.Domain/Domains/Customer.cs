@@ -12,16 +12,6 @@ namespace IntellaQuest.Domain
         private string _password;
         private IList<Order> _orders;
         public Customer() { }
-
-        public Customer(string name, string surname, string email, string username, string password)
-        {
-            _name = name;
-            _surname = surname;
-            _email = email;
-            _username = username;
-            _password = password;
-        }
-
         public virtual string Name
         {
             get => _name;

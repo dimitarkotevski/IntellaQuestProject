@@ -4,7 +4,10 @@
         <h3 class="modal-title">Category:</h3>
     </div>
     <div class="modal-body">
-        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert($index)">{{alert.msg}}</div>
+
+        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert($index)">
+            {{alert.msg}}
+        </div>
 
         <div>
             <label for="category">Category Name: *</label>
@@ -12,7 +15,7 @@
                    required
                    name="CategoryName"
                    ng-model="category.Name" />
-            <div ng-messages="CategoryForm.CategoryName.$error" ng-if="CategoryForm.CategoryName.$touched" style="color:maroon" role="alert">
+            <div ng-messages="CategoryForm.CategoryName.$error" ng-if="CategoryForm.CategoryName.$invalid" style="color:maroon" role="alert">
                 <div ng-message="required">Category Name is required</div>
                 <div ng-message-default>This field has an input error</div>
             </div>

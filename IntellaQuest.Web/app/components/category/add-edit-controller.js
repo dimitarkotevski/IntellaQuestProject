@@ -8,7 +8,7 @@
 
         $scope.ok = function (categoryFromModel) {
             if (!$scope.CategoryForm.$valid) {
-                $scope.alerts.push({ msg: 'Please fill out all required fields' });
+                return;
             } else {
                 if (!categoryFromModel.Id) {
                     CategoryService.add(categoryFromModel).then(
@@ -21,16 +21,17 @@
                         }
                     )
                 } else {
-                    CategoryService.edit(categoryFromModel).then(function () {
-                        $uibModalInstance.close();
-                    }, function (response) {
-                        $scope.exception = response.data.exception;
-                        $scope.addAlert()
-                    }
+                    CategoryService.edit(categoryFromModel).then(
+                        function () {
+                            $uibModalInstance.close();
+                        }, function (response) {
+                            $scope.exception = response.data.exception;
+                            $scope.addAlert()
+                        }
                     )
                 }
             }
-            
+
 
         }
         $scope.cancel = function () {

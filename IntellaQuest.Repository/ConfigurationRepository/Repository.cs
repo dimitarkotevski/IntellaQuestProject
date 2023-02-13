@@ -1,5 +1,4 @@
-﻿using NHibernate.Mapping.ByCode;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,9 +15,10 @@ namespace IntellaQuest.Data.NHibernate.ConfigurationRepository
         bool Delete(Guid id);
         bool Delete(IEnumerable<T> entities);
         IQueryable<T> All();
-        T FindBy(Expression<Func<T, bool>> expression);
         T FindBy(Guid id);
+        T FindBy(Expression<Func<T, bool>> expression);
         IQueryable<T> FilterBy(Expression<Func<T, bool>> expression);
+        bool CheckExist(Expression<Func<T, bool>> expression);
     }
     public class Repository<T> : NHibernateContext, IRepository<T> where T : class
     {
@@ -105,6 +105,11 @@ namespace IntellaQuest.Data.NHibernate.ConfigurationRepository
             var entity = _unitOfWork.Session.Get<T>(id);
             _unitOfWork.Session.Delete(entity);
             return true;
+        }
+
+        public bool CheckExist(Expression<Func<T, bool>> expression)
+        {
+            return All().Where(expression).Any();
         }
 
 

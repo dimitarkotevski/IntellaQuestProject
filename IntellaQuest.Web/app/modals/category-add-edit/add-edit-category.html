@@ -1,4 +1,4 @@
-﻿<form novalidate name="CategoryForm">
+﻿`<form novalidate name="CategoryForm">
 
     <div class="modal-header">
         <h3 class="modal-title">Category:</h3>
@@ -15,7 +15,7 @@
                    required
                    name="CategoryName"
                    ng-model="category.Name" />
-            <div ng-messages="CategoryForm.CategoryName.$error" ng-if="CategoryForm.CategoryName.$invalid" style="color:maroon" role="alert">
+            <div ng-messages="CategoryForm.CategoryName.$error" ng-if="CategoryForm.CategoryName.$touched || showErrorMessages" style="color:maroon" role="alert">
                 <div ng-message="required">Category Name is required</div>
                 <div ng-message-default>This field has an input error</div>
             </div>
@@ -30,7 +30,7 @@
 
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="ok(category)">OK</button>
+        <button class="btn btn-primary" type="button" ng-click="ok(category); showErrorMessages = CategoryForm.$invalid">OK</button>
         <button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
     </div>
 </form>

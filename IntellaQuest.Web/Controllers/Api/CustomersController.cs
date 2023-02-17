@@ -1,8 +1,9 @@
-﻿using IntellaQeust.BusinessLogic.Services;
+﻿using FluentNHibernate.Mapping;
+using IntellaQeust.BusinessLogic.Requests;
+using IntellaQeust.BusinessLogic.Services;
 using IntellaQuest.BusinessLogic.Models;
 using IntellaQuest.Web.Controllers.Api;
 using System;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
@@ -18,9 +19,9 @@ namespace IntellaQuest.Web.Controllers
 
         // GET: Customers
         [HttpPost]
-        public ActionResult All()
+        public ActionResult All(RequestModel request)
         {
-            return Json(_customersService.GetAll());
+            return Json(_customersService.GetAll(request));
         }
 
         // GET: Customer/Details/5
@@ -38,7 +39,8 @@ namespace IntellaQuest.Web.Controllers
             {
                 return Json(ModelState.Values);
             }
-            return Json(_customersService.Create(model));
+            _customersService.Create(model);
+            return Json(new { success = true });
         }
         // GET: Customer/Edit
         [HttpPost]
@@ -49,14 +51,14 @@ namespace IntellaQuest.Web.Controllers
                 return Json(ModelState.Values);
             }
             _customersService.Update(model);
-            return Json(true);
+            return Json(new { success = true });
         }
         //POST Customers/DeleteById/5
         [HttpPost]
-        public ActionResult DeleteById(Guid id)
+        public ActionResult Delete(Guid id)
         {
             _customersService.Delete(id);
-            return Json(true);
+            return Json(new { success = true });
         }
     }
 }

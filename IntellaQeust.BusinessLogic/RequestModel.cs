@@ -1,4 +1,6 @@
-﻿namespace IntellaQeust.BusinessLogic.Requests
+﻿using System;
+
+namespace IntellaQeust.BusinessLogic.Requests
 {
     public class RequestModel
     {
@@ -7,5 +9,9 @@
         public string isAscending { get; set; }
         public int PageNeeded { get; set; }
         public int Size { get; set; }
+        public Guid? EntityId { get; set; }
+        public string SearchStatus { get; set; }
+        public string EmailEnding { get; set; }
+        public float? Quantity { get; set; }
     }
 }

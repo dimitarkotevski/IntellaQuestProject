@@ -7,7 +7,6 @@ using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
-using NHibernate.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +16,14 @@ namespace IntellaQeust.Business.Services
     public interface ICategoryService
     {
         CategoryViewModel Get(Guid Id);
-        CategoryResponse GetAll(CategoryRequest request);
+        ResponseModel<CategoryViewModel> GetAll(RequestModel request);
         List<CategoryViewModel> GetAll();
         bool Create(CategoryViewModel model);
         bool Update(CategoryViewModel model);
-        void DeleteById(Guid Id);
+        bool DeleteById(Guid Id);
         bool CheckCategoryNameExists(String Name);
         bool CheckCategoryStatus(bool status);
-        CategoryResponse FilterAndPage(CategoryRequest request);
+        ResponseModel<CategoryViewModel> FilterAndPage(RequestModel request);
     }
 
     public class CategoryService : ICategoryService
@@ -67,7 +66,7 @@ namespace IntellaQeust.Business.Services
                 return true;
             }
         }
-        public void DeleteById(Guid Id)
+        public bool DeleteById(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -78,14 +77,15 @@ namespace IntellaQeust.Business.Services
                 }
                 _categoryRepository.Delete(categoryEntity);
                 _unitOfWork.Commit();
+                return true;
             }
         }
 
-        public CategoryResponse FilterAndPage(CategoryRequest request)
+        public ResponseModel<CategoryViewModel> FilterAndPage(RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                CategoryResponse response = new CategoryResponse();
+                ResponseModel<CategoryViewModel> response = new ResponseModel<CategoryViewModel>();
                 IQueryable<Category> listCategoryViewModelForFiltering = _categoryRepository.All();
 
                 //Filter
@@ -173,7 +173,7 @@ namespace IntellaQeust.Business.Services
             }
         }
 
-        public CategoryResponse GetAll(CategoryRequest request)
+        public ResponseModel<CategoryViewModel> GetAll(RequestModel request)
         {
             return FilterAndPage(request);
         }

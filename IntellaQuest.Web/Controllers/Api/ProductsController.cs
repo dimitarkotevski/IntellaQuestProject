@@ -17,7 +17,7 @@ namespace IntellaQuest.Web.Controllers
         }
         // POST: Products
         [HttpPost]
-        public ActionResult All(ProductRequest request)
+        public ActionResult All(RequestModel request)
         {
             return Json(_productsService.GetAll(request));
         }
@@ -37,7 +37,7 @@ namespace IntellaQuest.Web.Controllers
             {
                 return Json(ModelState.Values);
             }
-            return Json(_productsService.Create(model));
+            return Json(new { success = _productsService.Create(model) });
         }
 
         
@@ -50,16 +50,16 @@ namespace IntellaQuest.Web.Controllers
             {
                 return Json(ModelState.Values);
             }
-            _productsService.Update(model);
-            return Json(true);
+            
+            return Json(new {success= _productsService.Update(model)});
         }
 
         // POST: Products/Delete/5
         [HttpPost]
         public ActionResult Delete(Guid Id)
         {
-            _productsService.Delete(Id);
-            return Json(true);
+            
+            return Json(new {success= _productsService.Delete(Id)});
         }
     }
 }

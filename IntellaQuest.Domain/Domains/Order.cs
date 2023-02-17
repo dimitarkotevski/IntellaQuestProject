@@ -1,10 +1,5 @@
 ﻿namespace IntellaQuest.Domain
 {
-    public enum Status
-    {
-        Active,
-        Inactive
-    }
     public class Order : BaseEntity
     {
         private Product _product;

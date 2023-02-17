@@ -1,5 +1,7 @@
 ﻿using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
+using IntellaQeust.BusinessLogic.Requests;
+using IntellaQeust.BusinessLogic.Responses;
 using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.BusinessLogic.Models;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
@@ -7,18 +9,17 @@ using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
 using IntellaQuest.Repository.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace IntellaQeust.BusinessLogic.Services
 {
     public interface ICustomerService
     {
-        List<CustomerViewModel> GetAll();
-        CustomerViewModel Get(Guid customerId);
-        Guid Create(CustomerViewModel model);
+        ResponseModel<CustomerViewModel> GetAll(RequestModel request);
+        CustomerViewModel Get(Guid Id);
+        bool Create(CustomerViewModel model);
         void Update(CustomerViewModel model);
-        void Delete(Guid customerId);
+        void Delete(Guid Id);
 
     }
     public class CustomerService : ICustomerService
@@ -37,7 +38,7 @@ namespace IntellaQeust.BusinessLogic.Services
         }
 
 
-        public Guid Create(CustomerViewModel model)
+        public bool Create(CustomerViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -59,27 +60,9 @@ namespace IntellaQeust.BusinessLogic.Services
                 };
                 _customerRepository.Add(customerEntity);
                 _unitOfWork.Commit();
-                return customerEntity.Id;
+                return true;
             }
         }
-
-        /*public void Delete(CustomerViewModel model)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var entity = new Customer
-                {
-                    Id = model.Id,
-                    Name = model.Name,
-                    Surname = model.Surname,
-                    Email = model.Email,
-                    Username = model.Username,
-                    Password = model.Password,
-                };
-                _customerRepository.Delete(entity);
-                _unitOfWork.Commit();
-            }
-        }*/
 
         public void Delete(Guid customerId)
         {
@@ -97,37 +80,140 @@ namespace IntellaQeust.BusinessLogic.Services
                 var customer = _customerRepository.FindBy(customerId);
                 if (customer == null)
                 {
-                    throw new BllException(String.Format(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION));
+                    throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
                 _unitOfWork.Commit();
-                return CustomersMappers.MapToViewModel(customer);
+                return customer.MapToViewModel();
 
             }
         }
 
-        public List<CustomerViewModel> GetAll()
+        public ResponseModel<CustomerViewModel> GetAll(RequestModel request)
+        {
+            return FilterAndPage(request);
+        }
+        private ResponseModel<CustomerViewModel> FilterAndPage(RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var result = _customerRepository.All()
-                    .Select(x => CustomersMappers.MapToViewModel(x))
-                    .ToList();
+                ResponseModel<CustomerViewModel> response = new ResponseModel<CustomerViewModel>();
+                IQueryable<Customer> listCustomersForFiltering = _customerRepository.All();
+
+                if (!string.IsNullOrEmpty(request.SearchString))
+                {
+                    listCustomersForFiltering = listCustomersForFiltering
+                        .Where(x => (
+                            x.Name.Contains(request.SearchString) || 
+                            x.Surname.Contains(request.SearchString)) || 
+                            (x.Surname+" "+x.Name).Equals(request.SearchString));
+                }
+                if (!string.IsNullOrEmpty(request.EmailEnding))
+                {
+                    listCustomersForFiltering = listCustomersForFiltering.Where(x => x.Name.EndsWith(request.EmailEnding));
+                }
+
+
+                switch (request.SortName)
+                {
+                    case "Name":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.Name);
+                        }
+                        else
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.Name);
+                        }
+                        break;
+                    case "Surname":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.Surname);
+                        }
+                        else
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.Surname);
+                        }
+                        break;
+                    case "Email":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.Email);
+                        }
+                        else
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.Email);
+                        }
+                        break;
+                    case "Username":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.Username);
+                        }
+                        else
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.Username);
+                        }
+                        break;
+                    case "NumberOfOrders":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.Orders.Count());
+                        }
+                        else
+                        {
+                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.Orders.Count());
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (request.Size == 0 && request.PageNeeded == 0)
+                {
+                    request.PageNeeded = 1;
+                    request.Size = listCustomersForFiltering.Count();
+                }
+
+                response.Size = request.Size;
+                response.CurrentPage = request.PageNeeded;
+                response.Items = listCustomersForFiltering
+                                    .Skip((response.CurrentPage - 1) * response.Size)
+                                    .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
+                response.TotalItems = listCustomersForFiltering.Count();
+
                 _unitOfWork.Commit();
-                return result;
+                return response;
             }
         }
 
         public void Update(CustomerViewModel model)
         {
-            
             using (_unitOfWork.BeginTransaction())
             {
                 var customer = _customerRepository.FindBy(model.Id);
                 if (customer == null)
                 {
-                    throw new BllException(
-                                ShopExceptionMassages
-                                    .CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
+                    throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
                 };
                 customer.Surname = model.Surname;
                 customer.Name = model.Name;

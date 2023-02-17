@@ -9,19 +9,17 @@ using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.Domain;
 using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.Requests;
-using System.Collections.Generic;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
     public interface IProductService
     {
-        ProductResponse GetAll(ProductRequest request);
+        ResponseModel<ProductViewModel> GetAll(RequestModel request);
         ProductViewModel Get(Guid Id);
-        Guid Create(ProductViewModel model);
-        void Update(ProductViewModel model);
-        void Delete(Guid Id);
+        bool Create(ProductViewModel model);
+        bool Update(ProductViewModel model);
+        bool Delete(Guid Id);
         bool CheckNameExists(string Name);
-        ProductResponse FilterAndPage(ProductRequest request);
     }
     public class ProductService : IProductService
     {
@@ -41,11 +39,10 @@ namespace IntellaQuest.BusinessLogic.Services
             return _productsRepository.CheckExist(x => x.Name == Name);
         }
 
-        public Guid Create(ProductViewModel model)
+        public bool Create(ProductViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                // Need exception for model.Id 
                 if (_productsRepository.CheckExist(x => x.Name == model.Name))
                 {
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
@@ -55,6 +52,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
+
                 var entity = new Product
                 {
                     Name = model.Name,
@@ -65,11 +63,11 @@ namespace IntellaQuest.BusinessLogic.Services
                 _productsRepository.Add(entity);
                 _unitOfWork.Commit();
 
-                return entity.Id;
+                return true;
             }
         }
 
-        public void Delete(Guid Id)
+        public bool Delete(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -80,28 +78,29 @@ namespace IntellaQuest.BusinessLogic.Services
                 }
                 _productsRepository.Delete(productEntity);
                 _unitOfWork.Commit();
+                return true;
             }
         }
 
-        public ProductResponse FilterAndPage(ProductRequest request)
+        private ResponseModel<ProductViewModel> FilterAndPage(RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                ProductResponse response = new ProductResponse();
-                IQueryable<Product> listProductViewForFiltering = _productsRepository.All();
-                
+                ResponseModel<ProductViewModel> response = new ResponseModel<ProductViewModel>();
+                IQueryable<Product> listProductForFiltering = _productsRepository.All();
+
                 if (!string.IsNullOrEmpty(request.SearchString))
                 {
-                    listProductViewForFiltering = listProductViewForFiltering.Where(x => x.Name.Contains(request.SearchString));
+                    listProductForFiltering = listProductForFiltering.Where(x => x.Name.Contains(request.SearchString));
                 }
-                if (request.CategoryId!=Guid.Empty)
+                if (request.EntityId.HasValue)
                 {
-                    var category = _categoryRepository.FindBy(request.CategoryId);
+                    var category = _categoryRepository.FindBy(request.EntityId.Value);
                     if (category == null)
                     {
                         throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                     }
-                    listProductViewForFiltering = listProductViewForFiltering.Where(x => x.Category == category);
+                    listProductForFiltering = listProductForFiltering.Where(x => x.Category == category);
                 }
 
                 switch (request.SortName)
@@ -113,11 +112,11 @@ namespace IntellaQuest.BusinessLogic.Services
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            listProductViewForFiltering = listProductViewForFiltering.OrderBy(x => x.Name);
+                            listProductForFiltering = listProductForFiltering.OrderBy(x => x.Name);
                         }
                         else
                         {
-                            listProductViewForFiltering = listProductViewForFiltering.OrderByDescending(x => x.Name);
+                            listProductForFiltering = listProductForFiltering.OrderByDescending(x => x.Name);
                         }
                         break;
                     case "Category":
@@ -127,23 +126,27 @@ namespace IntellaQuest.BusinessLogic.Services
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            listProductViewForFiltering = listProductViewForFiltering.OrderBy(x => x.Category);
+                            listProductForFiltering = listProductForFiltering.OrderBy(x => x.Category);
                         }
                         else
                         {
-                            listProductViewForFiltering = listProductViewForFiltering.OrderByDescending(x => x.Category);
+                            listProductForFiltering = listProductForFiltering.OrderByDescending(x => x.Category);
                         }
                         break;
                     default:
                         break;
                 }
-
+                if (request.Size == 0 && request.PageNeeded == 0)
+                {
+                    request.PageNeeded = 1;
+                    request.Size = listProductForFiltering.Count();
+                }
                 response.Size = request.Size;
                 response.CurrentPage = request.PageNeeded;
-                response.Items = listProductViewForFiltering
+                response.Items = listProductForFiltering
                                     .Skip((response.CurrentPage - 1) * response.Size)
-                                    .Take(response.Size).Select(x=>x.MapToViewModel()).ToList();
-                response.TotalItems = listProductViewForFiltering.Count();
+                                    .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
+                response.TotalItems = listProductForFiltering.Count();
 
 
                 _unitOfWork.Commit();
@@ -167,12 +170,12 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
-        public ProductResponse GetAll(ProductRequest request)
-        {
+        public ResponseModel<ProductViewModel> GetAll(RequestModel request)
+        {   
             return FilterAndPage(request);
         }
 
-        public void Update(ProductViewModel model)
+        public bool Update(ProductViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -187,12 +190,19 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
+                if (_productsRepository.CheckExist(x => x.Id != model.Id && x.Name == model.Name))
+                {
+                    throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
+                }
+
                 //exception need
                 product.Name = model.Name;
                 product.Description = model.Description;
                 product.Category = category;
                 _productsRepository.Update(product);
                 _unitOfWork.Commit();
+
+                return true;
             }
         }
     }

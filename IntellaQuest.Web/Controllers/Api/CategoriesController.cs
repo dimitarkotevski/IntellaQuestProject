@@ -18,16 +18,10 @@ namespace IntellaQuest.Web.Controllers
 
         // GET: Categories
         [HttpPost]
-        public ActionResult All(CategoryRequest request)
+        public ActionResult All(RequestModel request)
         {
             return Json(_categoriesService.GetAll(request));
         }
-        [HttpGet]
-        public ActionResult GetAll(CategoryRequest request)
-        {
-            return Json(_categoriesService.GetAll());
-        }
-
         // GET: Categories/Get/5
         [HttpPost]
         public ActionResult Get(Guid id)
@@ -43,7 +37,8 @@ namespace IntellaQuest.Web.Controllers
             {
                 return ErrorNotAcceptable();
             }
-            return Json(new { success = _categoriesService.Create(model) });
+            _categoriesService.Create(model);
+            return Json(new { success =true});
         }
 
         
@@ -56,8 +51,8 @@ namespace IntellaQuest.Web.Controllers
             {
                 return ErrorNotAcceptable();
             }
-            
-            return Json(new { success = _categoriesService.Update(model)});
+            _categoriesService.Update(model);
+            return Json(new { success = true});
         }
 
 
@@ -66,7 +61,7 @@ namespace IntellaQuest.Web.Controllers
         public ActionResult DeleteById(Guid id)
         {
             _categoriesService.DeleteById(id);
-            return Json(new { success = true });
+            return Json(new { success = true});
         }
     }
 }

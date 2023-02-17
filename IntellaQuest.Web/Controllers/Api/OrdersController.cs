@@ -1,4 +1,5 @@
 ﻿using IntellaQeust.BusinessLogic.Orders;
+using IntellaQeust.BusinessLogic.Requests;
 using IntellaQuest.Web.Controllers.Api;
 using System;
 using System.Web.Mvc;
@@ -16,15 +17,15 @@ namespace IntellaQuest.Web.Controllers
 
         // POST: Orders
         [HttpPost]
-        public ActionResult All()
+        public ActionResult All(RequestModel request)
         {
-            return Json(_orderService.GetAll());
+            return Json(_orderService.GetAll(request));
         }
         // POST: Orders/Get
         [HttpPost]
         public ActionResult Get(Guid Id)
         {
-            return Json(_orderService.Get(Id));
+            return Json( _orderService.Get(Id));
         }
 
         // POST: Orders/Create
@@ -35,7 +36,8 @@ namespace IntellaQuest.Web.Controllers
             {
                 return Json(ModelState.Values);
             }
-            return Json(_orderService.Create(model));
+            _orderService.Create(model);
+            return Json(new { success = true });
         }
 
         // POST: Orders/Edit/5
@@ -47,7 +49,7 @@ namespace IntellaQuest.Web.Controllers
                 return Json(ModelState.Values);
             }
             _orderService.Update(model);
-            return Json(true);
+            return Json(new { success = true });
         }
 
         // GET: Orders/Delete/5
@@ -55,7 +57,7 @@ namespace IntellaQuest.Web.Controllers
         public ActionResult Delete(Guid Id)
         {
             _orderService.Delete(Id);
-            return Json(true);
+            return Json(new { success = true });
         }
 
     }

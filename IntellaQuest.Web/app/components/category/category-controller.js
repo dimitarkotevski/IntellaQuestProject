@@ -1,5 +1,6 @@
-﻿app.controller('CategoryController', ['$scope', '$uibModal', 'CategoryService', 'Flash',
-    function ($scope, $uibModal, CategoryService, Flash) {
+﻿app.controller('CategoryController',
+    ['$scope', '$uibModal', 'CategoryService', 'Flash','successMessages',
+        function ($scope, $uibModal, CategoryService, Flash, successMessages) {
         $scope.title = "Category table";
         $scope.categories = [];
         $scope.filterPageRequest = {
@@ -35,6 +36,8 @@
             });
         }
 
+        $scope.refresh();
+
         $scope.reset = function () {
             $scope.filterPageRequest = {
                 SearchString: "",
@@ -47,12 +50,11 @@
             $scope.refresh();
         }
 
-        $scope.refresh();
 
         $scope.openNew = function () {
             $uibModal.open({
-                templateUrl: 'app/components/category/add-edit-controller.html',
-                controller: 'AddEditController',
+                templateUrl: 'app/modals/category-add-edit/add-edit-category.html',
+                controller: 'AddEditCategory',
                 resolve: {
                     category: {
                         Name: '',
@@ -63,16 +65,16 @@
             }).result.then(function () {
                 $scope.refresh();
                 $scope.massage(
-                    'success',
-                    "<strong>CREATED</strong><div>You successfully create category.</div>"
+                    successMessages.successFlashMassage,
+                    successMessages.createCategoryMassageHtml
                 );
             });
         };
 
         $scope.openEdit = function (category) {
             $uibModal.open({
-                templateUrl: 'app/components/category/add-edit-controller.html',
-                controller: 'AddEditController',
+                templateUrl: 'app/modals/category-add-edit/add-edit-category.html',
+                controller: 'AddEditCategory',
                 resolve: {
                     category: CategoryService.get(category.Id).then(function (res) {
                         return res.data;
@@ -81,26 +83,27 @@
             }).result.then(function () {
                 $scope.refresh();
                 $scope.massage(
-                    'success',
-                    "<strong>EDITED</strong><div>You successfully edit category.</div>"
+                    successMessages.successFlashMessage,
+                    successMessages.editCategoryMassageHtml
                 );
             });
         };
 
         $scope.openDelete = function (Id) {
             $uibModal.open({
-                templateUrl: 'app/components/category/delete-controller.html',
+                templateUrl: 'app/modals/delete/delete-controller.html',
                 controller: 'deleteController',
                 resolve: {
-                    category: CategoryService.get(Id).then(function (res) {
+                    entity: CategoryService.get(Id).then(function (res) {
                         return res.data;
-                    })
+                    }),
+                    entityService: CategoryService
                 }
             }).result.then(function () {
                 $scope.refresh();
                 $scope.massage(
-                    'success',
-                    "<strong>DELETED</strong><div>You successfully deleted category.</div>"
+                    successMessages.successFlashMessage,
+                    successMessages.deleteCategoryMassageHtml
                 );
             });
         };

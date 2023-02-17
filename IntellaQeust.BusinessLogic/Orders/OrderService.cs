@@ -7,12 +7,14 @@ using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
+using IntellaQeust.BusinessLogic.Requests;
+using IntellaQeust.BusinessLogic.Responses;
 
 namespace IntellaQeust.BusinessLogic.Orders
 {
     public interface IOrderService
     {
-        List<OrderViewModel> GetAll();
+        ResponseModel<OrderViewModel> GetAll(RequestModel request);
         OrderViewModel Get(Guid Id);
         Guid Create(OrderViewModel model);
         void Update(OrderViewModel model);
@@ -97,16 +99,89 @@ namespace IntellaQeust.BusinessLogic.Orders
             }
         }
 
-        public List<OrderViewModel> GetAll()
+        public ResponseModel<OrderViewModel> GetAll(RequestModel request)
+        {
+            return FilterAndPage(request);
+        }
+        private ResponseModel<OrderViewModel> FilterAndPage(RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var result=_orderRepository.All().Select(order=>order.MapToViewModel()).ToList();
+                ResponseModel<OrderViewModel> response = new ResponseModel<OrderViewModel>();
+                IQueryable<Order> ordersListForFiltering = _orderRepository.All();
+
+                if (!string.IsNullOrEmpty(request.SearchString))
+                {
+                    ordersListForFiltering = ordersListForFiltering
+                                        .Where(x => x.Customer.Name.Contains(request.SearchString) || 
+                                            x.Product.Name.Contains(request.SearchString));
+                }
+
+
+                switch (request.SortName)
+                {
+                    case "ProductName":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Product.Name);
+                        }
+                        else
+                        {
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Product.Name);
+                        }
+                        break;
+                    case "CustomerName":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Customer.Name);
+                        }
+                        else
+                        {
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Customer.Name);
+                        }
+                        break;
+                    case "Quantity":
+                        if (string.IsNullOrEmpty(request.isAscending))
+                        {
+                            break;
+                        }
+                        else if (request.isAscending.Equals("asc"))
+                        {
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Quantity);
+                        }
+                        else
+                        {
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Quantity);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (request.Size == 0 && request.PageNeeded == 0)
+                {
+                    request.PageNeeded = 1;
+                    request.Size = ordersListForFiltering.Count();
+                }
+
+                response.Size = request.Size;
+                response.CurrentPage = request.PageNeeded;
+                response.Items = ordersListForFiltering
+                                    .Skip((response.CurrentPage - 1) * response.Size)
+                                    .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
+                response.TotalItems = ordersListForFiltering.Count();
+
                 _unitOfWork.Commit();
-                return result;
+                return response;
             }
         }
-
         public void Update(OrderViewModel model)
         {
             using(_unitOfWork.BeginTransaction())

@@ -11,14 +11,14 @@
             <input type="text" class="form-control" ng-model="filterPageRequest.SearchString" placeholder="Product Name" name="product_name">
         </div>
         <div class="form-group">
-            <select class="form-control" ng-model="filterPageRequest.CategoryId">
+            <select class="form-control" ng-model="filterPageRequest.EntityId">
                 <option ng-repeat="cat in categories" ng-value="cat.Id">{{cat.Name}}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-default" ng-click="reset()">Reset</button>
         <button class="btn btn-primary" ng-click="refresh()">Filter</button>
     </form>
-    <hr/>
+    <hr />
     <table class="table table-hover">
         <thead>
         <th ng-click="sort('Name')" scope="col">
@@ -40,11 +40,15 @@
             <td scope="row">{{product.Name}}</td>
             <td scope="row">{{product.Description}}</td>
             <td>{{product.Category.Name}}</td>
-            <td scope="row"> <button class="btn btn-primary">Edit</button> </td>
-            <td scope="row"><button class="btn btn-danger">Delete</button></td>
+            <td scope="row"> <button class="btn btn-primary" ng-click="openEdit(product)">Edit</button> </td>
+            <td scope="row"><button class="btn btn-danger" ng-click="openDelete(product.Id)">Delete</button></td>
         </tr>
     </table>
 
+    <div role="alert" ng-show="hasFlash" class="alert  alert-dismissible alertIn alertOut ng-animate alert-success ng-hide ">
+        <span dynamic="flash.text">
+        </span>
+    </div>
 
     <div class="row">
         <div class="col-sm-4">

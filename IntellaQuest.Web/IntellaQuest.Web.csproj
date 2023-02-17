@@ -548,12 +548,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\components\category\add-edit-controller.html" />
-    <Content Include="app\components\category\add-edit-controller.js" />
+    <Content Include="app\constants\success-massage-constants.js" />
+    <Content Include="app\modals\category-add-edit\add-edit-category.html" />
+    <Content Include="app\modals\category-add-edit\add-edit-category.js" />
     <Content Include="app\components\category\categories.html" />
     <Content Include="app\components\category\category-controller.js" />
-    <Content Include="app\components\category\delete-controller.html" />
-    <Content Include="app\components\category\delete-controller.js" />
+    <Content Include="app\modals\customer-add-edit\add-edit-customer.html" />
+    <Content Include="app\modals\customer-add-edit\add-edit-customer.js" />
+    <Content Include="app\modals\delete\delete-controller.html" />
+    <Content Include="app\modals\delete\delete-controller.js" />
     <Content Include="app\components\customer\customer-controller.js" />
     <Content Include="app\components\customer\customers.html" />
     <Content Include="app\components\order\order-controller.js" />
@@ -561,6 +564,10 @@
     <Content Include="app\components\product\product-controller.js" />
     <Content Include="app\components\product\products.html" />
     <Content Include="app\flash.js" />
+    <Content Include="app\modals\order-add-edit\add-edit-order.html" />
+    <Content Include="app\modals\order-add-edit\add-edit-order.js" />
+    <Content Include="app\modals\product-add-edit\add-edit-product.html" />
+    <Content Include="app\modals\product-add-edit\add-edit-product.js" />
     <Content Include="app\routes.js" />
     <Content Include="app\services\category-service.js" />
     <Content Include="app\services\customer-service.js" />

@@ -1,5 +1,4 @@
 ﻿using IntellaQeust.BusinessLogic;
-using IntellaQeust.BusinessLogic.Orders;
 using IntellaQuest.BusinessLogic.Models;
 using IntellaQuest.Domain;
 using System.Linq;
@@ -23,18 +22,6 @@ namespace IntellaQuest.BusinessLogic.Mappers
                     Id= order.Id,
                     Name=order.Product.Name
                 }).ToList(),
-            };
-        }
-        public static Customer MapToModel(this CustomerViewModel model)
-        {
-            return new Customer
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Surname = model.Surname,
-                Email = model.Email,
-                Username = model.Username,
-                Password = model.Password,
             };
         }
     }

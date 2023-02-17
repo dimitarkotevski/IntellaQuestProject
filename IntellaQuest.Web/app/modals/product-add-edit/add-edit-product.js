@@ -1,17 +1,17 @@
-﻿app.controller('AddEditController', ['$scope', '$uibModalInstance', 'category', 'CategoryService',
-    function ($scope, $uibModalInstance, category, CategoryService) {
-        $scope.category = category;
-        $scope.category.Status = category.Status.toString();
+﻿app.controller('AddEditProduct', ['$scope', '$uibModalInstance', 'product','categories', 'ProductService',
+    function ($scope, $uibModalInstance, product, categories, ProductService) {
+        $scope.product = product;
+        $scope.categories = categories;
         $scope.error = null;
         $scope.exception = null;
         $scope.alerts = [];
 
-        $scope.ok = function (categoryFromModel) {
-            if (!$scope.CategoryForm.$valid) {
+        $scope.ok = function (productFromModel) {
+            if (!$scope.ProductForm.$valid) {
                 return;
             } else {
-                if (!categoryFromModel.Id) {
-                    CategoryService.add(categoryFromModel).then(
+                if (!productFromModel.Id) {
+                    ProductService.add(productFromModel).then(
                         function () {
                             $uibModalInstance.close();
                         },
@@ -21,7 +21,7 @@
                         }
                     )
                 } else {
-                    CategoryService.edit(categoryFromModel).then(
+                    ProductService.edit(productFromModel).then(
                         function () {
                             $uibModalInstance.close();
                         }, function (response) {

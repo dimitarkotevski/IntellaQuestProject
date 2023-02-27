@@ -109,7 +109,7 @@ namespace IntellaQeust.Business.Services
                 //Sort
                 switch (request.SortName)
                 {
-                    case "Name":
+                    case "CategoryName":
                         if (string.IsNullOrEmpty(request.isAscending))
                         {
                             break;
@@ -123,7 +123,7 @@ namespace IntellaQeust.Business.Services
                             listCategoryViewModelForFiltering = listCategoryViewModelForFiltering.OrderByDescending(x => x.Name);
                         }
                         break;
-                    case "Status":
+                    case "CategoryStatus":
                         if (string.IsNullOrEmpty(request.isAscending))
                         {
                             break;

@@ -2,11 +2,15 @@
 using IntellaQeust.BusinessLogic.CategoryModel;
 using IntellaQeust.BusinessLogic.Requests;
 using IntellaQuest.Web.Controllers.Api;
+using IntellaQuest.Web.Cors;
 using System;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
+using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 
 namespace IntellaQuest.Web.Controllers
 {
+    [AllowCrossSite]
     public class CategoriesController : BaseController
     {
         private readonly ICategoryService _categoriesService;
@@ -16,22 +20,22 @@ namespace IntellaQuest.Web.Controllers
             _categoriesService = categoryService;
         }
 
-        // GET: Categories
+        // POST: Categories
         [HttpPost]
-        public ActionResult All(RequestModel request)
+        public ActionResult All( RequestModel request)
         {
-            return Json(_categoriesService.GetAll(request));
+            return Json(_categoriesService.GetAll(request), JsonRequestBehavior.AllowGet);
         }
-        // GET: Categories/Get/5
+        // POST: Categories/Get/5
         [HttpPost]
-        public ActionResult Get(Guid id)
+        public ActionResult Get( Guid id)
         {
             return Json(_categoriesService.Get(id));
         }
 
         // POST: Categories/Create
         [HttpPost]
-        public ActionResult Create(CategoryViewModel model)
+        public ActionResult Create( CategoryViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -45,14 +49,14 @@ namespace IntellaQuest.Web.Controllers
 
         // POST: Categories/Edit/5
         [HttpPost]
-        public ActionResult Edit(CategoryViewModel model)
+        public ActionResult Edit( CategoryViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return ErrorNotAcceptable();
             }
             _categoriesService.Update(model);
-            return Json(new { success = true});
+            return Json(new { success = true}, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -61,7 +65,7 @@ namespace IntellaQuest.Web.Controllers
         public ActionResult DeleteById(Guid id)
         {
             _categoriesService.DeleteById(id);
-            return Json(new { success = true});
+            return Json(new { success = true}, JsonRequestBehavior.AllowGet);
         }
     }
 }

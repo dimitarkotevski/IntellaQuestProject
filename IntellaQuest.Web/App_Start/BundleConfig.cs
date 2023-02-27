@@ -32,6 +32,9 @@ namespace IntellaQuest.Web
             bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
                      "~/app/", "*.js", true));
 
+            bundles.Add(new ScriptBundle("~/bundles/angular2").IncludeDirectory(
+                    "~/my-app/bundles/", "*.js", true));
+
         }
     }
 }

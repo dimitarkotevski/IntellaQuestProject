@@ -21,25 +21,26 @@
         <button type="submit" class="btn btn-default" ng-click="reset()">Reset</button>
         <button class="btn btn-primary" ng-click="refresh()">Filter</button>
     </form>
-
+    <!--TABLE PICKER-->
+    <table-picker headers="" rows="categories"></table-picker>
     <hr class="hrStyle">
     <!--TABLE-->
     <table class="table">
         <thead>
             <tr>
-                <th  ng-click="sort('Name')" scope="col">
+                <th  ng-click="sort('CategoryName')" scope="col">
                     <a href="#">
                         Category Name
                     </a>
-                    <span ng-show="filterPageRequest.SortName=='Name' && filterPageRequest.isAscending=='asc'">  ↓</span>
-                    <span ng-show="filterPageRequest.SortName=='Name' && filterPageRequest.isAscending=='desc'">  ↑</span>
+                    <span ng-show="filterPageRequest.SortName=='CategoryName' && filterPageRequest.isAscending=='asc'">  ↓</span>
+                    <span ng-show="filterPageRequest.SortName=='CategoryName' && filterPageRequest.isAscending=='desc'">  ↑</span>
                 </th>
-                <th ng-click="sort('Status')" scope="col">
+                <th ng-click="sort('CategoryStatus')" scope="col">
                     <a href="#">
                         Category Status
                     </a>
-                    <span ng-show="filterPageRequest.SortName=='Status' && filterPageRequest.isAscending=='asc'">  ↓</span>
-                    <span ng-show="filterPageRequest.SortName=='Status' && filterPageRequest.isAscending=='desc'">  ↑</span>
+                    <span ng-show="filterPageRequest.SortName=='CategoryStatus' && filterPageRequest.isAscending=='asc'">  ↓</span>
+                    <span ng-show="filterPageRequest.SortName=='CategoryStatus' && filterPageRequest.isAscending=='desc'">  ↑</span>
                 </th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>

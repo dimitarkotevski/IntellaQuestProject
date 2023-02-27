@@ -1,8 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic;
 using IntellaQeust.BusinessLogic.CategoryModel;
 using IntellaQuest.Domain;
-using NHibernate.Mapping;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace IntellaQuest.BusinessLogic.Mappers

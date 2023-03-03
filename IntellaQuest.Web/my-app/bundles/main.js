@@ -925,9 +925,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ProductComponent = /** @class */ (function () {
-    ////////////////
-    //constructor
-    ///////////////
+    // !constructor
     function ProductComponent(titleService, toastr, productService, dynamicService, viewContainerRef, applicationService, viewContainer) {
         var _this = this;
         this.titleService = titleService;
@@ -940,57 +938,56 @@ var ProductComponent = /** @class */ (function () {
         this.source = [];
         this.renderButtonsTypes = codera_shared__WEBPACK_IMPORTED_MODULE_2__["RenderButtonsPosition"];
         this.currentFilter = [];
-        //END OF getFluentTableConfig()
-        ///////////////////////////////
+        //  END OF getFluentTableConfig()
         this.summonDialog = function () {
             _this.model = new _product__WEBPACK_IMPORTED_MODULE_4__["Product"]();
             _this.model = {
                 Id: null,
-                Name: '',
-                Description: '',
-                Category: null
+                Name: "",
+                Description: "",
+                Category: null,
             };
             _this.modalConfig = _this.getModalConfig(_this.model);
             _this.modalConfig.modalHeader = "New";
             _this.dynamicService.addComponent(_this.viewContainer, codera_shared__WEBPACK_IMPORTED_MODULE_2__["ModalFormComponent"], [
-                { "config": _this.modalConfig },
-                { "model": _this.model },
+                { config: _this.modalConfig },
+                { model: _this.model },
             ], true);
         };
         this.bulkChangeStatus = function () {
             _this.dynamicService.addComponent(_this.viewContainer, codera_shared__WEBPACK_IMPORTED_MODULE_2__["BulkChangeStatusComponent"], [
-                { "fluentTable": _this.fluentTableConfig },
-                { "url": "ChangeRequestType/BulkChangeStatus" },
-                { "modalOptions": { size: "sm" } }
+                { fluentTable: _this.fluentTableConfig },
+                { url: "ChangeRequestType/BulkChangeStatus" },
+                { modalOptions: { size: "sm" } },
             ]);
         };
         this.bulkDelete = function () {
             _this.dynamicService.addComponent(_this.viewContainer, codera_shared__WEBPACK_IMPORTED_MODULE_2__["BulkDeleteComponent"], [
-                { "fluentTable": _this.fluentTableConfig },
-                { "url": "ChangeRequestType/BulkDelete" },
-                { "modalOptions": { size: "sm" } }
+                { fluentTable: _this.fluentTableConfig },
+                { url: "ChangeRequestType/BulkDelete" },
+                { modalOptions: { size: "sm" } },
             ], true);
         };
         this.onCreateUpdate = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
     }
-    //BEGIN ngOnInit()
-    //////////////////
+    // * BEGIN ngOnInit()
     ProductComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var that = this;
         this.source = "Products/getTable";
-        this.applicationSettings =
-            this.applicationService.getApplicationSettings();
+        this.applicationSettings = this.applicationService.getApplicationSettings();
         this.fluentTableConfig = this.getFluentTableConfig();
-        this.pageTitle = 'Product';
+        this.pageTitle = "Product";
         this.headerItemsConfig = new codera_shared__WEBPACK_IMPORTED_MODULE_2__["HeaderItemsConfig"]([
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["HeaderButtonItem"]({
                 name: "new-change-request-type",
                 icon: "fa fa-plus",
                 label: "Add new product",
-                action: that.summonDialog
+                action: that.summonDialog,
             }),
         ]);
         this.configModal();
+        // * fluentSearchConfig
         this.fluentSearchConfig = new codera_shared__WEBPACK_IMPORTED_MODULE_2__["FluentSearchConfig"]({
             controls: [
                 new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
@@ -998,29 +995,30 @@ var ProductComponent = /** @class */ (function () {
                         field: "Name",
                         type: "text",
                         label: "Name",
-                        css: "col-xs-12 col-sm-12 col-md-2 col-lg-2"
+                        css: "col-xs-12 col-sm-12 col-md-2 col-lg-2",
                     }),
                     new codera_shared__WEBPACK_IMPORTED_MODULE_2__["ComponentControl"]({
                         componentClass: _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_8__["MyCategoryPickerComponent"],
                         field: "Category",
                         label: "Category",
                         css: "col-12",
-                        data: [
-                            { Category: this.categoryValue },
-                        ],
+                        value: this.categoryValue,
+                        data: [{ Category: this.categoryValue }],
                     }),
-                ])
+                ]),
             ],
             searchAction: function () {
                 that.fluentTableConfig.applyFilter(that.currentFilter);
             },
             resetAction: function () {
                 that.fluentTableConfig.grouping = undefined;
-                that.fluentTableConfig.sorting = [{ Name: "asc", Category: null }];
+                that.fluentTableConfig.sorting = [{ Name: "asc" }];
+                _this.categoryValue = null;
+                console.log();
                 that.fluentTableConfig.applyFilterAndGrouping(that.currentFilter);
                 that.fluentTableComponent.table.groupedRows = undefined;
                 that.fluentTableComponent.table.sorts = [{ prop: "Name", dir: "asc" }];
-            }
+            },
         });
     };
     /////////////////////
@@ -1039,10 +1037,8 @@ var ProductComponent = /** @class */ (function () {
                     min: 1,
                     max: 255,
                     required: true,
-                    validators: [
-                        _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required,
-                    ]
-                })
+                    validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                }),
             ]),
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
                 //0
@@ -1052,7 +1048,7 @@ var ProductComponent = /** @class */ (function () {
                     label: "Description",
                     min: 1,
                     max: 255,
-                })
+                }),
             ]),
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
                 //1
@@ -1062,8 +1058,8 @@ var ProductComponent = /** @class */ (function () {
                     label: "Category",
                     css: "col-12",
                     required: true,
-                })
-            ])
+                }),
+            ]),
         ], [
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["CustomAction"]({
                 actionType: "submit",
@@ -1071,9 +1067,7 @@ var ProductComponent = /** @class */ (function () {
                 value: "Submit",
                 callback: function (row) {
                     that.model.Status;
-                    that.productService
-                        .createOrUpdate(that.model)
-                        .subscribe(function (response) {
+                    that.productService.createOrUpdate(that.model).subscribe(function (response) {
                         that.onCreateUpdate.emit(response);
                         that.modalConfig.modalRef.close();
                         that.fluentTableConfig.notifyDataChanged("item-updated");
@@ -1087,8 +1081,7 @@ var ProductComponent = /** @class */ (function () {
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["CancelAction"]({
                 field: "Cancel",
                 value: "Cancel",
-                callback: function () {
-                },
+                callback: function () { },
                 css: "btn btn-default",
             }),
         ]);
@@ -1106,7 +1099,7 @@ var ProductComponent = /** @class */ (function () {
                 {
                     field: "Description",
                     title: "Description",
-                    type: "string"
+                    type: "string",
                 },
                 {
                     field: "Category.Name",
@@ -1119,21 +1112,16 @@ var ProductComponent = /** @class */ (function () {
                     type: "custom",
                     render: function (row) {
                         return row.Category.Status;
-                    }
+                    },
                 },
                 {
                     field: "editAction",
                     title: "Edit",
                     type: "action",
                     handler: function (row) {
-                        that.productService
-                            .get(row.Id)
-                            .subscribe(function (x) {
+                        that.productService.get(row.Id).subscribe(function (x) {
                             that.model = x;
-                            that.dynamicService.addComponent(that.viewContainerRef, codera_shared__WEBPACK_IMPORTED_MODULE_2__["ModalFormComponent"], [
-                                { config: that.modalConfig },
-                                { model: that.model },
-                            ]);
+                            that.dynamicService.addComponent(that.viewContainerRef, codera_shared__WEBPACK_IMPORTED_MODULE_2__["ModalFormComponent"], [{ config: that.modalConfig }, { model: that.model }]);
                         });
                     },
                     render: function (row) {
@@ -1178,19 +1166,17 @@ var ProductComponent = /** @class */ (function () {
             filter: null,
             footer: {
                 show: true,
-                showExports: false,
+                showExports: true,
                 showPageSize: true,
                 showPaging: true,
-                showRefreshButton: true
+                showRefreshButton: true,
             },
         });
     };
-    //////////////
-    //ADD PRODUCT
-    //////////////
+    // ADD PRODUCT
     ProductComponent.prototype.getModalConfig = function (model, onSave) {
         var that = this;
-        return new codera_shared__WEBPACK_IMPORTED_MODULE_2__["ModalFormConfig"]('New', [
+        return new codera_shared__WEBPACK_IMPORTED_MODULE_2__["ModalFormConfig"]("New", [
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
                 //0
                 new codera_shared__WEBPACK_IMPORTED_MODULE_2__["InputControl"]({
@@ -1200,10 +1186,8 @@ var ProductComponent = /** @class */ (function () {
                     min: 1,
                     max: 255,
                     required: true,
-                    validators: [
-                        _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required,
-                    ]
-                })
+                    validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                }),
             ]),
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
                 //0
@@ -1213,7 +1197,7 @@ var ProductComponent = /** @class */ (function () {
                     label: "Description",
                     min: 1,
                     max: 255,
-                })
+                }),
             ]),
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
                 //1
@@ -1223,8 +1207,8 @@ var ProductComponent = /** @class */ (function () {
                     label: "Category",
                     css: "col-12",
                     required: true,
-                })
-            ])
+                }),
+            ]),
         ], [
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["CustomAction"]({
                 actionType: "submit",
@@ -1232,9 +1216,7 @@ var ProductComponent = /** @class */ (function () {
                 value: "Submit",
                 callback: function (row) {
                     that.model.Status;
-                    that.productService
-                        .createOrUpdate(that.model)
-                        .subscribe(function (response) {
+                    that.productService.createOrUpdate(that.model).subscribe(function (response) {
                         that.onCreateUpdate.emit(response);
                         that.modalConfig.modalRef.close();
                         that.fluentTableConfig.notifyDataChanged("item-updated");
@@ -1246,11 +1228,11 @@ var ProductComponent = /** @class */ (function () {
                 css: "btn btn-primary",
             }),
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["CancelAction"]({
-                field: 'Cancel',
-                value: '[ISOQuest].[Common].Buttons.Cancel',
+                field: "Cancel",
+                value: "[ISOQuest].[Common].Buttons.Cancel",
                 callback: function () { },
-                css: 'btn btn-default'
-            })
+                css: "btn btn-default",
+            }),
         ]);
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1259,7 +1241,7 @@ var ProductComponent = /** @class */ (function () {
     ], ProductComponent.prototype, "fluentTableComponent", void 0);
     ProductComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-product',
+            selector: "app-product",
             template: __webpack_require__(/*! ./product.component.html */ "./src/app/product/product.component.html"),
             styles: [__webpack_require__(/*! ./product.component.scss */ "./src/app/product/product.component.scss")]
         }),

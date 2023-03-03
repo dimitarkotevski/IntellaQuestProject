@@ -1,5 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic.Models;
 using IntellaQeust.BusinessLogic.Requests;
+using IntellaQuest.BusinessLogic.Request;
 using IntellaQuest.BusinessLogic.Services;
 using IntellaQuest.Web.Controllers.Api;
 using System;
@@ -21,9 +22,16 @@ namespace IntellaQuest.Web.Controllers
         {
             return Json(_productsService.GetAll(request));
         }
+        [HttpPost]
+        public ActionResult getTable()
+        {
+            var data = _productsService.GetAllTable();
+            var count = data.Count;
+            return Json( new {data, count}, JsonRequestBehavior.AllowGet);
+        }
 
         // POST: Products/get/5
-        
+
         public ActionResult Get(Guid Id)
         {
             return Json(_productsService.Get(Id));

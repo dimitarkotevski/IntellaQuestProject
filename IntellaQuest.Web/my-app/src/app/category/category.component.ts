@@ -3,10 +3,11 @@ import { CategoryService } from '../services/category-service/category.service';
 import {ShopReponse} from '../shop-response';
 import { ShopRequest } from '../shop-request';
 import { FormsModule } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddEditComponent } from '../add-edit/add-edit.component';
 import { Category } from '../category';
 import { DeleteComponent } from '../delete/delete.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({

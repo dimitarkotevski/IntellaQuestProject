@@ -4,6 +4,10 @@
     "outDir": "../out-tsc/app",
     "types": []
   },
+  "include": [
+		"./**/*.ts",
+		"../node_modules/@swimlane/ngx-datatable/src/types/**/*.ts"
+	],
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

@@ -17,6 +17,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 {
                     Id= product.Category.Id,
                     Name = product.Category.Name,
+                    Status = product.Category.Status,
                 },
                 Orders = product.Orders.Select(order => new LookupViewModel
                 {

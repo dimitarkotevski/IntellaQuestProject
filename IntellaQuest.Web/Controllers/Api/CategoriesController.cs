@@ -19,7 +19,13 @@ namespace IntellaQuest.Web.Controllers
         {
             _categoriesService = categoryService;
         }
-
+        [HttpPost]
+        public ActionResult AllTable()
+        {
+            var data=_categoriesService.GetAll();
+            var count = data.Count;
+            return Json(new { data, count }, JsonRequestBehavior.AllowGet);
+        }
         // POST: Categories
         [HttpPost]
         public ActionResult All( RequestModel request)

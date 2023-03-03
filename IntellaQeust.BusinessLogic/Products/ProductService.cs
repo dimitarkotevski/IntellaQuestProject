@@ -9,6 +9,7 @@ using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQuest.Domain;
 using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.Requests;
+using System.Collections.Generic;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -20,6 +21,7 @@ namespace IntellaQuest.BusinessLogic.Services
         bool Update(ProductViewModel model);
         bool Delete(Guid Id);
         bool CheckNameExists(string Name);
+        List<ProductViewModel> GetAllTable();
     }
     public class ProductService : IProductService
     {
@@ -184,7 +186,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-                var product = _productsRepository.FindBy(model.Id);
+                var product = _productsRepository.FindBy(model.Id.Value);
 
                 if (product == null)
                 {
@@ -203,6 +205,14 @@ namespace IntellaQuest.BusinessLogic.Services
                 _unitOfWork.Commit();
 
                 return true;
+            }
+        }
+
+        public List<ProductViewModel> GetAllTable()
+        {
+            using(_unitOfWork.BeginTransaction())
+            {
+                return _productsRepository.All().Select(x=>x.MapToViewModel()).ToList();
             }
         }
     }

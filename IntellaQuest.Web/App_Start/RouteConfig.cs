@@ -16,8 +16,14 @@ namespace IntellaQuest.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                //url: "",
+                defaults: new { controller = "Home", action = "Angular2", id = UrlParameter.Optional }
             );
+            /*routes.MapRoute(
+                name: "default",
+                url: "{*url}",
+                defaults: new { controller = "Home", action = "Angular2" } // The view that bootstraps Angular 2 app
+            );*/
         }
     }
 }

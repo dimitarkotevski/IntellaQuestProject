@@ -25,4 +25,7 @@ export class CategoryService {
   delete(Id:number){
     return this.http.post<any>("categories/DeleteById/"+Id,JSON)
   }
+  allTable(){
+    return this.http.post<any>("categories/alltable",JSON)
+  }
 }

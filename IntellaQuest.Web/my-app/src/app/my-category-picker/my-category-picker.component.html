@@ -1,0 +1,5 @@
+<div class="form-group-sm pt-3">
+  <select class="form-control" [(ngModel)]="categoryId" (change)="onChange()" >
+    <option  *ngFor="let item of categories" [value]="item.Id">{{item.Name}}</option>
+  </select>
+</div>

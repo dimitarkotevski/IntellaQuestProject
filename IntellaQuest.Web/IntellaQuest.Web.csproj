@@ -543,6 +543,7 @@
     <Compile Include="Controllers\Api\BaseController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
+    <Compile Include="Controllers\ApplicationSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\Api\ProductsController.cs" />
@@ -1414,11 +1415,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\AngularJs.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\Angular2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\angular2\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

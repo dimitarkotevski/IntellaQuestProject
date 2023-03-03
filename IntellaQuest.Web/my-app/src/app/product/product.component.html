@@ -1,3 +1,14 @@
-<div class="container">
-  product works!
+<div><br/> <br/>
+  <header-information headerTitle="{{ pageTitle | translate }}"
+  [hasBreadcrumbs]="true"
+  [renderButtonsPosition]="renderButtonsTypes.Right"
+  [(headerItemsConfig)]="headerItemsConfig"
+  [fluentTableConfig]="fluentTableConfig">
+</header-information>
+
+<fluent-search [config]="fluentSearchConfig" [(model)]="currentFilter"></fluent-search>
+
+  <fluent-table [customApiUrl]="source" [config]="fluentTableConfig" [source]="''">
+    
+  </fluent-table>
 </div>

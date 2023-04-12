@@ -26,6 +26,7 @@
     "codera-shared": "file:C:/Users/DimitarKotevski/Documents/projects/IntellaQuestProject/IntellaQuest.Web/my-app/codera-shared-7.2.429.tgz",
     "core-js": "^2.5.4",
     "ng2-dragula": "^2.1.1",
+    "ngx-alerts": "^10.1.3",
     "ngx-color-picker": "^10.1.0",
     "ngx-ui-switch": "^8.0.1",
     "powerbi-client": "^2.17.2",

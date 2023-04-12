@@ -5,6 +5,10 @@
   [(headerItemsConfig)]="headerItemsConfig"
   [fluentTableConfig]="fluentTableConfig">
 </header-information>
+<!-- <button class="btn btn-success m-1" (click)="alertService.success('Success!!', options)">Success</button> -->
+<p *ngFor="let alert of alerts">
+  <ngb-alert [type]="alert.type" [dismissible]="false">{{ alert.message }}</ngb-alert>
+</p>
 
 <fluent-search [config]="fluentSearchConfig" [(model)]="currentFilter"></fluent-search>
 

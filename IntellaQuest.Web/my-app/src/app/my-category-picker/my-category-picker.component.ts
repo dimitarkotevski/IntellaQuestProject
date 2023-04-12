@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { CategoryService } from '../services/category-service/category.service';
 import { Category } from '../category';
 
@@ -7,9 +7,8 @@ import { Category } from '../category';
   templateUrl: './my-category-picker.component.html',
   styleUrls: ['./my-category-picker.component.scss']
 })
-export class MyCategoryPickerComponent implements OnInit {
+export class MyCategoryPickerComponent implements OnInit, OnChanges {
   @Input() model: any;
-  @Input() Category: any; 
   @Output() modelChange: EventEmitter<any>;
   @Input() FormGroup: any;
   categoryId:any;
@@ -24,11 +23,17 @@ export class MyCategoryPickerComponent implements OnInit {
       this.categories=res.data;
     })
   }
+  ngOnChanges(changes: SimpleChanges){
+    console.log("Hello");
+  }
   onChange(){
     this.model = {
       Id: this.categoryId,
     }
-    this.modelChange.emit(this.model)
+    this.modelChange.emit(this.model)    
+    }
+  reset(){
+    this.model = null
+    this.categoryId=null;
   }
-
 }

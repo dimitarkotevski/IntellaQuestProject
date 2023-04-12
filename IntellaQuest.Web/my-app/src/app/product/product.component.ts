@@ -25,6 +25,7 @@ import {
   LookupViewModel,
   ModalFormComponent,
   ModalFormConfig,
+  NotificationService,
   RenderButtonsPosition,
   RowControl,
   TextConfirmationModalComponent,
@@ -40,6 +41,7 @@ import { ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Validators } from "@angular/forms";
 import { MyCategoryPickerComponent } from "../my-category-picker/my-category-picker.component";
+import { CategoryService } from "../services/category-service/category.service";
 
 @Component({
   selector: "app-product",
@@ -62,20 +64,30 @@ export class ProductComponent implements OnInit {
   headerItemsConfig: HeaderItemsConfig;
   categoryValue: any;
   changeRequestTypeFactory: any;
+  categoryService: CategoryService;
   tabsConfig: FluentTabConfig[];
   onCreateUpdate: EventEmitter<string | boolean>;
   currentFilter: { [key: string]: any }[] = [];
-  @ViewChild(FluentTableComponent) fluentTableComponent: FluentTableComponent;
+  show: true;
 
+  successMassage={
+    type: 'success',
+    message: 'Successfully',
+  }
+  alerts: Alert[] = [];
+  @ViewChild(FluentTableComponent) fluentTableComponent: FluentTableComponent;
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: false
+};
   // !constructor
   constructor(
-    private titleService: Title,
     private toastr: ToastrService,
     private productService: ProductService,
     private dynamicService: DynamicService,
     private viewContainerRef: ViewContainerRef,
     private applicationService: ApplicationService,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,    //!private alertService: AlertService
   ) {
     this.onCreateUpdate = new EventEmitter<string | boolean>();
   }
@@ -112,9 +124,8 @@ export class ProductComponent implements OnInit {
             componentClass: MyCategoryPickerComponent,
             field: "Category",
             label: "Category",
-            css: "col-12",
             value: this.categoryValue,
-            data: [{ Category: this.categoryValue }],
+            css: "col-xs-12 col-sm-12 col-md-2 col-lg-2",
           }),
         ]),
       ],
@@ -124,9 +135,8 @@ export class ProductComponent implements OnInit {
       resetAction: () => {
         that.fluentTableConfig.grouping = undefined;
         that.fluentTableConfig.sorting = [{ Name: "asc" }];
-        this.categoryValue = null;
-        console.log();
-
+        that.fluentSearchConfig.controls.values
+        window.location.reload()
         that.fluentTableConfig.applyFilterAndGrouping(that.currentFilter);
         that.fluentTableComponent.table.groupedRows = undefined;
         that.fluentTableComponent.table.sorts = [{ prop: "Name", dir: "asc" }];
@@ -190,7 +200,6 @@ export class ProductComponent implements OnInit {
               },
               (error) => {
                 console.log(error.error.exception);
-                that.toastr.show(error.error.exception);
               }
             );
           },
@@ -247,6 +256,7 @@ export class ProductComponent implements OnInit {
                 [{ config: that.modalConfig }, { model: that.model }]
               );
             });
+            that.openAlert(this.successMassage);
           },
           render(row: Product) {
             return `<a class="btn btn-primary btn-sm btn-default yellow-stripe pull-right btn-overlay"><i class="fa fa-pencil"></i>&nbsp;<span>Edit</span></a>`;
@@ -274,8 +284,10 @@ export class ProductComponent implements OnInit {
                   successCallback: () => {
                     that.productService
                       .delete(row.Id)
-                      .subscribe(() =>
+                      .subscribe(() =>{
                         that.fluentTableConfig.notifyDataChanged("item-deleted")
+                        that.openAlert(this.successMassage);
+                      }
                       );
                   },
                 },
@@ -295,11 +307,12 @@ export class ProductComponent implements OnInit {
       filter: null,
       footer: {
         show: true,
-        showExports: true,
+        showExports: false,
         showPageSize: true,
         showPaging: true,
-        showRefreshButton: true,
+        showRefreshButton: false,
       },
+      pageSize:10
     });
   }
   //  END OF getFluentTableConfig()
@@ -378,6 +391,7 @@ export class ProductComponent implements OnInit {
               (response) => {
                 that.onCreateUpdate.emit(response);
                 that.modalConfig.modalRef.close();
+                that.openAlert(this.successMassage);
                 that.fluentTableConfig.notifyDataChanged("item-updated");
               },
               (error) => {
@@ -421,4 +435,12 @@ export class ProductComponent implements OnInit {
       true
     );
   };
+
+  closeAlert(alert: Alert) {
+		this.alerts.splice(this.alerts.indexOf(alert), 1);
+	}
+  openAlert(alert: Alert){
+    this.alerts.push(alert)
+    setTimeout(() => this.closeAlert(alert), 5000);
+  }
 }

@@ -26,8 +26,8 @@ namespace IntellaQuest.Web.Controllers
         public ActionResult getTable()
         {
             var data = _productsService.GetAllTable();
-            var count = 5;//data.Count;
-            return Json( new {data, count}, JsonRequestBehavior.AllowGet);
+            var recordsTotal = data.Count;
+            return Json( new {data, recordsTotal }, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Products/get/5

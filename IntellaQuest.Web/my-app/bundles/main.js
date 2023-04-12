@@ -718,7 +718,7 @@ var DeleteComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-group-sm pt-3\">\n  <select class=\"form-control\" [(ngModel)]=\"categoryId\" (change)=\"onChange()\" >\n    <option  *ngFor=\"let item of categories\" [value]=\"item.Id\">{{item.Name}}</option>\n  </select>\n</div>"
+module.exports = "<div class=\"form-group-sm\">\n  <select class=\"form-control\" [(ngModel)]=\"categoryId\" (change)=\"onChange()\" >\n    <option  *ngFor=\"let item of categories\" [value]=\"item.Id\">{{item.Name}}</option>\n  </select>\n  <br/>\n</div>"
 
 /***/ }),
 
@@ -761,20 +761,23 @@ var MyCategoryPickerComponent = /** @class */ (function () {
             _this.categories = res.data;
         });
     };
+    MyCategoryPickerComponent.prototype.ngOnChanges = function (changes) {
+        console.log("Hello");
+    };
     MyCategoryPickerComponent.prototype.onChange = function () {
         this.model = {
             Id: this.categoryId,
         };
         this.modelChange.emit(this.model);
     };
+    MyCategoryPickerComponent.prototype.reset = function () {
+        this.model = null;
+        this.categoryId = null;
+    };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
     ], MyCategoryPickerComponent.prototype, "model", void 0);
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
-    ], MyCategoryPickerComponent.prototype, "Category", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])
@@ -881,7 +884,7 @@ var Product = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div><br/> <br/>\n  <header-information headerTitle=\"{{ pageTitle | translate }}\"\n  [hasBreadcrumbs]=\"true\"\n  [renderButtonsPosition]=\"renderButtonsTypes.Right\"\n  [(headerItemsConfig)]=\"headerItemsConfig\"\n  [fluentTableConfig]=\"fluentTableConfig\">\n</header-information>\n\n<fluent-search [config]=\"fluentSearchConfig\" [(model)]=\"currentFilter\"></fluent-search>\n\n  <fluent-table [customApiUrl]=\"source\" [config]=\"fluentTableConfig\" [source]=\"''\">\n    \n  </fluent-table>\n</div>"
+module.exports = "<div><br/> <br/>\n  <header-information headerTitle=\"{{ pageTitle | translate }}\"\n  [hasBreadcrumbs]=\"true\"\n  [renderButtonsPosition]=\"renderButtonsTypes.Right\"\n  [(headerItemsConfig)]=\"headerItemsConfig\"\n  [fluentTableConfig]=\"fluentTableConfig\">\n</header-information>\n<!-- <button class=\"btn btn-success m-1\" (click)=\"alertService.success('Success!!', options)\">Success</button> -->\n<p *ngFor=\"let alert of alerts\">\n  <ngb-alert [type]=\"alert.type\" [dismissible]=\"false\">{{ alert.message }}</ngb-alert>\n</p>\n\n<fluent-search [config]=\"fluentSearchConfig\" [(model)]=\"currentFilter\"></fluent-search>\n\n  <fluent-table [customApiUrl]=\"source\" [config]=\"fluentTableConfig\" [source]=\"''\">\n    \n  </fluent-table>\n</div>"
 
 /***/ }),
 
@@ -911,11 +914,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var codera_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! codera-shared */ "./node_modules/codera-shared/fesm5/codera-shared.js");
 /* harmony import */ var _services_product_service_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/product-service/product.service */ "./src/app/services/product-service/product.service.ts");
 /* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../product */ "./src/app/product.ts");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../my-category-picker/my-category-picker.component */ "./src/app/my-category-picker/my-category-picker.component.ts");
-
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../my-category-picker/my-category-picker.component */ "./src/app/my-category-picker/my-category-picker.component.ts");
 
 
 
@@ -926,9 +927,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var ProductComponent = /** @class */ (function () {
     // !constructor
-    function ProductComponent(titleService, toastr, productService, dynamicService, viewContainerRef, applicationService, viewContainer) {
+    function ProductComponent(toastr, productService, dynamicService, viewContainerRef, applicationService, viewContainer) {
         var _this = this;
-        this.titleService = titleService;
         this.toastr = toastr;
         this.productService = productService;
         this.dynamicService = dynamicService;
@@ -938,6 +938,15 @@ var ProductComponent = /** @class */ (function () {
         this.source = [];
         this.renderButtonsTypes = codera_shared__WEBPACK_IMPORTED_MODULE_2__["RenderButtonsPosition"];
         this.currentFilter = [];
+        this.successMassage = {
+            type: 'success',
+            message: 'Successfully',
+        };
+        this.alerts = [];
+        this.options = {
+            autoClose: true,
+            keepAfterRouteChange: false
+        };
         //  END OF getFluentTableConfig()
         this.summonDialog = function () {
             _this.model = new _product__WEBPACK_IMPORTED_MODULE_4__["Product"]();
@@ -972,7 +981,6 @@ var ProductComponent = /** @class */ (function () {
     }
     // * BEGIN ngOnInit()
     ProductComponent.prototype.ngOnInit = function () {
-        var _this = this;
         var that = this;
         this.source = "Products/getTable";
         this.applicationSettings = this.applicationService.getApplicationSettings();
@@ -998,12 +1006,11 @@ var ProductComponent = /** @class */ (function () {
                         css: "col-xs-12 col-sm-12 col-md-2 col-lg-2",
                     }),
                     new codera_shared__WEBPACK_IMPORTED_MODULE_2__["ComponentControl"]({
-                        componentClass: _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_8__["MyCategoryPickerComponent"],
+                        componentClass: _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_7__["MyCategoryPickerComponent"],
                         field: "Category",
                         label: "Category",
-                        css: "col-12",
                         value: this.categoryValue,
-                        data: [{ Category: this.categoryValue }],
+                        css: "col-xs-12 col-sm-12 col-md-2 col-lg-2",
                     }),
                 ]),
             ],
@@ -1013,8 +1020,8 @@ var ProductComponent = /** @class */ (function () {
             resetAction: function () {
                 that.fluentTableConfig.grouping = undefined;
                 that.fluentTableConfig.sorting = [{ Name: "asc" }];
-                _this.categoryValue = null;
-                console.log();
+                that.fluentSearchConfig.controls.values;
+                window.location.reload();
                 that.fluentTableConfig.applyFilterAndGrouping(that.currentFilter);
                 that.fluentTableComponent.table.groupedRows = undefined;
                 that.fluentTableComponent.table.sorts = [{ prop: "Name", dir: "asc" }];
@@ -1037,7 +1044,7 @@ var ProductComponent = /** @class */ (function () {
                     min: 1,
                     max: 255,
                     required: true,
-                    validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                    validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
                 }),
             ]),
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
@@ -1053,7 +1060,7 @@ var ProductComponent = /** @class */ (function () {
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
                 //1
                 new codera_shared__WEBPACK_IMPORTED_MODULE_2__["ComponentControl"]({
-                    componentClass: _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_8__["MyCategoryPickerComponent"],
+                    componentClass: _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_7__["MyCategoryPickerComponent"],
                     field: "Category",
                     label: "Category",
                     css: "col-12",
@@ -1073,7 +1080,6 @@ var ProductComponent = /** @class */ (function () {
                         that.fluentTableConfig.notifyDataChanged("item-updated");
                     }, function (error) {
                         console.log(error.error.exception);
-                        that.toastr.show(error.error.exception);
                     });
                 },
                 css: "btn btn-primary",
@@ -1123,6 +1129,7 @@ var ProductComponent = /** @class */ (function () {
                             that.model = x;
                             that.dynamicService.addComponent(that.viewContainerRef, codera_shared__WEBPACK_IMPORTED_MODULE_2__["ModalFormComponent"], [{ config: that.modalConfig }, { model: that.model }]);
                         });
+                        that.openAlert(this.successMassage);
                     },
                     render: function (row) {
                         return "<a class=\"btn btn-primary btn-sm btn-default yellow-stripe pull-right btn-overlay\"><i class=\"fa fa-pencil\"></i>&nbsp;<span>Edit</span></a>";
@@ -1134,6 +1141,7 @@ var ProductComponent = /** @class */ (function () {
                     title: "Delete",
                     type: "action",
                     handler: function (row) {
+                        var _this = this;
                         that.dynamicService.addComponent(that.viewContainerRef, codera_shared__WEBPACK_IMPORTED_MODULE_2__["TextConfirmationModalComponent"], [
                             { modalHeader: "Delete" },
                             { modalText: "Do you want to delete " + row.Name + " ?" },
@@ -1148,7 +1156,8 @@ var ProductComponent = /** @class */ (function () {
                                     that.productService
                                         .delete(row.Id)
                                         .subscribe(function () {
-                                        return that.fluentTableConfig.notifyDataChanged("item-deleted");
+                                        that.fluentTableConfig.notifyDataChanged("item-deleted");
+                                        that.openAlert(_this.successMassage);
                                     });
                                 },
                             },
@@ -1166,15 +1175,17 @@ var ProductComponent = /** @class */ (function () {
             filter: null,
             footer: {
                 show: true,
-                showExports: true,
+                showExports: false,
                 showPageSize: true,
                 showPaging: true,
-                showRefreshButton: true,
+                showRefreshButton: false,
             },
+            pageSize: 10
         });
     };
     // ADD PRODUCT
     ProductComponent.prototype.getModalConfig = function (model, onSave) {
+        var _this = this;
         var that = this;
         return new codera_shared__WEBPACK_IMPORTED_MODULE_2__["ModalFormConfig"]("New", [
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
@@ -1186,7 +1197,7 @@ var ProductComponent = /** @class */ (function () {
                     min: 1,
                     max: 255,
                     required: true,
-                    validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                    validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
                 }),
             ]),
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
@@ -1202,7 +1213,7 @@ var ProductComponent = /** @class */ (function () {
             new codera_shared__WEBPACK_IMPORTED_MODULE_2__["RowControl"]([
                 //1
                 new codera_shared__WEBPACK_IMPORTED_MODULE_2__["ComponentControl"]({
-                    componentClass: _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_8__["MyCategoryPickerComponent"],
+                    componentClass: _my_category_picker_my_category_picker_component__WEBPACK_IMPORTED_MODULE_7__["MyCategoryPickerComponent"],
                     field: "Category",
                     label: "Category",
                     css: "col-12",
@@ -1219,6 +1230,7 @@ var ProductComponent = /** @class */ (function () {
                     that.productService.createOrUpdate(that.model).subscribe(function (response) {
                         that.onCreateUpdate.emit(response);
                         that.modalConfig.modalRef.close();
+                        that.openAlert(_this.successMassage);
                         that.fluentTableConfig.notifyDataChanged("item-updated");
                     }, function (error) {
                         console.log(error.error.exception);
@@ -1235,6 +1247,14 @@ var ProductComponent = /** @class */ (function () {
             }),
         ]);
     };
+    ProductComponent.prototype.closeAlert = function (alert) {
+        this.alerts.splice(this.alerts.indexOf(alert), 1);
+    };
+    ProductComponent.prototype.openAlert = function (alert) {
+        var _this = this;
+        this.alerts.push(alert);
+        setTimeout(function () { return _this.closeAlert(alert); }, 5000);
+    };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(codera_shared__WEBPACK_IMPORTED_MODULE_2__["FluentTableComponent"]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", codera_shared__WEBPACK_IMPORTED_MODULE_2__["FluentTableComponent"])
@@ -1245,8 +1265,7 @@ var ProductComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./product.component.html */ "./src/app/product/product.component.html"),
             styles: [__webpack_require__(/*! ./product.component.scss */ "./src/app/product/product.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["Title"],
-            ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"],
             _services_product_service_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"],
             codera_shared__WEBPACK_IMPORTED_MODULE_2__["DynamicService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"],

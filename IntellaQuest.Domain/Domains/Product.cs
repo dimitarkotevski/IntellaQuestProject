@@ -9,7 +9,7 @@ namespace IntellaQuest.Domain
         private string _description;
         private Category _category;
         private IList<Order> _orders;
-        public Product() { }
+        private double _price;
         public virtual string Name 
         { 
             get => _name; 
@@ -29,6 +29,11 @@ namespace IntellaQuest.Domain
         {
             get => _orders;
             set => _orders = value;
+        }
+        public virtual double Price
+        {
+            get => _price;
+            set => _price = value;
         }
     }
 }

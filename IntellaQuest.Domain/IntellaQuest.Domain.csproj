@@ -75,7 +75,12 @@
     <Compile Include="Domains\Category.cs" />
     <Compile Include="Domains\Customer.cs" />
     <Compile Include="Domains\Order.cs" />
+    <Compile Include="Domains\Payment.cs" />
     <Compile Include="Domains\Product.cs" />
+    <Compile Include="Domains\ShoppingCart.cs" />
+    <Compile Include="Domains\ShoppingCartProduct.cs" />
+    <Compile Include="Enums\OrderStatus.cs" />
+    <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

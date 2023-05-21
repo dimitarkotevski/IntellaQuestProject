@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Attributes;
 using IntellaQuest.Domain;
+using IntellaQuest.Domain.Enums;
 using System;
 
 namespace IntellaQeust.BusinessLogic.Orders
@@ -9,17 +10,17 @@ namespace IntellaQeust.BusinessLogic.Orders
     public class OrderViewModel
     {
         public Guid Id { get; set; }
-        public LookupViewModel Product { get; set; }
+        public LookupViewModel ShoppingCart { get; set; }
         public LookupViewModel Customer { get; set; }
-        public float Quantity { get; set; }
+        public OrderStatus OrderStatus { get; set; }
     }
     public class OrderViewModelValidator : AbstractValidator<Order>
     {
         public OrderViewModelValidator()
         {
             RuleFor(x => x.Customer).NotEmpty().WithMessage("Customer is required.");
-            RuleFor(x => x.Product).NotEmpty().WithMessage("Product is required.");
-            RuleFor(x => x.Quantity).NotEmpty().WithMessage("Quantity is required.");
+            RuleFor(x => x.ShoppingCart).NotEmpty().WithMessage("Shopping Card is required.");
+            RuleFor(x => x.OrderStatus).NotEmpty().WithMessage("Order Status is required.");
         }
     }
 }

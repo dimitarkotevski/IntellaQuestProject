@@ -12,10 +12,10 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             Id(o => o.Id);
 
-            Map(o => o.Quantity);
+            Map(o => o.OrderStatus);
 
-            References(x => x.Product)
-                .Column("ProductId")
+            References(x => x.ShoppingCart)
+                .Column("ShoppingCartId")
                 .Cascade.SaveUpdate().LazyLoad();
             References(x => x.Customer)
                  .Column("CustomerId")

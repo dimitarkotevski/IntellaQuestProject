@@ -1,13 +1,27 @@
-﻿namespace IntellaQuest.Domain
+﻿using IntellaQuest.Domain.Enums;
+
+namespace IntellaQuest.Domain
 {
     public class Order : BaseEntity
     {
-        private Product _product;
         private Customer _customer;
-        private float _quantity;
+        private ShoppingCart _shoppingCart;
+        private OrderStatus _orderStatus;
         public Order() { }
-        public virtual Product Product { get { return _product; } set { _product = value; } }
-        public virtual Customer Customer { get { return _customer; } set { _customer = value; } }
-        public virtual float Quantity { get { return _quantity; } set { _quantity = value; } }
+        public virtual Customer Customer 
+        {
+            get => _customer;
+            set => _customer = value;
+        }
+        public virtual ShoppingCart ShoppingCart
+        {
+            get => _shoppingCart;
+            set => _shoppingCart = value;
+        }
+        public virtual OrderStatus OrderStatus
+        {
+            get => _orderStatus; 
+            set { _orderStatus = value; }
+        }
     }
 }

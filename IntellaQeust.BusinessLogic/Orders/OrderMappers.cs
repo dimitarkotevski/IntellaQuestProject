@@ -1,4 +1,5 @@
 ﻿using IntellaQuest.Domain;
+using System.Linq;
 
 namespace IntellaQeust.BusinessLogic.Orders
 {
@@ -12,14 +13,13 @@ namespace IntellaQeust.BusinessLogic.Orders
                 Customer=new LookupViewModel
                 {
                     Id=model.Customer.Id,
-                    Name=model.Customer.Name+ " "+ model.Customer.Surname,
+                    Name=model.Customer.FirstName + " "+ model.Customer.LastName,
                 },
-                Product = new LookupViewModel 
+                ShoppingCart = new LookupViewModel 
                 {
-                    Id=model.Product.Id,
-                    Name=model.Product.Name,
+                    Id=model.ShoppingCart.Id,
                 },
-                Quantity= model.Quantity,
+                OrderStatus = model.OrderStatus,
             };
         }
     }

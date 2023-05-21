@@ -1,8 +1,5 @@
 ﻿using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Domain;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace IntellaQuest.Data.NHibernate.Repositories
 {

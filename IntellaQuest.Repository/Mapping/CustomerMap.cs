@@ -10,13 +10,15 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Table("Customers");
             //Id
             Id(c => c.Id).GeneratedBy.Guid();
-            //Other attribute
-            Map(c => c.Name)
-                .Column("Name")
+
+            #region Attributes
+
+            Map(c => c.FirstName)
+                .Column("FirstName")
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
-            Map(c => c.Surname)
-                .Column("Surname")
+            Map(c => c.LastName)
+                .Column("LastName")
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
             Map(c => c.Email)
@@ -32,10 +34,27 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
 
+            #endregion
+
+            #region Foreign Key
+
+            References(x => x.ShoppingCart)
+                .Column("ShoppingCartId")
+                .Access
+                .CamelCaseField(Prefix.Underscore).LazyLoad();
+
+            References(x => x.Payment)
+                .Column("PaymentId")
+                .Access
+                .CamelCaseField(Prefix.Underscore).LazyLoad();
+
             HasMany(x => x.Orders)
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
                 .KeyColumn("CustomerId").LazyLoad();
+
+            #endregion
+
         }
     }
 }

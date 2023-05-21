@@ -74,7 +74,10 @@
     <Compile Include="Mapping\CategoryMap.cs" />
     <Compile Include="Mapping\CustomerMap.cs" />
     <Compile Include="Mapping\OrderMap.cs" />
+    <Compile Include="Mapping\PaymentMap.cs" />
     <Compile Include="Mapping\ProductMap.cs" />
+    <Compile Include="Mapping\ShoppingCartMap.cs" />
+    <Compile Include="Mapping\ShoppingCartProductMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
@@ -82,7 +85,10 @@
     <Compile Include="ConfigurationRepository\UnitOfWork.cs" />
     <Compile Include="ConfigurationRepository\NHibernateContext.cs" />
     <Compile Include="Repositories\OrderRepository.cs" />
+    <Compile Include="Repositories\PaymentRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\ShoppingCartProductRepository.cs" />
+    <Compile Include="Repositories\ShoppingCartRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntellaQuest.Domain\IntellaQuest.Domain.csproj">

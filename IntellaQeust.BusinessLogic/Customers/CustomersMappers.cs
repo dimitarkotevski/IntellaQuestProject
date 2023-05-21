@@ -12,15 +12,14 @@ namespace IntellaQuest.BusinessLogic.Mappers
             return new CustomerViewModel
             {
                 Id= customer.Id,
-                Name= customer.Name,
-                Surname= customer.Surname,
+                FirstName= customer.FirstName,
+                LastName= customer.LastName,
                 Email= customer.Email,
                 Username= customer.Username,
                 Password= customer.Password,
                 Orders = customer.Orders.Select(order=> new LookupViewModel
                 {
                     Id= order.Id,
-                    Name=order.Product.Name
                 }).ToList(),
             };
         }

@@ -22,7 +22,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 Orders = product.Orders.Select(order => new LookupViewModel
                 {
                     Id= order.Id,
-                    Name=order.Customer.Name + " " + order.Customer.Surname,
+                    Name=order.Customer.FirstName + " " + order.Customer.LastName,
                 }).ToList(),
             };
         }

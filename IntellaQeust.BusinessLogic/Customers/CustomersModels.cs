@@ -2,7 +2,6 @@
 using FluentValidation.Attributes;
 using IntellaQeust.BusinessLogic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace IntellaQuest.BusinessLogic.Models
@@ -11,8 +10,8 @@ namespace IntellaQuest.BusinessLogic.Models
     public class CustomerViewModel
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -22,8 +21,8 @@ namespace IntellaQuest.BusinessLogic.Models
     {
         public CustomerViewModelValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.");
-            RuleFor(x => x.Surname).NotEmpty().WithMessage("Surname is required.");
+            RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name is required.");
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name is required.");
             RuleFor(x => x.Email).EmailAddress().WithMessage("Invalid email address.");
             RuleFor(x => x.Username).NotEmpty().WithMessage("Username is required.");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required.");

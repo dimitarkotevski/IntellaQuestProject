@@ -52,8 +52,8 @@ namespace IntellaQeust.BusinessLogic.Services
                 }
                 var customerEntity = new Customer
                 {
-                    Name = model.Name,
-                    Surname = model.Surname,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
                     Email = model.Email,
                     Username = model.Username,
                     Password = model.Password,
@@ -103,44 +103,44 @@ namespace IntellaQeust.BusinessLogic.Services
                 {
                     listCustomersForFiltering = listCustomersForFiltering
                         .Where(x => (
-                            x.Name.Contains(request.SearchString) || 
-                            x.Surname.Contains(request.SearchString)) || 
-                            (x.Surname+" "+x.Name).Equals(request.SearchString));
+                            x.FirstName.Contains(request.SearchString) || 
+                            x.LastName.Contains(request.SearchString)) || 
+                            (x.LastName +" "+x.FirstName).Equals(request.SearchString));
                 }
                 if (!string.IsNullOrEmpty(request.EmailEnding))
                 {
-                    listCustomersForFiltering = listCustomersForFiltering.Where(x => x.Name.EndsWith(request.EmailEnding));
+                    listCustomersForFiltering = listCustomersForFiltering.Where(x => x.FirstName.EndsWith(request.EmailEnding));
                 }
 
 
                 switch (request.SortName)
                 {
-                    case "Name":
+                    case "FirstName":
                         if (string.IsNullOrEmpty(request.isAscending))
                         {
                             break;
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.Name);
+                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.FirstName);
                         }
                         else
                         {
-                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.Name);
+                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.FirstName);
                         }
                         break;
-                    case "Surname":
+                    case "LastName":
                         if (string.IsNullOrEmpty(request.isAscending))
                         {
                             break;
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.Surname);
+                            listCustomersForFiltering = listCustomersForFiltering.OrderBy(x => x.LastName);
                         }
                         else
                         {
-                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.Surname);
+                            listCustomersForFiltering = listCustomersForFiltering.OrderByDescending(x => x.LastName);
                         }
                         break;
                     case "Email":
@@ -215,8 +215,8 @@ namespace IntellaQeust.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
                 };
-                customer.Surname = model.Surname;
-                customer.Name = model.Name;
+                customer.LastName = model.LastName;
+                customer.FirstName = model.FirstName;
                 customer.Email = model.Email;
                 customer.Password = model.Password;
                 _customerRepository.Update(customer);

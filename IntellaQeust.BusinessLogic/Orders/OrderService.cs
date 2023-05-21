@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 using IntellaQuest.Repository.Repositories;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using System.Linq;
@@ -20,7 +19,6 @@ namespace IntellaQeust.BusinessLogic.Orders
         void Update(OrderViewModel model);
         void Delete(Guid Id);
         bool CheckCustomerExists(Customer customer);
-        bool CheckProductExists(Product product);
     }
     public class OrderService : IOrderService
     {
@@ -45,10 +43,6 @@ namespace IntellaQeust.BusinessLogic.Orders
             return _orderRepository.CheckExist(x => x.Customer == customer);
         }
 
-        public bool CheckProductExists(Product product)
-        {
-            return _orderRepository.CheckExist(x=> x.Product == product);
-        }
 
         public Guid Create(OrderViewModel model)
         {
@@ -59,16 +53,16 @@ namespace IntellaQeust.BusinessLogic.Orders
                 {
                     throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-                var product = _productRepository.FindBy(model.Product.Id);
-                if(product == null)
+                var shoppingCart = _productRepository.FindBy(model.ShoppingCart.Id);
+                if(shoppingCart == null)
                 {
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
                 var order = new Order
                 {
                     Customer=customer,
-                    Product =product,
-                    Quantity=model.Quantity,
+                    ShoppingCart =customer.ShoppingCart,
+                    OrderStatus =model.OrderStatus,
                 };
                 _orderRepository.Add(order);
                 _unitOfWork.Commit();
@@ -113,8 +107,7 @@ namespace IntellaQeust.BusinessLogic.Orders
                 if (!string.IsNullOrEmpty(request.SearchString))
                 {
                     ordersListForFiltering = ordersListForFiltering
-                                        .Where(x => x.Customer.Name.Contains(request.SearchString) || 
-                                            x.Product.Name.Contains(request.SearchString));
+                                        .Where(x => x.Customer.FirstName.Contains(request.SearchString));
                 }
 
 
@@ -127,11 +120,11 @@ namespace IntellaQeust.BusinessLogic.Orders
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Product.Name);
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.ShoppingCart.TotalCost);
                         }
                         else
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Product.Name);
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.ShoppingCart.TotalCost);
                         }
                         break;
                     case "CustomerName":
@@ -141,11 +134,11 @@ namespace IntellaQeust.BusinessLogic.Orders
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Customer.Name);
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Customer.FirstName);
                         }
                         else
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Customer.Name);
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Customer.FirstName);
                         }
                         break;
                     case "Quantity":
@@ -155,11 +148,11 @@ namespace IntellaQeust.BusinessLogic.Orders
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Quantity);
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.OrderStatus);
                         }
                         else
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Quantity);
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.OrderStatus);
                         }
                         break;
                     default:
@@ -196,15 +189,10 @@ namespace IntellaQeust.BusinessLogic.Orders
                 {
                     throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-                var product= _productRepository.FindBy(model.Product.Id);
-                if(product == null)
-                {
-                    throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
-                }
                 
-                entityOrder.Product = product;
+                entityOrder.ShoppingCart = customer.ShoppingCart;
                 entityOrder.Customer = customer;
-                entityOrder.Quantity= model.Quantity;
+                entityOrder.OrderStatus = model.OrderStatus;
                 
                 _orderRepository.Update(entityOrder);
                 _unitOfWork.Commit();

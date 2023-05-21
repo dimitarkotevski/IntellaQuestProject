@@ -543,6 +543,7 @@
     <Compile Include="Controllers\Api\BaseController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
+    <Compile Include="Controllers\Api\RegistrationAndLoginController.cs" />
     <Compile Include="Controllers\ApplicationSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
@@ -1422,6 +1423,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\angular2\" />
+    <Folder Include="Views\RegistrationAndLogin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -85,6 +85,9 @@
     <Compile Include="Categories\CategoriesModels.cs" />
     <Compile Include="FluentTableRequest.cs" />
     <Compile Include="PasswordEncryption\PasswordEncryption.cs" />
+    <Compile Include="Payments\PaymentService.cs" />
+    <Compile Include="Payments\PaymentsMappers.cs" />
+    <Compile Include="Payments\PaymentsModels.cs" />
     <Compile Include="RequestModel.cs" />
     <Compile Include="Categories\CategoryService.cs" />
     <Compile Include="Customers\CustomersMappers.cs" />
@@ -101,6 +104,12 @@
     <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseModel.cs" />
+    <Compile Include="ShoppingCartProducts\ShoppingCartProductService.cs" />
+    <Compile Include="ShoppingCartProducts\ShoppingCartProductsMappers.cs" />
+    <Compile Include="ShoppingCartProducts\ShoppingCartProductsModels.cs" />
+    <Compile Include="ShoppingCarts\ShoppingCartMappers.cs" />
+    <Compile Include="ShoppingCarts\ShoppingCartService.cs" />
+    <Compile Include="ShoppingCarts\ShoppingCartsModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -116,10 +125,6 @@
       <Name>IntellaQuest.Data.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Payments\" />
-    <Folder Include="ShoppingCartProducts\" />
-    <Folder Include="ShoppingCarts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

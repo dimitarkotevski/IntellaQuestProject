@@ -8,8 +8,9 @@ using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
 using IntellaQeust.BusinessLogic.Requests;
 using IntellaQeust.BusinessLogic.Responses;
+using IntellaQeust.BusinessLogic.ViewModels;
 
-namespace IntellaQeust.BusinessLogic.Orders
+namespace IntellaQuest.BusinessLogic.Services
 {
     public interface IOrderService
     {

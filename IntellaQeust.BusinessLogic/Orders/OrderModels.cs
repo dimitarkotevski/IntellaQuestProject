@@ -4,7 +4,7 @@ using IntellaQuest.Domain;
 using IntellaQuest.Domain.Enums;
 using System;
 
-namespace IntellaQeust.BusinessLogic.Orders
+namespace IntellaQeust.BusinessLogic.ViewModels
 {
     //[Validator(typeof(OrderViewModelValidator))]
     public class OrderViewModel

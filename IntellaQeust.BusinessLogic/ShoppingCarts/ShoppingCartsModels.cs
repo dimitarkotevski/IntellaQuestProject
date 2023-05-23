@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 namespace IntellaQeust.BusinessLogic.ViewModels
 {
-    [Validator(typeof(CategoriesViewModelValidator))]
-    public class CategoryViewModel
+    [Validator(typeof(ShoppingCartsViewModelValidator))]
+    public class ShoppingCartsViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public bool Status { get; set; }
-        public IList<LookupViewModel> Products { get; set; }
+        public double TotalCost { get; set; }
+        public IList<ProductViewModel> Products { get; set; }
     }
-    public class CategoriesViewModelValidator : AbstractValidator<CategoryViewModel>
+    public class ShoppingCartsViewModelValidator : AbstractValidator<ShoppingCartsViewModel>
     {
-        public CategoriesViewModelValidator()
+        public ShoppingCartsViewModelValidator()
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.");
         }

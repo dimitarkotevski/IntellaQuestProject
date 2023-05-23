@@ -3,7 +3,7 @@ using FluentValidation.Attributes;
 using System;
 using System.Collections.Generic;
 
-namespace IntellaQeust.BusinessLogic.Models
+namespace IntellaQeust.BusinessLogic.ViewModels
 {
     [Validator(typeof(ProductsViewModelValidator))]
     public class ProductViewModel

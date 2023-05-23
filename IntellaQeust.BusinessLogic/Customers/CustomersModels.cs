@@ -4,7 +4,7 @@ using IntellaQeust.BusinessLogic;
 using System;
 using System.Collections.Generic;
 
-namespace IntellaQuest.BusinessLogic.Models
+namespace IntellaQuest.BusinessLogic.ViewModels
 {
     [Validator(typeof(CustomerViewModelValidator))]
     public class CustomerViewModel

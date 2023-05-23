@@ -1,5 +1,5 @@
 ﻿using IntellaQeust.BusinessLogic;
-using IntellaQeust.BusinessLogic.CategoryModel;
+using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
 using System.Linq;
 

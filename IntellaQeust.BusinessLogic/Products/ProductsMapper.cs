@@ -1,4 +1,4 @@
-﻿using IntellaQeust.BusinessLogic.Models;
+﻿using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
 using System.Linq;
 

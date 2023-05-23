@@ -1,7 +1,7 @@
-﻿using IntellaQuest.Domain;
-using System.Linq;
+﻿using IntellaQeust.BusinessLogic.ViewModels;
+using IntellaQuest.Domain;
 
-namespace IntellaQeust.BusinessLogic.Orders
+namespace IntellaQeust.BusinessLogic.Mappers
 {
     public static class OrderMappers
     {

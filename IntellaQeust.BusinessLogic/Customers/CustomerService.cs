@@ -3,7 +3,7 @@ using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQeust.BusinessLogic.Requests;
 using IntellaQeust.BusinessLogic.Responses;
 using IntellaQuest.BusinessLogic.Mappers;
-using IntellaQuest.BusinessLogic.Models;
+using IntellaQuest.BusinessLogic.ViewModels;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Domain;
@@ -11,7 +11,7 @@ using IntellaQuest.Repository.Repositories;
 using System;
 using System.Linq;
 
-namespace IntellaQeust.BusinessLogic.Services
+namespace IntellaQuest.BusinessLogic.Services
 {
     public interface ICustomerService
     {

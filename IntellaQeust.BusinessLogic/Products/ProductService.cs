@@ -1,5 +1,4 @@
-﻿using IntellaQeust.BusinessLogic.Models;
-using System.Linq;
+﻿using System.Linq;
 using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
@@ -10,6 +9,7 @@ using IntellaQuest.Domain;
 using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.Requests;
 using System.Collections.Generic;
+using IntellaQeust.BusinessLogic.ViewModels;
 
 namespace IntellaQuest.BusinessLogic.Services
 {

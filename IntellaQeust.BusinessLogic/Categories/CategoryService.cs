@@ -1,8 +1,8 @@
-﻿using IntellaQeust.BusinessLogic.CategoryModel;
-using IntellaQeust.BusinessLogic.Exceptions;
+﻿using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQeust.BusinessLogic.Requests;
 using IntellaQeust.BusinessLogic.Responses;
+using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IntellaQeust.Business.Services
+namespace IntellaQuest.BusinessLogic.Services
 {
     public interface ICategoryService
     {

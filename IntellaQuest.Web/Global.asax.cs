@@ -7,7 +7,7 @@ using System.Web.Routing;
 using FluentValidation.Mvc;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
-using IntellaQeust.BusinessLogic.Services;
+using IntellaQuest.BusinessLogic.Services;
 
 namespace IntellaQuest.Web
 {
@@ -20,12 +20,12 @@ namespace IntellaQuest.Web
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(typeof(ICustomerRepository).Assembly)
+            builder.RegisterAssemblyTypes(typeof(IUserRepository).Assembly)
                 .Where(x => x.FullName.EndsWith("Repository"))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
-            builder.RegisterAssemblyTypes(typeof(ICustomerService).Assembly)
+            builder.RegisterAssemblyTypes(typeof(IUserService).Assembly)
                 .Where(x => x.FullName.EndsWith("Service"))
                 .AsImplementedInterfaces()
                 .InstancePerRequest();

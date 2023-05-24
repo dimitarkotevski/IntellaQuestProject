@@ -9,6 +9,7 @@ using IntellaQuest.Domain;
 using IntellaQeust.BusinessLogic.Requests;
 using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.ViewModels;
+using IntellaQeust.BusinessLogic.Mappers;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -19,29 +20,29 @@ namespace IntellaQuest.BusinessLogic.Services
         Guid Create(OrderViewModel model);
         void Update(OrderViewModel model);
         void Delete(Guid Id);
-        bool CheckCustomerExists(Customer customer);
+        bool CheckUserExists(User user);
     }
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly ICustomerRepository _customerRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public OrderService(IOrderRepository orderRepository, 
-                            ICustomerRepository customerRepository, 
+                            IUserRepository userRepository, 
                             IProductRepository productRepository, 
                             IUnitOfWork unitOfWork)
         {
             _orderRepository = orderRepository;
-            _customerRepository = customerRepository;
+            _userRepository = userRepository;
             _productRepository = productRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public bool CheckCustomerExists(Customer customer)
+        public bool CheckUserExists(User user)
         {
-            return _orderRepository.CheckExist(x => x.Customer == customer);
+            return _orderRepository.CheckExist(x => x.User == user);
         }
 
 
@@ -49,10 +50,10 @@ namespace IntellaQuest.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var customer = _customerRepository.FindBy(model.Customer.Id);
-                if(customer == null)
+                var user = _userRepository.FindBy(model.User.Id);
+                if(user == null)
                 {
-                    throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
                 var shoppingCart = _productRepository.FindBy(model.ShoppingCart.Id);
                 if(shoppingCart == null)
@@ -61,8 +62,8 @@ namespace IntellaQuest.BusinessLogic.Services
                 }
                 var order = new Order
                 {
-                    Customer=customer,
-                    ShoppingCart =customer.ShoppingCart,
+                    User =user,
+                    ShoppingCart =user.ShoppingCart,
                     OrderStatus =model.OrderStatus,
                 };
                 _orderRepository.Add(order);
@@ -108,7 +109,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 if (!string.IsNullOrEmpty(request.SearchString))
                 {
                     ordersListForFiltering = ordersListForFiltering
-                                        .Where(x => x.Customer.FirstName.Contains(request.SearchString));
+                                        .Where(x => x.User.FirstName.Contains(request.SearchString));
                 }
 
 
@@ -128,18 +129,18 @@ namespace IntellaQuest.BusinessLogic.Services
                             ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.ShoppingCart.TotalCost);
                         }
                         break;
-                    case "CustomerName":
+                    case "UserName":
                         if (string.IsNullOrEmpty(request.isAscending))
                         {
                             break;
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.Customer.FirstName);
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.User.FirstName);
                         }
                         else
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.Customer.FirstName);
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.User.FirstName);
                         }
                         break;
                     case "Quantity":
@@ -185,14 +186,14 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-                var customer = _customerRepository.FindBy(model.Customer.Id);
-                if(customer == null)
+                var user = _userRepository.FindBy(model.User.Id);
+                if(user == null)
                 {
-                    throw new BllException(ShopExceptionMassages.CustomerExceptionMassages.NOT_FOUND_EXCEPTION);
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
                 
-                entityOrder.ShoppingCart = customer.ShoppingCart;
-                entityOrder.Customer = customer;
+                entityOrder.ShoppingCart = user.ShoppingCart;
+                entityOrder.User = user;
                 entityOrder.OrderStatus = model.OrderStatus;
                 
                 _orderRepository.Update(entityOrder);

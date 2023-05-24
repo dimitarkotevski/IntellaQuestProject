@@ -19,11 +19,6 @@ namespace IntellaQeust.BusinessLogic.Mappers
                     Name = product.Category.Name,
                     Status = product.Category.Status,
                 },
-                Orders = product.Orders.Select(order => new LookupViewModel
-                {
-                    Id= order.Id,
-                    Name=order.Customer.FirstName + " " + order.Customer.LastName,
-                }).ToList(),
             };
         }
     }

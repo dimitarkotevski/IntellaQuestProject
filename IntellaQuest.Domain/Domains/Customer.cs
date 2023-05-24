@@ -2,7 +2,7 @@
 
 namespace IntellaQuest.Domain
 {
-    public class Customer : BaseEntity
+    public class User : BaseEntity
     {
         private string _firstName;
         private string _lastName;
@@ -12,7 +12,7 @@ namespace IntellaQuest.Domain
         private IList<Order> _orders;
         private Payment _payment;
         private ShoppingCart _shoppingCart;
-        public Customer() { }
+        public User() { }
         public virtual string FirstName
         {
             get => _firstName;

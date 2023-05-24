@@ -3,10 +3,11 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace IntellaQeust.BusinessLogic.PasswordEncryption
+namespace IntellaQeust.BusinessLogic.Security
 {
     public static class PasswordEncryption
     {
+        public static string KEY = "ThisIsTheBestKeyEverAndImNotEvenJoking_YouKnowWhatImJoking";
         public static string Encryption(string plainText)
         {
             string encryptionKey = "MAKV2SPBNI99212";

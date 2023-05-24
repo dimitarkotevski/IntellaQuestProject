@@ -10,10 +10,10 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new OrderViewModel
             {
                 Id=model.Id,
-                Customer=new LookupViewModel
+                User=new LookupViewModel
                 {
-                    Id=model.Customer.Id,
-                    Name=model.Customer.FirstName + " "+ model.Customer.LastName,
+                    Id=model.User.Id,
+                    Name=model.User.FirstName + " "+ model.User.LastName,
                 },
                 ShoppingCart = new LookupViewModel 
                 {

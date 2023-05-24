@@ -17,8 +17,8 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             References(x => x.ShoppingCart)
                 .Column("ShoppingCartId")
                 .Cascade.SaveUpdate().LazyLoad();
-            References(x => x.Customer)
-                 .Column("CustomerId")
+            References(x => x.User)
+                 .Column("UserId")
                  .Cascade.SaveUpdate().LazyLoad();
         }
 

@@ -1,6 +1,7 @@
-﻿using IntellaQeust.Business.Services;
-using IntellaQeust.BusinessLogic.CategoryModel;
+﻿
 using IntellaQeust.BusinessLogic.Requests;
+using IntellaQeust.BusinessLogic.ViewModels;
+using IntellaQuest.BusinessLogic.Services;
 using IntellaQuest.Web.Controllers.Api;
 using IntellaQuest.Web.Cors;
 using System;

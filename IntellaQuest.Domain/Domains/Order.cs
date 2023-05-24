@@ -4,14 +4,14 @@ namespace IntellaQuest.Domain
 {
     public class Order : BaseEntity
     {
-        private Customer _customer;
+        private User _user;
         private ShoppingCart _shoppingCart;
         private OrderStatus _orderStatus;
         public Order() { }
-        public virtual Customer Customer 
+        public virtual User User 
         {
-            get => _customer;
-            set => _customer = value;
+            get => _user;
+            set => _user = value;
         }
         public virtual ShoppingCart ShoppingCart
         {

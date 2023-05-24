@@ -11,14 +11,14 @@ namespace IntellaQeust.BusinessLogic.ViewModels
     {
         public Guid Id { get; set; }
         public LookupViewModel ShoppingCart { get; set; }
-        public LookupViewModel Customer { get; set; }
+        public LookupViewModel User { get; set; }
         public OrderStatus OrderStatus { get; set; }
     }
     public class OrderViewModelValidator : AbstractValidator<Order>
     {
         public OrderViewModelValidator()
         {
-            RuleFor(x => x.Customer).NotEmpty().WithMessage("Customer is required.");
+            RuleFor(x => x.User).NotEmpty().WithMessage("User is required.");
             RuleFor(x => x.ShoppingCart).NotEmpty().WithMessage("Shopping Card is required.");
             RuleFor(x => x.OrderStatus).NotEmpty().WithMessage("Order Status is required.");
         }

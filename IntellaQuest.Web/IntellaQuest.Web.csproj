@@ -542,8 +542,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Api\BaseController.cs" />
     <Compile Include="Controllers\Api\CategoriesController.cs" />
-    <Compile Include="Controllers\Api\CustomersController.cs" />
-    <Compile Include="Controllers\Api\RegistrationAndLoginController.cs" />
+    <Compile Include="Controllers\Api\UsersController.cs" />
+    <Compile Include="Controllers\Api\IdentityController.cs" />
     <Compile Include="Controllers\ApplicationSettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
@@ -1416,14 +1416,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\AngularJs.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Home\Angular2.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\angular2\" />
-    <Folder Include="Views\RegistrationAndLogin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

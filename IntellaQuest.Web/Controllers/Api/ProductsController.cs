@@ -1,5 +1,5 @@
-﻿using IntellaQeust.BusinessLogic.Models;
-using IntellaQeust.BusinessLogic.Requests;
+﻿using IntellaQeust.BusinessLogic.Requests;
+using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.BusinessLogic.Request;
 using IntellaQuest.BusinessLogic.Services;
 using IntellaQuest.Web.Controllers.Api;

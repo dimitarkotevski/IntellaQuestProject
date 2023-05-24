@@ -3,12 +3,12 @@ using IntellaQuest.Domain;
 
 namespace IntellaQuest.Data.NHibernate.Mapping
 {
-    public class CustomerMap : ClassMap<Customer>
+    public class UserMap : ClassMap<User>
     {
-        public CustomerMap() {
+        public UserMap() {
             Schema("dbo");
-            Table("Customers");
-            //Id
+            Table("Users");
+
             Id(c => c.Id).GeneratedBy.Guid();
 
             #region Attributes
@@ -51,7 +51,7 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             HasMany(x => x.Orders)
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
-                .KeyColumn("CustomerId").LazyLoad();
+                .KeyColumn("UsersId").LazyLoad();
 
             #endregion
 

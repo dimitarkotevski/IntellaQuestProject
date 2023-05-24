@@ -12,7 +12,6 @@ namespace IntellaQeust.BusinessLogic.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public LookupViewModel Category { get; set; }
-        public IList<LookupViewModel> Orders { get; set; }
     }
     public class ProductsViewModelValidator : AbstractValidator<ProductViewModel>
     {

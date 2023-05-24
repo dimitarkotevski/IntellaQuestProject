@@ -6,8 +6,21 @@ using System.Collections.Generic;
 
 namespace IntellaQuest.BusinessLogic.ViewModels
 {
-    [Validator(typeof(CustomerViewModelValidator))]
-    public class CustomerViewModel
+    public class UserRegistrationViewModel
+    {
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+    public class UserLoginViewModel
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+    [Validator(typeof(UserViewModelValidator))]
+    public class UserViewModel
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -17,9 +30,9 @@ namespace IntellaQuest.BusinessLogic.ViewModels
         public string Password { get; set; }
         public IList<LookupViewModel> Orders { get; set; }
     }
-    public class CustomerViewModelValidator : AbstractValidator<CustomerViewModel>
+    public class UserViewModelValidator : AbstractValidator<UserViewModel>
     {
-        public CustomerViewModelValidator()
+        public UserViewModelValidator()
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name is required.");
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name is required.");

@@ -1,65 +1,63 @@
 ﻿using IntellaQeust.BusinessLogic.Requests;
-using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.BusinessLogic.Services;
+using IntellaQuest.BusinessLogic.ViewModels;
 using IntellaQuest.Web.Controllers.Api;
 using System;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
 {
-    public class OrdersController : BaseController
+    public class UsersController : BaseController
     {
-        private readonly IOrderService _orderService;
-
-        public OrdersController(IOrderService orderService)
+        private readonly IUserService _usersService;
+        public UsersController() { }
+        public UsersController(IUserService usersService)
         {
-            _orderService = orderService;
+            _usersService = usersService;
         }
 
-        // POST: Orders
+        // GET: Users
         [HttpPost]
         public ActionResult All(RequestModel request)
         {
-            return Json(_orderService.GetAll(request));
-        }
-        // POST: Orders/Get
-        [HttpPost]
-        public ActionResult Get(Guid Id)
-        {
-            return Json( _orderService.Get(Id));
+            return Json(_usersService.GetAll(request));
         }
 
-        // POST: Orders/Create
+        // GET: Users/Details/5
         [HttpPost]
-        public ActionResult Create(OrderViewModel model)
+        public ActionResult Get(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Json(ModelState.Values);
-            }
-            _orderService.Create(model);
-            return Json(new { success = true });
+            return Json(_usersService.Get(id));
         }
 
-        // POST: Orders/Edit/5
+        // GET: Users/Create
         [HttpPost]
-        public ActionResult Edit(OrderViewModel model)
+        public ActionResult Create(UserViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return Json(ModelState.Values);
             }
-            _orderService.Update(model);
+            _usersService.Create(model);
             return Json(new { success = true });
         }
-
-        // GET: Orders/Delete/5
+        // GET: Users/Edit
         [HttpPost]
-        public ActionResult Delete(Guid Id)
+        public ActionResult Edit(UserViewModel model)
         {
-            _orderService.Delete(Id);
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Values);
+            }
+            _usersService.Update(model);
             return Json(new { success = true });
         }
-
+        //POST Users/DeleteById/5
+        [HttpPost]
+        public ActionResult Delete(Guid id)
+        {
+            _usersService.Delete(id);
+            return Json(new { success = true });
+        }
     }
 }

@@ -29,12 +29,22 @@ namespace IntellaQuest.Web
                      "~/Scripts/angular-ui/ui-bootstrap.js",
                      "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
                      )); 
+
+
             
-            bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
+            /*bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
                      "~/app/", "*.js", true));
 
             bundles.Add(new ScriptBundle("~/bundles/angular2").IncludeDirectory(
-                    "~/my-app/bundles/", "*.js", true));
+                    "~/my-app/bundles/", "*.*.js", true));*/
+
+            bundles.Add(new Bundle("~/bundles/clientapp").Include(
+                "~/my-app/bundles/runtime.*",
+                "~/my-app/bundles/polyfills.*",
+                "~/my-app/bundles/main.*"));
+
+            bundles.Add(new StyleBundle("~/Content/clientapp").Include(
+                      "~/my-app/bundles/styles.*"));
 
         }
     }

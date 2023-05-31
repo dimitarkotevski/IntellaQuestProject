@@ -15,6 +15,7 @@
 
 # Mono auto generated files
 mono_crash.*
+boundle
 
 # Build results
 [Dd]ebug/
@@ -361,3 +362,18 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+IntellaQuest.Web/my-app/src/app/app.component.html
+IntellaQuest.Web/my-app/bundles/index.html
+IntellaQuest.Web/my-app/bundles/main.4fb89346e35a750d.js
+IntellaQuest.Web/my-app/bundles/main.4fef38263dd14bc6.js
+IntellaQuest.Web/my-app/bundles/polyfills.2c8feaf9a88e851e.js
+IntellaQuest.Web/my-app/bundles/polyfills.3429e494615ca3b5.js
+IntellaQuest.Web/my-app/bundles/index.html
+IntellaQuest.Web/my-app/bundles/main.4fef38263dd14bc6.js
+IntellaQuest.Web/my-app/bundles/polyfills.3429e494615ca3b5.js
+IntellaQuest.Web/my-app/bundles/index.html
+IntellaQuest.Web/my-app/bundles/main.4fef38263dd14bc6.js
+IntellaQuest.Web/my-app/bundles/polyfills.3429e494615ca3b5.js
+IntellaQuest.Web/my-app/bundles/index.html
+IntellaQuest.Web/my-app/bundles/main.4fef38263dd14bc6.js
+IntellaQuest.Web/my-app/bundles/polyfills.3429e494615ca3b5.js

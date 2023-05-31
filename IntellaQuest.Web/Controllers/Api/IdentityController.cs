@@ -21,6 +21,7 @@ namespace IntellaQuest.Web.Controllers.Api
             }
             return Json(new { success = false });
         }
+        [HttpPost]
         public ActionResult Login(UserLoginViewModel model)
         {
             if(ModelState.IsValid)

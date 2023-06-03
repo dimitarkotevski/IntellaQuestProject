@@ -1,4 +1,6 @@
 export class UserLogin{
-    Username?:string
-    Password?: string
+    constructor(
+        Username?:string,
+        Password?: string
+        ){}
 }

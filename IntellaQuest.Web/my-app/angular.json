@@ -3,12 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Client": {
+    "my-app": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:application": {
-          "strict": true,
-          "skipTests": true
+        "@schematics/angular:component": {
+          "style": "css"
         }
       },
       "root": "",
@@ -23,24 +22,10 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "css",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@fortawesome/fontawesome-pro/webfonts",
-                "output": "/assets/webfonts"
-              },
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@fortawesome/fontawesome-pro/sprites",
-                "output": "/assets/sprites"
-              },
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@fortawesome/fontawesome-pro/css",
-                "output": "/assets/css"
-              }
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -55,15 +40,13 @@
                   "type": "initial",
                   "maximumWarning": "500kb",
                   "maximumError": "1mb"
-                }
-              ],
-              "fileReplacements": [
+                },
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
-              ],
-              "outputHashing": "none"
+              ]
             },
             "development": {
               "buildOptimizer": false,
@@ -73,24 +56,25 @@
               "sourceMap": true,
               "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Client:build:production"
+              "browserTarget": "my-app:build:production"
             },
             "development": {
-              "browserTarget": "Client:build:development"
+              "browserTarget": "my-app:build:development"
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Client:build"
+            "browserTarget": "my-app:build"
           }
         },
         "test": {
@@ -114,5 +98,5 @@
       }
     }
   },
-  "defaultProject": "Client"
+  "defaultProject": "my-app"
 }

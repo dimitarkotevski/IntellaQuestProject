@@ -11,7 +11,6 @@ using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 
 namespace IntellaQuest.Web.Controllers
 {
-    [AllowCrossSite]
     public class CategoriesController : BaseController
     {
         private readonly ICategoryService _categoriesService;

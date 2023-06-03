@@ -10,6 +10,10 @@ import { ProductsComponent } from './products/products.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import { AuthService } from './services/auth.service';
+//import { ProductService } from './services/product.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,13 +34,17 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [
+    // AuthService,
+    // ProductService
+  ],
   bootstrap: [
     AppComponent,
-    RouterModule
   ]
 })
 export class AppModule { }

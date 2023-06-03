@@ -14,6 +14,6 @@ export class NavbarComponent implements OnInit {
 
   login(something:any){
     console.log(something)
-    this.router.navigate(['/']);
+    //this.router.navigate(['/']);
   }
 }

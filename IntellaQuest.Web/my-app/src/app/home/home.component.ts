@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+//import { ProductService } from '../services/product.service';
 
 
 @Component({
@@ -8,9 +8,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
+  products: any;
+  constructor(
+    //private productService: ProductService
+    ) { }
 
   ngOnInit(): void {
+    // this.productService.getAll(null).subscribe(products => {
+    //       this.products = products;
+    //     });
   }
 
 }

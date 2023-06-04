@@ -1,5 +1,6 @@
 ﻿using IntellaQuest.BusinessLogic.Services;
 using IntellaQuest.BusinessLogic.ViewModels;
+using System;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers.Api
@@ -30,6 +31,12 @@ namespace IntellaQuest.Web.Controllers.Api
                 return Json(new { success = true, token });
             }
             return Json(new { success = false });
+        }
+        [HttpGet]
+        [Authorize]
+        public ActionResult UserDetails(Guid id)
+        {
+            return Json(_userService.Get(id));
         }
     }
 }

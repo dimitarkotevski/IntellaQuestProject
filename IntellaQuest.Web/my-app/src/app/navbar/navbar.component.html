@@ -1,20 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid leftPadding rightPadding">
-    <a class="navbar-brand letterSpacing" routerLink="/">ShoppingDev</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor02">
-
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="p-2"><a routerLink="/login" style="color: #ffffff;"><i class='fa fa-2x fa-sign-in'></i></a></li>
-      <li class="p-2"><a routerLink="/cart" style="color: #ffffff;"><i  class="fa fa-2x fa-cart-shopping"></i></a></li>
-    </ul>
-  </div>
-</nav>
-
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand flex-grow-1" href="#">ShoppingDev</a>
+      <!-- <div class="center flex-grow-1 d-flex">
+          <form class="form-inline flex-nowrap mx-0 mx-lg-auto rounded">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+      </div> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <div *ngIf="!isUserAuthenticated" class="nav-item">
+              <a class="nav-link " routerLink="/login"><i class='fa fa-s15 fa-sign-in'></i></a>
+            </div>
+            <div *ngIf="isUserAuthenticated" class="nav-item">
+              <div class="nav-link dropdown">
+                <button class="avatar dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>  Profile
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa fa-cog" aria-hidden="true"></i>   Settings
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a (click)="logout()" class="dropdown-item" href="#">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>   Logout
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="nav-item">
+              <a class="nav-item nav-link " routerLink="/favourite"><i class='fa fa-s15 fa-heart'></i></a>
+            </div>
+            <div class="nav-item">
+              <a class="nav-item nav-link " routerLink="/cart"><i class='fa fa-s15 fa-cart-shopping'></i></a>
+            </div>
+          </div>
+      </div>
+      </div>
+  </nav>
+</header>

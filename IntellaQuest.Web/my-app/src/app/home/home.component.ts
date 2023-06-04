@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { ProductService } from '../services/product.service';
+import { ProductService } from '../services/product.service';
 
 
 @Component({
@@ -8,15 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  isUserAuthenticated: boolean = false;
   products: any;
+  totalItems?: number
+
   constructor(
-    //private productService: ProductService
+    private productService: ProductService,
     ) { }
 
   ngOnInit(): void {
-    // this.productService.getAll(null).subscribe(products => {
-    //       this.products = products;
-    //     });
+    this.productService.getAll(null).subscribe(products => {
+          this.products = products.data;
+          this.totalItems = products.recordsTotal;
+        });
   }
 
 }

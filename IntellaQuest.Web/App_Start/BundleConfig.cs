@@ -8,7 +8,7 @@ namespace IntellaQuest.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-3.7.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -17,35 +17,31 @@ namespace IntellaQuest.Web
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                      "~/Scripts/modernizr-*"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                     "~/Scripts/bootstrap.bundle.min.js"));
+                     "~/Scripts/bootstrap.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     "~/Content/bootstrap_theme.css",
-                     "~/Content/site.css")); 
+                     "~/Content/bootstrap.min.css",
+                     "~/Content/site.css"));
+
             bundles.Add(new StyleBundle("~/bundles/vendor").Include(
                      "~/Scripts/angular.js",
                      "~/Scripts/angular-messages.js",
                      "~/Scripts/angular-ui-router.js",
                      "~/Scripts/angular-ui/ui-bootstrap.js",
                      "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
-                     )); 
-
-
-            
-            /*bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory(
-                     "~/app/", "*.js", true));
-
-            bundles.Add(new ScriptBundle("~/bundles/angular2").IncludeDirectory(
-                    "~/my-app/bundles/", "*.*.js", true));*/
+                     ));
 
             bundles.Add(new Bundle("~/bundles/clientapp").Include(
                 "~/my-app/bundles/runtime.*",
                 "~/my-app/bundles/polyfills.*",
-                "~/my-app/bundles/main.*"));
+                "~/my-app/bundles/main.*",
+                "~/my-app/bundles/vendor.*",
+                "~/my-app/bundles/style.*"));
 
             bundles.Add(new StyleBundle("~/Content/clientapp").Include(
                       "~/my-app/bundles/styles.*"));
-
         }
     }
 }

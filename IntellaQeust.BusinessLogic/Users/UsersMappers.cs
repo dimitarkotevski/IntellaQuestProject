@@ -1,4 +1,4 @@
-﻿using IntellaQeust.BusinessLogic;
+﻿using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQuest.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
 using System.Linq;
@@ -11,16 +11,14 @@ namespace IntellaQuest.BusinessLogic.Mappers
         {
             return new UserViewModel
             {
-                Id= user.Id,
-                FirstName= user.FirstName,
-                LastName= user.LastName,
-                Email= user.Email,
-                Username= user.Username,
-                Password= user.Password,
-                Orders = user.Orders.Select(order=> new LookupViewModel
-                {
-                    Id= order.Id,
-                }).ToList(),
+                Id = user.Id,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Address = user.Address,
+                FavouriteProducts = user.FavouriteProducts.Select(x=>x.Product).Select(x=>x.MapToViewModel()).ToList(),
+                Payment = user.Payment.MapToViewModel()
             };
         }
     }

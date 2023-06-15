@@ -28,7 +28,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 FirstName = payment.FirstName,
                 LastName = payment.LastName,
                 City = payment.City,
-                BillingAddress = payment.BillingAddress,
+                BillingAddress = payment.BillingAdress,
                 ZipPostalCode = payment.ZipPostalCode,
                 Country = payment.Country,
                 PhoneNumber = payment.PhoneNumber,

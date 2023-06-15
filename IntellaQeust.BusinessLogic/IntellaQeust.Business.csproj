@@ -120,6 +120,8 @@
   <ItemGroup>
     <Compile Include="Categories\CategoriesMappers.cs" />
     <Compile Include="Categories\CategoriesModels.cs" />
+    <Compile Include="FavouriteProducts\FavouriteProductModels.cs" />
+    <Compile Include="FavouriteProducts\FavouriteProductsMappers.cs" />
     <Compile Include="FluentTableRequest.cs" />
     <Compile Include="Security\TokenConstant.cs" />
     <Compile Include="Security\PasswordEncryption.cs" />

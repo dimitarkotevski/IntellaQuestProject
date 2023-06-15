@@ -13,6 +13,9 @@ export class AppComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
+    this.refreshState();
+  }
+  refreshState(){
     this.isUserAuthenticated = this.authService.isAuthenticated();
   }
 }

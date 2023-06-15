@@ -23,7 +23,7 @@ namespace IntellaQuest.Web.Controllers
             return Json(_productsService.GetAll(request));
         }
         [HttpPost]
-        public ActionResult getTable()
+        public ActionResult GetTable()
         {
             var data = _productsService.GetAllTable();
             var recordsTotal = data.Count;

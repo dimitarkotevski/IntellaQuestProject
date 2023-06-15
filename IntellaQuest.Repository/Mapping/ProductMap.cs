@@ -15,16 +15,17 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Map(c => c.Name);
             Map(c => c.Description);
             Map(c => c.Price);
+            Map(c => c.Created);
 
             References(x => x.Category)
                 .Column("CategoryId")
                 .Access
                 .CamelCaseField(Prefix.Underscore).LazyLoad();
 
-            /*HasMany(x => x.Orders)
-                .Inverse()
-                .Cascade.AllDeleteOrphan()
-                .KeyColumn("ProductId").LazyLoad();*/
+            /*References(x => x.FavouriteProducts)
+                .Column("ProductId")
+                .Access
+                .CamelCaseField(Prefix.Underscore).LazyLoad();*/
         }
     }
 }

@@ -2,12 +2,15 @@
 using Autofac.Integration.Mvc;
 using System.Web.Mvc;
 using System.Web.Optimization;
-using System.Web.Http;
 using System.Web.Routing;
 using FluentValidation.Mvc;
 using IntellaQuest.Data.NHibernate.ConfigurationRepository;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.BusinessLogic.Services;
+/*using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Owin.Security.Jwt;
+using Microsoft.Owin;*/
 
 namespace IntellaQuest.Web
 {
@@ -19,6 +22,7 @@ namespace IntellaQuest.Web
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
+
 
             builder.RegisterAssemblyTypes(typeof(IUserRepository).Assembly)
                 .Where(x => x.FullName.EndsWith("Repository"))
@@ -34,8 +38,6 @@ namespace IntellaQuest.Web
             builder.RegisterModelBinderProvider();
             FluentValidationModelValidatorProvider.Configure();
 
-
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -43,7 +45,10 @@ namespace IntellaQuest.Web
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            GlobalConfiguration.Configuration.EnableCors();
+
+
+            //GlobalConfiguration.Configuration.EnableCors();
         }
     }
+
 }

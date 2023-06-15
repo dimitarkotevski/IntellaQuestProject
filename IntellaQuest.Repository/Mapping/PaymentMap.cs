@@ -10,63 +10,21 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Schema("dbo");
             Table("Payments");
 
-            Id(p=>p.Id);
+            Id(p => p.Id);
 
             #region Attribute
-            Map(p => p.PaymentType)
-                .Column("PaymentType")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Not.Nullable();
 
-            Map(p => p.CardNumber)
-                .Column("CardNumber")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Not.Nullable();
-
-            Map(p => p.SecurityCode)
-                .Column("SecurityCode")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Not.Nullable();
-
-            Map(p => p.ExpirationDate)
-                .Column("ExpirationDate")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Not.Nullable();
-
-            Map(p => p.FirstName)
-                .Column("FirstName")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Nullable();
-
-            Map(p => p.LastName)
-                .Column("LastName")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Nullable();
-
-            Map(p => p.City)
-                .Column("City")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Nullable();
-
-            Map(p => p.BillingAddress)
-                .Column("BillingAddress")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Not.Nullable();
-
-            Map(p => p.ZipPostalCode)
-                .Column("ZipPostalCode")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Nullable();
-
-            Map(p => p.Country)
-                .Column("Country")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Nullable();
-
-            Map(p => p.PhoneNumber)
-                .Column("PhoneNumber")
-                .Access.CamelCaseField(Prefix.Underscore)
-                .Nullable();
+            //Map(p => p.PaymentType);
+            Map(p => p.CardNumber);
+            Map(p => p.ExpirationDate);
+            Map(p => p.SecurityCode);
+            Map(p => p.FirstName);
+            Map(p => p.LastName);
+            Map(p => p.City);
+            Map(p => p.BillingAdress);
+            Map(p => p.ZipPostalCode);
+            Map(p => p.Country);
+            Map(p => p.PhoneNumber);
 
             #endregion
 

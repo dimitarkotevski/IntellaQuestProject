@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IntellaQuest.Domain
 {
@@ -9,10 +10,16 @@ namespace IntellaQuest.Domain
         private string _email;
         private string _username;
         private string _password;
-        private IList<Order> _orders;
+        private string _address;
         private Payment _payment;
         private ShoppingCart _shoppingCart;
-        public User() { }
+        private IList<Order> _orders;
+        private IList<FavouriteProducts> _favouriteProducts;
+        public User() 
+        {
+            _favouriteProducts = new List<FavouriteProducts>();
+            _orders = new List<Order>();
+        }
         public virtual string FirstName
         {
             get => _firstName;
@@ -37,6 +44,16 @@ namespace IntellaQuest.Domain
         {
             get => _password;
             set => _password = value;
+        }
+        public virtual string Address
+        {
+            get => _address; 
+            set => _address = value;
+        }
+        public virtual IList<FavouriteProducts> FavouriteProducts
+        {
+            get => _favouriteProducts; 
+            set => _favouriteProducts = value;
         }
         public virtual IList<Order> Orders 
         { 

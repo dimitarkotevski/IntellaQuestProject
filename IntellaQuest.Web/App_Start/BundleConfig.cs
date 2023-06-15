@@ -22,7 +22,7 @@ namespace IntellaQuest.Web
                      "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     "~/Content/bootstrap.min.css",
+                     "~/Content/bootstrap_theme.css",
                      "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/bundles/vendor").Include(

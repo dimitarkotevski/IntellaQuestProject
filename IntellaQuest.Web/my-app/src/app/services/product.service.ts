@@ -11,7 +11,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAll(filter:any) {
-    return this.http.post<any>(this.baseApi+'products/gettable',filter)
+    return this.http.post<any>(this.baseApi+'products/All',filter)
   }
   get(Id:number) {
     return this.http.post<any>(this.baseApi+'products/get/'+Id,JSON)

@@ -9,7 +9,7 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Schema("dbo");
             Table("Users");
 
-            Id(c => c.Id).GeneratedBy.Guid();
+            Id(c => c.Id);
 
             #region Attributes
 
@@ -34,6 +34,11 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
 
+            Map(c => c.Address)
+                .Column("Address")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
+
             #endregion
 
             #region Foreign Key
@@ -44,14 +49,20 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .CamelCaseField(Prefix.Underscore).LazyLoad();
 
             References(x => x.Payment)
+                //.PropertyRef("Id")
                 .Column("PaymentId")
                 .Access
-                .CamelCaseField(Prefix.Underscore).LazyLoad();
+                .CamelCaseField(Prefix.Underscore).Cascade.All();
 
             HasMany(x => x.Orders)
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
                 .KeyColumn("UsersId").LazyLoad();
+
+            HasMany(x => x.FavouriteProducts)
+                .Inverse()
+                .Cascade.AllDeleteOrphan()
+                .KeyColumn("UserId").LazyLoad();
 
             #endregion
 

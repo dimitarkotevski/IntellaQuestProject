@@ -5,11 +5,11 @@ namespace IntellaQuest.Domain
     public class ShoppingCart : BaseEntity
     {
         private IList<Product> _products;
-        private float _totalCost;
-        public virtual float TotalCost 
+        private float _quantity;
+        public virtual float Quantity 
         { 
-            get =>  _totalCost;
-            set => _totalCost = value;
+            get => _quantity;
+            set => _quantity = value;
         }
         public virtual IList<Product> Products 
         { 

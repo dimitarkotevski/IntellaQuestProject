@@ -73,7 +73,8 @@
   <ItemGroup>
     <Compile Include="Domains\BaseEntity.cs" />
     <Compile Include="Domains\Category.cs" />
-    <Compile Include="Domains\Customer.cs" />
+    <Compile Include="Domains\FavouriteProducts.cs" />
+    <Compile Include="Domains\User.cs" />
     <Compile Include="Domains\Order.cs" />
     <Compile Include="Domains\Payment.cs" />
     <Compile Include="Domains\Product.cs" />

@@ -12,7 +12,7 @@ namespace IntellaQuest.Domain
         private string _firstName;
         private string _lastName;
         private string _city;
-        private string _billingAddress;
+        private string _billingAdress;
         private string _zipPostalCode;
         private string _country;
         private string _phoneNumber;
@@ -52,10 +52,10 @@ namespace IntellaQuest.Domain
             get => _city;
             set => _city = value;
         }
-        public virtual string BillingAddress
+        public virtual string BillingAdress
         {
-            get => _billingAddress;
-            set => _billingAddress = value;
+            get => _billingAdress;
+            set => _billingAdress = value;
         }
         public virtual string ZipPostalCode
         {

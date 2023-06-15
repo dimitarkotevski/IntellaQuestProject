@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.Attributes;
 using IntellaQeust.BusinessLogic;
+using IntellaQeust.BusinessLogic.ViewModels;
+using IntellaQuest.Domain;
 using System;
 using System.Collections.Generic;
 
@@ -28,7 +30,10 @@ namespace IntellaQuest.BusinessLogic.ViewModels
         public string Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Address { get; set; }
+        public IList<ProductViewModel> FavouriteProducts { get; set; }
         public IList<LookupViewModel> Orders { get; set; }
+        public PaymentsViewModel Payment { get; set; }
     }
     public class UserViewModelValidator : AbstractValidator<UserViewModel>
     {
@@ -38,7 +43,7 @@ namespace IntellaQuest.BusinessLogic.ViewModels
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name is required.");
             RuleFor(x => x.Email).EmailAddress().WithMessage("Invalid email address.");
             RuleFor(x => x.Username).NotEmpty().WithMessage("Username is required.");
-            RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required.");
+            //RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required.");
         }
     }
 }

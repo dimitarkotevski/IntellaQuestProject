@@ -13,6 +13,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { ProductService } from './services/product.service';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { ProfileComponent } from './profile/profile.component';
+import { CartComponent } from './cart/cart.component';
+import { FavouriteComponent } from './favourite/favourite.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 const routes: Routes = [
 ];
@@ -24,18 +30,25 @@ const routes: Routes = [
     NavbarComponent,
     SidebarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent,
+    CartComponent,
+    FavouriteComponent,
+    SettingsComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
+    //RouterModule.forRoot(routes),
   ],
   providers: [
     AuthService,
-    ProductService
+    ProductService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
   ],
   bootstrap: [
     AppComponent,

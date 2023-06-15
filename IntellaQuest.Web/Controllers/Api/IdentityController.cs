@@ -1,9 +1,15 @@
 ﻿using IntellaQuest.BusinessLogic.Services;
 using IntellaQuest.BusinessLogic.ViewModels;
+using IntellaQuest.Domain;
+using IntellaQuest.Web.Controllers.Api;
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
-namespace IntellaQuest.Web.Controllers.Api
+namespace IntellaQuest.Web.Controllers
 {
     public class IdentityController : BaseController
     {
@@ -18,7 +24,7 @@ namespace IntellaQuest.Web.Controllers.Api
             if (ModelState.IsValid)
             {
                 _userService.Registration(model);
-                return Json(new { Success = true });
+                return Json( true );
             }
             return Json(new { success = false });
         }
@@ -32,11 +38,48 @@ namespace IntellaQuest.Web.Controllers.Api
             }
             return Json(new { success = false });
         }
-        [HttpGet]
-        [Authorize]
+        [HttpPost]
+        [MyJwtTokenCustomAuthorize]
         public ActionResult UserDetails(Guid id)
         {
             return Json(_userService.Get(id));
+        }
+        [HttpPost]
+        [MyJwtTokenCustomAuthorize]
+        public ActionResult UserAddFavouriteProduct(Guid userId ,Guid productId)
+        {
+            return null;
+        }
+    }
+    public class MyJwtTokenCustomAuthorize : AuthorizeAttribute
+    {
+        User context = new User(); // my entity  
+        private readonly string[] allowedroles;
+        public MyJwtTokenCustomAuthorize(params string[] roles)
+        {
+            this.allowedroles = roles;
+        }
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            bool authorize = true;
+            var tokenValue = httpContext.Request.Headers["Authorization"].Substring(7);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = tokenHandler.ReadJwtToken(tokenValue);
+            var claims = jwtSecurityToken.Claims;
+
+            var tokenClaims = new Dictionary<string, string>();
+
+            foreach (var claim in claims)
+            {
+                tokenClaims.Add(claim.Type, claim.Value);
+            }
+
+
+            return authorize;
+        }
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            filterContext.Result = new HttpUnauthorizedResult();
         }
     }
 }

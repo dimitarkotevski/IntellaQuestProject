@@ -101,8 +101,8 @@ namespace IntellaQuest.BusinessLogic.Services
         }
         private ResponseModel<OrderViewModel> FilterAndPage(RequestModel request)
         {
-            using (_unitOfWork.BeginTransaction())
-            {
+            /*using (_unitOfWork.BeginTransaction())
+            {*/
                 ResponseModel<OrderViewModel> response = new ResponseModel<OrderViewModel>();
                 IQueryable<Order> ordersListForFiltering = _orderRepository.All();
 
@@ -122,11 +122,11 @@ namespace IntellaQuest.BusinessLogic.Services
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.ShoppingCart.TotalCost);
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.ShoppingCart.Quantity);
                         }
                         else
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.ShoppingCart.TotalCost);
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.ShoppingCart.Quantity);
                         }
                         break;
                     case "UserName":
@@ -171,11 +171,11 @@ namespace IntellaQuest.BusinessLogic.Services
                 response.Items = ordersListForFiltering
                                     .Skip((response.CurrentPage - 1) * response.Size)
                                     .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
-                response.TotalItems = ordersListForFiltering.Count();
+                response.TotalItems = ordersListForFiltering.ToList().Count();
 
-                _unitOfWork.Commit();
+                //_unitOfWork.Commit();
                 return response;
-            }
+            //}
         }
         public void Update(OrderViewModel model)
         {

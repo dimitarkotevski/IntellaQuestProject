@@ -90,6 +90,14 @@ namespace IntellaQuest.BusinessLogic.Services
             {
                 ResponseModel<ProductViewModel> response = new ResponseModel<ProductViewModel>();
                 IQueryable<Product> listProductForFiltering = _productsRepository.All();
+                if (request.SearchStatus == "Popular")
+                {
+                    listProductForFiltering = _productsRepository.All();
+                }
+                else
+                {
+                    listProductForFiltering = _productsRepository.All();
+                }
 
                 if (!string.IsNullOrEmpty(request.SearchString))
                 {
@@ -107,33 +115,17 @@ namespace IntellaQuest.BusinessLogic.Services
 
                 switch (request.SortName)
                 {
-                    case "Name":
-                        if (string.IsNullOrEmpty(request.isAscending))
-                        {
-                            break;
-                        }
-                        else if (request.isAscending.Equals("asc"))
-                        {
-                            listProductForFiltering = listProductForFiltering.OrderBy(x => x.Name);
-                        }
-                        else
-                        {
-                            listProductForFiltering = listProductForFiltering.OrderByDescending(x => x.Name);
-                        }
+                    case "Popular":
+                        listProductForFiltering = listProductForFiltering.OrderBy(x => x.Name);
                         break;
-                    case "Category":
-                        if (string.IsNullOrEmpty(request.isAscending))
-                        {
-                            break;
-                        }
-                        else if (request.isAscending.Equals("asc"))
-                        {
-                            listProductForFiltering = listProductForFiltering.OrderBy(x => x.Category);
-                        }
-                        else
-                        {
-                            listProductForFiltering = listProductForFiltering.OrderByDescending(x => x.Category);
-                        }
+                    case "Newest":
+                        listProductForFiltering = listProductForFiltering.OrderBy(x => x.Created);
+                        break;
+                    case "PriceLow":
+                        listProductForFiltering = listProductForFiltering.OrderBy(x => x.Price);
+                        break;
+                    case "PriceHigh":
+                        listProductForFiltering = listProductForFiltering.OrderByDescending(x => x.Price);
                         break;
                     default:
                         break;

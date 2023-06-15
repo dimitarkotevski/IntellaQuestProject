@@ -85,7 +85,6 @@ namespace IntellaQuest.BusinessLogic.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TokenConstant.KEY));
@@ -139,12 +138,9 @@ namespace IntellaQuest.BusinessLogic.Services
             {
                 var user = _userRepository.FindBy(userId);
                 if (user == null)
-                {
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-                }
-                _unitOfWork.Commit();
+                //_unitOfWork.Commit();
                 return user.MapToViewModel();
-
             }
         }
 

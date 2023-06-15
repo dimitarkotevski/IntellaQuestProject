@@ -12,7 +12,7 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             Id(c => c.Id);
 
-            Map(c => c.TotalCost);
+            Map(c => c.Quantity);
 
             HasMany(x => x.Products)
                 .Inverse()

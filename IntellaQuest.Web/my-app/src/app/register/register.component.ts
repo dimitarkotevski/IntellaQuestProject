@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,6 +11,4 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
 }

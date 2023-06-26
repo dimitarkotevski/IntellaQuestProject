@@ -14,10 +14,15 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             Map(c => c.Quantity);
 
-            HasMany(x => x.Products)
-                .Inverse()
-                .Cascade.AllDeleteOrphan()
-                .KeyColumn("ProductId").LazyLoad();
+            References(x => x.Product)
+                .Column("ProductId")
+                .Access
+                .CamelCaseField(Prefix.Underscore).LazyLoad();
+
+            References(x => x.User)
+                .Column("UserId")
+                .Access
+                .CamelCaseField(Prefix.Underscore).LazyLoad();
         }
     }
 }

@@ -2,9 +2,11 @@
 using IntellaQuest.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
 using IntellaQuest.Web.Controllers.Api;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -28,27 +30,58 @@ namespace IntellaQuest.Web.Controllers
             }
             return Json(new { success = false });
         }
+
         [HttpPost]
         public ActionResult Login(UserLoginViewModel model)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
-                var token = _userService.Login(model);
-                return Json(new { success = true, token });
+                return Json(ModelState.Values);
             }
-            return Json(new { success = false });
+            var UserToken = _userService.Login(model);
+            return Json(UserToken);
         }
+
         [HttpPost]
-        [MyJwtTokenCustomAuthorize]
+        public ActionResult ChangePassword(ChangePasswordUserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState.Values);
+            }
+            _userService.UpdatePassword(model);
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        //[MyJwtTokenCustomAuthorize]
         public ActionResult UserDetails(Guid id)
         {
             return Json(_userService.Get(id));
         }
         [HttpPost]
-        [MyJwtTokenCustomAuthorize]
+        //[MyJwtTokenCustomAuthorize]
         public ActionResult UserAddFavouriteProduct(Guid userId ,Guid productId)
         {
-            return null;
+            _userService.AddFavouriteProduct(userId,productId);
+            return Json(true);
+        }
+        [HttpPost]
+        public ActionResult GetUserFavouriteProducts(Guid userId)
+        {
+            return Json(_userService.GetUserFavouriteProducts(userId));
+        }
+
+        [HttpPost]
+        //[MyJwtTokenCustomAuthorize]
+        public ActionResult UserAddProductToCart(Guid userId, Guid productId,float quality)
+        {
+            _userService.AddProductToCart(userId, productId,quality);
+            return Json(true);
+        }
+        public ActionResult GetUserCartProducts(Guid userId)
+        {
+            return Json(_userService.GetUserCartProducts(userId));
         }
     }
     public class MyJwtTokenCustomAuthorize : AuthorizeAttribute

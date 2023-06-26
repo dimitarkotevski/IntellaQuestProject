@@ -3,6 +3,9 @@ import { ProductService } from '../services/product.service';
 import { ProductsFilter } from '../models/products-filter';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
+import { ResponseListModel } from '../models/response';
+import { Product } from '../models/product';
 
 
 @Component({
@@ -12,6 +15,7 @@ import { HttpParams } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   isUserAuthenticated: boolean = false;
+  favouriteProduct?: Product[] | null | undefined;
   products: any;
   search: string = 'search'
   totalItems?: number
@@ -28,25 +32,18 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private productService: ProductService,
     ) { }
 
   ngOnInit(): void {
-    
-    this.route.queryParams.subscribe(params => {
-      this.productFilter = params;
-      this.queryParam =this.removeDuplicateParams( new HttpParams({ fromObject: params }).toString());
-      console.log(this.queryParam);
-      if(params['SortName'] || params['SortName'][0]){
-        this.activeSorting = params['SortName']
-      }
-    });
-
-    this.productService.getAll(this.productFilter).subscribe(products => {
-          this.products = products.Items;
-          this.totalItems = products.recordsTotal;
+    this.productService.getAll(this.productFilter).subscribe((result:ResponseListModel<Product>) => {
+          this.products = result.Items;
+          this.totalItems = result.TotalItems;
       });
+      // this.authService.getFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
+      //   this.favouriteProduct = result.Items;
+      // })
   }
 
   removeDuplicateParams(paramsString: string): string {
@@ -71,4 +68,8 @@ export class HomeComponent implements OnInit {
   changeRoute(url:string){
     this.router.navigate(['/search?q=',url]);
   }
+  // checkIfFavouriteProductExist(product: Product){
+  //   const flag = this.favouriteProduct?.includes(product,0);
+  //   return flag;
+  // }
 }

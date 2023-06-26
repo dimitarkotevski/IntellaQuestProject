@@ -11,7 +11,8 @@ export class NavbarComponent implements OnInit {
 
   @Input() isUserAuthenticated?: boolean;
   @Input() refreshState: EventEmitter<any>;
-  username: string="username";
+  username?: string;
+  id?: string | null;
 
   constructor(
     private router: Router,
@@ -21,7 +22,8 @@ export class NavbarComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log(this.authService.getTokenInformation());
+    this.id = this.authService.getLoggedUserId();
+    this.username = this.authService.getLoggedUsername();
   }
   logout(){
     this.authService.logout();

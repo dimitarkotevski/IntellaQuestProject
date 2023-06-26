@@ -17,6 +17,12 @@ namespace IntellaQuest.Domain
         private string _country;
         private string _phoneNumber;
 
+        public Payment() 
+        {
+            _expirationDate = DateTime.Now;
+            _paymentType = PaymentType.Card;
+        }
+
         public virtual PaymentType PaymentType
         {
             get => _paymentType;

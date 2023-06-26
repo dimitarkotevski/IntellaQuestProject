@@ -34,10 +34,30 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
 
+            Map(c => c.Description)
+                .Column("Description")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Nullable();
+
             Map(c => c.Address)
                 .Column("Address")
                 .Access.CamelCaseField(Prefix.Underscore)
-                .Not.Nullable();
+                .Nullable();
+
+            Map(c => c.State)
+                .Column("State")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Nullable();
+
+            Map(c => c.City)
+                .Column("City")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Nullable();
+
+            Map(c => c.ZipCode)
+                .Column("ZipCode")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Nullable();
 
             #endregion
 

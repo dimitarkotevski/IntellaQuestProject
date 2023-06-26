@@ -1,4 +1,5 @@
 ﻿using IntellaQeust.BusinessLogic.ViewModels;
+using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Domain;
 using System.Linq;
 
@@ -11,8 +12,9 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new ShoppingCartsViewModel
             {
                 Id = model.Id,
-                Name = "My Shopping Cart",
-                TotalCost = model.Products.Sum(p => p.Price),
+                User = model.User.MapToViewModel(),
+                Product = model.Product.MapToViewModel(),
+                Quality = model.Quantity
             };
         }
     }

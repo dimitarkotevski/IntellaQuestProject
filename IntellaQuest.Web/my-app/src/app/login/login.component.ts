@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { UserLogin } from '../models/login/login-user';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
     }
   }
   loginUser(){
-    this.authService.login(this.username, this.password).subscribe(res=>{
+    this.authService.login(this.username, this.password).subscribe(()=>{
       window.location.replace('/')
     })
   }

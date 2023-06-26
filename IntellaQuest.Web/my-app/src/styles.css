@@ -1,2 +1,156 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
+/* @font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon/icomoon.eot');
+	src:url('../fonts/icomoon/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon/icomoon.woff') format('woff'),
+		url('../fonts/icomoon/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} */
+
+.navigationLink > span{
+    padding: 10px;
+}
+.navigationLink > span > a{
+	color: black;
+}
+
+.shop__thumb {
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	padding: 15px;
+	margin-bottom: auto;
+	background-color: white;
+	text-align: left;
+	-webkit-transition: border-color 0.1s, -webkit-box-shadow 0.1s;
+		 -o-transition: border-color 0.1s, box-shadow 0.1s;
+			transition: border-color 0.1s, box-shadow 0.1s;
+  }
+  .shop__thumb:hover {
+	border-color: rgba(0, 0, 0, 0.07);
+	-webkit-box-shadow: 0 5px 30px rgba(0, 0, 0, 0.07);
+			box-shadow: 0 5px 30px rgba(0, 0, 0, 0.07);
+  }
+  .shop__thumb > a {
+	color: #333333;
+  }
+  .shop__thumb > a:hover {
+	text-decoration: none;
+  }
+  .shop-thumb__img {
+	position: relative;
+	margin-bottom: 20px;
+	overflow: hidden;
+  }
+  .shop-thumb__title {
+	font-weight: 600;
+  }
+  .shop-thumb__price {
+	color: #777777;
+  }
+  .shop-thumb-price_old {
+	text-decoration: line-through;
+  }
+  .shop-thumb-price_new {
+	color: black;
+  }
+
+body{
+	background-color: #33333310;
+	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.solid_button_orange{
+	border-radius: 3px;
+	background-color: coral;
+	color: white;
+}
+.solid_button_orange:hover{
+	border-radius: 3px;
+	background-color: chocolate;
+	color: white;
+}
+.solid_button{
+	border-radius: 3px;
+}
+
+.solid_button:hover{
+	border-radius: 3px;
+	background-color: coral;
+	color: white;
+}
+
+.solid_favourite{
+	border-radius: 3px;
+}
+.solid_favourite:hover{
+	border-radius: 3px;
+	background-color: coral;
+	color: white;
+}
+.solid_color{
+	color: coral;
+}
+.solid_hover_color{
+	border: 0;
+}
+.solid_hover_color:hover{
+	color: coral;
+	border: 0;
+}
+.img-responsive{
+	width: 100%;
+  	height: 100%;
+	aspect-ratio: 3/2;
+	object-fit: contain;
+	/* mix-blend-mode: color-burn; */
+}
+
+@media (max-width: 2500px) {
+	.responsive-text {
+		display: none;
+	  }
+}
+
+  
+  /* Styles for small screens */
+  @media (max-width: 1000px) {
+	.responsive-text {
+		display: initial;
+		font-family: auto;
+	  }
+  }
+
+  @media (max-width: 2500px) {
+	.responsive-font {
+		display: flex;
+	  }
+}
+
+  
+  /* Styles for small screens */
+  @media (max-width: 1000px) {
+	.responsive-font {
+		display: none;
+	  }
+  }
+
+  @media (max-width: 575) {
+	.responsive-button{
+		width: 50%;
+	}
+  }
+
+  .right-solid-text{
+	text-align: right;
+  }
+  .left-solid-text{
+	text-align: left;
+  }
+
+  .solid-footer{
+	position: inherit;
+  	bottom: 0;
+  	width: 100%;
+  }

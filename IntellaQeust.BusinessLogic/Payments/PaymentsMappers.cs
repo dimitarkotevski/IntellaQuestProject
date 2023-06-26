@@ -1,5 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
+using IntellaQuest.Domain.Enum;
 
 namespace IntellaQeust.BusinessLogic.Mappers
 {
@@ -10,7 +11,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new PaymentsViewModel
             {
                 Id = payment.Id,
-                PaymentType = payment.PaymentType,
+                PaymentType = payment.PaymentType.ToString(),
                 CardNumber = payment.CardNumber,
                 ExpirationDate = payment.ExpirationDate,
                 SecurityCode = payment.SecurityCode,

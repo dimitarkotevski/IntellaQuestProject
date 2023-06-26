@@ -79,7 +79,6 @@
     <Compile Include="Domains\Payment.cs" />
     <Compile Include="Domains\Product.cs" />
     <Compile Include="Domains\ShoppingCart.cs" />
-    <Compile Include="Domains\ShoppingCartProduct.cs" />
     <Compile Include="Enums\OrderStatus.cs" />
     <Compile Include="Enums\PaymentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

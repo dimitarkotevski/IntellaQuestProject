@@ -10,7 +10,11 @@ namespace IntellaQuest.Domain
         private string _email;
         private string _username;
         private string _password;
+        private string _description;
         private string _address;
+        private string _state;
+        private string _city;
+        private string _zipCode;
         private Payment _payment;
         private ShoppingCart _shoppingCart;
         private IList<Order> _orders;
@@ -45,10 +49,30 @@ namespace IntellaQuest.Domain
             get => _password;
             set => _password = value;
         }
+        public virtual string Description
+        {
+            get => _description; 
+            set => _description = value;
+        }
         public virtual string Address
         {
             get => _address; 
             set => _address = value;
+        }
+        public virtual string State
+        {
+            get => _state;
+            set => _state = value;
+        }
+        public virtual string City
+        {
+            get => _city;
+            set => _city = value;
+        }
+        public virtual string ZipCode
+        {
+            get => _zipCode;
+            set => _zipCode = value;
         }
         public virtual IList<FavouriteProducts> FavouriteProducts
         {

@@ -143,8 +143,6 @@ namespace IntellaQuest.BusinessLogic.Services
                 response.TotalItems = listProductForFiltering.Count();
 
 
-                _unitOfWork.Commit();
-
                 return response;
             }
         }

@@ -13,7 +13,7 @@ export class ProductService {
   getAll(filter:any) {
     return this.http.post<any>(this.baseApi+'products/All',filter)
   }
-  get(Id:number) {
+  get(Id:string) {
     return this.http.post<any>(this.baseApi+'products/get/'+Id,JSON)
   }
   delete(Id:number){

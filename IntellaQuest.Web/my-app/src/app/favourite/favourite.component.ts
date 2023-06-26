@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Product } from '../models/product';
+import { ResponseListModel } from '../models/response';
 
 @Component({
   selector: 'app-favourite',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favourite.component.css']
 })
 export class FavouriteComponent implements OnInit {
-
-  constructor() { }
+  responseModel?: ResponseListModel<Product>;
+  constructor(
+    private authService: AuthService
+    ) { }
 
   ngOnInit(): void {
+    this.authService.getFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
+      this.responseModel = result;
+      console.log(result)
+    })
   }
 
 }

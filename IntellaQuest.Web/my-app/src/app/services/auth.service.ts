@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserTokenInfo } from '../models/login/user-token-info';
+import { UserDetails } from '../models/login/user-details';
 
 
 @Injectable({
@@ -15,23 +17,35 @@ export class AuthService {
     private http: HttpClient,
     private tokenHelper: JwtHelperService
     ) {}
-  userDetails(id:string){
-    return this.http.get(`${this.baseUrl}/${id}`);
+    
+  getUserDetails(id:string | null) : Observable<UserDetails>{
+    return this.http.post<UserDetails>(`${this.baseUrl}/UserDetails/${id}`, null);
   }
-  login(username:string,password:string): Observable<any> {
+  getLoggedUsername() : string | undefined {
+    return localStorage.getItem('username') || undefined;
+  }
+
+  login(username:string,password:string): Observable<boolean> {
     return this.http.post<any>(this.baseUrl+"/Login", {Username:username, Password:password}).pipe(
-      map(response => {
-        if (response.success && response.token) {
-          localStorage.setItem('token', response.token);
+      map((response : UserTokenInfo) => {
+        if (response.Id && response.Token && response.Username) {
+          localStorage.setItem('id', response.Id);
+          localStorage.setItem('username', response.Username);
+          localStorage.setItem('token', response.Token);
+          return true;
         }
-        return response.success;
+        return false;
       })
     );
   }
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('username');
   }
-
+  getLoggedUserId(): string | null {
+    return localStorage.getItem('id') || null;
+  }
   getToken(): string | null  {
     return localStorage.getItem('token') || null;
   }
@@ -45,5 +59,9 @@ export class AuthService {
       return this.tokenHelper.decodeToken(this.getToken() || '') || null;
     }
     return null;
+  }
+
+  getFavouriteProducts(Id:string | null): Observable<any>  {
+    return this.http.post<any>(this.baseUrl+'/GetUserFavouriteProducts/',{userId: Id})
   }
 }

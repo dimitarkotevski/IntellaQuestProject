@@ -1,197 +1,99 @@
-
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://solutionhubtech.com/wp-content/uploads/2021/01/Lenovo-laptop-repair-Delhi-2.jpg" class="d-block w-100"  alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img src="https://plecom.imgix.net/bo-761993-1500x500.jpg?auto=format" class="d-block w-100"  alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img src="https://cdn.shopify.com/s/files/1/0355/8296/7943/files/Untitled-1_be05ce94-d08f-4120-896c-6bd713c4b039.jpg?v=1648257013" class="d-block w-100"  alt="Third slide">
+    </div>
+    <div class="carousel-item">
+      <img src="https://techlingo.co/wp-content/uploads/2022/09/Logitech-G502X-Cover-Image-1500x500.jpg" class="d-block w-100"  alt="Third slide">
+    </div>
+    <div class="carousel-item">
+      <img src="https://cdn.shopify.com/s/files/1/0355/8296/7943/files/blackbluee.jpg?v=1638686898" class="d-block w-100"  alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 <div class="container pt-3">
   <div class="row">
-    <!-- LEFT SEARCHBAR -->
-    <div class="col-sm-4 col-md-3">
-      <form>
-        <div class="well">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search products...">
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="submit">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-
-      <!-- Filter -->
-      <form class="shop__filter">
-        <!-- Price -->
-        <h3 class="headline">
-          <span>Price</span>
-        </h3>
-        <div class="radio">
-          <input type="radio" name="shop-filter__price" id="shop-filter-price_1" value="" checked="">
-          <label for="shop-filter-price_1">Under $25</label>
-        </div>
-        <div class="radio">
-          <input type="radio" name="shop-filter__price" id="shop-filter-price_2" value="">
-          <label for="shop-filter-price_2">$25 to $50</label>
-        </div>
-        <div class="radio">
-          <input type="radio" name="shop-filter__price" id="shop-filter-price_3" value="">
-          <label for="shop-filter-price_3">$50 to $100</label>
-        </div>
-        <div class="radio">
-          <input type="radio" name="shop-filter__price" id="shop-filter-price_4" value="specify">
-          <label for="shop-filter-price_4">Other (specify)</label>
-        </div>
-        <div class="form-group shop-filter__price">
-          <div class="row">
-            <div class="col-xs-4">
-              <label for="shop-filter-price_from" class="sr-only"></label>
-              <input id="shop-filter-price_from" type="number" min="0" class="form-control" placeholder="From" disabled="">
-            </div>
-            <div class="col-xs-4">
-              <label for="shop-filter-price_to" class="sr-only"></label>
-              <input id="shop-filter-price_to" type="number" min="0" class="form-control" placeholder="To" disabled="">
-            </div>
-            <div class="col-xs-4">
-              <button type="submit" class="btn btn-block btn-default" disabled="">Go</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Checkboxes -->
-        <h3 class="headline">
-          <span>Brand</span>
-        </h3>
-        <div class="checkbox">
-          <input type="checkbox" value="" id="shop-filter-checkbox_1" > <!-- checked="false" -->
-          <label for="shop-filter-checkbox_1">Acer</label>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" value="" id="shop-filter-checkbox_2">
-          <label for="shop-filter-checkbox_2">Asus</label>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" value="" id="shop-filter-checkbox_3">
-          <label for="shop-filter-checkbox_3">Lenovo</label>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" value="" id="shop-filter-checkbox_4">
-          <label for="shop-filter-checkbox_4">Dell</label>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" value="" id="shop-filter-checkbox_5">
-          <label for="shop-filter-checkbox_5">Not specified</label>
-        </div>
-
-        <!-- Radios -->
-        <!-- <h3 class="headline">
-          <span>Material</span>
-        </h3>
-        <div class="radio">
-          <input type="radio" name="shop-filter__radio" id="shop-filter-radio_1" value="" checked="">
-          <label for="shop-filter-radio_1">100% Cotton</label>
-        </div>
-        <div class="radio">
-          <input type="radio" name="shop-filter__radio" id="shop-filter-radio_2" value="">
-          <label for="shop-filter-radio_2">Bamboo</label>
-        </div>
-        <div class="radio">
-          <input type="radio" name="shop-filter__radio" id="shop-filter-radio_3" value="">
-          <label for="shop-filter-radio_3">Leather</label>
-        </div>
-        <div class="radio">
-          <input type="radio" name="shop-filter__radio" id="shop-filter-radio_4" value="">
-          <label for="shop-filter-radio_4">Polyester</label>
-        </div>
-        <div class="radio">
-          <input type="radio" name="shop-filter__radio" id="shop-filter-radio_5" value="">
-          <label for="shop-filter-radio_5">Not specified</label>
-        </div> -->
-
-        <!-- Colors -->
-        <h3 class="headline">
-          <span>Colors</span>
-        </h3>
-        <div class="shop-filter__color">
-          <input type="text" id="shop-filter-color_1" value="" data-input-color="black">
-          <label for="shop-filter-color_1" style="background-color: black;"></label>
-        </div>
-        <div class="shop-filter__color">
-          <input type="text" id="shop-filter-color_2" value="" data-input-color="gray">
-          <label for="shop-filter-color_2" style="background-color: gray;"></label>
-        </div>
-        <div class="shop-filter__color">
-          <input type="text" id="shop-filter-color_3" value="" data-input-color="brown">
-          <label for="shop-filter-color_3" style="background-color: brown;"></label>
-        </div>
-        <div class="shop-filter__color">
-          <input type="text" id="shop-filter-color_4" value="" data-input-color="beige">
-          <label for="shop-filter-color_4" style="background-color: beige;"></label>
-        </div>
-        <div class="shop-filter__color">
-          <input type="text" id="shop-filter-color_5" value="" data-input-color="white">
-          <label for="shop-filter-color_5" style="background-color: white;"></label>
-        </div>
-      </form>
-    </div>
-    <!-- RIGHT PRODUCTS -->
-    <div class="col-sm-8 col-md-9">
+    <!-- PRODUCTS -->
+    <div class="">
       <!-- Filters -->
       <ul class="shop__sorting">
         <li [ngClass]="{ 'active': activeSorting === 'Popular' }" (click)="changeSorting('Popular')">
-          <a (click)="changeRoute('SortName=Popular')">Popular</a>
+          <a href="" (click)="changeRoute('SortName=Popular')">Popular</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'Newest' }" (click)="changeSorting('Newest')">
-          <a (click)="changeRoute('SortName=Newest')">Newest</a>
+          <a href="" (click)="changeRoute('SortName=Newest')">Newest</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'Bestselling' }" (click)="changeSorting('Bestselling')">
-          <a (click)="changeRoute('SortName=BestSelling')">Best Selling</a>
+          <a href="" (click)="changeRoute('SortName=BestSelling')">Best Selling</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'PriceLow' }" (click)="changeSorting('PriceLow')">
-          <a (click)="changeRoute('SortName=PriceLow')">Price (low)</a>
+          <a href="" (click)="changeRoute('SortName=PriceLow')">Price (low)</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'PriceHigh' }" (click)="changeSorting('PriceHigh')">
-          <a (click)="changeRoute('SortName=PriceHigh')">Price (high)</a>
+          <a href="" (click)="changeRoute('SortName=PriceHigh')">Price (high)</a>
         </li>
       </ul>
 
       <div class="row">
-        <div *ngFor="let product of products" class="col-sm-6 col-md-4">
+        <div *ngFor="let product of products" class="py-lg-2 py-md-2 py-sm-2 col-sm-6 col-md-4 col-lg-3">
           <div class="shop__thumb">
-            <a href="#">
+            <div class="row">
+              <div class="col-6">
+                <div>new</div>
+              </div>
+              <div class="col-6">
+                <div class="right-solid-text">-5%</div>
+              </div>
+            </div>
+            <a href="product-detail/{{product.Id}}">
               <div class="shop-thumb__img">
-                <img src="https://www.bootdey.com/image/200x200/87CEFA/000000" class="img-responsive" alt="...">
+                <img src="https://hhstsyoejx.gjirafa.net/gjirafa50core/images/3605/3605.jpeg?q=80" class="img-responsive m-auto" alt="...">
               </div>
               <h5 class="shop-thumb__title">
                 {{product.Name}}
               </h5>
+            </a>
               <div class="shop-thumb__price">
-                <!-- <span class="shop-thumb-price_old">$80.99</span> -->
                 <span class="shop-thumb-price_new">${{product.Price.toFixed(2)}}</span>
               </div>
-            </a>
+                <div class="row">
+                    <span class="col-lg-8 col-md-6 col-sm-6 p-2">
+                      <button class="btn h-100 w-100 responsive-button solid_button"> 
+                        <span class="d-none d-lg-block">Add to cart</span> 
+                        <i class="d-block d-lg-none fa-solid fa-cart-shopping"></i>
+                      </button>
+                    </span>
+                    <!-- *ngIf="favouriteProduct"
+                    *ngIf="checkIfFavouriteProductExist(product)"  -->
+                    <span class="col-lg-4 col-md-6 col-sm-6 p-2">
+                      <button class="btn h-100 w-100 solid_favourite"><i class="fa-regular fa-heart"></i></button>
+                    </span>
+              </div>
           </div>
         </div>
         
       </div> <!-- / .row -->
-
-      <!-- Pagination -->
-      <div class="row">
-        <div class="col-sm-12">
-
-          <ul class="pagination pull-right">
-            <li class="disabled"><a href="#">«</a></li>
-            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">»</a></li>
-          </ul>
-          
-        </div>
-      </div> <!-- / .row -->
-      
     </div> <!-- / .col-sm-8 -->
   </div> <!-- / .row -->
 </div>

@@ -2,31 +2,32 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand flex-grow-1" href="#">ShoppingDev</a>
-      <!-- <div class="center flex-grow-1 d-flex">
-          <form class="form-inline flex-nowrap mx-0 mx-lg-auto rounded">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-      </div> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
             <div *ngIf="!isUserAuthenticated" class="nav-item">
-              <a class="nav-link " routerLink="/login"><i class='fa fa-s15 fa-sign-in'></i></a>
+              <a class="nav-link " routerLink="/login"><i class='fa fa-s15 fa-sign-in'></i> <span class="responsive-text"> Login</span></a>
             </div>
             <div *ngIf="isUserAuthenticated" class="nav-item">
               <div class="nav-link dropdown">
                 <button class="avatar dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-user"></i>
+                  <i class="fa fa-user"></i><span class="px-1">{{username}}</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" routerLink="/profile">
-                    <i class="fa fa-user-circle" aria-hidden="true"></i>  Profile
+                  <a class="dropdown-item" [routerLink]="['/profile',id]">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>  Profile Information
                   </a>
                   <a class="dropdown-item" routerLink="/settings">
-                    <i class="fa fa-cog" aria-hidden="true"></i>   Settings
+                    <i class="fa fa-cog" aria-hidden="true"></i>   Change Information
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" routerLink="/favourite">
+                    <i class="fa fa-cog" aria-hidden="true"></i>   My Favourite Products
+                  </a>
+                  <a class="dropdown-item" routerLink="/favourite">
+                    <i class="fa fa-cog" aria-hidden="true"></i>   My Orders
                   </a>
                   <div class="dropdown-divider"></div>
                   <a (click)="logout()" class="dropdown-item" href="#">
@@ -36,13 +37,57 @@
               </div>
             </div>
             <div class="nav-item">
-              <a class="nav-item nav-link " routerLink="/favourite"><i class='fa fa-s15 fa-heart'></i></a>
+              <a class="nav-item nav-link " routerLink="/favourite">
+                <i class='fa fa-s15 fa-heart'><span class="responsive-text"> Favourite</span> </i>
+              </a>
             </div>
             <div class="nav-item">
-              <a class="nav-item nav-link " routerLink="/cart"><i class='fa fa-s15 fa-cart-shopping'></i></a>
+              <a class="nav-item nav-link " routerLink="/cart"><i class='fa fa-s15 fa-cart-shopping'></i> <span class="responsive-text"> Cart</span></a>
             </div>
           </div>
       </div>
       </div>
+  </nav>
+  <!-- CATEGORIES -->
+  <nav class="bg-white navbar navbar-expand-lg p-0 dropdownmenu">
+    <div class="container">
+      <ul>
+        <li><a href="#">Articles on HTML5 & CSS3</a>
+          <ul id="submenu">
+            <li><a href="http://www.jochaho.com/wordpress/difference-between-svg-vs-canvas/">Difference between SVG vs. Canvas</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/creating-links-to-sections-within-a-webpage/">Creating links to sections within a webpage</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Articles on HTML5 & CSS3</a>
+          <ul id="submenu">
+            <li><a href="http://www.jochaho.com/wordpress/difference-between-svg-vs-canvas/">Difference between SVG vs. Canvas</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/creating-links-to-sections-within-a-webpage/">Creating links to sections within a webpage</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Articles on HTML5 & CSS3</a>
+          <ul id="submenu">
+            <li><a href="http://www.jochaho.com/wordpress/difference-between-svg-vs-canvas/">Difference between SVG vs. Canvas</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/creating-links-to-sections-within-a-webpage/">Creating links to sections within a webpage</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Articles on HTML5 & CSS3</a>
+          <ul id="submenu">
+            <li><a href="http://www.jochaho.com/wordpress/difference-between-svg-vs-canvas/">Difference between SVG vs. Canvas</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/creating-links-to-sections-within-a-webpage/">Creating links to sections within a webpage</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Articles on HTML5 & CSS3</a>
+          <ul id="submenu">
+            <li><a href="http://www.jochaho.com/wordpress/difference-between-svg-vs-canvas/">Difference between SVG vs. Canvas</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
+            <li><a href="http://www.jochaho.com/wordpress/creating-links-to-sections-within-a-webpage/">Creating links to sections within a webpage</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </nav>
 </header>

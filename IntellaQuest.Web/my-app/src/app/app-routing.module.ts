@@ -11,15 +11,13 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'search?q=', component: HomeComponent },
-  { path: '**', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile/:id', component: ProfileComponent},
   { path: 'cart', component: CartComponent},
   { path: 'favourite', component: FavouriteComponent},
   { path: 'settings', component: SettingsComponent},
-  { path: 'product/:id', component: ProductDetailComponent},
+  { path: 'product-detail/:id', component: ProductDetailComponent},
 ];
 
 @NgModule({

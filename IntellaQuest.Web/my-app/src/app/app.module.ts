@@ -3,14 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
+import {  Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { ProductService } from './services/product.service';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
@@ -19,6 +18,8 @@ import { CartComponent } from './cart/cart.component';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
 ];
@@ -35,7 +36,8 @@ const routes: Routes = [
     CartComponent,
     FavouriteComponent,
     SettingsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

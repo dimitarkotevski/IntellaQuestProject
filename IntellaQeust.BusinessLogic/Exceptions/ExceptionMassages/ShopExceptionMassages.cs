@@ -14,6 +14,9 @@
             public static string USERNAME_NOT_FOUND_EXCEPTION = "User with username: '{0}' not found";
 
             public static string PASSWORD_IS_INCORRECT = "Password is incorrect";
+
+            public static string USERNAME_IS_REQUIRED = "Username is required";
+            public static string PASSWORD_IS_REQUIRED = "Password is required";
         }
         public static class CategoriesExceptionMassages
         {
@@ -37,6 +40,10 @@
 
             public static string PRODUCT_NOT_FOUND_EXCEPTION = "Product not found exception";
             public static string USER_NOT_FOUND_EXCEPTION = "User not found exception";
+        }
+        public static class FavouriteProductExceptionMassages
+        {
+            public static string NOT_FOUND_EXCEPTION = "Favourite product not found";
         }
     }
 }

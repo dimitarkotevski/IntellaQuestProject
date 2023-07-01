@@ -59,3 +59,31 @@ li:hover ul#submenu {
 #submenu a {
 	background-color:white;
 }
+.solid-gray:hover{
+	background-color: coral;
+}
+
+@media (min-width: 768px){
+	.solid-button-hide{
+		display: flex;
+	}
+	.solid-button-sm-show{
+		text-align: none;
+	}
+	.hide-in-width-screen{
+		display: none;
+	}
+}
+@media (max-width: 767px){
+	.solid-button-hide{
+		display: none;
+	}
+	.solid-button-sm-show{
+		text-align: block;
+	}
+	.solid-container{
+		display: block;
+	}
+
+	
+}

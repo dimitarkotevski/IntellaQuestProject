@@ -20,6 +20,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
+import { NavigationPanelComponent } from './navigation-panel/navigation-panel.component';
 
 const routes: Routes = [
 ];
@@ -37,7 +38,8 @@ const routes: Routes = [
     FavouriteComponent,
     SettingsComponent,
     ProductDetailComponent,
-    FooterComponent
+    FooterComponent,
+    NavigationPanelComponent
   ],
   imports: [
     BrowserModule,

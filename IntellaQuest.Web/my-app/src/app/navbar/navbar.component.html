@@ -1,8 +1,8 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-md navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand flex-grow-1" href="#">ShoppingDev</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="solid-gray navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -10,7 +10,7 @@
             <div *ngIf="!isUserAuthenticated" class="nav-item">
               <a class="nav-link " routerLink="/login"><i class='fa fa-s15 fa-sign-in'></i> <span class="responsive-text"> Login</span></a>
             </div>
-            <div *ngIf="isUserAuthenticated" class="nav-item">
+            <div *ngIf="isUserAuthenticated" class="solid-button-hide  nav-item">
               <div class="nav-link dropdown">
                 <button class="avatar dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-user"></i><span class="px-1">{{username}}</span>
@@ -36,23 +36,64 @@
                 </div>
               </div>
             </div>
+
+            <div class="hide-in-width-screen">
+              <div class="nav-item">
+                <div class="dropdown-divider"></div>
+                <a class="nav-item nav-link" [routerLink]="['/profile',id]">
+                  <i class="fa fa-user-circle" aria-hidden="true"></i>  Profile Information
+                </a>
+              </div>
+
+              <div class="nav-item">
+                <a class="nav-item nav-link" routerLink="/settings">
+                  <i class="fa fa-cog" aria-hidden="true"></i>   Change Information
+                </a>
+              </div>
+
+                <div class="dropdown-divider"></div>
+         
+            </div>
+
+
+            <!-- POCNUVA FAVOURITE I CART -->
             <div class="nav-item">
               <a class="nav-item nav-link " routerLink="/favourite">
                 <i class='fa fa-s15 fa-heart'><span class="responsive-text"> Favourite</span> </i>
               </a>
             </div>
+
             <div class="nav-item">
               <a class="nav-item nav-link " routerLink="/cart"><i class='fa fa-s15 fa-cart-shopping'></i> <span class="responsive-text"> Cart</span></a>
+            </div>
+
+            <div class="solid-button-sm-show hide-in-width-screen">
+              <div class="dropdown-divider"></div>
+              <div class="nav-item">
+                <a  class="nav-item nav-link"  (click)="logout()" href="#">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>   Logout
+                </a>
+              </div>    
             </div>
           </div>
       </div>
       </div>
+
   </nav>
   <!-- CATEGORIES -->
-  <nav class="bg-white navbar navbar-expand-lg p-0 dropdownmenu">
+  <nav *ngIf="categories" class="bg-white navbar navbar-expand-lg p-0 dropdownmenu">
     <div class="container">
       <ul>
+
         <li><a href="#">Articles on HTML5 & CSS3</a>
+          <ul id="submenu">
+            <li *ngFor="let category of categories">
+              <a href="category/">{{category.Name}}</a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- <li><a href="#">Articles on HTML5 & CSS3</a>
           <ul id="submenu">
             <li><a href="http://www.jochaho.com/wordpress/difference-between-svg-vs-canvas/">Difference between SVG vs. Canvas</a></li>
             <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
@@ -86,7 +127,7 @@
             <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
             <li><a href="http://www.jochaho.com/wordpress/creating-links-to-sections-within-a-webpage/">Creating links to sections within a webpage</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>

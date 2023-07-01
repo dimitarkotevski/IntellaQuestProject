@@ -1,11 +1,6 @@
-<div *ngIf="productDetail" class="container py-3">
-    <div class="navigationLink py-lg-3">
-        <span><a href="/" class="text-decoration-none"><i class="fa-solid fa-house"></i></a> </span>
-        <span><i class="fa-sharp fa-solid fa-arrow-right fa-2xs"></i></span>       
-        <span>{{productDetail.Category?.Name}}</span>
-        <span><i class="fa-sharp fa-solid fa-arrow-right fa-2xs"></i></span>   
-        <span>{{productDetail?.Name}}</span>
-    </div>
+<div *ngIf="productDetail" class="container">
+
+    <app-navigation-panel [productDetail]="productDetail"></app-navigation-panel>
     
 
     <div class="card w-100">
@@ -14,7 +9,7 @@
             <div class="col-lg-6 col-md-12 text-md-center w-100 h-100">
                 <img src="https://www.bootdey.com/image/400x400/87CEFA/000000" class="img-responsive" alt="...">
             </div>
-            <div class="col-lg-6 col-md-12">
+            <div class="container-sm py-sm-2 col-lg-6 col-md-12">
                 <h5 class="card-title">{{productDetail.Name}}</h5>
                 <p class="card-text">{{productDetail.Description}}</p>
                 <p class="card-text">{{productDetail.Price?.toFixed(2) || '/'}}</p>

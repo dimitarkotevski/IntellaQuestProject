@@ -26,7 +26,6 @@ export class ProductDetailComponent implements OnInit {
           console.log(result);
         })
       }
-      console.log(id);
     });
   }
 

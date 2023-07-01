@@ -21,5 +21,14 @@ namespace IntellaQuest.BusinessLogic.Mappers
                     }).ToList()
             };
         }
+        public static CategoryLookupViewModel MapToLookupViewModel(this Category category)
+        {
+            return new CategoryLookupViewModel
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Status = category.Status,
+            };
+        }
     }
 }

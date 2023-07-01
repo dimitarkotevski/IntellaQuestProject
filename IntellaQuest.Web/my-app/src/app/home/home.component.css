@@ -583,3 +583,7 @@ body{margin-top:20px;}
   color: #ccc;
   font-weight: 600;
 }
+
+.solid-active{
+  color:coral;
+}

@@ -10,6 +10,10 @@ using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.Requests;
 using System.Collections.Generic;
 using IntellaQeust.BusinessLogic.ViewModels;
+using System.Drawing;
+using System.Data;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -20,8 +24,10 @@ namespace IntellaQuest.BusinessLogic.Services
         bool Create(ProductViewModel model);
         bool Update(ProductViewModel model);
         bool Delete(Guid Id);
+        string GetProductImage(Guid Id);
         bool CheckNameExists(string Name);
         List<ProductViewModel> GetAllTable();
+        void UploadImage(Guid Id, string image);
     }
     public class ProductService : IProductService
     {
@@ -203,6 +209,35 @@ namespace IntellaQuest.BusinessLogic.Services
             using(_unitOfWork.BeginTransaction())
             {
                 return _productsRepository.All().Select(x=>x.MapToViewModel()).ToList();
+            }
+        }
+
+        public string GetProductImage(Guid Id)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var product = _productsRepository.FindBy(Id);
+
+
+                return null;
+                //return Convert.ToBase64String(product.Image);
+
+            }
+        }
+        public void UploadImage(Guid Id, string image)
+        {
+            using (_unitOfWork.BeginTransaction())
+            { 
+               
+                var product = _productsRepository.FindBy(Id)
+                    ?? throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(image));
+
+                product.Image = Convert.FromBase64String(base64String);
+
+                _productsRepository.Update(product);
+                _unitOfWork.Commit();
             }
         }
     }

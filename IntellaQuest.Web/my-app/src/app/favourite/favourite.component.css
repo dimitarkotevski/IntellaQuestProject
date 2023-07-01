@@ -1,0 +1,9 @@
+.circle {
+    height: 200px;
+    width: 200px;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 50%; /* may require vendor prefixes */
+    background-color: rgb(230 82 40 / 0.25);
+    color: coral;
+  }

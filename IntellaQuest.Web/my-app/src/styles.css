@@ -92,6 +92,12 @@ body{
 .solid_color{
 	color: coral;
 }
+.solid_color span{
+	text-transform: uppercase;
+}
+.solid-top-margin{
+	margin-top: 10px;
+}
 .solid_hover_color{
 	border: 0;
 }
@@ -104,6 +110,7 @@ body{
   	height: 100%;
 	aspect-ratio: 3/2;
 	object-fit: contain;
+	background-image:none;
 	/* mix-blend-mode: color-burn; */
 }
 

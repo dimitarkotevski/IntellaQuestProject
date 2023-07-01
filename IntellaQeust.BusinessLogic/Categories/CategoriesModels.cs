@@ -20,4 +20,10 @@ namespace IntellaQeust.BusinessLogic.ViewModels
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.");
         }
     }
+    public class CategoryLookupViewModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public bool Status { get; set; }
+    }
 }

@@ -5,5 +5,6 @@ export class Product{
     Name?:string;
     Description?:string;
     Price?:number;
+    Image?:any;
     Category?: LookupViewModel
 }

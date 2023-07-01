@@ -16,14 +16,14 @@ namespace IntellaQuest.BusinessLogic.Services
     public interface ICategoryService
     {
         CategoryViewModel Get(Guid Id);
-        ResponseModel<CategoryViewModel> GetAll(RequestModel request);
-        List<CategoryViewModel> GetAll();
+        ResponseListModel<CategoryViewModel> GetAll(RequestModel request);
+        List<CategoryLookupViewModel> GetAll();
         bool Create(CategoryViewModel model);
         bool Update(CategoryViewModel model);
         bool DeleteById(Guid Id);
         bool CheckCategoryNameExists(String Name);
         bool CheckCategoryStatus(bool status);
-        ResponseModel<CategoryViewModel> FilterAndPage(RequestModel request);
+        ResponseListModel<CategoryViewModel> FilterAndPage(RequestModel request);
     }
 
     public class CategoryService : ICategoryService
@@ -81,11 +81,11 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
-        public ResponseModel<CategoryViewModel> FilterAndPage(RequestModel request)
+        public ResponseListModel<CategoryViewModel> FilterAndPage(RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                ResponseModel<CategoryViewModel> response = new ResponseModel<CategoryViewModel>();
+                ResponseListModel<CategoryViewModel> response = new ResponseListModel<CategoryViewModel>();
                 IQueryable<Category> listCategoryViewModelForFiltering = _categoryRepository.All();
 
                 //Filter
@@ -146,11 +146,6 @@ namespace IntellaQuest.BusinessLogic.Services
                     request.PageNeeded= 1;
                     request.Size = listCategoryViewModelForFiltering.Count();
                 }
-                response.Size = request.Size;
-                response.CurrentPage = request.PageNeeded;
-                response.Items = listCategoryViewModelForFiltering
-                                    .Skip((response.CurrentPage - 1) * response.Size)
-                                    .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
                 response.TotalItems = listCategoryViewModelForFiltering.Count();
 
                 return response;
@@ -173,15 +168,15 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
-        public ResponseModel<CategoryViewModel> GetAll(RequestModel request)
+        public ResponseListModel<CategoryViewModel> GetAll(RequestModel request)
         {
             return FilterAndPage(request);
         }
-        public List<CategoryViewModel> GetAll()
+        public List<CategoryLookupViewModel> GetAll()
         {
             using (_unitOfWork.BeginTransaction())
             {
-                return _categoryRepository.All().Select(x=>x.MapToViewModel()) .ToList();
+                return _categoryRepository.All().Select(x=>x.MapToLookupViewModel()) .ToList();
             }
         }
 

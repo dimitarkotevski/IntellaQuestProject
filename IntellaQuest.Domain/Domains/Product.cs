@@ -10,13 +10,12 @@ namespace IntellaQuest.Domain
         private string _description;
         private Category _category;
         private IList<Order> _orders;
-        //private IList<FavouriteProducts> _favou;
         private double _price;
+        private byte[] _image;
         private DateTime _created;
         public Product()
         {
             _orders = new List<Order>();
-            //_users = new List<FavouriteProducts>();
         }
         public virtual string Name 
         { 
@@ -38,15 +37,15 @@ namespace IntellaQuest.Domain
             get => _orders;
             set => _orders = value;
         }
-        /*public virtual IList<FavouriteProducts> FavouriteProducts
-        {
-            get=> _users;
-            set => _users = value;
-        }*/
         public virtual double Price
         {
             get => _price;
             set => _price = value;
+        }
+        public virtual byte[] Image
+        {
+            get => _image;
+            set => _image = value;
         }
         public virtual DateTime Created
         {

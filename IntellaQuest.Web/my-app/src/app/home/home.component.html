@@ -39,19 +39,19 @@
       <!-- Filters -->
       <ul class="shop__sorting">
         <li [ngClass]="{ 'active': activeSorting === 'Popular' }" (click)="changeSorting('Popular')">
-          <a href="" (click)="changeRoute('SortName=Popular')">Popular</a>
+          <a class="btn" (click)="changeRoute('popular')">Popular</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'Newest' }" (click)="changeSorting('Newest')">
-          <a href="" (click)="changeRoute('SortName=Newest')">Newest</a>
+          <a class="btn" (click)="changeRoute('newest')">Newest</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'Bestselling' }" (click)="changeSorting('Bestselling')">
-          <a href="" (click)="changeRoute('SortName=BestSelling')">Best Selling</a>
+          <a class="btn" (click)="changeRoute('best-selling')">Best Selling</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'PriceLow' }" (click)="changeSorting('PriceLow')">
-          <a href="" (click)="changeRoute('SortName=PriceLow')">Price (low)</a>
+          <a class="btn" (click)="changeRoute('price-low')">Price (low)</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'PriceHigh' }" (click)="changeSorting('PriceHigh')">
-          <a href="" (click)="changeRoute('SortName=PriceHigh')">Price (high)</a>
+          <a class="btn" (click)="changeRoute('price-high')">Price (high)</a>
         </li>
       </ul>
 
@@ -68,19 +68,19 @@
             </div>
             <a href="product-detail/{{product.Id}}">
               <div class="shop-thumb__img">
-                <img src="https://hhstsyoejx.gjirafa.net/gjirafa50core/images/3605/3605.jpeg?q=80" class="img-responsive m-auto" alt="...">
+                <img [src]="getImage(product.Image)" class="img-responsive m-auto" />
               </div>
               <h5 class="shop-thumb__title">
                 {{product.Name}}
               </h5>
             </a>
               <div class="shop-thumb__price">
-                <span class="shop-thumb-price_new">${{product.Price.toFixed(2)}}</span>
+                <span class="shop-thumb-price_new">${{product.Price}}</span>
               </div>
                 <div class="row">
                     <span class="col-lg-8 col-md-6 col-sm-6 p-2">
                       <button class="btn h-100 w-100 responsive-button solid_button"> 
-                        <span class="d-none d-lg-block">Add to cart</span> 
+                        <span class="d-none text-uppercase strong d-lg-block">Add to cart</span> 
                         <i class="d-block d-lg-none fa-solid fa-cart-shopping"></i>
                       </button>
                     </span>

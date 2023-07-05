@@ -1,6 +1,10 @@
 ﻿namespace IntellaQuest.BusinessLogic.Services
 {
-    internal class ShoppingCartProductService
+    public interface IShoppingCartProductService
+    {
+
+    }
+    public class ShoppingCartProductService : IShoppingCartProductService
     {
     }
 }

@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ProductsFilter } from '../models/products-filter';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 import { ResponseListModel } from '../models/response';
 import { Product } from '../models/product';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -45,7 +41,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.activeSorting==='Popular'){
-      this.router.navigate(['popular']);
+      this.router.navigate(['sort/popular']);
     }
 
     this.productService.getAll(this.productFilter).subscribe((result:ResponseListModel<Product>) => {
@@ -69,12 +65,11 @@ export class HomeComponent implements OnInit {
     });
   }
   changeRoute(url: string): void {
-    this.router.navigate([url]);
+    this.router.navigate(["sort/"+url]);
   }
 
   getImage(image:any){
     var returnImage= this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + image);
-    console.log(returnImage)
     return returnImage;
   }
   // getImage(image: any): any {

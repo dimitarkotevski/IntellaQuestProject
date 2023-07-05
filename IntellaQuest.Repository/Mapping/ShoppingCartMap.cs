@@ -12,17 +12,13 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             Id(c => c.Id);
 
-            Map(c => c.Quantity);
+            Map(c => c.Name);
+            Map(c => c.Active);
 
-            References(x => x.Product)
-                .Column("ProductId")
-                .Access
-                .CamelCaseField(Prefix.Underscore).LazyLoad();
-
-            References(x => x.User)
-                .Column("UserId")
-                .Access
-                .CamelCaseField(Prefix.Underscore).LazyLoad();
+            HasMany(x => x.ShoppingCartDetails)
+                .Inverse()
+                .Cascade.AllDeleteOrphan()
+                .KeyColumn("ShoppingCartDetailId").LazyLoad();
         }
     }
 }

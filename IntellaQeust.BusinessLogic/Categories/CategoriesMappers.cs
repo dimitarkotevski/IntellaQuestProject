@@ -28,6 +28,7 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 Id = category.Id,
                 Name = category.Name,
                 Status = category.Status,
+                Url = category.Url,
             };
         }
     }

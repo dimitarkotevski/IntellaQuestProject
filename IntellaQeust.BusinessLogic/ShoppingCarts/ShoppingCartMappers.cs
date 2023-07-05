@@ -12,9 +12,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new ShoppingCartsViewModel
             {
                 Id = model.Id,
-                User = model.User.MapToViewModel(),
-                Product = model.Product.MapToViewModel(),
-                Quality = model.Quantity
+                Name = model.Name,
             };
         }
     }

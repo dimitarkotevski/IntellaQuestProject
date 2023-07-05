@@ -19,6 +19,10 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Column("Status")
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
+            Map(c => c.Url)
+                .Column("Url")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Not.Nullable();
 
             HasMany(x => x.Products)
                 .Inverse()

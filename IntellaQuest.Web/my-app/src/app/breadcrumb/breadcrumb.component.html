@@ -1,0 +1,34 @@
+<div *ngIf="isItem" class="container p-3 solid-navigation-panel-font">
+    <div class="navigationLink py-md-3 py-sm-3 py-lg-3">
+        <!-- HOME -->
+        <span>
+            <a href="/" class="text-decoration-none"><i class="fa-solid fa-house solid-nav-panel-item"></i></a> 
+        </span>
+        <!-- CATEGORY -->
+        <span>
+            <i class="fa-solid fa-solid fa-2xs fa-angle-right"></i>
+        </span>  
+        <!-- PRODUCT NAME      -->
+        <span>{{itemDetail.Category?.Name}}</span>
+        <span>
+            <i class="fa-solid fa-solid fa-2xs fa-angle-right"></i>
+        </span>   
+        <span class="solid_color"><strong>{{itemDetail?.Name}}</strong></span>
+    </div>
+</div>
+
+<div *ngIf="!isItem" class="container solid-navigation-panel-font">
+    <div class="navigationLink p-3 ">
+        <!-- HOME -->
+        <span>
+            <a href="/" class="text-decoration-none"><i class="fa-solid fa-house solid-nav-panel-item"></i></a> 
+        </span>
+        <!-- ACTION -->
+        <span>
+            <i class="fa-solid fa-solid fa-2xs fa-angle-right"></i>
+        </span>  
+        <span class="solid_color">
+            <strong>{{itemDetail}}</strong>
+        </span> 
+    </div>
+</div>

@@ -122,11 +122,11 @@ namespace IntellaQuest.BusinessLogic.Services
                         }
                         else if (request.isAscending.Equals("asc"))
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.ShoppingCart.Quantity);
+                            ordersListForFiltering = ordersListForFiltering.OrderBy(x => x.ShoppingCart.ShoppingCartDetails);
                         }
                         else
                         {
-                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.ShoppingCart.Quantity);
+                            ordersListForFiltering = ordersListForFiltering.OrderByDescending(x => x.ShoppingCart.ShoppingCartDetails);
                         }
                         break;
                     case "UserName":

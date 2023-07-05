@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Data;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using IntellaQuest.Repository.Repositories;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -34,12 +35,23 @@ namespace IntellaQuest.BusinessLogic.Services
         private readonly IProductRepository _productsRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IFavouriteProductsRepository _favouriteProductsRepository;
+        private readonly IShoppingCartDetailRepository _shoppingCartDetailRepository;
 
-        public ProductService(IProductRepository productsRepository, ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+        public ProductService(IProductRepository productsRepository, 
+            ICategoryRepository categoryRepository, 
+            IUnitOfWork unitOfWork, 
+            IOrderRepository orderRepository,
+            IFavouriteProductsRepository favouriteProductsRepository,
+            IShoppingCartDetailRepository shoppingCartDetailRepository)
         {
             _productsRepository = productsRepository;
             _categoryRepository = categoryRepository;
             _unitOfWork = unitOfWork;
+            _orderRepository = orderRepository;
+            _favouriteProductsRepository = favouriteProductsRepository;
+            _shoppingCartDetailRepository = shoppingCartDetailRepository;
         }
 
         public bool CheckNameExists(string Name)
@@ -95,10 +107,16 @@ namespace IntellaQuest.BusinessLogic.Services
             using (_unitOfWork.BeginTransaction())
             {
                 ResponseModel<ProductViewModel> response = new ResponseModel<ProductViewModel>();
-                IQueryable<Product> listProductForFiltering = _productsRepository.All();
-                if (request.SearchStatus == "Popular")
+
+                IQueryable<Product> listProductForFiltering;
+
+                if (request.SortName== "Popular")
                 {
-                    listProductForFiltering = _productsRepository.All();
+                    listProductForFiltering = _favouriteProductsRepository.All().Select(x => x.Product);
+                }
+                else if (request.SortName == "BestSelling")
+                {
+                    listProductForFiltering = _shoppingCartDetailRepository.All().Select(x => x.Product);
                 }
                 else
                 {
@@ -121,9 +139,6 @@ namespace IntellaQuest.BusinessLogic.Services
 
                 switch (request.SortName)
                 {
-                    case "Popular":
-                        listProductForFiltering = listProductForFiltering.OrderBy(x => x.Name);
-                        break;
                     case "Newest":
                         listProductForFiltering = listProductForFiltering.OrderBy(x => x.Created);
                         break;
@@ -136,6 +151,8 @@ namespace IntellaQuest.BusinessLogic.Services
                     default:
                         break;
                 }
+                var list = listProductForFiltering.ToList();
+
                 if (request.Size == 0 && request.PageNeeded == 0)
                 {
                     request.PageNeeded = 1;

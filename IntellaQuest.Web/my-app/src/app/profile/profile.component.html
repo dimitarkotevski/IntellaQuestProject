@@ -1,60 +1,80 @@
-<div class="container pt-3">
+<div class="container">
+    <app-breadcrumb [isItem]="false" [itemDetail]="'Account'"></app-breadcrumb>
+
     <div *ngIf="userDetails" class="tab-pane fade show active" id="account" role="tabpanel">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">User info</h5>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h1>Profile image</h1>
+                        <hr/>
+                        <div>
+                            <i class="fas fa-user-circle fa-10x"></i>
+                        </div>
+                        <h3 class="py-3 text-capitalize">{{userDetails.FirstName}} {{userDetails.LastName}}</h3>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="inputFirstName">First name</label>
-                        <div>{{userDetails.FirstName}}</div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputLastName">Last name</label>
-                        <div>{{userDetails.LastName}}</div>
-                    </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label for="inputUsername">Username</label>
-                            <div>{{userDetails.Username}}</div>
+            <div class="col-lg-8">
+                <div class="card ">
+                    <div class="card-body">
+                        <h1>Account Information</h1>
+                        <hr>
+                        <div>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0"><i class="fa fa-envelope" aria-hidden="true"></i> Email</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{userDetails.Email}}
+                              </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0"><i class="fa-solid fa-person"></i> Username</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{userDetails.Username}}
+                              </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0"><i class="fa-solid fa-globe"></i> State</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{userDetails.State}}
+                              </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0"><i class="fa-solid fa-location-dot"></i> Address</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{userDetails.Address}}
+                              </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0"><i class="fa-solid fa-pencil"></i> Description</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{userDetails.Description}}
+                              </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label for="inputUsername">Description</label>
-                            <div>{{userDetails.Description}}</div>
-                        </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail4">Email</label>
-                    <div>{{userDetails.Email}}</div>
-                </div>
-                <div class="form-group">
-                    <label for="inputAddress">Address</label>
-                    <div>{{userDetails.Address}}</div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputCity">City</label>
-                        <div>{{userDetails.City}}</div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputState">State</label>
-                        <div>{{userDetails.State}}</div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="inputZip">Zip</label>
-                        <div>{{userDetails.ZipCode}}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card mt-3">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Payment info</h5>
-            </div>
+        <div class="card mt-sm-3">
             <div class="card-body">
-                    No Payment Information Available
+                <h1>Payment info</h1>
+                <hr/>
+                <div>No Payment Information Available</div>
             </div>
         </div>
     </div>

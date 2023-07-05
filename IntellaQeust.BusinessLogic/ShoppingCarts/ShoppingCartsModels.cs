@@ -2,7 +2,6 @@
 using FluentValidation.Attributes;
 using IntellaQuest.BusinessLogic.ViewModels;
 using System;
-using System.Collections.Generic;
 
 namespace IntellaQeust.BusinessLogic.ViewModels
 {
@@ -11,9 +10,6 @@ namespace IntellaQeust.BusinessLogic.ViewModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public double Quality { get; set; }
-        public ProductViewModel Product { get; set; }
-        public UserViewModel User { get; set; }
     }
     public class ShoppingCartsListViewModel
     {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   @Input() isAuthenticated?: boolean;
 
+  errorMessage?:string = "";
   username: string = "";
   password: string = "";
   constructor(
@@ -24,8 +25,16 @@ export class LoginComponent implements OnInit {
     }
   }
   loginUser(){
+
+    if(this.username ==="" || this.password ===""){
+      this.errorMessage = "Fields are required";
+      return;
+    }
     this.authService.login(this.username, this.password).subscribe(()=>{
       window.location.replace('/')
+    },
+    (error) => {
+      this.errorMessage = error.error.exception;
     })
   }
 }

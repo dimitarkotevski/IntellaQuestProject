@@ -98,8 +98,7 @@ namespace IntellaQuest.BusinessLogic.Services
             {
                 if(_userRepository.CheckExist(x=> x.Username.Equals(loginModel.Username) && x.Password.Equals(loginModel.Password)))
                 {
-                    var user = _userRepository.FindBy(x=>x.Username.Equals(loginModel.Username) && x.Password.Equals(loginModel.Password))
-                        ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                    var user = _userRepository.FindBy(x => x.Username.Equals(loginModel.Username) && x.Password.Equals(loginModel.Password));
 
                     return new UserTokenInformation
                     {
@@ -108,7 +107,7 @@ namespace IntellaQuest.BusinessLogic.Services
                         Token = CreateToken(user)
                     };
                 }
-                throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                throw new BllException(ShopExceptionMassages.UserExceptionMassages.USERNAME_PASSWORD_INCORRECT);
             }
         }
         private string CreateToken(User user)
@@ -170,7 +169,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 var user = _userRepository.FindBy(userId);
                 if (user == null)
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-                //_unitOfWork.Commit();
+
                 return user.MapToUserDetailModel();
             }
         }
@@ -393,14 +392,14 @@ namespace IntellaQuest.BusinessLogic.Services
 
             using (_unitOfWork.BeginTransaction())
             {
-                var cartProduct = new ShoppingCart
+                /*var cartProduct = new ShoppingCart
                 {
                     User = user,
                     Product = product,
                     Quantity = quality
                 };
                 _shoppingCartRepository.Add(cartProduct);
-                _unitOfWork.Commit();
+                _unitOfWork.Commit();*/
             }
         }
 
@@ -411,7 +410,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 var user = _userRepository.FindBy(userId)
                     ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
 
-                var userCartProduct = _shoppingCartRepository.GetUserCartProducts(user);
+                var userCartProduct = _shoppingCartRepository.All();
 
                 return new ResponseListModel<ShoppingCartsViewModel>
                 {

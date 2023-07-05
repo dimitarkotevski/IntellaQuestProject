@@ -1,5 +1,6 @@
 ﻿using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
+using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQeust.BusinessLogic.Requests;
 using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.ViewModels;
@@ -10,6 +11,7 @@ using IntellaQuest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -24,6 +26,8 @@ namespace IntellaQuest.BusinessLogic.Services
         bool CheckCategoryNameExists(String Name);
         bool CheckCategoryStatus(bool status);
         ResponseListModel<CategoryViewModel> FilterAndPage(RequestModel request);
+        ResponseListModel<ProductViewModel> GetProductsByCategory(string Url);
+        CategoryLookupViewModel GetCategoryByUrl(string url);
     }
 
     public class CategoryService : ICategoryService
@@ -200,6 +204,33 @@ namespace IntellaQuest.BusinessLogic.Services
 
                 _unitOfWork.Commit();
                 return true;
+            }
+        }
+
+        public ResponseListModel<ProductViewModel> GetProductsByCategory(string Url)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var category = _categoryRepository.FindBy(x => x.Url == Url)
+                    ?? throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                ResponseListModel<ProductViewModel> response = new ResponseListModel<ProductViewModel>();
+
+                response.Items = _categoryRepository.GetProductsByCategory(category).Select(x=>x.MapToViewModel()).ToList();
+                response.TotalItems = response.Items.Count();
+
+                return response;
+            }
+        }
+
+        public CategoryLookupViewModel GetCategoryByUrl(string url)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var category = _categoryRepository.FindBy(x => x.Url == url)
+                   ?? throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                return category.MapToLookupViewModel();
             }
         }
     }

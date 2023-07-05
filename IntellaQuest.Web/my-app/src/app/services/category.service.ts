@@ -12,4 +12,11 @@ export class CategoryService{
     getAllCategories(){
         return this.http.post<any>(this.baseApi+'Categories/AllCategories',null)
     }
+    getProductsByCategoryUrl(Url:string){
+        return this.http.post<any>(this.baseApi+'Categories/GetProductsByCategory',{Url:Url})
+    }
+
+    GetCategoryByUrl(Url:string){
+        return this.http.post<any>(this.baseApi+'Categories/GetCategoryByUrl',{Url:Url})
+    }
 }

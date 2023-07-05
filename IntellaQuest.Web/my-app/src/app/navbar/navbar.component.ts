@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
   id?: string | null;
 
   constructor(
-      private router: Router,
       private authService: AuthService,
       private categoryService: CategoryService
     ){
@@ -29,9 +28,9 @@ export class NavbarComponent implements OnInit {
     this.id = this.authService.getLoggedUserId();
     this.username = this.authService.getLoggedUsername();
 
-    this.categoryService.getAllCategories().subscribe((result:ResponseListModel<Category>) => {
-      this.categories = result.Items;
-    })
+    // this.categoryService.getAllCategories().subscribe((result:ResponseListModel<Category>) => {
+    //   this.categories = result.Items;
+    // })
   }
   logout(){
     this.authService.logout();

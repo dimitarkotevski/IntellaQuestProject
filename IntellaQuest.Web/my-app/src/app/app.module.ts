@@ -3,11 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {  Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
@@ -18,9 +16,17 @@ import { CartComponent } from './cart/cart.component';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
-import { NavigationPanelComponent } from './navigation-panel/navigation-panel.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { ByPassSecurityPipe } from './by-pass-security';
+import { CategoryProductsComponent } from './category-products/category-products.component';
+import { CategoriesNavbarComponent } from './navbar/categories-navbar/categories-navbar.component';
+import { RegularNavbarComponent } from './navbar/regular-navbar/regular-navbar.component';
+import { LoginComponent } from './authentification/login/login.component';
+import { RegisterComponent } from './authentification/register/register.component';
+import { ProductsGridComponent } from './products-grid/products-grid.component';
+import { CarouselComponent } from './home/carousel/carousel.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 const routes: Routes = [
 ];
@@ -30,7 +36,6 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    SidebarComponent,
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
@@ -39,7 +44,14 @@ const routes: Routes = [
     SettingsComponent,
     ProductDetailComponent,
     FooterComponent,
-    NavigationPanelComponent
+    ErrorPageComponent,
+    ByPassSecurityPipe,
+    CategoryProductsComponent,
+    CategoriesNavbarComponent,
+    RegularNavbarComponent,
+    ProductsGridComponent,
+    CarouselComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,

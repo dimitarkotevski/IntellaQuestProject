@@ -8,6 +8,7 @@ namespace IntellaQuest.Domain
         private string _name;
         private bool _status;
         private IList<Product> _products;
+        private string _url;
         public Category()
         {
             _products = new List<Product>();
@@ -26,6 +27,11 @@ namespace IntellaQuest.Domain
         {
             get => _products;
             set => _products = value;
+        }
+        public virtual string Url
+        {
+            get => _url;
+            set => _url = value;
         }
     }
 }

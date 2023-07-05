@@ -23,7 +23,6 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Access
                 .CamelCaseField(Prefix.Underscore).LazyLoad();
 
-
         }
     }
 }

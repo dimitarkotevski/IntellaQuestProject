@@ -1,26 +1,27 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 
 namespace IntellaQuest.Domain
 {
     public class ShoppingCart : BaseEntity
     {
-        private User _user;
-        private Product _product;
-        private float _quantity;
-        public virtual float Quantity 
+        private string _name;
+        private bool _active;
+        private IList<ShoppingCartDetail> _shoppingCartDetails;
+        public virtual string Name 
         { 
-            get => _quantity;
-            set => _quantity = value;
+            get => _name;
+            set => _name = value;
         }
-        public virtual User User
+        public virtual bool Active
         {
-            get=> _user;
-            set => _user = value;
+            get => _active;
+            set => _active = value;
         }
-        public virtual Product Product 
+        public virtual IList<ShoppingCartDetail> ShoppingCartDetails 
         { 
-            get => _product;
-            set => _product = value;
+            get => _shoppingCartDetails; 
+            set => _shoppingCartDetails = value;
         }
     }
 }

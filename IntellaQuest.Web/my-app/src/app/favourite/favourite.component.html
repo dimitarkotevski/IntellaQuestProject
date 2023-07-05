@@ -1,46 +1,48 @@
-<div class="container  pt-3">
-    <div class="d-flex justify-content-end">
-      <div class="mr-auto p-2">
-        <h3 class="solid_color">Favourite product</h3>
-      </div>
-      <div class="pull-right">
-        <span class="solid_hover_color justify-content-center align-self-center">
-          <button class="solid_hover_color no_border_btn">Delete all favourite list</button>
-          <i class="fa fa-trash" aria-hidden="true"></i>
-        </span>
-      </div>
-    </div>
+<div class="container">
+    
+  <app-breadcrumb  [isItem]="false" [itemDetail]="'Favourite Products'"></app-breadcrumb>
 
-    <!-- <div *ngIf="responseModel" class="row py-3">
-        <div *ngFor="let product of responseModel.Items" class="col-sm-6 col-md-4 col-lg-3">
-          <div class="shop__thumb">
+    <div *ngIf="responseModel?.TotalItems" class="row py-3">
+        <div *ngFor="let product of responseModel?.Items" class="py-lg-2 py-md-2 py-sm-2 col-sm-6 col-md-6 col-lg-4">
+          <div class="shop__thumb h-100">
+            <div class="row">
+              <!-- <div class="col-6  d-flex align-items-stretch">
+                <div *ngIf="product">new</div>
+              </div>
+              <div class="col-6  d-flex align-items-stretch">
+                <div class="right-solid-text">-5%</div>
+              </div> -->
+            </div>
             <a href="product-detail/{{product.Id}}">
               <div class="shop-thumb__img">
-                <img src="https://hhstsyoejx.gjirafa.net/gjirafa50core/images/3605/3605.jpeg?q=80" class="img-responsive m-auto" alt="...">
+                <img [src]="product.Image | byPassSecurity" class="img-responsive m-auto" />
               </div>
               <h5 class="shop-thumb__title">
                 {{product.Name}}
               </h5>
+            </a>
               <div class="shop-thumb__price">
-                <span class="shop-thumb-price_new">${{product.Price}}</span>
+                <span class="shop-thumb-price_new">${{product.Price?.toFixed(2) || '/'}}</span>
+              </div>
                 <div class="row">
-                    <span class="col-lg-8 col-md-6 col-sm-6 p-2">
+                    <span class="col-lg-8 col-md-6 col p-2">
                       <button class="btn h-100 w-100 responsive-button solid_button"> 
-                        <span class="d-none d-lg-block">Add to cart</span> 
+                        <span class="d-none text-uppercase strong d-lg-block">Add to cart</span> 
                         <i class="d-block d-lg-none fa-solid fa-cart-shopping"></i>
                       </button>
                     </span>
-                    <span class="col-lg-4 col-md-6 col-sm-6 p-2">
-                      <button class="btn w-100 h-100 solid_favourite"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <!-- *ngIf="favouriteProduct"
+                    *ngIf="checkIfFavouriteProductExist(product)"  -->
+                    <span class="col-lg-4 col-md-6 col  p-2">
+                      <button class="btn h-100 w-100 solid_favourite"><i class="fa-regular fa-heart"></i></button>
                     </span>
-                </div>
               </div>
-            </a>
           </div>
         </div>
-        
-      </div>  -->
-      <div class="text-center" *ngIf="responseModel">
+      </div>
+
+    <div *ngIf="!responseModel?.TotalItems">
+      <div class="text-center">
         <div class="card" style="text-align: -webkit-center;">
           <div class="card-body"> 
             <div class="circle">
@@ -53,4 +55,6 @@
           </div> 
       </div>
       </div>
+    </div>
+
 </div>

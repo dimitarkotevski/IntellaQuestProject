@@ -50,11 +50,16 @@
             },
             "development": {
               "buildOptimizer": false,
+              "outputHashing": "none",
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "progress": false,
+              "statsJson": false,
+              //"showCircularDependencies": false
             }
           },
           "defaultConfiguration": "development"

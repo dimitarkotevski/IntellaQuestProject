@@ -1,0 +1,57 @@
+<div class="container">
+    <app-navigation-panel [isItem]="false" [itemDetail]="category"></app-navigation-panel>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h1>Profile image</h1>
+                    <hr/>
+                    <div>
+                        <i class="fas fa-user-circle fa-10x"></i>
+                    </div>
+                    <h3 class="py-3 text-capitalize">Jao brate</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9" *ngIf="products?.Items?.length">
+            <div class="row">
+                <div *ngFor="let product of products?.Items" class="py-lg-2 py-md-2 py-sm-2 col-sm-6 col-md-4 col-lg-4">
+                    <div class="shop__thumb h-100">
+                        <div class="row">
+                          <div class="col-6  d-flex align-items-stretch">
+                            <div>new</div>
+                          </div>
+                          <div class="col-6  d-flex align-items-stretch">
+                            <div class="right-solid-text">-5%</div>
+                          </div>
+                        </div>
+                        <a href="product-detail/{{product.Id}}">
+                          <div class="shop-thumb__img">
+                            <img [src]="product.Image | byPassSecurity" class="img-responsive m-auto" />
+                          </div>
+                          <h5 class="shop-thumb__title">
+                            {{product.Name}}
+                          </h5>
+                        </a>
+                          <div class="shop-thumb__price">
+                            <span class="shop-thumb-price_new">${{product.Price}}</span>
+                          </div>
+                            <div class="row">
+                                <span class="col-lg-8 col-md-6 col-sm-6 p-2">
+                                  <button class="btn h-100 w-100 responsive-button solid_button"> 
+                                    <span class="d-none text-uppercase strong d-lg-block">Add to cart</span> 
+                                    <i class="d-block d-lg-none fa-solid fa-cart-shopping"></i>
+                                  </button>
+                                </span>
+                                <!-- *ngIf="favouriteProduct"
+                                *ngIf="checkIfFavouriteProductExist(product)"  -->
+                                <span class="col-lg-4 col-md-6 col-sm-6 p-2">
+                                  <button class="btn h-100 w-100 solid_favourite"><i class="fa-regular fa-heart"></i></button>
+                                </span>
+                          </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

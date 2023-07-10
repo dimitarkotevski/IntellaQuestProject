@@ -18,7 +18,8 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             HasMany(x => x.ShoppingCartDetails)
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
-                .KeyColumn("ShoppingCartDetailId").LazyLoad();
+                .KeyColumn("ShoppingCartId").LazyLoad();
+                
         }
     }
 }

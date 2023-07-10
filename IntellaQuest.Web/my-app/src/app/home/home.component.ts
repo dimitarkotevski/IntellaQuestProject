@@ -23,6 +23,9 @@ export class HomeComponent implements OnInit {
   activeSorting?: string ='Popular';
   sortingNames?: string[];
 
+  message?: string="";
+  type?: any="";
+
 
   productFilter?: ProductsFilter={
     SearchString:"",
@@ -68,17 +71,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(["sort/"+url]);
   }
 
-  getImage(image:any){
-    var returnImage= this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, ' + image);
-    return returnImage;
+
+  addToFavourite(Id:string | undefined){
+    console.log("in favourite")
+    this.message = 'Success message';
+    this.type = 'success';
   }
-  // getImage(image: any): any {
-  //   const blob = new Blob([image], { type: 'image/jpeg' });
-  //   const imageUrl = URL.createObjectURL(blob);
-  //   const value = this.sanitizer.bypassSecurityTrustUrl(imageUrl);
-  //   console.log(value)
-  //   return imageUrl;
-  //   const base64String = btoa( image);
-  //  return "data:image/png;base64, "+ base64String;
-  // }
 }

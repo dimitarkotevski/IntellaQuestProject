@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -13,9 +12,6 @@ export class ProductService {
 
   getAll(filter:any) {
     return this.http.post<any>(this.baseApi+'products/All',filter)
-  }
-  getImage(id: any): Observable<Blob> {
-    return this.http.post<any>(this.baseApi+'/products/GetProductImage/'+id,JSON);
   }
   get(Id:string) {
     return this.http.post<any>(this.baseApi+'products/get/'+Id,JSON)

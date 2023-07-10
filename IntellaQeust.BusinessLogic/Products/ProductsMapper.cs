@@ -15,7 +15,6 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 Name = product.Name,
                 Description = product.Description,
                 Price = product.Price,
-                //Image = product.Image,
                 Image = System.Text.Encoding.UTF8.GetString(product.Image),
                 Category = new LookupViewModel
                     {

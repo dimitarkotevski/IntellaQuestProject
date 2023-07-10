@@ -1,4 +1,5 @@
 ﻿using IntellaQuest.Domain.Enums;
+using System;
 
 namespace IntellaQuest.Domain
 {
@@ -7,6 +8,8 @@ namespace IntellaQuest.Domain
         private User _user;
         private ShoppingCart _shoppingCart;
         private OrderStatus _orderStatus;
+        private double _totalAmount;
+        private DateTime _dateCreated;
         public Order() { }
         public virtual User User 
         {
@@ -22,6 +25,16 @@ namespace IntellaQuest.Domain
         {
             get => _orderStatus; 
             set { _orderStatus = value; }
+        }
+        public virtual double TotalAmount
+        {
+            get => _totalAmount;
+            set => _totalAmount = value;
+        }
+        public virtual DateTime DateCreated
+        {
+            get => _dateCreated;
+            set => _dateCreated = value;
         }
     }
 }

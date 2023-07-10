@@ -18,13 +18,14 @@ export class RegularNavbarComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
   ) { 
     this.refreshState = new EventEmitter();
   }
 
   ngOnInit(): void {
     this.username = this.authService.getLoggedUsername();
+    this.id = this.authService.getLoggedUserId();
   }
 
   logout(){

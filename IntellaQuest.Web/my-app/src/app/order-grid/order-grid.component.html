@@ -1,0 +1,38 @@
+<div class="container">
+    <app-breadcrumb [isItem]="false" [itemDetail]="'My orders'"></app-breadcrumb>
+    <div class="card">
+        <div *ngIf="orders" class="card-body">
+            <h1>Active order</h1>
+            <hr/>
+            <!-- <div class="row" *ngFor="let order of orders">{{order.OrderStatus}}</div> -->
+        </div>
+    </div>
+    <br/>
+    <div class="card">
+        <div *ngIf="orders" class="card-body">
+            <h1>My orders</h1>
+            <!-- <div class="row" *ngFor="let order of orders">{{order.OrderStatus}}</div> -->              
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Order date</th>
+                    <th scope="col">Number of products</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col" class="text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orders">
+                    <td>{{(order.DateCreated | dateConverter) || '/'}}</td>
+                    <td>{{order.NumberOfProducts}}</td>
+                    <td>${{order.TotalAmount?.toFixed(2) || '/'}}</td>
+                    <td *ngIf="order.OrderStatus == 0" class="bg-danger text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                    <td *ngIf="order.OrderStatus == 1" class="bg-info text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                    <td *ngIf="order.OrderStatus == 2" class="bg-warning text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                    <td *ngIf="order.OrderStatus == 3" class="bg-success text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { CategoryService } from '../services/category.service';
 import { ResponseListModel } from '../models/response';
 import { Category } from '../models/category';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +21,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
       private authService: AuthService,
-      private categoryService: CategoryService
+      private categoryService: CategoryService,
+      private toastr: ToastrService,
     ){
       this.refreshState = new EventEmitter();
     }
@@ -35,6 +38,7 @@ export class NavbarComponent implements OnInit {
   logout(){
     this.authService.logout();
     this.refreshState.emit();
+    this.toastr.success("Success logout!");
     window.location.replace('/')
   }
 }

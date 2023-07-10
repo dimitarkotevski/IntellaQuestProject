@@ -1,6 +1,8 @@
 ﻿using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Domain;
+using NHibernate.Mapping;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IntellaQeust.BusinessLogic.Mappers
@@ -13,6 +15,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
             {
                 Id = model.Id,
                 Name = model.Name,
+                ShoppingCartDetails = model.ShoppingCartDetails.Select(x => x.MapToViewModel()).ToList()
             };
         }
     }

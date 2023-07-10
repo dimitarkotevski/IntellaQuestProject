@@ -39,6 +39,7 @@ namespace IntellaQuest.BusinessLogic.Services
         bool Create(UserViewModel model);
         void Update(UserViewModel model);
         void Delete(Guid Id);
+        ResponseListModel<OrderGridViewModel> GetUserOrders(Guid userId);
 
     }
     public class UserService : IUserService
@@ -410,12 +411,27 @@ namespace IntellaQuest.BusinessLogic.Services
                 var user = _userRepository.FindBy(userId)
                     ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
 
-                var userCartProduct = _shoppingCartRepository.All();
+                var userCartProduct = _shoppingCartRepository.FilterBy(x=> x == user.ShoppingCart);//_shoppingCartRepository.All();
 
                 return new ResponseListModel<ShoppingCartsViewModel>
                 {
-                    Items = userCartProduct.Select(x=>x.MapToViewModel()).ToList(),
+                    Items = userCartProduct.Select(x => x.MapToViewModel()).ToList(),
                     TotalItems = userCartProduct.Count()
+                };
+            }
+        }
+
+        public ResponseListModel<OrderGridViewModel> GetUserOrders(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId)
+                    ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                return new ResponseListModel<OrderGridViewModel>
+                {
+                    Items = userOrder.Select(x=>x.MapToGridViewModel()).ToList(),
+                    TotalItems = userOrder.Count()
                 };
             }
         }

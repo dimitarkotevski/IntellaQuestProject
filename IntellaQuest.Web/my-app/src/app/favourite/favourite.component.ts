@@ -15,9 +15,12 @@ export class FavouriteComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    if(!this.authService.isAuthenticated()){
+      window.location.replace('/')
+    }
+
     this.authService.getFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
       this.responseModel = result;
-      console.log(result)
     })
   }
 

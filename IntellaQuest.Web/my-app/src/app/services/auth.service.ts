@@ -68,4 +68,8 @@ export class AuthService {
   getFavouriteProducts(Id:string | null): Observable<any>  {
     return this.http.post<any>(this.baseUrl+'/GetUserFavouriteProducts/',{userId: Id})
   }
+
+  addFavouriteProducts(userId:string | null, productId: string | null): Observable<any>  {
+    return this.http.post<any>(this.baseUrl+'/UserAddFavouriteProduct/',{userId: userId, productId: productId})
+  }
 }

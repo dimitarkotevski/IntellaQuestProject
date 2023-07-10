@@ -83,6 +83,13 @@ namespace IntellaQuest.Web.Controllers
         {
             return Json(_userService.GetUserCartProducts(userId));
         }
+
+        [HttpPost]
+        public ActionResult GetUserOrders(Guid userId)
+        {
+            var result = _userService.GetUserOrders(userId);
+            return Json(result);
+        }
     }
     public class MyJwtTokenCustomAuthorize : AuthorizeAttribute
     {

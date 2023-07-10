@@ -1,9 +1,9 @@
 .solid-active{
-  border-bottom: 1px solid coral;
+  border-bottom: 2px solid coral;
 }
 
 @media (max-width: 575px) {
   .solid-active{
-    border-right: 1px solid coral;
+    border-right: 2px solid coral;
   }
 }

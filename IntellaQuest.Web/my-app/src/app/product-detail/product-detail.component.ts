@@ -12,6 +12,9 @@ export class ProductDetailComponent implements OnInit {
 
   productDetail?: Product
 
+  message?: string="";
+  type?: any="";
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService
@@ -23,10 +26,15 @@ export class ProductDetailComponent implements OnInit {
       if(id){
         this.productService.get(id).subscribe( (result: Product)=>{
           this.productDetail = result;
-          console.log(result);
         })
       }
     });
+  }
+
+  addToFavourite(Id:string | undefined){
+    console.log("in favourite")
+    this.message = 'Success message';
+    this.type = 'success';
   }
 
 }

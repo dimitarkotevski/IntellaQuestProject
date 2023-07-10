@@ -12,11 +12,15 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             Id(c => c.Id);
 
-            Map(c => c.Quality);
+            Map(c => c.Quantity);
+
+            References(x => x.ShoppingCart)
+                .Column("ShoppingCartId").Access
+                .CamelCaseField(Prefix.Underscore);
 
             References(x => x.Product)
                 .Column("ProductId").Access
-                .CamelCaseField(Prefix.Underscore).LazyLoad();
+                .CamelCaseField(Prefix.Underscore);
 
         }
     }

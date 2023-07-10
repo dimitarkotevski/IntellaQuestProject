@@ -130,6 +130,7 @@
     <Compile Include="Payments\PaymentsModels.cs" />
     <Compile Include="RequestModel.cs" />
     <Compile Include="Categories\CategoryService.cs" />
+    <Compile Include="ShoppingCartDetails\ShoppingCartDetailMappers.cs" />
     <Compile Include="ShoppingCartDetails\ShoppingCartDetailModels.cs" />
     <Compile Include="ShoppingCartDetails\ShoppingCartDetailService.cs" />
     <Compile Include="Users\UsersMappers.cs" />

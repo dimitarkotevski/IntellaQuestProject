@@ -27,6 +27,15 @@ import { RegisterComponent } from './authentification/register/register.componen
 import { ProductsGridComponent } from './products-grid/products-grid.component';
 import { CarouselComponent } from './home/carousel/carousel.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrderGridComponent } from './order-grid/order-grid.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { CartDetailComponent } from './cart-detail/cart-detail.component';
+import { DateConverter } from './convert-date';
+import { OrderStatusPipe } from './order-pipe';
+
+
 
 const routes: Routes = [
 ];
@@ -46,19 +55,29 @@ const routes: Routes = [
     FooterComponent,
     ErrorPageComponent,
     ByPassSecurityPipe,
+    DateConverter,
+    OrderStatusPipe,
     CategoryProductsComponent,
     CategoriesNavbarComponent,
     RegularNavbarComponent,
     ProductsGridComponent,
     CarouselComponent,
     BreadcrumbComponent,
+    OrderGridComponent,
+    OrderDetailComponent,
+    CartDetailComponent,    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    //RouterModule.forRoot(routes),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthService,

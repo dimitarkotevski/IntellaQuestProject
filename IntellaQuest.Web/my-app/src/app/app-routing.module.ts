@@ -10,6 +10,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { CategoryProductsComponent } from './category-products/category-products.component';
+import { OrderGridComponent } from './order-grid/order-grid.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,7 +25,9 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent},
   { path: 'product-detail/:id', component: ProductDetailComponent},
   { path: 'error-404',component: ErrorPageComponent },
-  { path: '**', redirectTo: '/error-404' }
+  { path: 'orders', component: OrderGridComponent },
+  { path: 'orders/:id/details', component: OrderDetailComponent},
+  { path: '**', redirectTo: '/error-404' },
 ];
 
 @NgModule({

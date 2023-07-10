@@ -16,7 +16,7 @@
             get => _product;
             set => _product = value;
         }
-        public virtual int Quality
+        public virtual int Quantity
         {
             get => _quantity;
             set => _quantity = value;

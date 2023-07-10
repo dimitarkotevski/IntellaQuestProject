@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
   password: string = "";
   constructor(
     private authService:AuthService,
-    private router:Router
+    private router:Router,
     ) { }
 
   ngOnInit(): void {

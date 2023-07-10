@@ -1,131 +1,147 @@
-<div class="container pt-3">
-    <app-breadcrumb [isItem]="false" [itemDetail]="'Settings'"></app-breadcrumb>
-    <div class="row">
 
-        <!-- SIDE NAV -->
-        <div class="col-md-5 col-xl-4">
+<div class="container">
+    <app-breadcrumb [isItem]="false" [itemDetail]="'Settings'"></app-breadcrumb>
+
+    <div class="row">
+        <!-- TABS -->
+        <div class="col-md-4 col-xl-4">
             <div class="card">
-                <div class="list-group list-group-flush" role="tablist">
-                    <a class="list-group-item list-group-item-action solid-active" 
-                        data-toggle="list" href="#account" role="tab">
-                        Profile Information
-                    </a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
-                        Change Password
-                    </a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
-                        Delete account
-                    </a>
-                </div>
+              <div class="">
+                <a [ngClass]="{ 'solid-active': activeTab === 'account' }" class="list-group-item btn left-solid-text nav-link" (click)="switchTab('account')">
+                    Profile Information
+                </a>
+                <a [ngClass]="{ 'solid-active': activeTab === 'address' }" class="list-group-item btn left-solid-text nav-link" (click)="switchTab('address')">
+                    Address Information
+                </a>
+                <a [ngClass]="{ 'solid-active': activeTab === 'password' }" class="list-group-item btn left-solid-text nav-link" (click)="switchTab('password')">
+                  Change Password
+                </a>
+                <a [ngClass]="{ 'solid-active': activeTab === 'deleteaccount' }" class="list-group-item btn left-solid-text nav-link" (click)="switchTab('deleteaccount')">
+                  Delete account
+                </a>
+              </div>
             </div>
         </div>
 
-        <!-- SETTINGS BASE ON SIDE NAV -->
-        <div class="col-md-7 col-xl-8">
+        <!-- TAB PANEL CONTENT -->
+        <div class="col-md-8 col-xl-8">
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="account" role="tabpanel">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Public info</h5>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="inputUsername">Username</label>
-                                            <input type="text" class="form-control" id="inputUsername"
-                                                placeholder="Username">
+              <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'account' }" id="account">
+                <div class="card">
+                    <div *ngIf="userDetails" class="card-body">
+                        <h1>Public info</h1>
+                        <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label >First name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="userDetails.FirstName"
+                                                placeholder="First name">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="inputUsername">Biography</label>
-                                            <textarea rows="2" class="form-control" id="inputBio"
-                                                placeholder="Tell something about yourself"></textarea>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputLastName">Last name</label>
+                                            <input type="text" class="form-control" id="inputLastName"
+                                            [(ngModel)]="userDetails.LastName"
+                                                placeholder="Last name">
                                         </div>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn solid_button_orange">Save changes</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Private info</h5>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputFirstName">First name</label>
-                                        <input type="text" class="form-control" id="inputFirstName"
-                                            placeholder="First name">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputLastName">Last name</label>
-                                        <input type="text" class="form-control" id="inputLastName"
-                                            placeholder="Last name">
+                                    <div class="form-group">
+                                        <label for="inputEmail4">Email</label>
+                                        <input type="email" class="form-control"
+                                            [(ngModel)]="userDetails.Email"
+                                            id="inputEmail4" 
+                                            placeholder="Email">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputEmail4">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress"
-                                        placeholder="1234 Main St">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress2">Address 2</label>
-                                    <input type="text" class="form-control" id="inputAddress2"
-                                        placeholder="Apartment, studio, or floor">
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inputCity">City</label>
-                                        <input type="text" class="form-control" id="inputCity">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="inputState">State</label>
-                                        <select id="inputState" class="form-control">
-                                            <option selected="">Choose...</option>
-                                            <option>...</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="inputZip">Zip</label>
-                                        <input type="text" class="form-control" id="inputZip">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control"
+                                            [(ngModel)]="userDetails.Username" 
+                                            placeholder="Username">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn solid_button_orange">Save changes</button>
-                            </form>
-                        </div>
+                                <div class="col-md-12">
+                                    <div class="form-group ">
+                                        <label>Description</label>
+                                        <textarea rows="5" class="form-control"
+                                        [(ngModel)]="userDetails.Description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" (click)="updateUserPublicInfo(userDetails.Username,userDetails.Description)" class="btn solid_button_orange">Save changes</button>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="password" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Password</h5>
-                            <form>
-                                <div class="form-group">
-                                    <label for="inputPasswordCurrent">Current password</label>
-                                    <input type="password" class="form-control" id="inputPasswordCurrent">
-                                    <small><a href="#">Forgot your password?</a></small>
+              </div>
+              <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'address'}" id="address">
+                <div class="card">
+                    <div *ngIf="userDetails" class="card-body">
+                        <h1>Private info</h1>
+                        <hr>
+                            <div class="form-group">
+                                <label for="inputAddress">Address</label>
+                                <input type="text" class="form-control" id="inputAddress"
+                                    [(ngModel)]="userDetails.Address" 
+                                    placeholder="1234 Main St">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" [(ngModel)]="userDetails.City" >
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputPasswordNew">New password</label>
-                                    <input type="password" class="form-control" id="inputPasswordNew">
+                                <div class="form-group col-md-4">
+                                    <label>State</label>
+                                    <select id="inputState" class="form-control">
+                                        <option selected="">Choose...</option>
+                                        <option *ngFor="let country of countriesList" [value]="country.name">{{country.name}}</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputPasswordNew2">Verify password</label>
-                                    <input type="password" class="form-control" id="inputPasswordNew2">
+                                <div class="form-group col-md-2">
+                                    <label>Zip</label>
+                                    <input type="text" class="form-control" [(ngModel)]="userDetails.ZipCode" >
                                 </div>
-                                <button type="submit" class="btn solid_button_orange">Save changes</button>
-                            </form>
-                        </div>
+                            </div>
+                            <button type="submit" class="btn solid_button_orange">Save changes</button>
                     </div>
                 </div>
+              </div>
+              <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'password' }" id="password">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Password</h1>
+                        <hr>
+                            <div class="form-group">
+                                <label for="inputPasswordCurrent">Current password</label>
+                                <input type="password" class="form-control" id="inputPasswordCurrent">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPasswordNew">New password</label>
+                                <input type="password" class="form-control" id="inputPasswordNew">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPasswordNew2">Verify password</label>
+                                <input type="password" class="form-control" id="inputPasswordNew2">
+                            </div>
+                            <button type="submit" class="btn solid_button_orange">Save changes</button>
+                    </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'deleteaccount' }" id="deleteaccount">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Password</h1>
+                        <hr>
+                            <div class="form-group">
+                                <label for="inputPasswordCurrent">Delete account</label>
+                                <input type="password" class="form-control" id="inputPasswordCurrent">
+                            </div>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
+      
 </div>

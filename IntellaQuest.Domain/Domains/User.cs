@@ -16,7 +16,6 @@ namespace IntellaQuest.Domain
         private string _city;
         private string _zipCode;
         private Payment _payment;
-        private ShoppingCart _shoppingCart;
         private IList<Order> _orders;
         private IList<FavouriteProducts> _favouriteProducts;
         public User() 
@@ -88,11 +87,6 @@ namespace IntellaQuest.Domain
         {
             get => _payment;
             set => _payment = value;
-        }
-        public virtual ShoppingCart ShoppingCart
-        {
-            get => _shoppingCart;
-            set => _shoppingCart = value;
         }
     }
 }

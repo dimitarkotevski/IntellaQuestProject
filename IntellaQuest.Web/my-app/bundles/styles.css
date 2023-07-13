@@ -2122,6 +2122,13 @@ body{
 	background-color: gainsboro;
 	color: white;
 }
+.solid-side-borders{
+	border-left: 1px solid gainsboro;
+	border-right: 1px solid gainsboro;
+}
+.solid-no-radius{
+	border-radius: 0;
+}
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[0].use[2]!./node_modules/ngx-toastr/toastr.css ***!
   \****************************************************************************************************************************************************************************************************************************/

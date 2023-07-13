@@ -1,5 +1,5 @@
 export const countries=[
-    {name:'Macedonia'},
+    {name:'North Macedonia'},
     {name:'Albania'},
     {name:'Bosnia and Hercegovina'},
     {name:'Bulgaria'},

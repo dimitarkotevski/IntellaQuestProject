@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace IntellaQuest.Web.Controllers
@@ -69,12 +70,19 @@ namespace IntellaQuest.Web.Controllers
         [HttpPost]
         public ActionResult GetUserFavouriteProducts(Guid userId)
         {
-            return Json(_userService.GetUserFavouriteProducts(userId));
+            var gridProducts =  _userService.GetUserFavouriteProducts(userId);
+            var json = Json(gridProducts);
+            json.MaxJsonLength = int.MaxValue;
+            return json;
         }
-
+        public ActionResult RemoveFavuriteProduct(Guid userId,Guid productId)
+        {
+            _userService.RemoveFavuriteProduct(userId, productId);
+            return Json(true);
+        }
         [HttpPost]
         //[MyJwtTokenCustomAuthorize]
-        public ActionResult UserAddProductToCart(Guid userId, Guid productId,float quality)
+        public ActionResult UserAddProductToCart(Guid userId, Guid productId,int quality=1)
         {
             _userService.AddProductToCart(userId, productId,quality);
             return Json(true);
@@ -89,6 +97,11 @@ namespace IntellaQuest.Web.Controllers
         {
             var result = _userService.GetUserOrders(userId);
             return Json(result);
+        }
+        public ActionResult RemoveCartDetail(Guid detailsId)
+        {
+            _userService.RemoveCartDetail(detailsId);
+            return Json(true);
         }
     }
     public class MyJwtTokenCustomAuthorize : AuthorizeAttribute

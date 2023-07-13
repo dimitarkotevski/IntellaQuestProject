@@ -7,6 +7,7 @@ namespace IntellaQuest.Domain
     {
         private string _name;
         private bool _active;
+        private User _user;
         private IList<ShoppingCartDetail> _shoppingCartDetails;
         public virtual string Name 
         { 
@@ -17,6 +18,11 @@ namespace IntellaQuest.Domain
         {
             get => _active;
             set => _active = value;
+        }
+        public virtual User User
+        {
+            get => _user;
+            set => _user = value;
         }
         public virtual IList<ShoppingCartDetail> ShoppingCartDetails 
         { 

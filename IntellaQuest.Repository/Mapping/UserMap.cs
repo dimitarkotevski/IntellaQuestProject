@@ -63,10 +63,6 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             #region Foreign Key
 
-            References(x => x.ShoppingCart)
-                .Column("ShoppingCartId")
-                .Access
-                .CamelCaseField(Prefix.Underscore).LazyLoad();
 
             References(x => x.Payment)
                 //.PropertyRef("Id")

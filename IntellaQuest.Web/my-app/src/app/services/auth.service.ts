@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserTokenInfo } from '../models/login/user-token-info';
 import { UserDetails } from '../models/login/user-details';
@@ -65,11 +65,48 @@ export class AuthService {
     
   }
 
+
+  addProductToCart(userId: string | null , productId: string | null){
+    if(userId && productId){
+      return this.http.post<any>(this.baseUrl+'/UserAddProductToCart/',{userId: userId, productId: productId})
+    }else{
+      return null;
+    }
+  }
+
+  getUserCartProducts(userId: string | null){
+    if(userId){
+      return this.http.post<any>(this.baseUrl+'/GetUserCartProducts/',{userId: userId})
+    }else{
+      return null;
+    }
+  }
+
   getFavouriteProducts(Id:string | null): Observable<any>  {
     return this.http.post<any>(this.baseUrl+'/GetUserFavouriteProducts/',{userId: Id})
   }
 
   addFavouriteProducts(userId:string | null, productId: string | null): Observable<any>  {
-    return this.http.post<any>(this.baseUrl+'/UserAddFavouriteProduct/',{userId: userId, productId: productId})
+    if(userId && productId){
+      return this.http.post<any>(this.baseUrl+'/UserAddFavouriteProduct/',{userId: userId, productId: productId})
+    }
+    else{
+      return of(null);
+    }
+  }
+  deleteFavouriteProduct(userId:string | null, productId: string| null){
+    if(userId && productId){
+      return this.http.post<any>(this.baseUrl+'/RemoveFavuriteProduct/',{userId: userId, productId: productId})
+    }else{
+      return null;
+    }
+  }
+
+  removeCartDetail(detailId:string){
+    if(detailId){
+      return this.http.post<any>(this.baseUrl+'/RemoveCartDetail/',{ detailsId : detailId })
+    }else{
+      return
+    }
   }
 }

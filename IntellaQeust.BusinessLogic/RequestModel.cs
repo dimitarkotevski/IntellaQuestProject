@@ -12,6 +12,5 @@ namespace IntellaQeust.BusinessLogic.Requests
         public Guid? EntityId { get; set; }
         public string SearchStatus { get; set; }
         public string EmailEnding { get; set; }
-        public float? Quantity { get; set; }
     }
 }

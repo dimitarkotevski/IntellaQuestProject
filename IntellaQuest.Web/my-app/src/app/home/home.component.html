@@ -1,27 +1,28 @@
 
 <app-carousel></app-carousel>
-<div class="container pt-3">
-  <div class="row">
+<div class="container mt-3">
+  <div>
     <div>
       <ul class="shop__sorting">
         <li [ngClass]="{ 'active': activeSorting === 'Popular' }" (click)="changeSorting('Popular')">
-          <a class="btn" (click)="changeRoute('popular')">Popular</a>
+          <a class="btn solid-no-radius" (click)="changeRoute('popular')">Popular</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'Newest' }" (click)="changeSorting('Newest')">
-          <a class="btn" (click)="changeRoute('newest')">Newest</a>
+          <a class="btn solid-no-radius" (click)="changeRoute('newest')">Newest</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'BestSelling' }" (click)="changeSorting('BestSelling')">
-          <a class="btn" (click)="changeRoute('best-selling')">Best Selling</a>
+          <a class="btn solid-no-radius" (click)="changeRoute('best-selling')">Best Selling</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'PriceLow' }" (click)="changeSorting('PriceLow')">
-          <a class="btn" (click)="changeRoute('price-low')">Price (low)</a>
+          <a class="btn solid-no-radius" (click)="changeRoute('price-low')">Price (low)</a>
         </li>
         <li [ngClass]="{ 'active': activeSorting === 'PriceHigh' }" (click)="changeSorting('PriceHigh')">
-          <a class="btn" (click)="changeRoute('price-high')">Price (high)</a>
+          <a class="btn solid-no-radius" (click)="changeRoute('price-high')">Price (high)</a>
         </li>
       </ul>
 
-      <app-products-grid [products]="products"></app-products-grid>
+      <app-products-grid *ngIf="!isLoading" [hasRemoveProductButton]="false" [products]="products"></app-products-grid>
+      <app-loading-items *ngIf="isLoading" ></app-loading-items>
 
     </div> 
   </div> 

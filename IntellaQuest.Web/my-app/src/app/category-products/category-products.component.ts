@@ -15,6 +15,7 @@ export class CategoryProductsComponent implements OnInit {
   //@Input() category?: Category;
   products?: ResponseListModel<Product>;
   category?: Category;
+  isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +32,7 @@ export class CategoryProductsComponent implements OnInit {
         
         this.categoryService.getProductsByCategoryUrl(categoryUrl).subscribe((res : ResponseListModel<Product>)=>{
           this.products = res;
+          this.isLoading=false;
         })
       }
     });

@@ -19,7 +19,12 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
                 .KeyColumn("ShoppingCartId").LazyLoad();
-                
+
+            References(x => x.User)
+                .Column("UserId")
+                .Access
+                .CamelCaseField(Prefix.Underscore).LazyLoad();
+
         }
     }
 }

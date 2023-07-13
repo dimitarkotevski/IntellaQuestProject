@@ -203,3 +203,10 @@ body{
 	background-color: gainsboro;
 	color: white;
 }
+.solid-side-borders{
+	border-left: 1px solid gainsboro;
+	border-right: 1px solid gainsboro;
+}
+.solid-no-radius{
+	border-radius: 0;
+}

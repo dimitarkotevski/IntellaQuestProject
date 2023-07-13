@@ -63,7 +63,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 var order = new Order
                 {
                     User =user,
-                    ShoppingCart =user.ShoppingCart,
+                    //ShoppingCart =user.ShoppingCart,
                     OrderStatus =model.OrderStatus,
                 };
                 _orderRepository.Add(order);
@@ -192,7 +192,7 @@ namespace IntellaQuest.BusinessLogic.Services
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
                 
-                entityOrder.ShoppingCart = user.ShoppingCart;
+                //entityOrder.ShoppingCart = user.ShoppingCart;
                 entityOrder.User = user;
                 entityOrder.OrderStatus = model.OrderStatus;
                 

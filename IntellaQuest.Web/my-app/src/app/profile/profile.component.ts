@@ -14,6 +14,10 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!this.authService.getLoggedUserId()){
+      window.location.replace("/error-404");
+    }
+
     this.authService.getUserDetails(this.authService.getLoggedUserId()).subscribe((response:UserDetails)=>{
       this.userDetails = response;
     });

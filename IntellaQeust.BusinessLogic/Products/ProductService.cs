@@ -151,7 +151,7 @@ namespace IntellaQuest.BusinessLogic.Services
                     default:
                         break;
                 }
-                var list = listProductForFiltering.ToList();
+                var list = listProductForFiltering.ToList().Distinct();
 
                 if (request.Size == 0 && request.PageNeeded == 0)
                 {

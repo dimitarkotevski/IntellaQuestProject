@@ -2,14 +2,8 @@
     <div *ngFor="let product of products" class="py-lg-2 py-md-2 py-sm-2 col-sm-6 col-md-6 col-lg-4">
       <div class="shop__thumb h-100">
         <div class="row">
-          <!-- <div class="col-6  d-flex align-items-stretch">
-            <div *ngIf="product">new</div>
-          </div>
-          <div class="col-6  d-flex align-items-stretch">
-            <div class="right-solid-text">-5%</div>
-          </div> -->
         </div>
-        <a href="product-detail/{{product.Id}}">
+        <a [routerLink]="['/product-detail',product.Id]">
           <div class="shop-thumb__img">
             <img [src]="product.Image | byPassSecurity" class="img-responsive m-auto" />
           </div>
@@ -22,17 +16,16 @@
           </div>
             <div class="row">
                 <span class="col-lg-8 col-md-6 col p-2">
-                  <button class="btn h-100 w-100 responsive-button solid_button" (click)="addToCart(product.Id)"> 
+                  <button (click)="addToCart(product.Id)" class="btn h-100 w-100 responsive-button solid_button"> 
                     <span class="d-none text-uppercase strong d-lg-block"><strong>Add to cart</strong></span> 
                     <i class="d-block d-lg-none fa-solid fa-cart-shopping"></i>
                   </button>
                 </span>
-                <!-- *ngIf="favouriteProduct"
-                *ngIf="checkIfFavouriteProductExist(product)"  -->
                 <span class="col-lg-4 col-md-6 col  p-2">
-                  <button class="btn h-100 w-100 solid_favourite" (click)="addToFavourite(product.Id)"><i class="fa-regular fa-heart"></i></button>
+                  <button *ngIf="!hasRemoveProductButton" class="btn h-100 w-100 solid_favourite" (click)="addToFavourite(product.Id)"><i class="fa-regular fa-heart"></i></button>
+                  <button *ngIf="hasRemoveProductButton" (click)="deleteFavouriteProduct(product.Id)" class="btn h-100 w-100 solid_favourite"><i class="fa-solid fa-trash"></i></button>
                 </span>
           </div>
       </div>
     </div>
-  </div> 
+</div>

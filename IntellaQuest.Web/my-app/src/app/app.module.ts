@@ -34,6 +34,9 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CartDetailComponent } from './cart-detail/cart-detail.component';
 import { DateConverter } from './convert-date';
 import { OrderStatusPipe } from './order-pipe';
+import { SideFilterComponent } from './side-filter/side-filter.component';
+import { LoadingItemComponent } from './loading-item/loading-item.component';
+import { LoadingItemsComponent } from './loading-items/loading-items.component';
 
 
 
@@ -65,7 +68,10 @@ const routes: Routes = [
     BreadcrumbComponent,
     OrderGridComponent,
     OrderDetailComponent,
-    CartDetailComponent,    
+    CartDetailComponent,
+    SideFilterComponent,
+    LoadingItemComponent,
+    LoadingItemsComponent,    
   ],
   imports: [
     BrowserModule,
@@ -73,9 +79,9 @@ const routes: Routes = [
     FormsModule,
     AppRoutingModule,
     ToastrModule.forRoot({
-      timeOut: 10000,
+      timeOut: 2000,
       positionClass: 'toast-top-right',
-      preventDuplicates: true,
+      preventDuplicates: false,
     }),
     BrowserAnimationsModule,
   ],

@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   totalItems?: number
   activeSorting?: string ='Popular';
   sortingNames?: string[];
+  isLoading: boolean = true;
 
   message?: string="";
   type?: any="";
@@ -39,7 +40,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private productService: ProductService,
-    private sanitizer: DomSanitizer,
     ) { }
 
   ngOnInit(): void {
@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     this.productService.getAll(this.productFilter).subscribe((result:ResponseListModel<Product>) => {
           this.products = result.Items;
           this.totalItems = result.TotalItems;
+          this.isLoading = false;
       });
   }
 

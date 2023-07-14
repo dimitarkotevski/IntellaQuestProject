@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../authentification/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,11 +17,11 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(!this.authService.isAuthenticated()){
+    if(!this.authService.IsAuthenticated()){
       this.router.navigate(["login"]);
     }
 
-    this.authService.getUserCartProducts(this.authService.getLoggedUserId())?.subscribe((res)=>{
+    this.authService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
       this.shoppingCart = res;
     })
 
@@ -38,9 +38,9 @@ export class CartComponent implements OnInit {
 
   deleteProductCartDetail(id:string){
     if(id){
-      this.authService.removeCartDetail(id)?.subscribe(()=>{
+      this.authService.RemoveCartDetail(id)?.subscribe(()=>{
 
-        this.authService.getUserCartProducts(this.authService.getLoggedUserId())?.subscribe((res)=>{
+        this.authService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
           this.shoppingCart = res;
         })
 

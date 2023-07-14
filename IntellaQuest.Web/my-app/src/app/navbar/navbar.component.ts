@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../authentification/auth.service';
 import { CategoryService } from '../services/category.service';
 import { ResponseListModel } from '../models/response';
 import { Category } from '../models/category';
@@ -28,15 +28,15 @@ export class NavbarComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.id = this.authService.getLoggedUserId();
-    this.username = this.authService.getLoggedUsername();
+    this.id = this.authService.GetLoggedUserId();
+    this.username = this.authService.GetLoggedUsername();
 
     // this.categoryService.getAllCategories().subscribe((result:ResponseListModel<Category>) => {
     //   this.categories = result.Items;
     // })
   }
   logout(){
-    this.authService.logout();
+    this.authService.Logout();
     this.refreshState.emit();
     this.toastr.success("Success logout!");
     window.location.replace('/')

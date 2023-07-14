@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
 import { ProductService } from './services/product.service';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { ProfileComponent } from './profile/profile.component';
@@ -37,6 +36,7 @@ import { OrderStatusPipe } from './order-pipe';
 import { SideFilterComponent } from './side-filter/side-filter.component';
 import { LoadingItemComponent } from './loading-item/loading-item.component';
 import { LoadingItemsComponent } from './loading-items/loading-items.component';
+import { AuthService } from './authentification/auth.service';
 
 
 

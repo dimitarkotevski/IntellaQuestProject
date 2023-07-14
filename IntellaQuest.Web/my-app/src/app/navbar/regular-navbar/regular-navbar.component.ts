@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/authentification/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -24,12 +24,12 @@ export class RegularNavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.username = this.authService.getLoggedUsername();
-    this.id = this.authService.getLoggedUserId();
+    this.username = this.authService.GetLoggedUsername();
+    this.id = this.authService.GetLoggedUserId();
   }
 
   logout(){
-    this.authService.logout();
+    this.authService.Logout();
     this.refreshState.emit();
     window.location.replace('/')
   }

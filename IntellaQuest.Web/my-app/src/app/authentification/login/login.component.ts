@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    if(this.authService.isAuthenticated()){
+    if(this.authService.IsAuthenticated()){
       this.router.navigate(["/"])
     }
   }
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = "Fields are required";
       return;
     }
-    this.authService.login(this.username, this.password).subscribe(()=>{
+    this.authService.Login(this.username, this.password).subscribe(()=>{
       window.location.replace('/')
     },
     (error) => {

@@ -10,7 +10,7 @@ import { UserDetails } from '../models/login/user-details';
   providedIn: 'root'
 })
 export class AuthService {
-   //https://localhost:44305/
+
   private baseUrl = 'api/Identity';
 
   constructor(
@@ -18,14 +18,14 @@ export class AuthService {
     private tokenHelper: JwtHelperService
     ) {}
     
-  getUserDetails(id:string | null) : Observable<UserDetails>{
+  GetUserDetails(id:string | null) : Observable<UserDetails>{
     return this.http.post<UserDetails>(`${this.baseUrl}/UserDetails/${id}`, null);
   }
-  getLoggedUsername() : string | undefined {
+  GetLoggedUsername() : string | undefined {
     return localStorage.getItem('username') || undefined;
   }
 
-  login(username:string,password:string): Observable<boolean> {
+  Login(username:string,password:string): Observable<boolean> {
     return this.http.post<any>(this.baseUrl+"/Login", {Username:username, Password:password}).pipe(
       map((response : UserTokenInfo) => {
         if (response.Id && response.Token && response.Username) {
@@ -38,35 +38,35 @@ export class AuthService {
       })
     );
   }
-  logout(): void {
+  Logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
     localStorage.removeItem('username');
   }
-  getLoggedUserId(): string | null {
+  GetLoggedUserId(): string | null {
     return localStorage.getItem('id') || null;
   }
-  getToken(): string | null  {
+  GetToken(): string | null  {
     return localStorage.getItem('token') || null;
   }
 
-  isAuthenticated(): boolean {
-    const token = this.getToken();
+  IsAuthenticated(): boolean {
+    const token = this.GetToken();
     return token !== null;
   }
   getTokenInformation(){
-    if(this.isAuthenticated()){
-      return this.tokenHelper.decodeToken(this.getToken() || '') || null;
+    if(this.IsAuthenticated()){
+      return this.tokenHelper.decodeToken(this.GetToken() || '') || null;
     }
     return null;
   }
 
-  registerUser(){
+  RegisterUser(){
     
   }
 
 
-  addProductToCart(userId: string | null , productId: string | null){
+  AddProductToCart(userId: string | null , productId: string | null){
     if(userId && productId){
       return this.http.post<any>(this.baseUrl+'/UserAddProductToCart/',{userId: userId, productId: productId})
     }else{
@@ -74,7 +74,7 @@ export class AuthService {
     }
   }
 
-  getUserCartProducts(userId: string | null){
+  GetUserCartProducts(userId: string | null){
     if(userId){
       return this.http.post<any>(this.baseUrl+'/GetUserCartProducts/',{userId: userId})
     }else{
@@ -82,11 +82,11 @@ export class AuthService {
     }
   }
 
-  getFavouriteProducts(Id:string | null): Observable<any>  {
+  GetFavouriteProducts(Id:string | null): Observable<any>  {
     return this.http.post<any>(this.baseUrl+'/GetUserFavouriteProducts/',{userId: Id})
   }
 
-  addFavouriteProducts(userId:string | null, productId: string | null): Observable<any>  {
+  AddFavouriteProducts(userId:string | null, productId: string | null): Observable<any>  {
     if(userId && productId){
       return this.http.post<any>(this.baseUrl+'/UserAddFavouriteProduct/',{userId: userId, productId: productId})
     }
@@ -94,7 +94,7 @@ export class AuthService {
       return of(null);
     }
   }
-  deleteFavouriteProduct(userId:string | null, productId: string| null){
+  DeleteFavouriteProduct(userId:string | null, productId: string| null){
     if(userId && productId){
       return this.http.post<any>(this.baseUrl+'/RemoveFavuriteProduct/',{userId: userId, productId: productId})
     }else{
@@ -102,7 +102,7 @@ export class AuthService {
     }
   }
 
-  removeCartDetail(detailId:string){
+  RemoveCartDetail(detailId:string){
     if(detailId){
       return this.http.post<any>(this.baseUrl+'/RemoveCartDetail/',{ detailsId : detailId })
     }else{

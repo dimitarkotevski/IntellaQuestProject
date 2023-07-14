@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../authentification/auth.service';
 import { ResponseListModel } from '../models/response';
 
 
@@ -25,12 +25,12 @@ export class ProductsGridComponent implements OnInit {
   }
 
   addToFavourite(productId: string | undefined){
-    var userId = this.authService.getLoggedUserId();
+    var userId = this.authService.GetLoggedUserId();
     if(!userId){
       window.location.replace('/login')
     }
     if(productId){
-      this.authService.addFavouriteProducts(userId,productId).subscribe(
+      this.authService.AddFavouriteProducts(userId,productId).subscribe(
       ()=>{
         this.toastr.success("Product added!");
       },
@@ -43,11 +43,11 @@ export class ProductsGridComponent implements OnInit {
   }
 
   addToCart(productId: string | undefined){
-    var userId = this.authService.getLoggedUserId();
+    var userId = this.authService.GetLoggedUserId();
     if(!userId && !productId){
       window.location.replace('/login')
     }else{
-      this.authService.addProductToCart(this.authService.getLoggedUserId(),productId || null)?.subscribe(()=>{
+      this.authService.AddProductToCart(this.authService.GetLoggedUserId(),productId || null)?.subscribe(()=>{
         this.toastr.success("Successs added product to cart");
       })
     }
@@ -55,9 +55,9 @@ export class ProductsGridComponent implements OnInit {
 
   deleteFavouriteProduct(id:string | undefined){
     if(id){
-      this.authService.deleteFavouriteProduct(this.authService.getLoggedUserId(),id)?.subscribe(()=>{
+      this.authService.DeleteFavouriteProduct(this.authService.GetLoggedUserId(),id)?.subscribe(()=>{
         this.toastr.success("Success deleted favourite product");
-        this.authService.getFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
+        this.authService.GetFavouriteProducts(this.authService.GetLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
           this.products = result.Items;
         })
       })

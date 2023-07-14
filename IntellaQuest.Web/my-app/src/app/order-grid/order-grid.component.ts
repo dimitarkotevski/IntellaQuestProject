@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/authentification/auth.service';
 import { ResponseListModel } from '../models/response';
 import { OrderGridViewModel } from '../models/order-grid';
 
@@ -17,7 +17,7 @@ export class OrderGridComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.orderService.GetUserOrders(this.authService.getLoggedUserId()).subscribe((res:ResponseListModel<OrderGridViewModel>)=>{
+    this.orderService.GetUserOrders(this.authService.GetLoggedUserId()).subscribe((res:ResponseListModel<OrderGridViewModel>)=>{
       console.log(res);
       this.orders = res.Items;
     })

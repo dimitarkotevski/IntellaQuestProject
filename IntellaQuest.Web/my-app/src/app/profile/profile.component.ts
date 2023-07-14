@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { UserDetails } from '../models/login/user-details';
+import { AuthService } from '../authentification/auth.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -14,11 +15,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(!this.authService.getLoggedUserId()){
+    if(!this.authService.GetLoggedUserId()){
       window.location.replace("/error-404");
     }
 
-    this.authService.getUserDetails(this.authService.getLoggedUserId()).subscribe((response:UserDetails)=>{
+    this.authService.GetUserDetails(this.authService.GetLoggedUserId()).subscribe((response:UserDetails)=>{
       this.userDetails = response;
     });
   }

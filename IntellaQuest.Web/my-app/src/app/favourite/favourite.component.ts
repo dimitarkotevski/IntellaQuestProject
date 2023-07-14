@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../authentification/auth.service';
 import { Product } from '../models/product';
 import { ResponseListModel } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
@@ -21,11 +21,11 @@ export class FavouriteComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    if(!this.authService.isAuthenticated()){
+    if(!this.authService.IsAuthenticated()){
       this.router.navigate(["login"]);
     }
 
-    this.authService.getFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
+    this.authService.GetFavouriteProducts(this.authService.GetLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
       this.responseModel = result;
       this.isLoading = false;
     })
@@ -33,9 +33,9 @@ export class FavouriteComponent implements OnInit {
 
   deleteFavouriteProduct(id:string | undefined){
     if(id){
-      this.authService.deleteFavouriteProduct(this.authService.getLoggedUserId(),id)?.subscribe(()=>{
+      this.authService.DeleteFavouriteProduct(this.authService.GetLoggedUserId(),id)?.subscribe(()=>{
         this.toastr.success("Success deleted favourite product");
-        this.authService.getFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
+        this.authService.GetFavouriteProducts(this.authService.GetLoggedUserId()).subscribe((result:ResponseListModel<Product>)=>{
           this.responseModel = result;
         })
       })

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../authentification/auth.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -16,6 +16,6 @@ export class BreadcrumbComponent implements OnInit {
   constructor(private userAuth: AuthService ) { }
 
   ngOnInit(): void {
-    this.user = this.userAuth.getLoggedUsername();
+    this.user = this.userAuth.GetLoggedUsername();
   }
 }

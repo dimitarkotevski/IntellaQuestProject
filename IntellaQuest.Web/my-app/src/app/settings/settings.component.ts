@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDetails } from '../models/login/user-details';
-import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { countries } from '../countries/countries';
+import { UserDetails } from '../models/login/user-details';
+import { AuthService } from '../authentification/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
   constructor( private authService: AuthService,private toastr: ToastrService ) { }
 
   ngOnInit(): void {
-    this.authService.getUserDetails(this.authService.getLoggedUserId()).subscribe((response:UserDetails)=>{
+    this.authService.GetUserDetails(this.authService.GetLoggedUserId()).subscribe((response:UserDetails)=>{
       this.userDetails = response;
     });
     

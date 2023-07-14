@@ -121,6 +121,7 @@
     <Compile Include="Categories\CategoriesMappers.cs" />
     <Compile Include="Categories\CategoriesModels.cs" />
     <Compile Include="FavouriteProducts\FavouriteProductModels.cs" />
+    <Compile Include="FavouriteProducts\FavouriteProductService.cs" />
     <Compile Include="FavouriteProducts\FavouriteProductsMappers.cs" />
     <Compile Include="FluentTableRequest.cs" />
     <Compile Include="Security\TokenConstant.cs" />
@@ -147,9 +148,6 @@
     <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseModel.cs" />
-    <Compile Include="ShoppingCartProducts\ShoppingCartProductService.cs" />
-    <Compile Include="ShoppingCartProducts\ShoppingCartProductsMappers.cs" />
-    <Compile Include="ShoppingCartProducts\ShoppingCartProductsModels.cs" />
     <Compile Include="ShoppingCarts\ShoppingCartMappers.cs" />
     <Compile Include="ShoppingCarts\ShoppingCartService.cs" />
     <Compile Include="ShoppingCarts\ShoppingCartsModels.cs" />

@@ -8,19 +8,19 @@ using System.Collections.Generic;
 namespace IntellaQeust.BusinessLogic.ViewModels
 {
     [Validator(typeof(ShoppingCartsViewModelValidator))]
-    public class ShoppingCartsViewModel
+    public class ShoppingCartViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public List<ShoppingCartDetailViewModel> ShoppingCartDetails { get; set; }
     }
-    public class ShoppingCartsListViewModel
+    public class ShoppingCartGridViewModel
     {
         public Guid Id { get; set; }
         public double Quality { get; set; }
         public ProductViewModel Product { get; set; }
     }
-    public class ShoppingCartsViewModelValidator : AbstractValidator<ShoppingCartsViewModel>
+    public class ShoppingCartsViewModelValidator : AbstractValidator<ShoppingCartViewModel>
     {
         public ShoppingCartsViewModelValidator()
         {

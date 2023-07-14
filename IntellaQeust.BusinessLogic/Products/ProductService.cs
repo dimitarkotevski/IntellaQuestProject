@@ -32,9 +32,10 @@ namespace IntellaQuest.BusinessLogic.Services
     }
     public class ProductService : IProductService
     {
+        private readonly IUnitOfWork _unitOfWork;
+
         private readonly IProductRepository _productsRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IOrderRepository _orderRepository;
         private readonly IFavouriteProductsRepository _favouriteProductsRepository;
         private readonly IShoppingCartDetailRepository _shoppingCartDetailRepository;
@@ -53,12 +54,12 @@ namespace IntellaQuest.BusinessLogic.Services
             _favouriteProductsRepository = favouriteProductsRepository;
             _shoppingCartDetailRepository = shoppingCartDetailRepository;
         }
+        #region ADMIN CRUD
 
         public bool CheckNameExists(string Name)
         {
             return _productsRepository.CheckExist(x => x.Name == Name);
         }
-
         public bool Create(ProductViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
@@ -86,7 +87,6 @@ namespace IntellaQuest.BusinessLogic.Services
                 return true;
             }
         }
-
         public bool Delete(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
@@ -101,7 +101,89 @@ namespace IntellaQuest.BusinessLogic.Services
                 return true;
             }
         }
+        public ProductViewModel Get(Guid Id)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var productEntity = _productsRepository.FindBy(Id);
+                if (productEntity == null)
+                {
+                    throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+                _unitOfWork.Commit();
 
+                return productEntity.MapToViewModel();
+            }
+        }
+        public bool Update(ProductViewModel model)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var category = _categoryRepository.FindBy(model.Category.Id);
+                if (category == null)
+                {
+                    throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+                var product = _productsRepository.FindBy(model.Id.Value);
+
+                if (product == null)
+                {
+                    throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+                if (_productsRepository.CheckExist(x => x.Id != model.Id && x.Name == model.Name))
+                {
+                    throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
+                }
+
+                //exception need
+                product.Name = model.Name;
+                product.Description = model.Description;
+                product.Category = category;
+                _productsRepository.Update(product);
+                _unitOfWork.Commit();
+
+                return true;
+            }
+        }
+        public List<ProductViewModel> GetAllTable()
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                return _productsRepository.All().Select(x => x.MapToViewModel()).ToList();
+            }
+        }
+        public string GetProductImage(Guid Id)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var product = _productsRepository.FindBy(Id);
+
+
+                return null;
+                //return Convert.ToBase64String(product.Image);
+
+            }
+        }
+        public void UploadImage(Guid Id, string image)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+
+                var product = _productsRepository.FindBy(Id)
+                    ?? throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(image));
+
+                product.Image = Convert.FromBase64String(base64String);
+
+                _productsRepository.Update(product);
+                _unitOfWork.Commit();
+            }
+        }
+
+        #endregion
+
+        #region USER
         private ResponseModel<ProductViewModel> FilterAndPage(RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
@@ -169,93 +251,11 @@ namespace IntellaQuest.BusinessLogic.Services
                 return response;
             }
         }
-
-        public ProductViewModel Get(Guid Id)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var productEntity = _productsRepository.FindBy(Id);
-                if (productEntity == null)
-                {
-                    throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
-                }
-                _unitOfWork.Commit();
-
-                return productEntity.MapToViewModel();
-            }
-        }
-
         public ResponseModel<ProductViewModel> GetAll(RequestModel request)
         {   
             return FilterAndPage(request);
         }
 
-        public bool Update(ProductViewModel model)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var category = _categoryRepository.FindBy(model.Category.Id);
-                if (category == null)
-                {
-                    throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
-                }
-                var product = _productsRepository.FindBy(model.Id.Value);
-
-                if (product == null)
-                {
-                    throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
-                }
-                if (_productsRepository.CheckExist(x => x.Id != model.Id && x.Name == model.Name))
-                {
-                    throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
-                }
-
-                //exception need
-                product.Name = model.Name;
-                product.Description = model.Description;
-                product.Category = category;
-                _productsRepository.Update(product);
-                _unitOfWork.Commit();
-
-                return true;
-            }
-        }
-
-        public List<ProductViewModel> GetAllTable()
-        {
-            using(_unitOfWork.BeginTransaction())
-            {
-                return _productsRepository.All().Select(x=>x.MapToViewModel()).ToList();
-            }
-        }
-
-        public string GetProductImage(Guid Id)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var product = _productsRepository.FindBy(Id);
-
-
-                return null;
-                //return Convert.ToBase64String(product.Image);
-
-            }
-        }
-        public void UploadImage(Guid Id, string image)
-        {
-            using (_unitOfWork.BeginTransaction())
-            { 
-               
-                var product = _productsRepository.FindBy(Id)
-                    ?? throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                string base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(image));
-
-                product.Image = Convert.FromBase64String(base64String);
-
-                _productsRepository.Update(product);
-                _unitOfWork.Commit();
-            }
-        }
+        #endregion
     }
 }

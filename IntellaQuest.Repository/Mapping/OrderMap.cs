@@ -19,6 +19,7 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Nullable();
             Map(o => o.TotalAmount);
             Map(o => o.DateCreated);
+            Map(o => o.OrderName);
 
             References(x => x.ShoppingCart)
                 .Column("ShoppingCartId")

@@ -15,21 +15,17 @@ namespace IntellaQuest.Web.Controllers
         {
             _orderService = orderService;
         }
-
-        // POST: Orders
+        #region ADMIN ACTION
         [HttpPost]
         public ActionResult All(RequestModel request)
         {
             return Json(_orderService.GetAll(request));
         }
-        // POST: Orders/Get
         [HttpPost]
         public ActionResult Get(Guid Id)
         {
             return Json( _orderService.Get(Id));
         }
-
-        // POST: Orders/Create
         [HttpPost]
         public ActionResult Create(OrderViewModel model)
         {
@@ -40,8 +36,6 @@ namespace IntellaQuest.Web.Controllers
             _orderService.Create(model);
             return Json(new { success = true });
         }
-
-        // POST: Orders/Edit/5
         [HttpPost]
         public ActionResult Edit(OrderViewModel model)
         {
@@ -52,14 +46,29 @@ namespace IntellaQuest.Web.Controllers
             _orderService.Update(model);
             return Json(new { success = true });
         }
-
-        // GET: Orders/Delete/5
         [HttpPost]
         public ActionResult Delete(Guid Id)
         {
             _orderService.Delete(Id);
             return Json(new { success = true });
         }
+        #endregion
 
+        #region USER ACTION
+
+        [HttpPost]
+        public ActionResult GetUserActiveOrder(Guid userId)
+        {
+            var result = _orderService.GetUserActiveOrder(userId);
+            return Json(result);
+        }
+        [HttpPost]
+        public ActionResult GetUserNotActiveOrders(Guid userId)
+        {
+            var result = _orderService.GetUserNotActiveOrders(userId);
+            return Json(result);
+        }
+
+        #endregion
     }
 }

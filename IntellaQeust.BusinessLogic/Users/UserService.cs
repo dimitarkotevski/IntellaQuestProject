@@ -30,18 +30,11 @@ namespace IntellaQuest.BusinessLogic.Services
         void Registration(UserRegistrationViewModel registrationModel);
         UserTokenInformation Login(UserLoginViewModel loginModel);
         void UpdatePassword(ChangePasswordUserViewModel model);
-        void AddProductToCart(Guid userId, Guid productId, int quality);
-        ShoppingCartsViewModel GetUserCartProducts(Guid userId);
         ResponseModel<UserViewModel> GetAll(RequestModel request);
-        void AddFavouriteProduct(Guid userId, Guid productId);
-        void RemoveFavuriteProduct(Guid userId , Guid productId);
-        ResponseListModel<ProductViewModel> GetUserFavouriteProducts(Guid userId);
         UserDetailsModel Get(Guid Id);
         bool Create(UserViewModel model);
         void Update(UserViewModel model);
         void Delete(Guid Id);
-        void RemoveCartDetail(Guid id);
-        ResponseListModel<OrderGridViewModel> GetUserOrders(Guid userId);
 
     }
     public class UserService : IUserService
@@ -51,22 +44,25 @@ namespace IntellaQuest.BusinessLogic.Services
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProductRepository _productRepository;
-        private readonly IFavouriteProductsRepository _favouriteProductsRepository;
         private readonly IShoppingCartDetailRepository _shoppingCartDetailRepository;
 
         public UserService(IUserRepository userRepository, 
-                            IOrderRepository orderRepository, IShoppingCartRepository shoppingCartRepository,
-                            IUnitOfWork unitOfWork, IProductRepository productRepository,
-                            IFavouriteProductsRepository favouriteProductsRepository, IShoppingCartDetailRepository shoppingCartDetailRepository)
+                            IOrderRepository orderRepository, 
+                            IShoppingCartRepository shoppingCartRepository,
+                            IUnitOfWork unitOfWork, 
+                            IProductRepository productRepository,
+                            IShoppingCartDetailRepository shoppingCartDetailRepository)
         {
             _shoppingCartRepository = shoppingCartRepository;
             _productRepository = productRepository;
             _userRepository = userRepository;
             _orderRepository = orderRepository;
             _unitOfWork = unitOfWork;
-            _favouriteProductsRepository = favouriteProductsRepository;
             _shoppingCartDetailRepository = shoppingCartDetailRepository;
         }
+        
+        #region User Authentification
+
         public void Registration(UserRegistrationViewModel model)
         {
             if (_userRepository.CheckExist(x=>x.Username == model.Username))
@@ -133,51 +129,28 @@ namespace IntellaQuest.BusinessLogic.Services
 
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
-
-        public bool Create(UserViewModel model)
+        public void UpdatePassword(ChangePasswordUserViewModel model)
         {
-            if (_userRepository.CheckExist(x => x.Email == model.Email))
-                throw new BllException(string.Format(ShopExceptionMassages.UserExceptionMassages.EMAIL_ALREADY_EXIST, model.Email));
-            
-            if (_userRepository.CheckExist(x => x.Username == model.Username))
-                throw new BllException(string.Format(ShopExceptionMassages.UserExceptionMassages.USERNAME_ALREADY_EXIST, model.Username));
-            
             using (_unitOfWork.BeginTransaction())
             {
-                var userEntity = new User
+                var user = _userRepository.FindBy(model.Id)
+                    ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                var oldPassword = PasswordEncryption.Encryption(model.OldPassword);
+                if (user.Password != oldPassword)
                 {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    Username = model.Username,
-                    Password = model.Password,
-                };
-                _userRepository.Add(userEntity);
-                _unitOfWork.Commit();
-                return true;
-            }
-        }
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.PASSWORD_IS_INCORRECT);
+                }
 
-        public void Delete(Guid userId)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                _userRepository.Delete(userId);
+                user.Password = PasswordEncryption.Encryption(model.NewPassword);
+                _userRepository.Update(user);
                 _unitOfWork.Commit();
             }
         }
 
-        public UserDetailsModel Get(Guid userId)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var user = _userRepository.FindBy(userId);
-                if (user == null)
-                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+        #endregion
 
-                return user.MapToUserDetailModel();
-            }
-        }
+        #region ADMIN 
 
         public ResponseModel<UserViewModel> GetAll(RequestModel request)
         {
@@ -194,9 +167,9 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     listUsersForFiltering = listUsersForFiltering
                         .Where(x => (
-                            x.FirstName.Contains(request.SearchString) || 
-                            x.LastName.Contains(request.SearchString)) || 
-                            (x.LastName +" "+x.FirstName).Equals(request.SearchString));
+                            x.FirstName.Contains(request.SearchString) ||
+                            x.LastName.Contains(request.SearchString)) ||
+                            (x.LastName + " " + x.FirstName).Equals(request.SearchString));
                 }
                 if (!string.IsNullOrEmpty(request.EmailEnding))
                 {
@@ -296,26 +269,48 @@ namespace IntellaQuest.BusinessLogic.Services
                 return response;
             }
         }
-
-        public void UpdatePassword(ChangePasswordUserViewModel model)
+        public bool Create(UserViewModel model)
+        {
+            if (_userRepository.CheckExist(x => x.Email == model.Email))
+                throw new BllException(string.Format(ShopExceptionMassages.UserExceptionMassages.EMAIL_ALREADY_EXIST, model.Email));
+            
+            if (_userRepository.CheckExist(x => x.Username == model.Username))
+                throw new BllException(string.Format(ShopExceptionMassages.UserExceptionMassages.USERNAME_ALREADY_EXIST, model.Username));
+            
+            using (_unitOfWork.BeginTransaction())
+            {
+                var userEntity = new User
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    Username = model.Username,
+                    Password = PasswordEncryption.Encryption(model.Password),
+                };
+                _userRepository.Add(userEntity);
+                _unitOfWork.Commit();
+                return true;
+            }
+        }
+        public void Delete(Guid userId)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var user = _userRepository.FindBy(model.Id)
-                    ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                var oldPassword = PasswordEncryption.Encryption(model.OldPassword);
-                if (user.Password != oldPassword)
-                {
-                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.PASSWORD_IS_INCORRECT);
-                }
-
-                user.Password = PasswordEncryption.Encryption(model.NewPassword);
-                _userRepository.Update(user);
+                _userRepository.Delete(userId);
                 _unitOfWork.Commit();
             }
         }
+        public UserDetailsModel Get(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var user = _userRepository.FindBy(userId);
+                if (user == null)
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
 
+                return user.MapToUserDetailModel();
+            }
+        }
         public void Update(UserViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
@@ -334,164 +329,7 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
-        public void AddFavouriteProduct(Guid userId, Guid productId)
-        {
-            var user = _userRepository.FindBy(userId);
-            if (user == null)
-                throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-            var product = _productRepository.FindBy(productId);
-            if(product == null)
-                throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
+        #endregion
 
-            var favouriteProductExist = _favouriteProductsRepository.CheckExist(x=>x.Product.Id == productId && x.User.Id == userId);
-            if(favouriteProductExist)
-                throw new BllException(ShopExceptionMassages.FavouriteProductExceptionMassages.NOT_FOUND_EXCEPTION);
-
-            using (_unitOfWork.BeginTransaction())
-            {
-
-                var favouriteProduct = new FavouriteProducts
-                {
-                    User = user,
-                    Product = product
-                };
-                _favouriteProductsRepository.Add(favouriteProduct);
-                _unitOfWork.Commit();
-            }
-        }
-        public void RemoveFavuriteProduct(Guid userId, Guid productId)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var user = _userRepository.FindBy(userId) 
-                    ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                var product = _productRepository.FindBy(productId)
-                    ?? throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                var favouriteProduct = _favouriteProductsRepository.FindBy(x => x.Product == product && x.User == user);
-
-                _favouriteProductsRepository.Delete(favouriteProduct);
-
-                _unitOfWork.Commit();
-            }
-        }
-
-        public ResponseListModel<ProductViewModel> GetUserFavouriteProducts(Guid userId)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var user = _userRepository.FindBy(userId) 
-                    ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                var userFavouriteProducts = _favouriteProductsRepository.GetUserFavouriteProducts(user)
-                    ?? throw new BllException(ShopExceptionMassages.FavouriteProductExceptionMassages.NOT_FOUND_EXCEPTION); ;
-
-                return new ResponseListModel<ProductViewModel>
-                {
-                    TotalItems = userFavouriteProducts.Count(),
-                    Items = userFavouriteProducts.Select(x=>x.Product.MapToViewModel()).ToList(),
-                };
-            }
-        }
-
-        public void AddProductToCart(Guid userId, Guid productId, int quality)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var user = _userRepository.FindBy(userId);
-                if (user == null)
-                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-                var product = _productRepository.FindBy(productId);
-                if (product == null)
-                    throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                var shoppingCart = _shoppingCartRepository.FindBy(x=>x.User.Id == userId == x.Active == true);
-
-                var exist = _shoppingCartDetailRepository.CheckExist(x =>
-                    x.Product == product &&
-                    x.ShoppingCart == shoppingCart &&
-                    x.ShoppingCart.User == user);
-
-                if (exist)
-                {
-                    var shoppingDetail = _shoppingCartDetailRepository.FindBy(x =>
-                    x.Product == product &&
-                    x.ShoppingCart == shoppingCart &&
-                    x.ShoppingCart.User == user);
-
-                    shoppingDetail.Quantity++;
-
-                    _shoppingCartDetailRepository.Update(shoppingDetail);
-                    _unitOfWork.Commit();
-                }
-                else
-                {
-                    var shoppingCartDetail = new ShoppingCartDetail
-                    {
-                        Product = product,
-                        ShoppingCart = shoppingCart,
-                        Quantity = quality
-                    };
-
-                    _shoppingCartDetailRepository.Add(shoppingCartDetail);
-
-                    _unitOfWork.Commit();
-                }
-            }
-        }
-
-        public void AddProductToShoppingCartDetail(ShoppingCartDetail shoppingCartDetail)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                _shoppingCartDetailRepository.Add(shoppingCartDetail);
-                _unitOfWork.Commit();
-            }
-        }
-
-        public ShoppingCartsViewModel GetUserCartProducts(Guid userId)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var user = _userRepository.FindBy(userId)
-                    ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                var userShoppingCartProduct = _shoppingCartRepository.FindBy(x=>x.User.Id == userId == x.Active == true);//_shoppingCartRepository.All();
-
-
-                return userShoppingCartProduct.MapToViewModel();
-            }
-        }
-
-        public ResponseListModel<OrderGridViewModel> GetUserOrders(Guid userId)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId)
-                    ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                return new ResponseListModel<OrderGridViewModel>
-                {
-                    Items = userOrder.Select(x=>x.MapToGridViewModel()).ToList(),
-                    TotalItems = userOrder.Count()
-                };
-            }
-        }
-
-        public void RemoveCartDetail(Guid id)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var detailCart = _shoppingCartDetailRepository.FindBy(id);
-                if (detailCart == null)
-                {
-                    throw new BllException("Detail not exist");
-                }
-
-                _shoppingCartDetailRepository.Delete(detailCart);
-                _unitOfWork.Commit();
-            }
-        }
     }
 }

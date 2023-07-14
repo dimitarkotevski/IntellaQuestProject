@@ -21,6 +21,8 @@ namespace IntellaQuest.Web.Controllers
         {
             _userService = userService;
         }
+        #region USER AUTHENTIFICATION
+        
         [HttpPost]
         public ActionResult Registration(UserRegistrationViewModel model)
         {
@@ -31,7 +33,6 @@ namespace IntellaQuest.Web.Controllers
             }
             return Json(new { success = false });
         }
-
         [HttpPost]
         public ActionResult Login(UserLoginViewModel model)
         {
@@ -42,6 +43,10 @@ namespace IntellaQuest.Web.Controllers
             var UserToken = _userService.Login(model);
             return Json(UserToken);
         }
+        
+        #endregion
+
+        #region USER ACTION
 
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordUserViewModel model)
@@ -53,56 +58,14 @@ namespace IntellaQuest.Web.Controllers
             _userService.UpdatePassword(model);
             return Json(new { success = true });
         }
-
         [HttpPost]
         //[MyJwtTokenCustomAuthorize]
         public ActionResult UserDetails(Guid id)
         {
             return Json(_userService.Get(id));
         }
-        [HttpPost]
-        //[MyJwtTokenCustomAuthorize]
-        public ActionResult UserAddFavouriteProduct(Guid userId ,Guid productId)
-        {
-            _userService.AddFavouriteProduct(userId,productId);
-            return Json(true);
-        }
-        [HttpPost]
-        public ActionResult GetUserFavouriteProducts(Guid userId)
-        {
-            var gridProducts =  _userService.GetUserFavouriteProducts(userId);
-            var json = Json(gridProducts);
-            json.MaxJsonLength = int.MaxValue;
-            return json;
-        }
-        public ActionResult RemoveFavuriteProduct(Guid userId,Guid productId)
-        {
-            _userService.RemoveFavuriteProduct(userId, productId);
-            return Json(true);
-        }
-        [HttpPost]
-        //[MyJwtTokenCustomAuthorize]
-        public ActionResult UserAddProductToCart(Guid userId, Guid productId,int quality=1)
-        {
-            _userService.AddProductToCart(userId, productId,quality);
-            return Json(true);
-        }
-        public ActionResult GetUserCartProducts(Guid userId)
-        {
-            return Json(_userService.GetUserCartProducts(userId));
-        }
-
-        [HttpPost]
-        public ActionResult GetUserOrders(Guid userId)
-        {
-            var result = _userService.GetUserOrders(userId);
-            return Json(result);
-        }
-        public ActionResult RemoveCartDetail(Guid detailsId)
-        {
-            _userService.RemoveCartDetail(detailsId);
-            return Json(true);
-        }
+        
+        #endregion
     }
     public class MyJwtTokenCustomAuthorize : AuthorizeAttribute
     {

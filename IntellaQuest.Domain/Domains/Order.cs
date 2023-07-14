@@ -6,6 +6,7 @@ namespace IntellaQuest.Domain
     public class Order : BaseEntity
     {
         private User _user;
+        private string _orderName;
         private ShoppingCart _shoppingCart;
         private OrderStatus _orderStatus;
         private double _totalAmount;
@@ -35,6 +36,11 @@ namespace IntellaQuest.Domain
         {
             get => _dateCreated;
             set => _dateCreated = value;
+        }
+        public virtual string OrderName
+        {
+            get => _orderName;
+            set => _orderName = value;
         }
     }
 }

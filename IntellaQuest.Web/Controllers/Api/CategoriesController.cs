@@ -19,6 +19,7 @@ namespace IntellaQuest.Web.Controllers
         {
             _categoriesService = categoryService;
         }
+        #region ADMIN ACTION
 
         [HttpPost]
         public ActionResult AllCategories()
@@ -27,36 +28,28 @@ namespace IntellaQuest.Web.Controllers
             var count = data.Count;
             return Json(new { Items = data, TotalItems = count }, JsonRequestBehavior.AllowGet);
         }
-
-        // POST: Product by category
+        [HttpPost]
         public ActionResult GetProductsByCategory(string Url)
         {
             var gridProducts = _categoriesService.GetProductsByCategory(Url);
             return Json(gridProducts);
         }
-
-        //POST: Get category by Url
+        [HttpPost]
         public ActionResult GetCategoryByUrl(string Url)
         {
             var gridProducts = _categoriesService.GetCategoryByUrl(Url);
             return Json(gridProducts);
         }
-
-        // POST: Categories
         [HttpPost]
         public ActionResult All( RequestModel request)
         {
             return Json(_categoriesService.GetAll(request), JsonRequestBehavior.AllowGet);
         }
-
-        // POST: Categories/Get/5
         [HttpPost]
         public ActionResult Get( Guid id)
         {
             return Json(_categoriesService.Get(id));
         }
-
-        // POST: Categories/Create
         [HttpPost]
         public ActionResult Create( CategoryViewModel model)
         {
@@ -67,8 +60,6 @@ namespace IntellaQuest.Web.Controllers
             _categoriesService.Create(model);
             return Json(new { success =true});
         }
-
-        // POST: Categories/Edit/5
         [HttpPost]
         public ActionResult Edit( CategoryViewModel model)
         {
@@ -79,13 +70,13 @@ namespace IntellaQuest.Web.Controllers
             _categoriesService.Update(model);
             return Json(new { success = true}, JsonRequestBehavior.AllowGet);
         }
-
-        // POST: Categories/DeleteById/5
         [HttpPost]
         public ActionResult DeleteById(Guid id)
         {
             _categoriesService.DeleteById(id);
             return Json(new { success = true}, JsonRequestBehavior.AllowGet);
         }
+        
+        #endregion
     }
 }

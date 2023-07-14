@@ -9,9 +9,9 @@ namespace IntellaQeust.BusinessLogic.Mappers
 {
     public static class ShoppingCartMappers
     {
-        public static ShoppingCartsViewModel MapToViewModel(this ShoppingCart model)
+        public static ShoppingCartViewModel MapToViewModel(this ShoppingCart model)
         {
-            return new ShoppingCartsViewModel
+            return new ShoppingCartViewModel
             {
                 Id = model.Id,
                 Name = model.Name,

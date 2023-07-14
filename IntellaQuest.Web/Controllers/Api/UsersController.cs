@@ -16,21 +16,16 @@ namespace IntellaQuest.Web.Controllers
             _usersService = usersService;
         }
 
-        // GET: Users
         [HttpPost]
         public ActionResult All(RequestModel request)
         {
             return Json(_usersService.GetAll(request));
         }
-
-        // GET: Users/Details/5
         [HttpPost]
         public ActionResult Get(Guid id)
         {
             return Json(_usersService.Get(id));
         }
-
-        // GET: Users/Create
         [HttpPost]
         public ActionResult Create(UserViewModel model)
         {
@@ -41,7 +36,6 @@ namespace IntellaQuest.Web.Controllers
             _usersService.Create(model);
             return Json(new { success = true });
         }
-        // GET: Users/Edit
         [HttpPost]
         public ActionResult Edit(UserViewModel model)
         {
@@ -52,7 +46,6 @@ namespace IntellaQuest.Web.Controllers
             _usersService.Update(model);
             return Json(new { success = true });
         }
-        //POST Users/DeleteById/5
         [HttpPost]
         public ActionResult Delete(Guid id)
         {

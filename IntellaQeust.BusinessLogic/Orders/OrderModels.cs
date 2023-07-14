@@ -10,6 +10,7 @@ namespace IntellaQeust.BusinessLogic.ViewModels
     public class OrderViewModel
     {
         public Guid Id { get; set; }
+        public string OrderName { get; set; }
         public LookupViewModel ShoppingCart { get; set; }
         public LookupViewModel User { get; set; }
         public OrderStatus OrderStatus { get; set; }
@@ -18,6 +19,7 @@ namespace IntellaQeust.BusinessLogic.ViewModels
     public class OrderGridViewModel
     {
         public Guid Id { get; set; }
+        public string OrderName { get; set; }
         public int NumberOfProducts { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public double TotalAmount { get; set; }

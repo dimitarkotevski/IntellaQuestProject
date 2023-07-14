@@ -25,7 +25,6 @@ namespace IntellaQuest.Web.Controllers
         {
             _productsService = productsService;
         }
-        // POST: Products
         [HttpPost]
         public ActionResult All(RequestModel request)
         {
@@ -41,25 +40,19 @@ namespace IntellaQuest.Web.Controllers
             var recordsTotal = data.Count;
             return Json( new {data, recordsTotal }, JsonRequestBehavior.AllowGet);
         }
-
-        // POST: Products/get/5
-
+        [HttpPost]
         public ActionResult Get(Guid Id)
         {
             return Json(_productsService.Get(Id));
         }
-
         [HttpPost]
         public ActionResult GetProductImage(Guid id)
         {
 
-            var image = _productsService.GetProductImage(id);   // You can use your own method over here.
-                                                                //
-
+            var image = _productsService.GetProductImage(id);
             return Json(image);
         }
-
-        // POST: Products/Create
+        #region ADMIN ACTION
         [HttpPost]
         public ActionResult Create(ProductViewModel model)
         {
@@ -69,10 +62,6 @@ namespace IntellaQuest.Web.Controllers
             }
             return Json(new { success = _productsService.Create(model) });
         }
-
-        
-
-        // POST: Products/Edit/5
         [HttpPost]
         public ActionResult Edit(ProductViewModel model)
         {
@@ -83,20 +72,18 @@ namespace IntellaQuest.Web.Controllers
             
             return Json(new {success= _productsService.Update(model)});
         }
-
-        // POST: Products/Delete/5
         [HttpPost]
         public ActionResult Delete(Guid Id)
         {
             
             return Json(new {success= _productsService.Delete(Id)});
         }
-
         [HttpPost]
         public ActionResult AddImageToProduct(Guid id,string image)
         {
             _productsService.UploadImage(id,image);
             return Json(true);
         }
+        #endregion
     }
 }

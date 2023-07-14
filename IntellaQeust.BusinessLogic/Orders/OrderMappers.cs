@@ -12,6 +12,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new OrderViewModel
             {
                 Id=model.Id,
+                OrderName= model.OrderName,
                 ShoppingCart = new LookupViewModel
                 {
                     Id = model.ShoppingCart.Id,
@@ -28,6 +29,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new OrderGridViewModel
             {
                 Id = model.Id,
+                OrderName = model.OrderName,
                 NumberOfProducts = model.ShoppingCart.ShoppingCartDetails.Select(x=>x.Product).Count(),
                 OrderStatus = model.OrderStatus,
                 TotalAmount = sumProducts == model.TotalAmount ? model.TotalAmount : sumProducts,

@@ -157,9 +157,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cart_detail_cart_detail_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./cart-detail/cart-detail.component */ 2110);
 /* harmony import */ var _convert_date__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./convert-date */ 5143);
 /* harmony import */ var _order_pipe__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./order-pipe */ 5080);
-/* harmony import */ var _side_filter_side_filter_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./side-filter/side-filter.component */ 579);
-/* harmony import */ var _loading_item_loading_item_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./loading-item/loading-item.component */ 125);
-/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./loading-items/loading-items.component */ 271);
+/* harmony import */ var _side_filter_side_filter_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./side-filter/side-filter.component */ 7579);
+/* harmony import */ var _loading_item_loading_item_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./loading-item/loading-item.component */ 1125);
+/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./loading-items/loading-items.component */ 8271);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @angular/core */ 3184);
 
 
@@ -738,9 +738,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_category_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/category.service */ 4655);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 6362);
 /* harmony import */ var _breadcrumb_breadcrumb_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../breadcrumb/breadcrumb.component */ 6723);
-/* harmony import */ var _side_filter_side_filter_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../side-filter/side-filter.component */ 579);
+/* harmony import */ var _side_filter_side_filter_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../side-filter/side-filter.component */ 7579);
 /* harmony import */ var _products_grid_products_grid_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../products-grid/products-grid.component */ 3296);
-/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loading-items/loading-items.component */ 271);
+/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../loading-items/loading-items.component */ 8271);
 
 
 
@@ -920,7 +920,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _breadcrumb_breadcrumb_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../breadcrumb/breadcrumb.component */ 6723);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 6362);
 /* harmony import */ var _products_grid_products_grid_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../products-grid/products-grid.component */ 3296);
-/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading-items/loading-items.component */ 271);
+/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading-items/loading-items.component */ 8271);
 
 
 
@@ -1196,7 +1196,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _carousel_carousel_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./carousel/carousel.component */ 276);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 6362);
 /* harmony import */ var _products_grid_products_grid_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../products-grid/products-grid.component */ 3296);
-/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading-items/loading-items.component */ 271);
+/* harmony import */ var _loading_items_loading_items_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../loading-items/loading-items.component */ 8271);
 
 
 
@@ -1320,7 +1320,7 @@ HomeComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["
 
 /***/ }),
 
-/***/ 125:
+/***/ 1125:
 /*!********************************************************!*\
   !*** ./src/app/loading-item/loading-item.component.ts ***!
   \********************************************************/
@@ -1347,7 +1347,7 @@ LoadingItemComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODUL
 
 /***/ }),
 
-/***/ 271:
+/***/ 8271:
 /*!**********************************************************!*\
   !*** ./src/app/loading-items/loading-items.component.ts ***!
   \**********************************************************/
@@ -1830,7 +1830,7 @@ class OrderGridComponent {
     }
 }
 OrderGridComponent.ɵfac = function OrderGridComponent_Factory(t) { return new (t || OrderGridComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](_services_order_service__WEBPACK_IMPORTED_MODULE_0__.OrderService), _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__.AuthService)); };
-OrderGridComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({ type: OrderGridComponent, selectors: [["app-order-grid"]], decls: 7, vars: 4, consts: [[1, "container"], [3, "isItem", "itemDetail"], [1, "card"], ["class", "card-body", 4, "ngIf"], [1, "card-body"], [1, "table", "table-hover"], ["scope", "col"], ["scope", "col", 1, "text-center"], [4, "ngFor", "ngForOf"], ["class", "bg-danger text-white text-center", 4, "ngIf"], ["class", "bg-info text-white text-center", 4, "ngIf"], ["class", "bg-warning text-white text-center", 4, "ngIf"], ["class", "bg-success text-white text-center", 4, "ngIf"], [1, "bg-danger", "text-white", "text-center"], [1, "bg-info", "text-white", "text-center"], [1, "bg-warning", "text-white", "text-center"], [1, "bg-success", "text-white", "text-center"]], template: function OrderGridComponent_Template(rf, ctx) { if (rf & 1) {
+OrderGridComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({ type: OrderGridComponent, selectors: [["app-order-grid"]], decls: 7, vars: 4, consts: [[1, "container"], [3, "isItem", "itemDetail"], [1, "card"], ["class", "card-body", 4, "ngIf"], [1, "card-body"], [1, "table", "table-responsive-md", "table-hover"], ["scope", "col"], ["scope", "col", 1, "text-center"], [4, "ngFor", "ngForOf"], ["class", "bg-danger text-white text-center", 4, "ngIf"], ["class", "bg-info text-white text-center", 4, "ngIf"], ["class", "bg-warning text-white text-center", 4, "ngIf"], ["class", "bg-success text-white text-center", 4, "ngIf"], [1, "bg-danger", "text-white", "text-center"], [1, "bg-info", "text-white", "text-center"], [1, "bg-warning", "text-white", "text-center"], [1, "bg-success", "text-white", "text-center"]], template: function OrderGridComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](1, "app-breadcrumb", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](2, "div", 2);
@@ -2724,7 +2724,7 @@ SettingsComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3
 
 /***/ }),
 
-/***/ 579:
+/***/ 7579:
 /*!******************************************************!*\
   !*** ./src/app/side-filter/side-filter.component.ts ***!
   \******************************************************/

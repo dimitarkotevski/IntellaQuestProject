@@ -10,6 +10,7 @@ using IntellaQeust.BusinessLogic.Requests;
 using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQeust.BusinessLogic.Mappers;
+using IntellaQuest.Domain.Enums;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -21,13 +22,18 @@ namespace IntellaQuest.BusinessLogic.Services
         void Update(OrderViewModel model);
         void Delete(Guid Id);
         bool CheckUserExists(User user);
+
+        ResponseListModel<OrderGridViewModel> GetUserNotActiveOrders(Guid userId);
+        ResponseListModel<OrderGridViewModel> GetUserActiveOrder(Guid userId);
+
     }
     public class OrderService : IOrderService
     {
+        private readonly IUnitOfWork _unitOfWork;
+
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
-        private readonly IUnitOfWork _unitOfWork;
 
         public OrderService(IOrderRepository orderRepository, 
                             IUserRepository userRepository, 
@@ -40,12 +46,11 @@ namespace IntellaQuest.BusinessLogic.Services
             _unitOfWork = unitOfWork;
         }
 
+        #region CRUD ADMIN
         public bool CheckUserExists(User user)
         {
             return _orderRepository.CheckExist(x => x.User == user);
         }
-
-
         public Guid Create(OrderViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
@@ -71,7 +76,6 @@ namespace IntellaQuest.BusinessLogic.Services
                 return order.Id;
             }
         }
-
         public void Delete(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
@@ -80,7 +84,6 @@ namespace IntellaQuest.BusinessLogic.Services
                 _unitOfWork.Commit();
             }
         }
-
         public OrderViewModel Get(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
@@ -94,7 +97,6 @@ namespace IntellaQuest.BusinessLogic.Services
                 return orderEntity.MapToViewModel();
             }
         }
-
         public ResponseModel<OrderViewModel> GetAll(RequestModel request)
         {
             return FilterAndPage(request);
@@ -200,5 +202,41 @@ namespace IntellaQuest.BusinessLogic.Services
                 _unitOfWork.Commit();
             }
         }
+        #endregion
+
+        #region USER
+
+        public ResponseListModel<OrderGridViewModel> GetUserNotActiveOrders(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus == OrderStatus.Completed)
+                    ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                return new ResponseListModel<OrderGridViewModel>
+                {
+                    Items = userOrder.Select(x => x.MapToGridViewModel()).ToList(),
+                    TotalItems = userOrder.Count()
+                };
+            }
+        }
+
+        public ResponseListModel<OrderGridViewModel> GetUserActiveOrder(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus != OrderStatus.Completed)
+                    ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                return new ResponseListModel<OrderGridViewModel>
+                {
+                    Items = userOrder.Select(x => x.MapToGridViewModel()).ToList(),
+                    TotalItems = userOrder.Count()
+                };
+            }
+        }
+
+
+        #endregion
     }
 }

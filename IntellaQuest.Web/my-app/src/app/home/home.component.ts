@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
+import { ProductService } from '../customer-components/product-components/product.service';
 import { ProductsFilter } from '../models/products-filter';
 import { Router } from '@angular/router';
 import { ResponseListModel } from '../models/response';
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  changeSorting(sorting: string): void {
+  ChangeSorting(sorting: string): void {
     this.activeSorting = sorting;
     this.productFilter ={
       SearchString:"",
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       this.totalItems = products.recordsTotal;
     });
   }
-  changeRoute(url: string): void {
+  ChangeRoute(url: string): void {
     this.router.navigate(["sort/"+url]);
   }
 

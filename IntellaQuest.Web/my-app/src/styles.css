@@ -210,3 +210,8 @@ body{
 .solid-no-radius{
 	border-radius: 0;
 }
+
+.solid-button-order{
+	background-color: coral;
+	color: white;
+}

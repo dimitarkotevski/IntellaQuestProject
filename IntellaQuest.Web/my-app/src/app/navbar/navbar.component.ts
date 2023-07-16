@@ -1,7 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../authentification/auth.service';
-import { CategoryService } from '../services/category.service';
+import { AuthentificationService } from '../authentification/authentification.service';
+import { CategoryService } from '../category-products/category.service';
 import { ResponseListModel } from '../models/response';
 import { Category } from '../models/category';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +19,7 @@ export class NavbarComponent implements OnInit {
   id?: string | null;
 
   constructor(
-      private authService: AuthService,
+      private authService: AuthentificationService,
       private categoryService: CategoryService,
       private toastr: ToastrService,
     ){

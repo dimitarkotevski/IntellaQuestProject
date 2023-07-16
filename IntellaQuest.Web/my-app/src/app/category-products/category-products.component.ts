@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CategoryService } from '../services/category.service';
+import { CategoryService } from './category.service';
 import { ResponseListModel } from '../models/response';
 import { Product } from '../models/product';
 import { Category } from '../models/category';

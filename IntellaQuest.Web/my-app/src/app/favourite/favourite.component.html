@@ -1,28 +1,32 @@
 <div class="container">
-    
-  <app-breadcrumb  [isItem]="false" [itemDetail]="'Favourite Products'"></app-breadcrumb>
 
-    <div *ngIf="responseModel?.TotalItems" class="py-3">
-        <app-products-grid [hasRemoveProductButton]="true" [products]="responseModel?.Items"></app-products-grid>
-      </div>
+  <app-breadcrumb [isItem]="false" [itemDetail]="'Favourite Products'"></app-breadcrumb>
 
-    <div *ngIf="!isLoading">
-      <div *ngIf="!responseModel?.TotalItems">
-        <div class="text-center">
-          <div class="card" style="text-align: -webkit-center;">
-            <div class="card-body"> 
-              <div class="circle">
-                <i class='fa-regular fa-5x fa-heart'></i>
-              </div>
-              <div class="p-3">
-                <div>List of favourite product is empty!</div>
+  <div *ngIf="responseModel?.TotalItems" class="py-3">
+    <app-products-grid 
+        [hasRemoveProductButton]="true" 
+        [type]="'favourite'"
+        (refreshState)="refreshState()"
+        [products]="responseModel?.Items"></app-products-grid>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <div *ngIf="responseModel?.TotalItems === 0">
+      <div class="text-center">
+        <div class="card" style="text-align: -webkit-center;">
+          <div class="card-body">
+            <div class="circle">
+              <i class='fa-regular fa-5x fa-heart'></i>
+            </div>
+            <div class="p-3">
+              <div>List of favourite product is empty!</div>
               <a class="solid_color" href="/"><strong>Keep buying</strong></a>
-              </div>
-            </div> 
-        </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <app-loading-items *ngIf="isLoading" ></app-loading-items>
+  <app-loading-grid *ngIf="isLoading"></app-loading-grid>
 </div>

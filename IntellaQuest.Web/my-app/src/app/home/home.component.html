@@ -4,25 +4,28 @@
   <div>
     <div>
       <ul class="shop__sorting">
-        <li [ngClass]="{ 'active': activeSorting === 'Popular' }" (click)="changeSorting('Popular')">
-          <a class="btn solid-no-radius" (click)="changeRoute('popular')">Popular</a>
+        <li [ngClass]="{ 'active': activeSorting === 'Popular' }" (click)="ChangeSorting('Popular')">
+          <a class="btn solid-no-radius" (click)="ChangeRoute('popular')">Popular</a>
         </li>
-        <li [ngClass]="{ 'active': activeSorting === 'Newest' }" (click)="changeSorting('Newest')">
-          <a class="btn solid-no-radius" (click)="changeRoute('newest')">Newest</a>
+        <li [ngClass]="{ 'active': activeSorting === 'Newest' }" (click)="ChangeSorting('Newest')">
+          <a class="btn solid-no-radius" (click)="ChangeRoute('newest')">Newest</a>
         </li>
-        <li [ngClass]="{ 'active': activeSorting === 'BestSelling' }" (click)="changeSorting('BestSelling')">
-          <a class="btn solid-no-radius" (click)="changeRoute('best-selling')">Best Selling</a>
+        <li [ngClass]="{ 'active': activeSorting === 'BestSelling' }" (click)="ChangeSorting('BestSelling')">
+          <a class="btn solid-no-radius" (click)="ChangeRoute('best-selling')">Best Selling</a>
         </li>
-        <li [ngClass]="{ 'active': activeSorting === 'PriceLow' }" (click)="changeSorting('PriceLow')">
-          <a class="btn solid-no-radius" (click)="changeRoute('price-low')">Price (low)</a>
+        <li [ngClass]="{ 'active': activeSorting === 'PriceLow' }" (click)="ChangeSorting('PriceLow')">
+          <a class="btn solid-no-radius" (click)="ChangeRoute('price-low')">Price (low)</a>
         </li>
-        <li [ngClass]="{ 'active': activeSorting === 'PriceHigh' }" (click)="changeSorting('PriceHigh')">
-          <a class="btn solid-no-radius" (click)="changeRoute('price-high')">Price (high)</a>
+        <li [ngClass]="{ 'active': activeSorting === 'PriceHigh' }" (click)="ChangeSorting('PriceHigh')">
+          <a class="btn solid-no-radius" (click)="ChangeRoute('price-high')">Price (high)</a>
         </li>
       </ul>
 
-      <app-products-grid *ngIf="!isLoading" [hasRemoveProductButton]="false" [products]="products"></app-products-grid>
-      <app-loading-items *ngIf="isLoading" ></app-loading-items>
+      <app-products-grid *ngIf="!isLoading" 
+            [hasRemoveProductButton]="false" 
+            [type]="'home'"
+            [products]="products"></app-products-grid>
+      <app-loading-grid *ngIf="isLoading" ></app-loading-grid>
 
     </div> 
   </div> 

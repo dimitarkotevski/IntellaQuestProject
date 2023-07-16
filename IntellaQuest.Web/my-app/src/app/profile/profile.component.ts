@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDetails } from '../models/login/user-details';
-import { AuthService } from '../authentification/auth.service';
+import { AuthentificationService } from '../authentification/authentification.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthService } from '../authentification/auth.service';
 export class ProfileComponent implements OnInit {
   userDetails?: UserDetails;
   constructor(
-    private authService: AuthService
+    private authService: AuthentificationService
   ) { }
 
   ngOnInit(): void {

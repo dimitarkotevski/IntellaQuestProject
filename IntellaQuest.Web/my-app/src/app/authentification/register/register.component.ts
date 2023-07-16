@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthentificationService } from '../authentification.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private authService:AuthService) { }
+      private authService:AuthentificationService) { }
 
   ngOnInit(): void {
     if(this.authService.IsAuthenticated()){

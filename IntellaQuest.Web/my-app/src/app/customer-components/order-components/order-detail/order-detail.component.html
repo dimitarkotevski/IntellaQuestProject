@@ -1,0 +1,29 @@
+<div class="card">
+    <div *ngIf="activeOrder">
+        <div class="card-body">
+            <h1>{{activeOrder?.OrderName}}</h1>
+            <hr/>
+            <app-products-grid 
+                    [type]="'order'" 
+                    [products]="activeOrder.Products">
+            </app-products-grid>
+            <hr/>
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn solid_hover_color w-100 h-100">Cancel order</button>
+                </div>
+                <div class="col-6">
+                    <h3>Total amount: ${{activeOrder.TotalAmount.toFixed(2)}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!activeOrder">
+        <div class="card-body">
+            <h1>No orders</h1>
+            <hr/>
+        </div>
+    </div>
+</div>
+<br/>
+

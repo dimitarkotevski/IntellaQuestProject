@@ -8,35 +8,37 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ProductService } from './services/product.service';
+import { ProductService } from './customer-components/product-components/product.service';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { ProfileComponent } from './profile/profile.component';
-import { CartComponent } from './cart/cart.component';
 import { FavouriteComponent } from './favourite/favourite.component';
 import { SettingsComponent } from './settings/settings.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductDetailComponent } from './customer-components/product-components/product-detail/product-detail.component';
 import { FooterComponent } from './footer/footer.component';
-import { ErrorPageComponent } from './error-page/error-page.component';
+import { ErrorPageComponent } from './customer-components/error-page/error-page.component';
 import { ByPassSecurityPipe } from './by-pass-security';
 import { CategoryProductsComponent } from './category-products/category-products.component';
 import { CategoriesNavbarComponent } from './navbar/categories-navbar/categories-navbar.component';
 import { RegularNavbarComponent } from './navbar/regular-navbar/regular-navbar.component';
 import { LoginComponent } from './authentification/login/login.component';
 import { RegisterComponent } from './authentification/register/register.component';
-import { ProductsGridComponent } from './products-grid/products-grid.component';
-import { CarouselComponent } from './home/carousel/carousel.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { CarouselComponent } from './customer-components/carousel/carousel.component';
+import { BreadcrumbComponent } from './customer-components/breadcrumb/breadcrumb.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OrderGridComponent } from './order-grid/order-grid.component';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
-import { CartDetailComponent } from './cart-detail/cart-detail.component';
+import { OrderDetailComponent } from './customer-components/order-components/order-detail/order-detail.component';
 import { DateConverter } from './convert-date';
 import { OrderStatusPipe } from './order-pipe';
-import { SideFilterComponent } from './side-filter/side-filter.component';
-import { LoadingItemComponent } from './loading-item/loading-item.component';
-import { LoadingItemsComponent } from './loading-items/loading-items.component';
-import { AuthService } from './authentification/auth.service';
+import { SideFilterComponent } from './customer-components/side-filter/side-filter.component';
+import { LoadingDetailComponent } from './customer-components/loading-components/loading-detail/loading-detail.component';
+import { AuthentificationService } from './authentification/authentification.service';
+import { CartGridComponent } from './customer-components/cart-components/cart-grid/cart-grid.component';
+import { LoadingGridComponent } from './customer-components/loading-components/loading-grid/loading-grid.component';
+import { OrderGridComponent } from './customer-components/order-components/order-grid/order-grid.component';
+import { ProductsGridComponent } from './customer-components/product-components/products-grid/products-grid.component';
+import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
+
 
 
 
@@ -51,7 +53,7 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    CartComponent,
+    CartGridComponent,
     FavouriteComponent,
     SettingsComponent,
     ProductDetailComponent,
@@ -68,10 +70,11 @@ const routes: Routes = [
     BreadcrumbComponent,
     OrderGridComponent,
     OrderDetailComponent,
-    CartDetailComponent,
     SideFilterComponent,
-    LoadingItemComponent,
-    LoadingItemsComponent,    
+    LoadingDetailComponent,
+    LoadingGridComponent,
+    CartComponent,
+    OrderComponent,    
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
   ],
   providers: [
-    AuthService,
+    AuthentificationService,
     ProductService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService

@@ -3,6 +3,7 @@ import { ShoppingCart } from "./shopping-cart";
 
 export class OrderGridViewModel{
     Id?:string;
+    OrderName?: string;
     OrderStatus?: OrderStatus;
     ShoppingCart?: ShoppingCart;
     NumberOfProducts?: number;

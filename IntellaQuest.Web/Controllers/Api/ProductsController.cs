@@ -84,6 +84,12 @@ namespace IntellaQuest.Web.Controllers
             _productsService.UploadImage(id,image);
             return Json(true);
         }
+        [HttpPost]
+        public ActionResult GetAllBrands(Guid categoryId)
+        {
+            return Json(_productsService.GetAllBrands(categoryId));
+        }
+        
         #endregion
     }
 }

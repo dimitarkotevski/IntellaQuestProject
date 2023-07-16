@@ -3,6 +3,7 @@ using FluentValidation.Attributes;
 using IntellaQuest.Domain;
 using IntellaQuest.Domain.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace IntellaQeust.BusinessLogic.ViewModels
 {
@@ -13,6 +14,14 @@ namespace IntellaQeust.BusinessLogic.ViewModels
         public string OrderName { get; set; }
         public LookupViewModel ShoppingCart { get; set; }
         public LookupViewModel User { get; set; }
+        public OrderStatus OrderStatus { get; set; }
+        public double TotalAmount { get; set; }
+    }
+    public class OrderViewModelWithProducts
+    {
+        public Guid Id { get; set; }
+        public string OrderName { get; set; }
+        public List<ProductViewModel> Products { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public double TotalAmount { get; set; }
     }

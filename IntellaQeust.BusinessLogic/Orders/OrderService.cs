@@ -24,7 +24,7 @@ namespace IntellaQuest.BusinessLogic.Services
         bool CheckUserExists(User user);
 
         ResponseListModel<OrderGridViewModel> GetUserNotActiveOrders(Guid userId);
-        ResponseListModel<OrderGridViewModel> GetUserActiveOrder(Guid userId);
+        OrderViewModelWithProducts GetUserActiveOrder(Guid userId);
 
     }
     public class OrderService : IOrderService
@@ -221,18 +221,14 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
-        public ResponseListModel<OrderGridViewModel> GetUserActiveOrder(Guid userId)
+        public OrderViewModelWithProducts GetUserActiveOrder(Guid userId)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus != OrderStatus.Completed)
+                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus != OrderStatus.Completed).FirstOrDefault()
                     ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
 
-                return new ResponseListModel<OrderGridViewModel>
-                {
-                    Items = userOrder.Select(x => x.MapToGridViewModel()).ToList(),
-                    TotalItems = userOrder.Count()
-                };
+                return userOrder.MapToViewModelWithProducts();
             }
         }
 

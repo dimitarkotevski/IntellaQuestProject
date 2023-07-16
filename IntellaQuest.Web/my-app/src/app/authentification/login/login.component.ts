@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthentificationService } from '../authentification.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   username: string = "";
   password: string = "";
   constructor(
-    private authService:AuthService,
+    private authService:AuthentificationService,
     private router:Router,
     ) { }
 

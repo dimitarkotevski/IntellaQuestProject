@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../authentification/auth.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthentificationService } from '../authentification/authentification.service';
+import { OrderService } from '../customer-components/order-components/order.service';
+import { ShoppingCartService } from '../customer-components/cart-components/shopping-cart.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -9,9 +11,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  shoppingCart?: any;
+
+  @Input() shoppingCart?: any;
+  isLoading: boolean = true;
+
   constructor(
-    private authService: AuthService,
+    private authService: AuthentificationService,
+    private shoppingCartService: ShoppingCartService,
     private router: Router,
     private toastr: ToastrService
   ) { }
@@ -21,10 +27,15 @@ export class CartComponent implements OnInit {
       this.router.navigate(["login"]);
     }
 
-    this.authService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
-      this.shoppingCart = res;
-    })
+    this.refreshState();
 
+  }
+
+  refreshState(): void {
+    this.shoppingCartService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res) => {
+      this.shoppingCart = res;
+      this.isLoading = false;
+    });
   }
 
   handleMinus(i:number){
@@ -38,9 +49,9 @@ export class CartComponent implements OnInit {
 
   deleteProductCartDetail(id:string){
     if(id){
-      this.authService.RemoveCartDetail(id)?.subscribe(()=>{
+      this.shoppingCartService.RemoveCartDetail(id)?.subscribe(()=>{
 
-        this.authService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
+        this.shoppingCartService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
           this.shoppingCart = res;
         })
 

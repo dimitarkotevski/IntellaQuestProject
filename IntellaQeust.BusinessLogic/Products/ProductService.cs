@@ -29,6 +29,7 @@ namespace IntellaQuest.BusinessLogic.Services
         bool CheckNameExists(string Name);
         List<ProductViewModel> GetAllTable();
         void UploadImage(Guid Id, string image);
+        List<string> GetAllBrands(Guid categoryId);
     }
     public class ProductService : IProductService
     {
@@ -256,6 +257,18 @@ namespace IntellaQuest.BusinessLogic.Services
             return FilterAndPage(request);
         }
 
+        public List<string> GetAllBrands(Guid categoryId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var category = _categoryRepository.FindBy(categoryId);
+                var listOfBrands = _categoryRepository.GetProductsByCategory(category)
+                            .Select(x => x.Name.Substring(0, x.Name.IndexOf(" "))).ToList(); 
+                            //_productsRepository.All().Select(x => x.Name.Substring(0,x.Name.IndexOf(" "))).ToList();
+
+                return listOfBrands;
+            }
+        }
         #endregion
     }
 }

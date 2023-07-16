@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { ResponseListModel } from 'src/app/models/response';
-import { CategoryService } from 'src/app/services/category.service';
+import { CategoryService } from 'src/app/category-products/category.service';
 
 @Component({
   selector: 'app-categories-navbar',

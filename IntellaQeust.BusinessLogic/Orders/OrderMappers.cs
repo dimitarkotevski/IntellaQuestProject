@@ -1,6 +1,7 @@
 ﻿using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
 using System.Linq;
+using System.Reflection;
 
 namespace IntellaQeust.BusinessLogic.Mappers
 {
@@ -34,6 +35,20 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 OrderStatus = model.OrderStatus,
                 TotalAmount = sumProducts == model.TotalAmount ? model.TotalAmount : sumProducts,
                 DateCreated = model.DateCreated
+            };
+        }
+
+        public static OrderViewModelWithProducts MapToViewModelWithProducts(this Order model)
+        {
+            var sumProducts = model.ShoppingCart.ShoppingCartDetails.Select(x => x.Product.Price).Sum();
+
+            return new OrderViewModelWithProducts
+            {
+                Id = model.Id,
+                OrderName = model.OrderName,
+                OrderStatus = model.OrderStatus,
+                Products = model.ShoppingCart.ShoppingCartDetails.Select(x => x.Product.MapToViewModel()).ToList(),
+                TotalAmount = sumProducts == model.TotalAmount ? model.TotalAmount : sumProducts,
             };
         }
     }

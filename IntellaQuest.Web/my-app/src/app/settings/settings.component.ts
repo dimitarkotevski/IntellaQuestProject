@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { countries } from '../countries/countries';
 import { UserDetails } from '../models/login/user-details';
-import { AuthService } from '../authentification/auth.service';
+import { AuthentificationService } from '../authentification/authentification.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
   activeTab: string = 'account';
   userDetails?: UserDetails;
 
-  constructor( private authService: AuthService,private toastr: ToastrService ) { }
+  constructor( private authService: AuthentificationService,private toastr: ToastrService ) { }
 
   ngOnInit(): void {
     this.authService.GetUserDetails(this.authService.GetLoggedUserId()).subscribe((response:UserDetails)=>{

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
-import { AuthService } from 'src/app/authentification/auth.service';
-import { CategoryService } from 'src/app/services/category.service';
+import { AuthentificationService } from 'src/app/authentification/authentification.service';
+import { CategoryService } from 'src/app/category-products/category.service';
 
 @Component({
   selector: 'app-regular-navbar',
@@ -17,7 +17,7 @@ export class RegularNavbarComponent implements OnInit {
   id?: string | null;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthentificationService,
     private categoryService: CategoryService,
   ) { 
     this.refreshState = new EventEmitter();

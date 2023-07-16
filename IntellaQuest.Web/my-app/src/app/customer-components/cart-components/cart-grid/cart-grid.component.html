@@ -1,0 +1,65 @@
+<div class="container">
+  <app-breadcrumb [isItem]="false" [itemDetail]="'Cart'"></app-breadcrumb>
+
+  <div *ngIf="!isLoading">
+    <div *ngFor="let detail of shoppingCart.ShoppingCartDetails; let i = index;" class="card">
+      <div class="card-body">
+        <div class="col-lg-12">
+          <div class="col-lg-12">
+            <div>
+              <a class="solid-color-a" [routerLink]="['/product-detail',detail.Product.Id]">
+                <h1>{{detail.Product?.Name}}</h1>
+              </a>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-lg-3 col-sm-12">
+              <a [routerLink]="['/product-detail',detail.Product.Id]">
+                <img [src]="detail.Product.Image | byPassSecurity" class="img-responsive" alt="...">
+              </a>
+            </div>
+            <div class="col-lg-6 col-sm-12 solid-side-borders">
+              <p>{{detail.Product?.Description}}</p>
+            </div>
+            <div class="col-lg-3 col-sm-12 text-center">
+              <div>${{detail.Product?.Price.toFixed(2)}}</div>
+              <hr />
+              <div class="text-center">
+                <div class="wrapper">
+                  <button class="plusminus" (click)="handleMinus(i)">-</button>
+                  <input type="number" class="num" [ngModel]="detail?.Quantity" />
+                  <button class="plusminus" (click)="handlePlus(i)">+</button>
+                </div>
+              </div>
+              <hr />
+              <div>
+                <button (click)="deleteProductCartDetail(detail.Id)" class=" w-100 btn btn-danger">Delete from
+                  Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+
+    <app-loading-grid *ngIf="isLoading" [isGridLoading]="false"></app-loading-grid>
+
+
+  </div>
+  <div *ngIf="shoppingCart.ShoppingCartDetails.length==0" class="container">
+    <div class="text-center">
+      <div class="card" style="text-align: -webkit-center;">
+        <div class="card-body">
+          <div class="circle">
+            <i class='fa-5x fa-solid fa-bag-shopping'></i>
+          </div>
+          <div class="p-3">
+            <div>List of cart product is empty!</div>
+            <a class="solid_color" href="/"><strong>Keep buying</strong></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

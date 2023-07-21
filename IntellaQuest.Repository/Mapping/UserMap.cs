@@ -59,6 +59,11 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Nullable();
 
+            Map(c => c.Amount)
+                .Column("Amount")
+                .Access.CamelCaseField(Prefix.Underscore)
+                .Nullable();
+
             #endregion
 
             #region Foreign Key
@@ -67,6 +72,11 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             References(x => x.Payment)
                 //.PropertyRef("Id")
                 .Column("PaymentId")
+                .Access
+                .CamelCaseField(Prefix.Underscore).Cascade.All();
+
+            References(x=>x.Role)
+                .Column("RoleId")
                 .Access
                 .CamelCaseField(Prefix.Underscore).Cascade.All();
 

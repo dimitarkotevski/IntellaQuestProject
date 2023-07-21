@@ -7,11 +7,13 @@ namespace IntellaQuest.Domain
     public class Product : BaseEntity
     {
         private string _name;
-        private string _description;
-        private Category _category;
-        private IList<Order> _orders;
         private double _price;
         private byte[] _image;
+        private string _description;
+        private string _tags;
+
+        private Category _category;
+        private IList<Order> _orders;
         private DateTime _created;
         public Product()
         {
@@ -21,6 +23,11 @@ namespace IntellaQuest.Domain
         { 
             get => _name; 
             set => _name = value; 
+        }
+        public virtual string Tags
+        {
+            get => _tags;
+            set => _tags = value;
         }
         public virtual string Description 
         {

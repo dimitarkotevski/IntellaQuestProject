@@ -15,7 +15,9 @@ namespace IntellaQuest.Domain
         private string _state;
         private string _city;
         private string _zipCode;
+        private double _amount;
         private Payment _payment;
+        private Role _role;
         private IList<Order> _orders;
         private IList<FavouriteProducts> _favouriteProducts;
         public User() 
@@ -73,6 +75,11 @@ namespace IntellaQuest.Domain
             get => _zipCode;
             set => _zipCode = value;
         }
+        public virtual double Amount
+        {
+            get => _amount; 
+            set => _amount = value;
+        }
         public virtual IList<FavouriteProducts> FavouriteProducts
         {
             get => _favouriteProducts; 
@@ -87,6 +94,11 @@ namespace IntellaQuest.Domain
         {
             get => _payment;
             set => _payment = value;
+        }
+        public virtual Role Role
+        {
+            get => _role;
+            set => _role = value;
         }
     }
 }

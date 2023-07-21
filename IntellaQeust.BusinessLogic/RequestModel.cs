@@ -12,7 +12,10 @@ namespace IntellaQeust.BusinessLogic.Requests
         public int PageNeeded { get; set; }
         public int Size { get; set; }
         public Guid? EntityId { get; set; }
-        public List<string> SearchList{ get; set; }
+        public List<string> SearchBrands { get; set; }
+        public List<string> SearchList { get; set; }
+        public int? PriceFrom { get; set; }
+        public int? PriceTo { get; set; }
         public string SearchStatus { get; set; }
         public string EmailEnding { get; set; }
     }

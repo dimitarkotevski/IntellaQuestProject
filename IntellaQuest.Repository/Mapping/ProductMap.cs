@@ -13,6 +13,7 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Id(c => c.Id);
 
             Map(c => c.Name);
+            Map(c => c.Tags);
             Map(c => c.Description);
             Map(c => c.Price);
             Map(c => c.Created);

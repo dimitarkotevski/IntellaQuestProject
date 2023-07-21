@@ -64,6 +64,7 @@ namespace IntellaQuest.BusinessLogic.ViewModels
         public Guid Id { get; set; }
         public string Username { get; set; }
         public string Token { get; set; }
+        public string Role { get; set; }
     }
     public class UserViewModelValidator : AbstractValidator<UserViewModel>
     {

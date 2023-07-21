@@ -29,9 +29,9 @@ namespace IntellaQuest.Web.Controllers
             return Json(new { Items = data, TotalItems = count }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public ActionResult GetProductsByCategory(string Url)
+        public ActionResult GetProductsByCategory(string Url,RequestModel request)
         {
-            var gridProducts = _categoriesService.GetProductsByCategory(Url);
+            var gridProducts = _categoriesService.GetProductsByCategory(Url,request);
             return Json(gridProducts);
         }
         [HttpPost]

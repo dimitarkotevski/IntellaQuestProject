@@ -1,4 +1,5 @@
-﻿using IntellaQeust.BusinessLogic.Exceptions;
+﻿using FluentNHibernate.Utils;
+using IntellaQeust.BusinessLogic.Exceptions;
 using IntellaQeust.BusinessLogic.Exceptions.ExceptionMassages;
 using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQeust.BusinessLogic.Requests;
@@ -11,6 +12,7 @@ using IntellaQuest.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Policy;
 
 namespace IntellaQuest.BusinessLogic.Services
@@ -26,7 +28,7 @@ namespace IntellaQuest.BusinessLogic.Services
         bool CheckCategoryNameExists(String Name);
         bool CheckCategoryStatus(bool status);
         ResponseListModel<CategoryViewModel> FilterAndPage(RequestModel request);
-        ResponseListModel<ProductViewModel> GetProductsByCategory(string Url);
+        ResponseListModel<ProductViewModel> GetProductsByCategory(string Url,RequestModel request);
         CategoryLookupViewModel GetCategoryByUrl(string url);
     }
 
@@ -166,7 +168,6 @@ namespace IntellaQuest.BusinessLogic.Services
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
                 _unitOfWork.Commit();
-                _unitOfWork.Rollback();
 
                 return category.MapToViewModel();
             }
@@ -207,22 +208,59 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
-        public ResponseListModel<ProductViewModel> GetProductsByCategory(string Url)
+        public ResponseListModel<ProductViewModel> GetProductsByCategory(string Url, RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
             {
                 var category = _categoryRepository.FindBy(x => x.Url == Url)
                     ?? throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
 
-                ResponseListModel<ProductViewModel> response = new ResponseListModel<ProductViewModel>();
+                
 
-                response.Items = _categoryRepository.GetProductsByCategory(category).Select(x=>x.MapToViewModel()).ToList();
+                ResponseListModel<ProductViewModel> response = new ResponseListModel<ProductViewModel>();
+                var queryCategoryProducts = _categoryRepository.GetProductsByCategory(category);
+
+                if (request != null)
+                {
+                    if(request.SearchBrands != null && request.SearchBrands.Count > 0)
+                    {
+                        IQueryable<Product> productsToJoin = Enumerable.Empty<Product>().AsQueryable();
+
+                        foreach (var search in request.SearchBrands)
+                        {
+                            var searchResult = queryCategoryProducts
+                                                .Where(x =>
+                                                    x.Name.Contains(search));
+                            productsToJoin = productsToJoin.Union(searchResult);
+                        }
+
+                        queryCategoryProducts = productsToJoin;
+                    }
+                    if (request.SearchList != null && request.SearchList.Count > 0)
+                    {
+                        IQueryable<Product> productsToJoin = Enumerable.Empty<Product>().AsQueryable();
+
+                        foreach (var search in request.SearchList)
+                        {
+                            var searchResult = queryCategoryProducts
+                                                .Where(x => 
+                                                    x.Description.Contains(search) || 
+                                                    x.Tags.Contains(search));
+                            productsToJoin = productsToJoin.Union(searchResult);
+                        }
+
+                        queryCategoryProducts = productsToJoin;
+
+                    }
+
+                }
+
+                response.Items = queryCategoryProducts.Select(x => x.MapToViewModel()).ToList();
                 response.TotalItems = response.Items.Count();
 
                 return response;
             }
         }
-
         public CategoryLookupViewModel GetCategoryByUrl(string url)
         {
             using (_unitOfWork.BeginTransaction())

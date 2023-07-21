@@ -12,6 +12,10 @@
 	font-style: normal;
 } */
 
+.solid-color{
+	color: coral;
+}
+
 .navigationLink > span{
     padding: 10px;
 }
@@ -124,6 +128,9 @@ body{
 .solid-top-margin{
 	margin-top: 10px;
 }
+.solid-top-margin-auto{
+	margin-top: auto;
+}
 .solid_hover_color{
 	border: 0;
 }
@@ -214,4 +221,19 @@ body{
 .solid-button-order{
 	background-color: coral;
 	color: white;
+}
+.solid_pb_1{
+	padding-bottom: 1%;
+}
+.solid_pb_3{
+	padding-bottom: 2%;
+}
+.solid_pb_3{
+	padding-bottom: 3%;
+}
+.solid_pb_4{
+	padding-bottom: 4%;
+}
+.solid_pb_5{
+	padding-bottom: 5%;
 }

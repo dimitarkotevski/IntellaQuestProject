@@ -105,6 +105,7 @@ namespace IntellaQuest.BusinessLogic.Services
                     {
                         Id = user.Id,
                         Username = user.Username,
+                        Role = user.Role.Name,
                         Token = CreateToken(user)
                     };
                 }
@@ -116,7 +117,8 @@ namespace IntellaQuest.BusinessLogic.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
+                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, user.Role.Name)
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TokenConstant.KEY));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);

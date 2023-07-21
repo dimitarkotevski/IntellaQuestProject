@@ -1,25 +1,31 @@
 <div class="row">
-  <div *ngFor="let product of products" class="col-sm-6 col-md-6 col-lg-4">
-    <div *ngIf="type =='home' || type == 'favourite'" class="shop__thumb h-100">
+  <div *ngFor="let product of products" class="col-sm-6 col-md-6 col-lg-4  solid_pb_3">
+    <div *ngIf="type =='home' || type == 'favourite'" class="shop__thumb h-100 d-flex flex-column">
       <a [routerLink]="['/product-detail',product.Id]">
         <div class="shop-thumb__img">
           <img [src]="product.Image | byPassSecurity" class="img-responsive m-auto" />
         </div>
-        <h5 class="shop-thumb__title">
+        <h6 class="shop-thumb__title solid-color-a">
           {{product.Name}}
-        </h5>
+        </h6>
       </a>
-      <div class="shop-thumb__price">
-        <span class="shop-thumb-price_new">${{product.Price?.toFixed(2) || '/'}}</span>
-      </div>
-      <div class="row">
+      <hr class="solid-gray" />
+      <!-- <div class="row mt-auto shop-thumb__price">
+        <div class="col-12">
+          <span class="shop-thumb-price_new">${{product.Price?.toFixed(2) || '/'}}</span>
+        </div>
+      </div> -->
+      <div class="row mt-auto">
+        <div class="col-12">
+          <strong class="shop-thumb-price_new">${{product.Price?.toFixed(2) || '/'}}</strong>
+        </div>
         <span class="col-lg-8 col-md-6 col p-2">
           <button (click)="addToCart(product.Id)" class="btn h-100 w-100 responsive-button solid_button">
             <span class="d-none text-uppercase strong d-lg-block"><strong>Add to cart</strong></span>
             <i class="d-block d-lg-none fa-solid fa-cart-shopping"></i>
           </button>
         </span>
-        <span class="col-lg-4 col-md-6 col  p-2">
+        <span class="col-lg-4 col-md-6 col p-2">
           <button *ngIf="!hasRemoveProductButton" class="btn h-100 w-100 solid_favourite"
             (click)="addToFavourite(product.Id)"><i class="fa-regular fa-heart"></i></button>
           <button *ngIf="hasRemoveProductButton" (click)="deleteFavouriteProduct(product.Id)"
@@ -31,7 +37,7 @@
 
   <!-- HTML FOR CART -->
   <div *ngIf="type =='cart'">
-    <div *ngFor="let detail of shoppingCart.ShoppingCartDetails; let i = index;" class="card">
+    <div *ngFor="let detail of shoppingCart.ShoppingCartDetails; let i = index;" class="card solid_pb_3">
       <div class="card-body">
         <div class="col-lg-12">
           <div class="col-lg-12">

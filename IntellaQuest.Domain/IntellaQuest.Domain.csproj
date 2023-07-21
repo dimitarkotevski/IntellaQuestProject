@@ -74,6 +74,7 @@
     <Compile Include="Domains\BaseEntity.cs" />
     <Compile Include="Domains\Category.cs" />
     <Compile Include="Domains\FavouriteProducts.cs" />
+    <Compile Include="Domains\Role.cs" />
     <Compile Include="Domains\ShoppingCartDetail.cs" />
     <Compile Include="Domains\User.cs" />
     <Compile Include="Domains\Order.cs" />

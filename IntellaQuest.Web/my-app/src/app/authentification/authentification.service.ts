@@ -28,10 +28,11 @@ export class AuthentificationService {
   Login(username:string,password:string): Observable<boolean> {
     return this.http.post<any>(this.baseApi+"/Login", {Username:username, Password:password}).pipe(
       map((response : UserTokenInfo) => {
-        if (response.Id && response.Token && response.Username) {
+        if (response.Id && response.Token && response.Username && response.Role) {
           localStorage.setItem('id', response.Id);
           localStorage.setItem('username', response.Username);
           localStorage.setItem('token', response.Token);
+          localStorage.setItem('role',response.Role);
           return true;
         }
         return false;

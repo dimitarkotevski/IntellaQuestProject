@@ -38,6 +38,8 @@ import { OrderGridComponent } from './customer-components/order-components/order
 import { ProductsGridComponent } from './customer-components/product-components/products-grid/products-grid.component';
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
+import { OrderService } from './customer-components/order-components/order.service';
+import { CategoryService } from './category-products/category.service';
 
 
 
@@ -91,6 +93,8 @@ const routes: Routes = [
   providers: [
     AuthentificationService,
     ProductService,
+    OrderService,
+    CategoryService,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService
   ],

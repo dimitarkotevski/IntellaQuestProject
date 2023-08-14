@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthentificationService } from '../authentification.service';
+import { UserRegister } from 'src/app/models/register/register-user';
 
 @Component({
   selector: 'app-register',
@@ -8,17 +9,16 @@ import { AuthentificationService } from '../authentification.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  errorMessage: string ="";
+  errorMessage: string[] = [];
 
-  email: string = "";
-  username: string = "";
-  firstName: string = "";
-  lastName: string = "";
-  password: string = "";
+  registerUserModel: UserRegister = new UserRegister();
+
+  repaetPassword: string = "";
 
   constructor(
-      private router: Router,
-      private authService:AuthentificationService) { }
+    private router: Router,
+    private authService:AuthentificationService) 
+    { }
 
   ngOnInit(): void {
     if(this.authService.IsAuthenticated()){
@@ -26,19 +26,27 @@ export class RegisterComponent implements OnInit {
     }
   }
   registerUser(){
-    if(this.username ===""){
-      this.errorMessage = "Username is required";
+    this.errorMessage = [];
+    if(this.registerUserModel.Email ===""){
+      this.errorMessage.push("Email is required");
+    }
+    if(this.registerUserModel.Username ===""){
+      this.errorMessage.push("Username is required");
+    }
+    if(this.registerUserModel.Password ===""){
+      this.errorMessage.push("Password is required");
+    }
+    if(this.registerUserModel.Email === "" || this.registerUserModel.Username ==="" || this.registerUserModel.Password === ""){
       return;
     }
-    if(this.password ===""){
-      this.errorMessage = "Password is required";
-      return;
-    }
-    // this.authService.registerUser().subscribe(()=>{
-    //   window.location.replace('/')
-    // },
-    // (error) => {
-    //   this.errorMessage = error.error.exception;
-    // })
+
+    this.authService.RegisterUser(this.registerUserModel).subscribe(()=>{
+       window.location.replace('/login')
+      },
+      (error) => {
+        this.errorMessage = [];
+        this.errorMessage.push(error.error.exception);
+      }
+    )
   }
 }

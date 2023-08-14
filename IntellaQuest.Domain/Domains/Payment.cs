@@ -5,7 +5,6 @@ namespace IntellaQuest.Domain
 {
     public class Payment : BaseEntity
     {
-        private PaymentType _paymentType;
         private string _cardNumber;
         private DateTime _expirationDate;
         private string _securityCode;
@@ -20,14 +19,8 @@ namespace IntellaQuest.Domain
         public Payment() 
         {
             _expirationDate = DateTime.Now;
-            _paymentType = PaymentType.Card;
         }
 
-        public virtual PaymentType PaymentType
-        {
-            get => _paymentType;
-            set => _paymentType = value;
-        }
         public virtual string CardNumber
         {
             get => _cardNumber;

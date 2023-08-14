@@ -15,8 +15,6 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
             #region Attribute
 
-            Map(p => p.PaymentType)
-                .CustomType<PaymentType>();
             Map(p => p.CardNumber);
             Map(p => p.ExpirationDate);
             Map(p => p.SecurityCode);

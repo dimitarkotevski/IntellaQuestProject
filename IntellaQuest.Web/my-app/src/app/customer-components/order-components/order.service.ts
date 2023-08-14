@@ -16,4 +16,14 @@ export class OrderService{
     GetUserActiveOrder(userId:string | null) {
         return this.http.post<any>(this.baseApi+'/GetUserActiveOrder',{userId: userId})
     }
+    CancelActiveOrder(orderId:string){
+        return this.http.post<any>(this.baseApi+'/CancelActiveOrder',{orderId: orderId})
+    }
+
+    MakeAnOrder(shoppingCartId : string,userId : string){
+        return this.http.post<any>(this.baseApi+'/MakeAnOrder',
+            {shoppingCartId: shoppingCartId,
+                userId: userId
+            })
+    }
 }

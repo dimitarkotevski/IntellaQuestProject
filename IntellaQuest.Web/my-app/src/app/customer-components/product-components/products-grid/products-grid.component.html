@@ -1,12 +1,21 @@
 <div class="row">
-  <div *ngFor="let product of products" class="col-sm-6 col-md-6 col-lg-4  solid_pb_3">
-    <div *ngIf="type =='home' || type == 'favourite'" class="shop__thumb h-100 d-flex flex-column">
-      <a [routerLink]="['/product-detail',product.Id]">
+  <div
+    *ngFor="let product of products"
+    class="col-sm-6 col-md-6 col-lg-4 solid_pb_3"
+  >
+    <div
+      *ngIf="type == 'home' || type == 'favourite'"
+      class="shop__thumb h-100 d-flex flex-column"
+    >
+      <a [routerLink]="['/product-detail', product.Id]">
         <div class="shop-thumb__img">
-          <img [src]="product.Image | byPassSecurity" class="img-responsive m-auto" />
+          <img
+            [src]="product.Image | byPassSecurity"
+            class="img-responsive m-auto"
+          />
         </div>
         <h6 class="shop-thumb__title solid-color-a">
-          {{product.Name}}
+          {{ product.Name }}
         </h6>
       </a>
       <hr class="solid-gray" />
@@ -17,60 +26,97 @@
       </div> -->
       <div class="row mt-auto">
         <div class="col-12">
-          <strong class="shop-thumb-price_new">${{product.Price?.toFixed(2) || '/'}}</strong>
+          <strong class="shop-thumb-price_new"
+            >${{ product.Price?.toFixed(2) || "/" }}</strong
+          >
         </div>
         <span class="col-lg-8 col-md-6 col p-2">
-          <button (click)="addToCart(product.Id)" class="btn h-100 w-100 responsive-button solid_button">
-            <span class="d-none text-uppercase strong d-lg-block"><strong>Add to cart</strong></span>
+          <button
+            (click)="addToCart(product.Id)"
+            class="btn h-100 w-100 responsive-button solid_button"
+          >
+            <span class="d-none text-uppercase strong d-lg-block"
+              ><strong>Add to cart</strong></span
+            >
             <i class="d-block d-lg-none fa-solid fa-cart-shopping"></i>
           </button>
         </span>
         <span class="col-lg-4 col-md-6 col p-2">
-          <button *ngIf="!hasRemoveProductButton" class="btn h-100 w-100 solid_favourite"
-            (click)="addToFavourite(product.Id)"><i class="fa-regular fa-heart"></i></button>
-          <button *ngIf="hasRemoveProductButton" (click)="deleteFavouriteProduct(product.Id)"
-            class="btn h-100 w-100 solid_favourite"><i class="fa-solid fa-trash"></i></button>
+          <button
+            *ngIf="!hasRemoveProductButton"
+            class="btn h-100 w-100 solid_favourite"
+            (click)="addToFavourite(product.Id)"
+          >
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button
+            *ngIf="hasRemoveProductButton"
+            (click)="deleteFavouriteProduct(product.Id)"
+            class="btn h-100 w-100 solid_favourite"
+          >
+            <i class="fa-solid fa-trash"></i>
+          </button>
         </span>
       </div>
     </div>
   </div>
 
   <!-- HTML FOR CART -->
-  <div *ngIf="type =='cart'">
-    <div *ngFor="let detail of shoppingCart.ShoppingCartDetails; let i = index;" class="card solid_pb_3">
+  <div *ngIf="type == 'cart'">
+    <div
+      *ngFor="let detail of shoppingCart.ShoppingCartDetails; let i = index"
+      class="card solid_pb_3"
+    >
       <div class="card-body">
         <div class="col-lg-12">
           <div class="col-lg-12">
             <div>
-              <a class="solid-color-a" [routerLink]="['/product-detail',detail.Product.Id]">
-                <h1>{{detail.Product?.Name}}</h1>
+              <a
+                class="solid-color-a"
+                [routerLink]="['/product-detail', detail.Product.Id]"
+              >
+                <h1>{{ detail.Product?.Name }}</h1>
               </a>
             </div>
           </div>
           <hr />
           <div class="row">
             <div class="col-lg-3 col-sm-12">
-              <a [routerLink]="['/product-detail',detail.Product.Id]">
-                <img [src]="detail.Product.Image | byPassSecurity" class="img-responsive" alt="...">
+              <a [routerLink]="['/product-detail', detail.Product.Id]">
+                <img
+                  [src]="detail.Product.Image | byPassSecurity"
+                  class="img-responsive"
+                  alt="..."
+                />
               </a>
             </div>
             <div class="col-lg-6 col-sm-12 solid-side-borders">
-              <p>{{detail.Product?.Description}}</p>
+              <p>{{ detail.Product?.Description }}</p>
             </div>
             <div class="col-lg-3 col-sm-12 text-center">
-              <div>${{detail.Product?.Price.toFixed(2)}}</div>
+              <div>
+                ${{ detail.Product?.Price.toFixed(2) * detail.Quantity }}
+              </div>
               <hr />
               <div class="text-center">
                 <div class="wrapper">
                   <button class="plusminus" (click)="handleMinus(i)">-</button>
-                  <input type="number" class="num" [ngModel]="detail?.Quantity" />
+                  <input
+                    type="number"
+                    class="num"
+                    [ngModel]="detail?.Quantity"
+                  />
                   <button class="plusminus" (click)="handlePlus(i)">+</button>
                 </div>
               </div>
               <hr />
               <div>
-                <button (click)="deleteProductCartDetail(detail.Id)" class="w-100 btn btn-danger">Delete
-                  fromCart</button>
+                <button
+                  (click)="deleteProductCartDetail(detail.Id)"
+                  class="w-100 btn btn-danger"
+                >
+                  Delete fromCart
+                </button>
               </div>
             </div>
           </div>
@@ -78,5 +124,31 @@
       </div>
       <br />
     </div>
+  </div>
+
+  <!-- HTML FOR ORDER -->
+  <div class="w-100" *ngIf="type == 'order'">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of orderProducts">
+          <td>
+            <a class="solid-color solid-color-a" [routerLink]="['/product-detail',product.Product.Id]">{{product.Product?.Name}}</a>
+          </td>
+          <td class="solid-color">
+            {{product.Product.Price.toFixed(2) }}
+          </td>
+          <td class="solid-color">
+            {{product.Quantity}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

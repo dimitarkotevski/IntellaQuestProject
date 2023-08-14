@@ -33,31 +33,36 @@ namespace IntellaQuest.BusinessLogic.Services
         ResponseModel<UserViewModel> GetAll(RequestModel request);
         UserDetailsModel Get(Guid Id);
         bool Create(UserViewModel model);
-        void Update(UserViewModel model);
+        void Update(UserDetailsModel model);
         void Delete(Guid Id);
-
+        double GetAmountMoneyOfUser(Guid userId);
     }
     public class UserService : IUserService
     {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRoleRepository _roleRepository;
         private readonly IUserRepository _userRepository;
         private readonly IOrderRepository _orderRepository;
-        private readonly IShoppingCartRepository _shoppingCartRepository;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IProductRepository _productRepository;
+        private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IShoppingCartDetailRepository _shoppingCartDetailRepository;
 
-        public UserService(IUserRepository userRepository, 
-                            IOrderRepository orderRepository, 
-                            IShoppingCartRepository shoppingCartRepository,
-                            IUnitOfWork unitOfWork, 
-                            IProductRepository productRepository,
-                            IShoppingCartDetailRepository shoppingCartDetailRepository)
+        public UserService(
+                    IUnitOfWork unitOfWork,
+                    IUserRepository userRepository, 
+                    IRoleRepository roleRepository,
+                    IOrderRepository orderRepository, 
+                    IProductRepository productRepository,
+                    IShoppingCartRepository shoppingCartRepository,
+                    IShoppingCartDetailRepository shoppingCartDetailRepository
+            )
         {
-            _shoppingCartRepository = shoppingCartRepository;
-            _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
+            _roleRepository = roleRepository;
             _userRepository = userRepository;
             _orderRepository = orderRepository;
-            _unitOfWork = unitOfWork;
+            _productRepository = productRepository;
+            _shoppingCartRepository = shoppingCartRepository;
             _shoppingCartDetailRepository = shoppingCartDetailRepository;
         }
         
@@ -70,18 +75,34 @@ namespace IntellaQuest.BusinessLogic.Services
 
             if (_userRepository.CheckExist(x => x.Email == model.Email))
                 throw new BllException(string.Format(ShopExceptionMassages.UserExceptionMassages.EMAIL_ALREADY_EXIST, model.Email));
-
+            User userEntity;
             using (_unitOfWork.BeginTransaction())
             {
-                var userEntity = new User
+                userEntity = new User
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
                     Username = model.Username,
+                    Role = _roleRepository.GetUserRole(),
                     Password =PasswordEncryption.Encryption( model.Password ),
                 };
                 _userRepository.Add(userEntity);
+                _unitOfWork.Commit();
+            }
+            MakeShoppingCardForTheUser(userEntity);
+        }
+        public void MakeShoppingCardForTheUser(User model)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                ShoppingCart shoppingCart = new ShoppingCart
+                {
+                    User = model,
+                    Active = true,
+                    ShoppingCartDetails = new List<ShoppingCartDetail>()
+                };
+                _shoppingCartRepository.Add(shoppingCart);
                 _unitOfWork.Commit();
             }
         }
@@ -139,18 +160,34 @@ namespace IntellaQuest.BusinessLogic.Services
                     ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
 
                 var oldPassword = PasswordEncryption.Encryption(model.OldPassword);
+                var newPassword = PasswordEncryption.Encryption(model.NewPassword);
                 if (user.Password != oldPassword)
                 {
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.PASSWORD_IS_INCORRECT);
                 }
+                if (oldPassword == newPassword)
+                {
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.SAME_OLD_AND_NEW_PASWORD);
+                }
 
-                user.Password = PasswordEncryption.Encryption(model.NewPassword);
+                user.Password = newPassword;
                 _userRepository.Update(user);
                 _unitOfWork.Commit();
             }
         }
 
         #endregion
+
+        public double GetAmountMoneyOfUser(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var user = _userRepository.FindBy(userId)
+                    ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                return user.Amount;
+            }
+        }
 
         #region ADMIN 
 
@@ -313,7 +350,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 return user.MapToUserDetailModel();
             }
         }
-        public void Update(UserViewModel model)
+        public void Update(UserDetailsModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -322,14 +359,60 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
                 };
+
                 user.LastName = model.LastName;
                 user.FirstName = model.FirstName;
+                user.Username = model.Username;
                 user.Email = model.Email;
-                user.Password = model.Password;
+
+                user.Address = model.Address;
+                user.City = model.City;
+                user.State = model.State;
+                user.ZipCode = model.ZipCode;
+
                 _userRepository.Update(user);
                 _unitOfWork.Commit();
             }
         }
+
+        //public void SetUserDetails(UserDetailsModel model)
+        //{
+        //    using (_unitOfWork.BeginTransaction())
+        //    {
+        //        var user = 
+        //    }
+        //}
+
+        //public void UpdatePassword(Guid userId,string oldPassword, string newPassword)
+        //{
+        //    using (_unitOfWork.BeginTransaction())
+        //    {
+        //        var user = _userRepository.FindBy(userId);
+        //        if (user == null)
+        //        {
+        //            throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+        //        };
+
+
+        //        var oldP = PasswordEncryption.Encryption(oldPassword);
+        //        var newP = PasswordEncryption.Encryption(newPassword);
+
+        //        if(oldP != user.Password)
+        //        {
+        //            throw new BllException(ShopExceptionMassages.UserExceptionMassages.PASSWORD_IS_INCORRECT);
+        //        }
+
+        //        if (oldP == newP)
+        //        {
+        //            throw new BllException(ShopExceptionMassages.UserExceptionMassages.SAME_OLD_AND_NEW_PASWORD);
+        //        }
+
+        //        user.Password = newP;
+
+        //        _userRepository.Update(user);
+        //        _unitOfWork.Commit();
+        //    }
+        //}
 
         #endregion
 

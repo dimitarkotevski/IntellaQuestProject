@@ -18,6 +18,7 @@ export class ProductsGridComponent implements OnInit {
 
   @Input() hasRemoveProductButton?: boolean;
   @Input() products: Product[] | null | undefined;
+  @Input() orderProducts: any;
   @Input() shoppingCart: any | null | undefined;
   @Input() type: "home" | "cart" | "favourite" | "order" | undefined;
   @Output() refreshState = new EventEmitter<any>();
@@ -37,6 +38,7 @@ export class ProductsGridComponent implements OnInit {
       }
 
   ngOnInit(): void {
+    console.log(this.orderProducts);
     console.log(this.type);
   }
 
@@ -83,10 +85,16 @@ export class ProductsGridComponent implements OnInit {
   handleMinus(i:number){
     if(this.shoppingCart.ShoppingCartDetails[i].Quantity>1){
       this.shoppingCart.ShoppingCartDetails[i].Quantity--;
+      this.shoppingCartService.MinusQuantity(this.shoppingCart.ShoppingCartDetails[i].Id)?.subscribe(res=>{
+
+      })
     }
   }
   handlePlus(i:number){
     this.shoppingCart.ShoppingCartDetails[i].Quantity++;
+    this.shoppingCartService.PlusQuantity(this.shoppingCart.ShoppingCartDetails[i].Id)?.subscribe((res)=>{
+
+    })
   }
 
   deleteProductCartDetail(id:string){

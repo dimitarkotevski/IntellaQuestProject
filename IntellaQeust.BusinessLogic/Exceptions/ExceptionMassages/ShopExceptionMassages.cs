@@ -7,6 +7,7 @@
             public static string ID_NOT_FOUND_EXCEPTION = "User with Id: {0} not found";
             public static string NOT_FOUND_EXCEPTION = "User not found";
             public static string USERNAME_PASSWORD_INCORRECT = "Username or password are incorrect";
+            public static string SAME_OLD_AND_NEW_PASWORD = "Old password and new password are the same.";
 
             public static string EMAIL_ALREADY_EXIST = "Email '{0}'  already exist";
             public static string EMAIL_NOT_FOUND_EXCEPTION = "User with email: '{0}' not found";
@@ -36,7 +37,7 @@
         }
         public static class OrderExceptionMassages
         {
-            public static string NOT_FOUND_EXCEPTION = "Order not found"; 
+            public static string NOT_FOUND_EXCEPTION = "Order not found";
             public static string ID_NOT_FOUND_EXCEPTION = "Order with Id: {0} not found";
 
             public static string PRODUCT_NOT_FOUND_EXCEPTION = "Product not found exception";
@@ -45,6 +46,11 @@
         public static class FavouriteProductExceptionMassages
         {
             public static string NOT_FOUND_EXCEPTION = "Favourite product not found";
+        }
+        public static class ShoppingCartExceptionMassages
+        {
+            public static string NOT_FOUNG = "Shopping cart not found";
+            public static string DETAIL_NOT_FOUND_EXCEPTION = "Shopping detail not found";
         }
     }
 }

@@ -4,15 +4,6 @@ namespace ShopApp.Web.Controllers
 {
     public class ApplicationSettingsController : Controller
     {
-        // GET: ApplicationSettings
-        public ActionResult Index()
-        {
-            return View("Index2");
-        }
-        public ActionResult Dashboard()
-        {
-            return View("Index2");
-        }
         public ActionResult GetApplicationContext()
         {
             var model = new

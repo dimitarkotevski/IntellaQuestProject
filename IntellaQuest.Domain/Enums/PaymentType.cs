@@ -2,7 +2,8 @@
 {
     public enum PaymentType
     {
-        Card = 0,
-        Paypal = 1,
+        Cash = 0,
+        BankAccount = 1,
+        Card = 2,
     }
 }

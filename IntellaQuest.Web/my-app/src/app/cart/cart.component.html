@@ -12,7 +12,7 @@
         <button class="btn w-75 btn-danger"><h5>Delete all products</h5></button>
       </div>
       <div class="my-5 col-md-6 col-lg-6 right-solid-text">
-        <button class="btn w-75 solid-button-order"><h5>Order here</h5></button>
+        <button class="btn w-75 solid-button-order" data-toggle="modal" data-target="#orderMaking" (click)="MakeOrder(shoppingCart.Id)" ><h5>Order here</h5></button>
       </div>
     </div>
   </div>
@@ -34,3 +34,24 @@
     </div>
   </div>
 </div>
+
+  <!-- Modal Make Order -->
+  <div class="modal fade" id="orderMaking" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Order cancel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Do you want to make order with this produts?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" (click)="MakeOrder(shoppingCart.Id)" class="btn btn-primary">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -11,7 +11,6 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new PaymentsViewModel
             {
                 Id = payment.Id,
-                PaymentType = payment.PaymentType.ToString(),
                 CardNumber = payment.CardNumber,
                 ExpirationDate = payment.ExpirationDate,
                 SecurityCode = payment.SecurityCode,
@@ -22,7 +21,6 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new PaymentsViewModelInfo
             {
                 Id = payment.Id,
-                PaymentType = payment.PaymentType,
                 CardNumber = payment.CardNumber,
                 ExpirationDate = payment.ExpirationDate,
                 SecurityCode = payment.SecurityCode,
@@ -40,7 +38,6 @@ namespace IntellaQeust.BusinessLogic.Mappers
             return new PaymentsViewModelCard
             {
                 Id = payment.Id,
-                PaymentType = payment.PaymentType,
                 CardNumber = payment.CardNumber,
                 ExpirationDate = payment.ExpirationDate,
                 SecurityCode = payment.SecurityCode,

@@ -5,21 +5,31 @@
         <div class="card-body">
           <h1 class="form-label">Register</h1>
           <hr />
+          <div *ngIf="errorMessage.length > 0" class="form-group">
+            <div class="alert alert-danger">
+              <ul>
+                <li *ngFor="let error of errorMessage">{{error}}</li>
+              </ul>
+            </div>
+          </div>
           <div class="form-group">
             <div class="form-floating mb-3">
-              <input [(ngModel)]="email" type="email" class="form-control" placeholder="Email">
+              <input [(ngModel)]="registerUserModel.Email" type="email" class="form-control" placeholder="Email *">
             </div>
             <div class="form-floating mb-3">
-              <input [(ngModel)]="username" type="username" class="form-control" placeholder="Username">
+              <input [(ngModel)]="registerUserModel.Username" type="username" class="form-control" placeholder="Username *">
             </div>
             <div class="form-floating mb-3">
-              <input [(ngModel)]="firstName" type="text" class="form-control" placeholder="First name">
+              <input [(ngModel)]="registerUserModel.FirstName" type="text" class="form-control" placeholder="First name">
             </div>
             <div class="form-floating mb-3">
-              <input [(ngModel)]="lastName" type="text" class="form-control" placeholder="Last name">
+              <input [(ngModel)]="registerUserModel.LastName" type="text" class="form-control" placeholder="Last name">
             </div>
             <div class="form-floating">
-              <input [(ngModel)]="password" type="password" class="form-control" placeholder="Password">
+              <input [(ngModel)]="registerUserModel.Password" type="password" class="form-control" placeholder="Password *">
+            </div>
+            <div class="form-floating">
+              <input [(ngModel)]="repaetPassword" type="password" class="form-control" placeholder="Password *">
             </div>
           </div>
           <div class="form-group">

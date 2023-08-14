@@ -22,8 +22,10 @@ export class SettingsComponent implements OnInit {
     });
     
   }
-  updateUserPublicInfo(username:string| undefined,description:string | undefined){
-    this.toastr.success('Update info')
+  updateUserPublicInfo(user:UserDetails){
+    this.authService.UpdateUserDetails(user).subscribe(()=>{
+      this.toastr.success('Update info')
+    })
   }
 
   switchTab(tab: string) {

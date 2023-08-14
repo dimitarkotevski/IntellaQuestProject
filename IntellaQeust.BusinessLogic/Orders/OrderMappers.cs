@@ -21,6 +21,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 },
                 OrderStatus = model.OrderStatus,
                 TotalAmount = sumProducts == model.TotalAmount ? model.TotalAmount : sumProducts,
+                PaymentType = model.PaymentType
                 //DateCreated = model.DateCreated
             };
         }
@@ -34,21 +35,23 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 NumberOfProducts = model.ShoppingCart.ShoppingCartDetails.Select(x=>x.Product).Count(),
                 OrderStatus = model.OrderStatus,
                 TotalAmount = sumProducts == model.TotalAmount ? model.TotalAmount : sumProducts,
-                DateCreated = model.DateCreated
+                DateCreated = model.DateCreated,
+                PaymentType = model.PaymentType
             };
         }
 
         public static OrderViewModelWithProducts MapToViewModelWithProducts(this Order model)
         {
-            var sumProducts = model.ShoppingCart.ShoppingCartDetails.Select(x => x.Product.Price).Sum();
+            //var sumProducts = model.ShoppingCart.ShoppingCartDetails.Select(x => x.Product.Price).Sum();
 
             return new OrderViewModelWithProducts
             {
                 Id = model.Id,
                 OrderName = model.OrderName,
                 OrderStatus = model.OrderStatus,
-                Products = model.ShoppingCart.ShoppingCartDetails.Select(x => x.Product.MapToViewModel()).ToList(),
-                TotalAmount = sumProducts == model.TotalAmount ? model.TotalAmount : sumProducts,
+                Products = model.ShoppingCart.ShoppingCartDetails.Select(x => x.MapToViewModel()).ToList(),
+                TotalAmount =model.TotalAmount,
+                PaymentType = model.PaymentType
             };
         }
     }

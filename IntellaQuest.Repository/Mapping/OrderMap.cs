@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Mapping;
 using IntellaQuest.Domain;
+using IntellaQuest.Domain.Enum;
 using IntellaQuest.Domain.Enums;
 
 namespace IntellaQuest.Data.NHibernate.Mapping
@@ -17,6 +18,8 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Access.CamelCaseField(Prefix.Underscore)
                 .CustomType<OrderStatus>()
                 .Nullable();
+            Map(o => o.PaymentType)
+                .CustomType<PaymentType>();
             Map(o => o.TotalAmount);
             Map(o => o.DateCreated);
             Map(o => o.OrderName);

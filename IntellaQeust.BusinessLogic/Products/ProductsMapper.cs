@@ -24,5 +24,6 @@ namespace IntellaQeust.BusinessLogic.Mappers
                     },
                 };
         }
+
     }
 }

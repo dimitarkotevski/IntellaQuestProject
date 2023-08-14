@@ -14,6 +14,7 @@ export class RegularNavbarComponent implements OnInit {
   @Input() isUserAuthenticated?: boolean;
   @Input() refreshState: EventEmitter<any>;
   username?: string;
+  amount: any;
   id?: string | null;
 
   constructor(
@@ -26,6 +27,10 @@ export class RegularNavbarComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.authService.GetLoggedUsername();
     this.id = this.authService.GetLoggedUserId();
+    this.authService.GetAmountMoneyOfUser(this.id)?.subscribe(res=>{
+      console.log(res)
+      this.amount = res;
+    })
   }
 
   logout(){

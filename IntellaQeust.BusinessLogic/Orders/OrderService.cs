@@ -11,6 +11,7 @@ using IntellaQeust.BusinessLogic.Responses;
 using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQuest.Domain.Enums;
+using IntellaQuest.Domain.Enum;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -25,6 +26,8 @@ namespace IntellaQuest.BusinessLogic.Services
 
         ResponseListModel<OrderGridViewModel> GetUserNotActiveOrders(Guid userId);
         OrderViewModelWithProducts GetUserActiveOrder(Guid userId);
+        void CancelActiveOrder(Guid orderId);
+        void MakeAnOrder(Guid shoppingCartId,Guid userId);
 
     }
     public class OrderService : IOrderService
@@ -33,17 +36,20 @@ namespace IntellaQuest.BusinessLogic.Services
 
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IProductRepository _productRepository;
 
-        public OrderService(IOrderRepository orderRepository, 
-                            IUserRepository userRepository, 
-                            IProductRepository productRepository, 
-                            IUnitOfWork unitOfWork)
+        public OrderService(IOrderRepository orderRepository,
+                            IUserRepository userRepository,
+                            IProductRepository productRepository,
+                            IUnitOfWork unitOfWork,
+                            IShoppingCartRepository shoppingCartRepository)
         {
             _orderRepository = orderRepository;
             _userRepository = userRepository;
             _productRepository = productRepository;
             _unitOfWork = unitOfWork;
+            _shoppingCartRepository = shoppingCartRepository;
         }
 
         #region CRUD ADMIN
@@ -228,11 +234,58 @@ namespace IntellaQuest.BusinessLogic.Services
                 var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus != OrderStatus.Completed).FirstOrDefault()
                     ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
 
+                userOrder.TotalAmount = userOrder.ShoppingCart.ShoppingCartDetails.Select(x=>x.Product.Price * x.Quantity).Sum();
+                _orderRepository.Update(userOrder);
+
+                _unitOfWork.Commit();
+
                 return userOrder.MapToViewModelWithProducts();
             }
         }
 
+        public void CancelActiveOrder(Guid orderId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var order = _orderRepository.FindBy(orderId)
+                    ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
 
+                _orderRepository.Delete(order);
+                _unitOfWork.Commit();
+            }
+        }
+
+        public void MakeAnOrder(Guid shoppingCartId,Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var shoppingCart = _shoppingCartRepository.FindBy(shoppingCartId)
+                    ?? throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.DETAIL_NOT_FOUND_EXCEPTION);
+
+                var user = _userRepository.FindBy(userId)
+                    ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+
+                if(_orderRepository.CheckExist(x=>x.User == user && x.ShoppingCart == shoppingCart))
+                {
+                    return;
+                }
+                else
+                {
+                    Order order = new Order
+                    {
+                        ShoppingCart = shoppingCart,
+                        User = user,
+                        PaymentType = PaymentType.Cash,
+                        DateCreated = DateTime.Now,
+                        TotalAmount = shoppingCart.ShoppingCartDetails.Select(x=>x.Product.Price * x.Quantity).Sum(),
+                        OrderName = "Order#11111",
+                        OrderStatus = OrderStatus.OnHold
+                    };
+                    _orderRepository.Add(order);
+                    _unitOfWork.Commit();
+                }
+            }
+        }
         #endregion
     }
 }

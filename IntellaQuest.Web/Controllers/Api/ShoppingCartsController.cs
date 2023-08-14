@@ -33,6 +33,18 @@ namespace IntellaQuest.Web.Controllers
             return Json(true);
         }
 
+        public ActionResult MinusQuantity(Guid detailsId)
+        {
+            _shoppingCartService.MinusQuantity(detailsId);
+            return Json(true);
+        }
+
+        public ActionResult PlusQuantity(Guid detailsId)
+        {
+            _shoppingCartService.PlusQuantity(detailsId);
+            return Json(true);
+        }
+
         #endregion
     }
 }

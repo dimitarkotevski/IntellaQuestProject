@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
   constructor(
     private authService: AuthentificationService,
     private shoppingCartService: ShoppingCartService,
+    private orderService: OrderService,
     private router: Router,
     private toastr: ToastrService
   ) { }
@@ -38,14 +39,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-  handleMinus(i:number){
-    if(this.shoppingCart.ShoppingCartDetails[i].Quantity>1){
-      this.shoppingCart.ShoppingCartDetails[i].Quantity--;
-    }
-  }
-  handlePlus(i:number){
-    this.shoppingCart.ShoppingCartDetails[i].Quantity++;
-  }
 
   deleteProductCartDetail(id:string){
     if(id){
@@ -60,6 +53,12 @@ export class CartComponent implements OnInit {
     }else{
       this.toastr.error("Something is wrong")
     }
+  }
+
+  MakeOrder(shoppingCartId:string){
+    this.orderService.MakeAnOrder(shoppingCartId,this.authService.GetLoggedUserId() || "").subscribe(()=>{
+      window.location.replace("my-order");
+    })
   }
 
 }

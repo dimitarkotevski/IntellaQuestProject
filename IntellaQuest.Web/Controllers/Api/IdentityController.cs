@@ -60,11 +60,25 @@ namespace IntellaQuest.Web.Controllers
         }
         [HttpPost]
         //[MyJwtTokenCustomAuthorize]
-        public ActionResult UserDetails(Guid id)
+        public ActionResult GetUserDetails(Guid id)
         {
             return Json(_userService.Get(id));
         }
-        
+        public ActionResult SetUserDetails(UserDetailsModel model)
+        {
+            _userService.Update(model);
+            return Json(true);
+        }
+        public ActionResult UpdatePassword(ChangePasswordUserViewModel model)
+        {
+            _userService.UpdatePassword(model);
+            return Json(true);
+        }
+        public ActionResult GetAmountMoneyOfUser(Guid userId)
+        {
+            var amount = _userService.GetAmountMoneyOfUser(userId);
+            return Json(amount);
+        }
         #endregion
     }
     public class MyJwtTokenCustomAuthorize : AuthorizeAttribute

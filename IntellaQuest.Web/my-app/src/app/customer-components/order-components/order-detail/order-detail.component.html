@@ -1,16 +1,27 @@
 <div class="card">
     <div *ngIf="activeOrder">
         <div class="card-body">
-            <h1>{{activeOrder?.OrderName}}</h1>
+            <div class="row">
+                <div class="col-6">
+                    <h1>{{activeOrder?.OrderName}}</h1>
+                </div>
+                <div class="col-6 right-solid-text">
+                    <button class="btn solid_hover_color h-75" data-toggle="modal" data-target="#cancelOrder" >Cancel order</button>
+                </div>
+            </div>
+            <div>
+                <div>Order Status</div>
+                <div>Payment Type</div>
+            </div>
             <hr/>
             <app-products-grid 
                     [type]="'order'" 
-                    [products]="activeOrder.Products">
+                    [orderProducts]="activeOrder.Products">
             </app-products-grid>
             <hr/>
             <div class="row">
                 <div class="col-6">
-                    <button class="btn solid_hover_color w-100 h-100">Cancel order</button>
+                    <button type="button"  data-toggle="modal" data-target="#confirmation" class="btn solid_hover_color w-100 h-100">Make order</button>
                 </div>
                 <div class="col-6">
                     <h3>Total amount: ${{activeOrder.TotalAmount.toFixed(2)}}</h3>
@@ -26,4 +37,44 @@
     </div>
 </div>
 <br/>
+<!-- Modal Confirmation -->
+<div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Order confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          How do you want to pay?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="Confirmation()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Modal Cancel order -->
+<div class="modal fade" id="cancelOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Order cancel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Do you want to cancel order?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" (click)="CancelOrder(activeOrder.Id)">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>

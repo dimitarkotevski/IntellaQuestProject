@@ -1,4 +1,5 @@
-﻿using IntellaQuest.Domain.Enums;
+﻿using IntellaQuest.Domain.Enum;
+using IntellaQuest.Domain.Enums;
 using System;
 
 namespace IntellaQuest.Domain
@@ -8,6 +9,7 @@ namespace IntellaQuest.Domain
         private User _user;
         private string _orderName;
         private ShoppingCart _shoppingCart;
+        private PaymentType _paymentType;
         private OrderStatus _orderStatus;
         private double _totalAmount;
         private DateTime _dateCreated;
@@ -21,6 +23,11 @@ namespace IntellaQuest.Domain
         {
             get => _shoppingCart;
             set => _shoppingCart = value;
+        }
+        public virtual PaymentType PaymentType
+        {
+            get => _paymentType;
+            set => _paymentType = value;
         }
         public virtual OrderStatus OrderStatus
         {

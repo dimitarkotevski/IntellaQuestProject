@@ -17,7 +17,6 @@ namespace IntellaQeust.BusinessLogic.ViewModels
     public class PaymentsViewModelInfo
     {
         public Guid Id { get; set; }
-        public PaymentType PaymentType { get; set; }
         public string CardNumber { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string SecurityCode { get; set; }

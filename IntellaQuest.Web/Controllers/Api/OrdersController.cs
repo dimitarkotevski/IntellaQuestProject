@@ -16,6 +16,7 @@ namespace IntellaQuest.Web.Controllers
             _orderService = orderService;
         }
         #region ADMIN ACTION
+
         [HttpPost]
         public ActionResult All(RequestModel request)
         {
@@ -52,6 +53,7 @@ namespace IntellaQuest.Web.Controllers
             _orderService.Delete(Id);
             return Json(new { success = true });
         }
+        
         #endregion
 
         #region USER ACTION
@@ -67,6 +69,18 @@ namespace IntellaQuest.Web.Controllers
         {
             var result = _orderService.GetUserNotActiveOrders(userId);
             return Json(result);
+        }
+
+        public ActionResult CancelActiveOrder(Guid orderId)
+        {
+            _orderService.CancelActiveOrder(orderId);
+            return Json(true);
+        }
+
+        public ActionResult MakeAnOrder(Guid shoppingCartId,Guid userId)
+        {
+            _orderService.MakeAnOrder(shoppingCartId, userId); 
+            return Json(new { success = true });
         }
 
         #endregion

@@ -19,6 +19,8 @@ namespace IntellaQuest.BusinessLogic.Services
         #region ShoppingCartDetails Action
         void RemoveProductFromShoppingCart(Guid shoppingCartDetailId);
         #endregion
+        void PlusQuantity(Guid detailId);
+        void MinusQuantity(Guid detailId);
     }
     public class ShoppingCartService : IShoppingCartService
     {
@@ -50,7 +52,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 var user = _userRepository.FindBy(userId)
                     ?? throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
 
-                var userShoppingCart = _shoppingCartRepository.FindBy(x => x.User.Id == userId == x.Active == true);
+                var userShoppingCart = _shoppingCartRepository.FindBy(x => x.User == user && x.Active == true);
 
 
                 return userShoppingCart.MapToViewModel();
@@ -67,8 +69,10 @@ namespace IntellaQuest.BusinessLogic.Services
                 var product = _productRepository.FindBy(productId);
                 if (product == null)
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
-
-                var shoppingCart = _shoppingCartRepository.FindBy(x => x.User.Id == userId == x.Active == true);
+                ShoppingCart shoppingCart;
+                shoppingCart = _shoppingCartRepository.FindBy(x => x.User.Id == userId && x.Active == true);
+                if (shoppingCart == null)
+                    throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.NOT_FOUNG);
 
                 var exist = _shoppingCartDetailRepository.CheckExist(x =>
                     x.Product == product &&
@@ -114,6 +118,36 @@ namespace IntellaQuest.BusinessLogic.Services
                 }
 
                 _shoppingCartDetailRepository.Delete(detailCart);
+                _unitOfWork.Commit();
+            }
+        }
+
+        public void PlusQuantity(Guid detailId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var shoppingCardDetail = _shoppingCartDetailRepository.FindBy(detailId)
+                    ?? throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.DETAIL_NOT_FOUND_EXCEPTION);
+
+                shoppingCardDetail.Quantity++;
+
+                _shoppingCartDetailRepository.Update(shoppingCardDetail);
+
+                _unitOfWork.Commit();
+            }
+        }
+
+        public void MinusQuantity(Guid detailId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var shoppingCardDetail = _shoppingCartDetailRepository.FindBy(detailId)
+                    ?? throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.DETAIL_NOT_FOUND_EXCEPTION);
+
+                shoppingCardDetail.Quantity--;
+
+                _shoppingCartDetailRepository.Update(shoppingCardDetail);
+
                 _unitOfWork.Commit();
             }
         }

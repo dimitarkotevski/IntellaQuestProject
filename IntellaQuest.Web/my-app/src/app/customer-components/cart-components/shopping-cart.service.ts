@@ -36,4 +36,19 @@ import { Injectable } from "@angular/core";
           return
         }
       }
+
+      MinusQuantity(detailId:string){
+        if(detailId){
+          return this.http.post<any>(this.baseApi+'/MinusQuantity/',{detailsId: detailId})
+        }else{
+          return null;
+        }
+      }
+      PlusQuantity(detailId:string){
+        if(detailId){
+          return this.http.post<any>(this.baseApi+'/PlusQuantity/',{detailsId: detailId})
+        }else{
+          return null;
+        }
+      }
   }

@@ -694,6 +694,17 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="ShopDB\dbo.Categories.Table.sql" />
+    <Content Include="ShopDB\dbo.Favourite.Table.sql" />
+    <Content Include="ShopDB\dbo.Orders.Table.sql" />
+    <Content Include="ShopDB\dbo.Payments.Table.sql" />
+    <Content Include="ShopDB\dbo.Products.Table.sql" />
+    <Content Include="ShopDB\dbo.Roles.Table.sql" />
+    <Content Include="ShopDB\dbo.ShoppingCartDetails.Table.sql" />
+    <Content Include="ShopDB\dbo.ShoppingCarts.Table.sql" />
+    <Content Include="ShopDB\dbo.Users.Table.sql" />
+    <Content Include="ShopDB\Product.txt" />
+    <Content Include="ShopDB\script.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -706,6 +717,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="ShopDB\data.ipynb" />
+    <Content Include="ShopDB\data_shop.ipynb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

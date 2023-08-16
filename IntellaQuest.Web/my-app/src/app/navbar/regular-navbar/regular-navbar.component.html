@@ -5,6 +5,8 @@
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <a class="solid-color-a btn" *ngIf="categoryNavBar" (click)="disableNavbar()" routerLink="/admin-tool" >Go to admin tool</a>
+    <a class="solid-color-a btn" *ngIf="!categoryNavBar" (click)="disableNavbar()" routerLink="/" >Back to user mode</a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ml-auto">
         <div *ngIf="!isUserAuthenticated" class="nav-item">
@@ -15,7 +17,7 @@
           <div class="nav-link dropdown">
             <button class="avatar dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user"></i><span class="px-1">{{username}} ( ${{amount}} ) </span>
+              <i class="fa fa-user"></i><span class="px-1">{{username}} {{amount}} </span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" [routerLink]="['/profile',id]">

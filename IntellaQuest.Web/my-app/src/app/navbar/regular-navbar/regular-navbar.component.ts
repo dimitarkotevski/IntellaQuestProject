@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { AuthentificationService } from 'src/app/authentification/authentification.service';
 import { CategoryService } from 'src/app/category-products/category.service';
@@ -13,6 +13,8 @@ export class RegularNavbarComponent implements OnInit {
   categories?: Category[] | null | undefined;
   @Input() isUserAuthenticated?: boolean;
   @Input() refreshState: EventEmitter<any>;
+  @Output() changeCategoryNavBar = new EventEmitter<any>();
+  @Input() categoryNavBar?: boolean ;
   username?: string;
   amount: any;
   id?: string | null;
@@ -28,8 +30,11 @@ export class RegularNavbarComponent implements OnInit {
     this.username = this.authService.GetLoggedUsername();
     this.id = this.authService.GetLoggedUserId();
     this.authService.GetAmountMoneyOfUser(this.id)?.subscribe(res=>{
-      console.log(res)
-      this.amount = res;
+      if(res === 0){
+        this.amount = null;
+      }else{
+        this.amount ="( $"+res+")";
+      }
     })
   }
 
@@ -37,5 +42,9 @@ export class RegularNavbarComponent implements OnInit {
     this.authService.Logout();
     this.refreshState.emit();
     window.location.replace('/')
+  }
+
+  disableNavbar(){
+    this.changeCategoryNavBar.emit();
   }
 }

@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   categories?: Category[] | null | undefined;
   @Input() isUserAuthenticated?: boolean;
   @Input() refreshState: EventEmitter<any>;
+  categoryNavBar = true;
   username?: string;
   id?: string | null;
 
@@ -29,15 +30,20 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.authService.GetLoggedUserId();
     this.username = this.authService.GetLoggedUsername();
-
-    // this.categoryService.getAllCategories().subscribe((result:ResponseListModel<Category>) => {
-    //   this.categories = result.Items;
-    // })
   }
   logout(){
     this.authService.Logout();
     this.refreshState.emit();
     this.toastr.success("Success logout!");
     window.location.replace('/')
+  }
+
+  changeCategoryNavBar(){
+    if(this.categoryNavBar==true){
+      this.categoryNavBar = false;
+    }else{
+      this.categoryNavBar=true;
+    }
+    console.log(this.categoryNavBar);
   }
 }

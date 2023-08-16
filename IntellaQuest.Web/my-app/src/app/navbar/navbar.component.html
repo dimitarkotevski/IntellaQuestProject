@@ -1,6 +1,10 @@
 <header>
 
-  <app-regular-navbar [isUserAuthenticated]="isUserAuthenticated" [refreshState]="refreshState"></app-regular-navbar>
+  <app-regular-navbar 
+    [isUserAuthenticated]="isUserAuthenticated" 
+    [refreshState]="refreshState"
+    [categoryNavBar] = "categoryNavBar"
+    (changeCategoryNavBar) = "changeCategoryNavBar()"></app-regular-navbar>
   
   <app-categories-navbar class="solid-hide-on-sm"></app-categories-navbar>  
 

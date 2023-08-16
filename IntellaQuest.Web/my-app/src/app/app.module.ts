@@ -40,6 +40,7 @@ import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { OrderService } from './customer-components/order-components/order.service';
 import { CategoryService } from './category-products/category.service';
+import { AdminToolComponent } from './admin-components/admin-tool/admin-tool.component';
 
 
 
@@ -76,7 +77,8 @@ const routes: Routes = [
     LoadingDetailComponent,
     LoadingGridComponent,
     CartComponent,
-    OrderComponent,    
+    OrderComponent,
+    AdminToolComponent,    
   ],
   imports: [
     BrowserModule,

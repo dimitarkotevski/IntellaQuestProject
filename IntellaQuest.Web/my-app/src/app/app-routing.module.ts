@@ -14,6 +14,7 @@ import { CartGridComponent } from './customer-components/cart-components/cart-gr
 import { OrderGridComponent } from './customer-components/order-components/order-grid/order-grid.component';
 import { OrderComponent } from './order/order.component';
 import { CartComponent } from './cart/cart.component';
+import { AdminToolComponent } from './admin-components/admin-tool/admin-tool.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'my-order', component: OrderComponent},
   { path: 'order-grid', component: OrderGridComponent },
   { path: 'orders/:id/details', component: OrderDetailComponent},
+  { path: 'admin-tool', component: AdminToolComponent},
   { path: '**', redirectTo: '/error-404' },
 ];
 

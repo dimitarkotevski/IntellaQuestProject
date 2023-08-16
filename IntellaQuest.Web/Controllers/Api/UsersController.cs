@@ -37,7 +37,7 @@ namespace IntellaQuest.Web.Controllers
             return Json(new { success = true });
         }
         [HttpPost]
-        public ActionResult Edit(UserViewModel model)
+        public ActionResult Edit(UserDetailsModel model)
         {
             if (!ModelState.IsValid)
             {

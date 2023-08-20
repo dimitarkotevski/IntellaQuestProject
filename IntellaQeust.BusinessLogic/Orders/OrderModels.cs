@@ -18,6 +18,7 @@ namespace IntellaQeust.BusinessLogic.ViewModels
         public LookupViewModel User { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public double TotalAmount { get; set; }
+        public DateTime DateCreated { get; set; }
     }
     public class OrderViewModelWithProducts
     {

@@ -192,19 +192,8 @@ namespace IntellaQuest.BusinessLogic.Services
                 ResponseModel<ProductViewModel> response = new ResponseModel<ProductViewModel>();
 
                 IQueryable<Product> listProductForFiltering;
-
-                if (request.SortName== "Popular")
-                {
-                    listProductForFiltering = _favouriteProductsRepository.All().Select(x => x.Product);
-                }
-                else if (request.SortName == "BestSelling")
-                {
-                    listProductForFiltering = _shoppingCartDetailRepository.All().Select(x => x.Product);
-                }
-                else
-                {
-                    listProductForFiltering = _productsRepository.All();
-                }
+                
+                listProductForFiltering = _productsRepository.All();
 
                 if (!string.IsNullOrEmpty(request.SearchString))
                 {
@@ -222,6 +211,12 @@ namespace IntellaQuest.BusinessLogic.Services
 
                 switch (request.SortName)
                 {
+                    case "Popular":
+                        listProductForFiltering = _favouriteProductsRepository.All().Select(x => x.Product);
+                        break;
+                    case "BestSelling":
+                        listProductForFiltering = _shoppingCartDetailRepository.All().Select(x => x.Product);
+                        break;
                     case "Newest":
                         listProductForFiltering = listProductForFiltering.OrderBy(x => x.Created);
                         break;
@@ -239,14 +234,14 @@ namespace IntellaQuest.BusinessLogic.Services
                 if (request.Size == 0 && request.PageNeeded == 0)
                 {
                     request.PageNeeded = 1;
-                    request.Size = listProductForFiltering.Count();
+                    request.Size = list.Count();
                 }
                 response.Size = request.Size;
                 response.CurrentPage = request.PageNeeded;
-                response.Items = listProductForFiltering
+                response.Items = list
                                     .Skip((response.CurrentPage - 1) * response.Size)
                                     .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
-                response.TotalItems = listProductForFiltering.Count();
+                response.TotalItems = list.Count();
 
 
                 return response;

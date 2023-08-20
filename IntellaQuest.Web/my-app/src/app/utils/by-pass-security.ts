@@ -6,7 +6,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class ByPassSecurityPipe implements PipeTransform {
 
-    constructor(private sanitizer: DomSanitizer) {}
+    constructor(
+        private sanitizer: DomSanitizer
+        ) 
+    {}
 
     transform (value: string): SafeHtml {
         return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64, '+value);

@@ -18,11 +18,12 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 {
                     Id = model.ShoppingCart.Id,
                     Name = model.ShoppingCart.Name,
+                    Status = true
                 },
                 OrderStatus = model.OrderStatus,
                 TotalAmount = sumProducts == model.TotalAmount ? model.TotalAmount : sumProducts,
-                PaymentType = model.PaymentType
-                //DateCreated = model.DateCreated
+                PaymentType = model.PaymentType,
+                DateCreated = model.DateCreated
             };
         }
         public static OrderGridViewModel MapToGridViewModel(this Order model)

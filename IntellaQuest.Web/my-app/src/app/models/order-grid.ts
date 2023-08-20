@@ -1,14 +1,14 @@
 import { OrderStatus } from "./enum/order-status";
-import { ShoppingCart } from "./shopping-cart";
+import { LookupViewModel } from "./lookup-view-model";
 
 export class OrderGridViewModel{
     Id?:string;
     OrderName?: string;
     OrderStatus?: OrderStatus;
-    ShoppingCart?: ShoppingCart;
+    ShoppingCart?: LookupViewModel;
     NumberOfProducts?: number;
     TotalAmount?: number;
     DateCreated?: string;
     //if we need
-    //User?: UserDetails;
+    User?: LookupViewModel;
 }

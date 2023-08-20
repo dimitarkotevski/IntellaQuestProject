@@ -16,6 +16,6 @@ export class BreadcrumbComponent implements OnInit {
   constructor(private userAuth: AuthentificationService ) { }
 
   ngOnInit(): void {
-    this.user = this.userAuth.GetLoggedUsername();
+    this.user = this.userAuth.getLoggedUsername();
   }
 }

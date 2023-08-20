@@ -11,20 +11,21 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-
+  
   @Input() shoppingCart?: any;
+
   isLoading: boolean = true;
 
   constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private orderService: OrderService,
     private authService: AuthentificationService,
     private shoppingCartService: ShoppingCartService,
-    private orderService: OrderService,
-    private router: Router,
-    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    if(!this.authService.IsAuthenticated()){
+    if(!this.authService.isAuthenticated()){
       this.router.navigate(["login"]);
     }
 
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit {
   }
 
   refreshState(): void {
-    this.shoppingCartService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res) => {
+    this.shoppingCartService.GetUserCartProducts(this.authService.getLoggedUserId())?.subscribe((res) => {
       this.shoppingCart = res;
       this.isLoading = false;
     });
@@ -44,7 +45,7 @@ export class CartComponent implements OnInit {
     if(id){
       this.shoppingCartService.RemoveCartDetail(id)?.subscribe(()=>{
 
-        this.shoppingCartService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
+        this.shoppingCartService.GetUserCartProducts(this.authService.getLoggedUserId())?.subscribe((res)=>{
           this.shoppingCart = res;
         })
 
@@ -56,7 +57,7 @@ export class CartComponent implements OnInit {
   }
 
   MakeOrder(shoppingCartId:string){
-    this.orderService.MakeAnOrder(shoppingCartId,this.authService.GetLoggedUserId() || "").subscribe(()=>{
+    this.orderService.MakeAnOrder(shoppingCartId,this.authService.getLoggedUserId() || "").subscribe(()=>{
       window.location.replace("my-order");
     })
   }

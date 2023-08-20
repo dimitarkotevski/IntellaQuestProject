@@ -28,11 +28,11 @@ export class NavbarComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.id = this.authService.GetLoggedUserId();
-    this.username = this.authService.GetLoggedUsername();
+    this.id = this.authService.getLoggedUserId();
+    this.username = this.authService.getLoggedUsername();
   }
   logout(){
-    this.authService.Logout();
+    this.authService.logout();
     this.refreshState.emit();
     this.toastr.success("Success logout!");
     window.location.replace('/')

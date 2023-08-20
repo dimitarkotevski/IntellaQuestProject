@@ -7,7 +7,7 @@ namespace IntellaQuest.Data.NHibernate.ConfigurationRepository
 {
     public class NHibernateContext
     {
-        private static string _connectionString = "Data Source=DIMITARK-LT;Initial Catalog=ShopDb;Integrated Security=SSPI;";
+        private static string _connectionString = "Data Source=localhost;Initial Catalog=ShopDb;Integrated Security=SSPI;";
         public static ISessionFactory BuildSessionFactory()
         {
             var build= Fluently.Configure()

@@ -19,17 +19,17 @@ export class AuthentificationService {
     private tokenHelper: JwtHelperService
     ) {}
     
-  GetUserDetails(id:string | null) : Observable<UserDetails>{
-    return this.http.post<UserDetails>(`${this.baseApi}/UserDetails/${id}`, null);
+  getUserDetails(id:string | null) : Observable<UserDetails>{
+    return this.http.post<UserDetails>(`${this.baseApi}/GetUserDetails/${id}`, null);
   }
-  UpdateUserDetails(userDetails:UserDetails){
+  updateUserDetails(userDetails:UserDetails){
     return this.http.post(`${this.baseApi}/UserDetails`, {model:userDetails});
   }
-  GetLoggedUsername() : string | undefined {
+  getLoggedUsername() : string | undefined {
     return localStorage.getItem('username') || undefined;
   }
 
-  Login(username:string,password:string): Observable<boolean> {
+  login(username:string,password:string): Observable<boolean> {
     return this.http.post<any>(this.baseApi+"/Login", {Username:username, Password:password}).pipe(
       map((response : UserTokenInfo) => {
         if (response.Id && response.Token && response.Username && response.Role) {
@@ -43,31 +43,31 @@ export class AuthentificationService {
       })
     );
   }
-  Logout(): void {
+  logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('id');
     localStorage.removeItem('username');
     localStorage.removeItem('role');
   }
-  GetLoggedUserId(): string | null {
+  getLoggedUserId(): string | null {
     return localStorage.getItem('id') || null;
   }
-  GetToken(): string | null  {
+  getToken(): string | null  {
     return localStorage.getItem('token') || null;
   }
 
-  IsAuthenticated(): boolean {
-    const token = this.GetToken();
+  isAuthenticated(): boolean {
+    const token = this.getToken();
     return token !== null;
   }
   getTokenInformation(){
-    if(this.IsAuthenticated()){
-      return this.tokenHelper.decodeToken(this.GetToken() || '') || null;
+    if(this.isAuthenticated()){
+      return this.tokenHelper.decodeToken(this.getToken() || '') || null;
     }
     return null;
   }
 
-  RegisterUser(userRegister: UserRegister){
+  registerUser(userRegister: UserRegister){
     return this.http.post<any>(this.baseApi+"/Registration", {model:userRegister}).pipe(
       map((response : UserTokenInfo) => {
         if (response.Id && response.Token && response.Username && response.Role) {
@@ -82,7 +82,7 @@ export class AuthentificationService {
     );
   }
 
-  GetAmountMoneyOfUser(userId: string | null){
+  getAmountMoneyOfUser(userId: string | null){
     if(userId){
       return this.http.post(`${this.baseApi}/GetAmountMoneyOfUser`, { userId : userId });
     }else{

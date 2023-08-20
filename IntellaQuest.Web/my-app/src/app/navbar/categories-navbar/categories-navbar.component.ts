@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
 import { ResponseListModel } from 'src/app/models/response';
 import { CategoryService } from 'src/app/category-products/category.service';
@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/category-products/category.service';
   styleUrls: ['./categories-navbar.component.css']
 })
 export class CategoriesNavbarComponent implements OnInit {
+  @Input() categoryNavBar?: boolean;
   categories?: Category[] | null | undefined;
   constructor(private categoryService: CategoryService) { }
 

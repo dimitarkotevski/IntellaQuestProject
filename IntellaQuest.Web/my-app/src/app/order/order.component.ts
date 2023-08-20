@@ -16,7 +16,7 @@ export class OrderComponent implements OnInit {
     private authService: AuthentificationService,
   ) { }
   ngOnInit(): void {
-    this.orderService.GetUserActiveOrder(this.authService.GetLoggedUserId()).subscribe((response)=>{
+    this.orderService.GetUserActiveOrder(this.authService.getLoggedUserId()).subscribe((response)=>{
       this.activeOrder = response
     })
   }

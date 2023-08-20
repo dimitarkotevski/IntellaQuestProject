@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { OrderStatus } from './models/enum/order-status';
+import { OrderStatus } from '../models/enum/order-status';
 
 @Pipe({
   name: 'orderStatus'
 })
 export class OrderStatusPipe implements PipeTransform {
-  transform(value: OrderStatus | undefined): string | undefined{
+  transform(value: OrderStatus | undefined): string{
     switch (value) {
       case OrderStatus.Canceled:
         return 'Canceled';
@@ -18,6 +18,5 @@ export class OrderStatusPipe implements PipeTransform {
       default:
         return '';
     }
-    return undefined;
   }
 }

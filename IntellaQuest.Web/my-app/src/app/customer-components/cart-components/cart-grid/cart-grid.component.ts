@@ -22,11 +22,11 @@ export class CartGridComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(!this.authService.IsAuthenticated()){
+    if(!this.authService.isAuthenticated()){
       this.router.navigate(["login"]);
     }
 
-    this.shoppingCartService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
+    this.shoppingCartService.GetUserCartProducts(this.authService.getLoggedUserId())?.subscribe((res)=>{
       this.shoppingCart = res;
       this.isLoading=false;
     })
@@ -46,7 +46,7 @@ export class CartGridComponent implements OnInit {
     if(id){
       this.shoppingCartService.RemoveCartDetail(id)?.subscribe(()=>{
 
-        this.shoppingCartService.GetUserCartProducts(this.authService.GetLoggedUserId())?.subscribe((res)=>{
+        this.shoppingCartService.GetUserCartProducts(this.authService.getLoggedUserId())?.subscribe((res)=>{
           this.shoppingCart = res;
         })
 

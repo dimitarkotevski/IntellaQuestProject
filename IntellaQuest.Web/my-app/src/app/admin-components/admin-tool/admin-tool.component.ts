@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-tool',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminToolComponent implements OnInit {
 
-  constructor() { }
+  activeAdminTool = ''
+
+  constructor(
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+    if(this.activeAdminTool===''){
+      this.router.navigate(['admin-tool/products']);
+    }
   }
 
 }

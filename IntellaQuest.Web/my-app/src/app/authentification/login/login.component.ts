@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    if(this.authService.IsAuthenticated()){
+    if(this.authService.isAuthenticated()){
       this.router.navigate(["/"])
     }
   }
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = "Fields are required";
       return;
     }
-    this.authService.Login(this.username, this.password).subscribe(()=>{
+    this.authService.login(this.username, this.password).subscribe(()=>{
       window.location.replace('/')
     },
     (error) => {

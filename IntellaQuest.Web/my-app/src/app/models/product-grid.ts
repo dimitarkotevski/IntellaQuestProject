@@ -1,6 +1,6 @@
 import { LookupViewModel } from "./lookup-view-model";
 
-export class Product{
+export class ProductGrid{
     Id?:string;
     Name?:string;
     Description?:string;

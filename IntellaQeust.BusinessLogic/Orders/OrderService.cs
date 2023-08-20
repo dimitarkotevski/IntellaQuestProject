@@ -109,8 +109,8 @@ namespace IntellaQuest.BusinessLogic.Services
         }
         private ResponseModel<OrderViewModel> FilterAndPage(RequestModel request)
         {
-            /*using (_unitOfWork.BeginTransaction())
-            {*/
+            using (_unitOfWork.BeginTransaction())
+            {
                 ResponseModel<OrderViewModel> response = new ResponseModel<OrderViewModel>();
                 IQueryable<Order> ordersListForFiltering = _orderRepository.All();
 
@@ -181,9 +181,8 @@ namespace IntellaQuest.BusinessLogic.Services
                                     .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
                 response.TotalItems = ordersListForFiltering.ToList().Count();
 
-                //_unitOfWork.Commit();
                 return response;
-            //}
+            }
         }
         public void Update(OrderViewModel model)
         {

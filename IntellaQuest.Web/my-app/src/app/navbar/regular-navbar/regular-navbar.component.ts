@@ -27,9 +27,9 @@ export class RegularNavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.username = this.authService.GetLoggedUsername();
-    this.id = this.authService.GetLoggedUserId();
-    this.authService.GetAmountMoneyOfUser(this.id)?.subscribe(res=>{
+    this.username = this.authService.getLoggedUsername();
+    this.id = this.authService.getLoggedUserId();
+    this.authService.getAmountMoneyOfUser(this.id)?.subscribe(res=>{
       if(res === 0){
         this.amount = null;
       }else{
@@ -39,7 +39,7 @@ export class RegularNavbarComponent implements OnInit {
   }
 
   logout(){
-    this.authService.Logout();
+    this.authService.logout();
     this.refreshState.emit();
     window.location.replace('/')
   }

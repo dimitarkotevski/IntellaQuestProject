@@ -17,13 +17,13 @@ export class SettingsComponent implements OnInit {
   constructor( private authService: AuthentificationService,private toastr: ToastrService ) { }
 
   ngOnInit(): void {
-    this.authService.GetUserDetails(this.authService.GetLoggedUserId()).subscribe((response:UserDetails)=>{
+    this.authService.getUserDetails(this.authService.getLoggedUserId()).subscribe((response:UserDetails)=>{
       this.userDetails = response;
     });
     
   }
   updateUserPublicInfo(user:UserDetails){
-    this.authService.UpdateUserDetails(user).subscribe(()=>{
+    this.authService.updateUserDetails(user).subscribe(()=>{
       this.toastr.success('Update info')
     })
   }

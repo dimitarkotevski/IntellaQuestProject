@@ -22,10 +22,10 @@
                     <th scope="col" class="text-center">Status</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody *ngIf="orders">
                   <tr *ngFor="let order of orders">
                     <td>{{order.OrderName}}</td>
-                    <td>{{(order.DateCreated | dateConverter) || '/'}}</td>
+                    <td *ngIf="order.DateCreated">{{(order.DateCreated | dateConverter) || '/'}}</td>
                     <td>{{order.NumberOfProducts}}</td>
                     <td>${{order.TotalAmount?.toFixed(2) || '/'}}</td>
                     <td *ngIf="order.OrderStatus == 0" class="bg-danger text-white text-center">{{order.OrderStatus | orderStatus}}</td>

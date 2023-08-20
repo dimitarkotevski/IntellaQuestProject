@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Product } from '../../../models/product';
+import { ProductGrid } from '../../../models/product-grid';
 import { ToastrService } from 'ngx-toastr';
 import { AuthentificationService } from '../../../authentification/authentification.service';
 import { ResponseListModel } from '../../../models/response';
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 export class ProductsGridComponent implements OnInit {
 
   @Input() hasRemoveProductButton?: boolean;
-  @Input() products: Product[] | null | undefined;
+  @Input() products: ProductGrid[] | null | undefined;
   @Input() orderProducts: any;
   @Input() shoppingCart: any | null | undefined;
   @Input() type: "home" | "cart" | "favourite" | "order" | undefined;
@@ -43,7 +43,7 @@ export class ProductsGridComponent implements OnInit {
   }
 
   addToFavourite(productId: string | undefined){
-    var userId = this.authService.GetLoggedUserId();
+    var userId = this.authService.getLoggedUserId();
     if(!userId){
       window.location.replace('/login')
     }
@@ -61,11 +61,11 @@ export class ProductsGridComponent implements OnInit {
   }
 
   addToCart(productId: string | undefined){
-    var userId = this.authService.GetLoggedUserId();
+    var userId = this.authService.getLoggedUserId();
     if(!userId && !productId){
       window.location.replace('/login')
     }else{
-      this.shoppingCartService.AddProductToCart(this.authService.GetLoggedUserId(),productId || null)?.subscribe(()=>{
+      this.shoppingCartService.AddProductToCart(this.authService.getLoggedUserId(),productId || null)?.subscribe(()=>{
         this.toastr.success("Successs added product to cart");
       })
     }
@@ -73,7 +73,7 @@ export class ProductsGridComponent implements OnInit {
 
   deleteFavouriteProduct(id:string | undefined){
     if(id){
-      this.favouriteProductService.DeleteFavouriteProduct(this.authService.GetLoggedUserId(),id)?.subscribe(()=>{
+      this.favouriteProductService.DeleteFavouriteProduct(this.authService.getLoggedUserId(),id)?.subscribe(()=>{
         this.toastr.success("Success deleted favourite product");
         this.refresh();
       })

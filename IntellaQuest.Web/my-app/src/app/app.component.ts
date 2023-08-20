@@ -16,6 +16,6 @@ export class AppComponent implements OnInit {
     this.refreshState();
   }
   refreshState(){
-    this.isUserAuthenticated = this.authService.IsAuthenticated();
+    this.isUserAuthenticated = this.authService.isAuthenticated();
   }
 }

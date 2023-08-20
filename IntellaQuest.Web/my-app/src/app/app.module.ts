@@ -16,7 +16,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { ProductDetailComponent } from './customer-components/product-components/product-detail/product-detail.component';
 import { FooterComponent } from './footer/footer.component';
 import { ErrorPageComponent } from './customer-components/error-page/error-page.component';
-import { ByPassSecurityPipe } from './by-pass-security';
+import { ByPassSecurityPipe } from './utils/by-pass-security';
 import { CategoryProductsComponent } from './category-products/category-products.component';
 import { CategoriesNavbarComponent } from './navbar/categories-navbar/categories-navbar.component';
 import { RegularNavbarComponent } from './navbar/regular-navbar/regular-navbar.component';
@@ -27,8 +27,6 @@ import { BreadcrumbComponent } from './customer-components/breadcrumb/breadcrumb
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrderDetailComponent } from './customer-components/order-components/order-detail/order-detail.component';
-import { DateConverter } from './convert-date';
-import { OrderStatusPipe } from './order-pipe';
 import { SideFilterComponent } from './customer-components/side-filter/side-filter.component';
 import { LoadingDetailComponent } from './customer-components/loading-components/loading-detail/loading-detail.component';
 import { AuthentificationService } from './authentification/authentification.service';
@@ -41,6 +39,11 @@ import { OrderComponent } from './order/order.component';
 import { OrderService } from './customer-components/order-components/order.service';
 import { CategoryService } from './category-products/category.service';
 import { AdminToolComponent } from './admin-components/admin-tool/admin-tool.component';
+import { AdminToolProductsComponent } from './admin-components/admin-tool-products/admin-tool-products.component';
+import { AdminToolOrdersComponent } from './admin-components/admin-tool-orders/admin-tool-orders.component';
+import { AdminToolUsersComponent } from './admin-components/admin-tool-users/admin-tool-users.component';
+import { DateConverter } from './utils/convert-date';
+import { OrderStatusPipe } from './utils/order-pipe';
 
 
 
@@ -78,7 +81,10 @@ const routes: Routes = [
     LoadingGridComponent,
     CartComponent,
     OrderComponent,
-    AdminToolComponent,    
+    AdminToolComponent,
+    AdminToolProductsComponent,
+    AdminToolOrdersComponent,
+    AdminToolUsersComponent,
   ],
   imports: [
     BrowserModule,

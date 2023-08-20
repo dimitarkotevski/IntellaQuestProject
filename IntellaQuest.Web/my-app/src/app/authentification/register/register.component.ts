@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     { }
 
   ngOnInit(): void {
-    if(this.authService.IsAuthenticated()){
+    if(this.authService.isAuthenticated()){
       this.router.navigate(["/"])
     }
   }
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.authService.RegisterUser(this.registerUserModel).subscribe(()=>{
+    this.authService.registerUser(this.registerUserModel).subscribe(()=>{
        window.location.replace('/login')
       },
       (error) => {

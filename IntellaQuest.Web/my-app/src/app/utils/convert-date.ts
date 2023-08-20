@@ -7,7 +7,7 @@ export class DateConverter implements PipeTransform {
 
     constructor() {}
 
-    transform(date: string | undefined): string | number {
+    transform(date: string): string | number {
         if (!date) {
             return 0;
         }

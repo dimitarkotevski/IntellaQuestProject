@@ -7,6 +7,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
 {
     public static class OrderMappers
     {
+        
         public static OrderViewModel MapToViewModel(this Order model)
         {
             var sumProducts = model.ShoppingCart.ShoppingCartDetails.Select(x => x.Product.Price).Sum();

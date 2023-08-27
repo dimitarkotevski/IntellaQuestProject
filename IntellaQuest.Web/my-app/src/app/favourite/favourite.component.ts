@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { AuthentificationService } from '../authentification/authentification.service';
-import { ProductGrid } from '../models/product-grid';
+import { ProductGridModel } from '../models/product-grid';
 import { ResponseListModel } from '../models/response';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { ProductsGridComponent } from '../customer-components/product-components
   styleUrls: ['./favourite.component.css']
 })
 export class FavouriteComponent implements OnInit, OnChanges {
-  responseModel?: ResponseListModel<ProductGrid>;
+  responseModel?: ResponseListModel<ProductGridModel>;
 
   isLoading: boolean = true;
 
@@ -37,7 +37,7 @@ export class FavouriteComponent implements OnInit, OnChanges {
   }
 
   refreshState(){
-    this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((response:ResponseListModel<ProductGrid>)=>{
+    this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((response:ResponseListModel<ProductGridModel>)=>{
       this.responseModel = response;
       this.isLoading = false;
     })
@@ -47,7 +47,7 @@ export class FavouriteComponent implements OnInit, OnChanges {
     if(id){
       this.favouriteProductService.DeleteFavouriteProduct(this.authService.getLoggedUserId(),id)?.subscribe(()=>{
         this.toastr.success("Success deleted favourite product");
-        this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<ProductGrid>)=>{
+        this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<ProductGridModel>)=>{
           this.responseModel = result;
         })
       })

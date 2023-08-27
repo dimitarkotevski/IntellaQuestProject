@@ -60,7 +60,8 @@ namespace IntellaQuest.Web.Controllers
             {
                 return Json(ModelState.Values);
             }
-            return Json(new { success = _productsService.Create(model) });
+            _productsService.Create(model);
+            return Json(new { success = true});
         }
         [HttpPost]
         public ActionResult Edit(ProductViewModel model)
@@ -69,8 +70,8 @@ namespace IntellaQuest.Web.Controllers
             {
                 return Json(ModelState.Values);
             }
-            
-            return Json(new {success= _productsService.Update(model)});
+            _productsService.Update(model);
+            return Json(new {success= true});
         }
         [HttpPost]
         public ActionResult Delete(Guid Id)

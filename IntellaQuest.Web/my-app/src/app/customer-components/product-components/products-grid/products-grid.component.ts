@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ProductGrid } from '../../../models/product-grid';
+import { ProductGridModel } from '../../../models/product-grid';
 import { ToastrService } from 'ngx-toastr';
 import { AuthentificationService } from '../../../authentification/authentification.service';
 import { ResponseListModel } from '../../../models/response';
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 export class ProductsGridComponent implements OnInit {
 
   @Input() hasRemoveProductButton?: boolean;
-  @Input() products: ProductGrid[] | null | undefined;
+  @Input() products: ProductGridModel[] | null | undefined;
   @Input() orderProducts: any;
   @Input() shoppingCart: any | null | undefined;
   @Input() type: "home" | "cart" | "favourite" | "order" | undefined;

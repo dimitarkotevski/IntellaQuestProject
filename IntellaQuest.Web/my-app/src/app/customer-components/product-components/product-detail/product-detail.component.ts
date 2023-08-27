@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
-import { ProductGrid } from '../../../models/product-grid';
+import { ProductGridModel } from '../../../models/product-grid';
+import { ProductViewModel } from 'src/app/models/product-view-model';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,7 +11,7 @@ import { ProductGrid } from '../../../models/product-grid';
 })
 export class ProductDetailComponent implements OnInit {
 
-  productDetail?: ProductGrid
+  productDetail?: ProductViewModel
 
   message?: string="";
   type?: any="";
@@ -24,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if(id){
-        this.productService.get(id).subscribe( (result: ProductGrid)=>{
+        this.productService.get(id).subscribe( (result: ProductGridModel)=>{
           this.productDetail = result;
         })
       }

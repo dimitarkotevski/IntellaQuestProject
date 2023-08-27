@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './category.service';
 import { ResponseListModel } from '../models/response';
-import { ProductGrid } from '../models/product-grid';
-import { Category } from '../models/category';
+import { ProductGridModel } from '../models/product-grid';
+import { CategoryViewModel } from '../models/category';
 import { RequestModel } from '../models/request';
 import { ProductService } from '../customer-components/product-components/product.service';
 
@@ -15,8 +15,8 @@ import { ProductService } from '../customer-components/product-components/produc
 export class CategoryProductsComponent implements OnInit {
   
   //@Input() category?: Category;
-  products?: ResponseListModel<ProductGrid>;
-  category?: Category;
+  products?: ResponseListModel<ProductGridModel>;
+  category?: CategoryViewModel;
   brands?: any;
   isLoading: boolean = true;
   filterCategory:RequestModel = new RequestModel();
@@ -43,7 +43,7 @@ export class CategoryProductsComponent implements OnInit {
           })
         })
         
-        this.categoryService.getProductsByCategoryUrl(categoryUrl,filter).subscribe((res : ResponseListModel<ProductGrid>)=>{
+        this.categoryService.getProductsByCategoryUrl(categoryUrl,filter).subscribe((res : ResponseListModel<ProductGridModel>)=>{
           this.products = res;
           this.isLoading=false;
         })

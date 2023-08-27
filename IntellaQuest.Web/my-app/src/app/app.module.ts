@@ -44,9 +44,17 @@ import { AdminToolOrdersComponent } from './admin-components/admin-tool-orders/a
 import { AdminToolUsersComponent } from './admin-components/admin-tool-users/admin-tool-users.component';
 import { DateConverter } from './utils/convert-date';
 import { OrderStatusPipe } from './utils/order-pipe';
-
-
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddEditProductDialogComponent } from './admin-components/admin-tool-products/add-edit-product-dialog/add-edit-product-dialog.component';
+import { PhotoDialogComponent } from './admin-components/admin-tool-products/photo-dialog/photo-dialog.component';
+import { YesNoDialogComponent } from './customer-components/yes-no-dialog/yes-no-dialog.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+// import { MatTableModule } from '@angular/material/table';
+// import { MatPaginatorModule } from '@angular/material/paginator';
+// import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
 ];
@@ -85,6 +93,9 @@ const routes: Routes = [
     AdminToolProductsComponent,
     AdminToolOrdersComponent,
     AdminToolUsersComponent,
+    PhotoDialogComponent,
+    AddEditProductDialogComponent,
+    YesNoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,6 +108,20 @@ const routes: Routes = [
       preventDuplicates: false,
     }),
     BrowserAnimationsModule,
+    MatDialogModule,
+    NgbModule,
+    MatSelectModule,
+    NgxDatatableModule
+    // MatTableModule,
+    // MatPaginatorModule,
+    // MatFormFieldModule,
+    // MatInputModule,
+  ],
+  exports:[
+    MatDialogModule
+  ],
+  entryComponents:[
+    PhotoDialogComponent
   ],
   providers: [
     AuthentificationService,

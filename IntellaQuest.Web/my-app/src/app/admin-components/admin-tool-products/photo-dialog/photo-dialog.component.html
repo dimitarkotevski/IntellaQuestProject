@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Photo view</h1>
+<div mat-dialog-content class="center text-center">
+  <img width="300px" [src]="photoUrl | byPassSecurity" alt="">
+  <hr/>
+  <label for="myfile">Change photo</label>
+  <input type="file" id="myfile" name="myfile" (change)="onFileSelected($event)">
+  <div *ngIf="addPhotoButton">
+    <button class="btn btn-check" (click)="addPhoto(photoUrl)">Add photo</button>
+  </div>
+</div>
+<div style="float:right;margin:20px;">
+  <input class="btn btn-danger" type="button" value="Cancel"  [mat-dialog-close]="false">
+</div>

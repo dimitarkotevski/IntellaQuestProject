@@ -1,5 +1,8 @@
 export class LookupViewModel {
-    Id?:string;
+    Id:string ='';
     Name?:string;
     Status?:boolean;
+    constructor(){
+        
+    }
 }

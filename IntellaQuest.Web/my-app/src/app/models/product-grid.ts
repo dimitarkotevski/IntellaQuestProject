@@ -1,10 +1,10 @@
 import { LookupViewModel } from "./lookup-view-model";
 
-export class ProductGrid{
-    Id?:string;
+export class ProductGridModel{
+    Id:string = '';
     Name?:string;
-    Description?:string;
     Price?:number;
     Image?:any;
+    DateCreated?: string;
     Category?: LookupViewModel
 }

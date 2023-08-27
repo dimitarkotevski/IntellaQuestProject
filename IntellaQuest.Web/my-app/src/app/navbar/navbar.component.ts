@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit } from '@angular/cor
 import { AuthentificationService } from '../authentification/authentification.service';
 import { CategoryService } from '../category-products/category.service';
 import { ResponseListModel } from '../models/response';
-import { Category } from '../models/category';
+import { CategoryViewModel } from '../models/category';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  categories?: Category[] | null | undefined;
+  categories?: CategoryViewModel[] | null | undefined;
   @Input() isUserAuthenticated?: boolean;
   @Input() refreshState: EventEmitter<any>;
   categoryNavBar = true;

@@ -1,4 +1,5 @@
 ﻿using IntellaQeust.BusinessLogic.ViewModels;
+using IntellaQuest.BusinessLogic.Mappers;
 using IntellaQuest.Domain;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +16,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
             {
                 Id=model.Id,
                 OrderName= model.OrderName,
+                User = model.ShoppingCart.User.MapToLookupViewModel(),
                 ShoppingCart = new LookupViewModel
                 {
                     Id = model.ShoppingCart.Id,

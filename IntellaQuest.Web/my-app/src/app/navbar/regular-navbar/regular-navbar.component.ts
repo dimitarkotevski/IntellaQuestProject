@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Category } from 'src/app/models/category';
+import { CategoryViewModel } from 'src/app/models/category';
 import { AuthentificationService } from 'src/app/authentification/authentification.service';
 import { CategoryService } from 'src/app/category-products/category.service';
 
@@ -10,11 +10,12 @@ import { CategoryService } from 'src/app/category-products/category.service';
 })
 export class RegularNavbarComponent implements OnInit {
 
-  categories?: Category[] | null | undefined;
   @Input() isUserAuthenticated?: boolean;
   @Input() refreshState: EventEmitter<any>;
   @Output() changeCategoryNavBar = new EventEmitter<any>();
   @Input() categoryNavBar?: boolean ;
+  
+  categories?: CategoryViewModel[] | null | undefined;
   username?: string;
   amount: any;
   id?: string | null;

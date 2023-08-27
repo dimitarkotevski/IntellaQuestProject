@@ -15,6 +15,7 @@ using System.Data;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using IntellaQuest.Repository.Repositories;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -75,12 +76,24 @@ namespace IntellaQuest.BusinessLogic.Services
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
 
+                string base64String = null;
+                if (model.Image!= null)
+                {
+                    base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(model.Image));
+                }
+
                 var entity = new Product
                 {
                     Name = model.Name,
                     Description = model.Description,
+                    Price = model.Price,
                     Category = category,
+                    Created = DateTime.Now
                 };
+                if(base64String != null)
+                {
+                    entity.Image = Convert.FromBase64String(base64String);
+                }
 
                 _productsRepository.Add(entity);
                 _unitOfWork.Commit();
@@ -136,8 +149,19 @@ namespace IntellaQuest.BusinessLogic.Services
                     throw new BllException(ShopExceptionMassages.CategoriesExceptionMassages.NAME_ALREADY_EXIST_EXCEPTION);
                 }
 
+                string base64String = null;
+                if (model.Image != null)
+                {
+                    base64String = Convert.ToBase64String(Encoding.UTF8.GetBytes(model.Image));
+                }
+
                 //exception need
                 product.Name = model.Name;
+                product.Price = model.Price;
+                if(base64String!= null)
+                {
+                    product.Image = Convert.FromBase64String(base64String);
+                }
                 product.Description = model.Description;
                 product.Category = category;
                 _productsRepository.Update(product);
@@ -159,10 +183,7 @@ namespace IntellaQuest.BusinessLogic.Services
             {
                 var product = _productsRepository.FindBy(Id);
 
-
                 return null;
-                //return Convert.ToBase64String(product.Image);
-
             }
         }
         public void UploadImage(Guid Id, string image)

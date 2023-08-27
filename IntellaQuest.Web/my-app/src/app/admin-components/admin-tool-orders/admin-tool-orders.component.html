@@ -1,3 +1,36 @@
 <div class="container">
-    admin-tool-orders works!
-</div>
+    <div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Order Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Shopping Cart</th>
+            <th scope="col">Order Status</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Payment Type</th>
+            <th scope="col">Date Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of response?.Items">
+            <td>{{ order.OrderName }}</td>
+            <td>{{ order.User?.Name || '/' }}</td>
+            <td>{{ order.ShoppingCart?.Name || "" }}</td>
+            <td>{{ order.OrderStatus | orderStatus }}</td>
+            <td>{{ order.TotalAmount }}</td>
+            <td>
+                {{ order.PaymentType || "" }}
+            </td>
+            <td *ngIf="order.DateCreated">{{ (order.DateCreated | dateConverter) || '/'}}</td>
+            <td>
+              <button class="edit-button">Edit</button>
+          </td>
+          <td>
+              <button class="delete-button">Delete</button>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

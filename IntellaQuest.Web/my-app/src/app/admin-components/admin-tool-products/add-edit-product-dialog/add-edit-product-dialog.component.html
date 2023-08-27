@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{title}} <hr/></h1>
+<div mat-dialog-content>
+  <form>
+    <div class="form-outline mb-4">
+      <label for="name" class="form-label" >Product name</label>
+      <input name="name" [(ngModel)]="model.Name" type="text" class="form-control" />
+    </div>
+
+    <div class="form-outline mb-4">
+      <label for="price" class="form-label" >Price</label>
+      <input name="price" [(ngModel)]="model.Price" type="number" class="form-control" />
+    </div>
+
+    <div class="form-outline mb-4">
+      <label for="description" class="form-label" >Description</label>
+      <input name="description" [(ngModel)]="model.Description" type="text"  class="form-control" />
+    </div>
+  
+    <div>
+      <label for="description" class="form-label" >Pick category</label>
+      <select [selectedIndex]="model.Category" class="form-select form-control" [(ngModel)]="model.Category">
+        <option *ngFor="let item of categories" [selected]="model.Category?.Id === item.Id" [ngValue]="item">{{ item.Name }}</option>
+      </select>
+    </div>
+
+    <!-- <div>{{model.Category | json}}</div> -->
+
+  </form>
+</div>
+<div style="float:right;margin:20px;">
+  <input class="btn btn-danger" type="button" value="Save"  [mat-dialog-close]="model">
+</div>
+

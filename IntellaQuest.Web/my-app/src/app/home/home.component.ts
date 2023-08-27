@@ -3,9 +3,9 @@ import { ProductService } from '../customer-components/product-components/produc
 import { ProductsFilter } from '../models/products-filter';
 import { Router } from '@angular/router';
 import { ResponseListModel } from '../models/response';
-import { ProductGrid } from '../models/product-grid';
+import { ProductGridModel } from '../models/product-grid';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Category } from '../models/category';
+import { CategoryViewModel } from '../models/category';
 
 
 @Component({
@@ -15,9 +15,9 @@ import { Category } from '../models/category';
 })
 export class HomeComponent implements OnInit {
   isUserAuthenticated: boolean = false;
-  favouriteProduct?: ProductGrid[] | null | undefined;
-  categories?: Category[] | null | undefined;
-  products: ProductGrid[] | null | undefined;
+  favouriteProduct?: ProductGridModel[] | null | undefined;
+  categories?: CategoryViewModel[] | null | undefined;
+  products: ProductGridModel[] | null | undefined;
   search: string = 'search'
   totalItems?: number
   activeSorting?: string ='Popular';
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['sort/popular']);
     }
 
-    this.productService.getAll(this.productFilter).subscribe((result:ResponseListModel<ProductGrid>) => {
+    this.productService.getAll(this.productFilter).subscribe((result:ResponseListModel<ProductGridModel>) => {
           this.products = result.Items;
           this.totalItems = result.TotalItems;
           this.isLoading = false;

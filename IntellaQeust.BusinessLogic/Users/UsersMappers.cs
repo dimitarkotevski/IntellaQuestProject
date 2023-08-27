@@ -1,4 +1,5 @@
-﻿using IntellaQeust.BusinessLogic.Mappers;
+﻿using IntellaQeust.BusinessLogic;
+using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQuest.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
 using System.Linq;
@@ -34,6 +35,15 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 State = user.State,
                 City = user.City,
                 ZipCode = user.ZipCode,
+            };
+        }
+        public static LookupViewModel MapToLookupViewModel(this User user)
+        {
+            return new LookupViewModel
+            {
+                Id = user.Id,
+                Name = user.FirstName + " " + user.LastName,
+                Status = true
             };
         }
     }

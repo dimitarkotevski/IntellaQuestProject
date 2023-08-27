@@ -10,7 +10,7 @@ import { OrderViewModel } from '../../admin-tool-models/order-view-model';
 })
 export class AdminToolOrderService {
 
-  private baseApi = 'api/Order/';
+  private baseApi = 'api/Orders/';
 
   constructor(
     private http: HttpClient,
@@ -20,15 +20,15 @@ export class AdminToolOrderService {
     return this.http.post<ResponseModel<OrderGridViewModel>>(this.baseApi+"All", request);
   }
   getById(id:string){
-    return this.http.post<OrderViewModel>
+    return this.http.post<OrderViewModel>(this.baseApi+"Get",{Id:id})
   }
-  create(){
-
+  create(model: OrderViewModel){
+    return this.http.post(this.baseApi+"Create",{model:model})
   }
-  update(){
-
+  update(model: OrderViewModel){
+    return this.http.post(this.baseApi+"Edit",{model:model})
   }
   delete(id:string){
-
+    return this.http.post<OrderViewModel>(this.baseApi+"Delete",{Id:id})
   }
 }

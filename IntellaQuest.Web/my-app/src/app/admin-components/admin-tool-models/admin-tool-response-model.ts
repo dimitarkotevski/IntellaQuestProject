@@ -1,6 +1,6 @@
 export class ResponseModel<T>{
-    TotalItem?:number
+    TotalItems:number = 0
     Items?: Array<T>
-    Size?: number
-    CurrentPage?: number
+    Size: number = 5
+    CurrentPage: number = 0
 }

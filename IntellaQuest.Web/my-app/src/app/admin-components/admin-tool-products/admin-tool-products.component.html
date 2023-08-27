@@ -1,3 +1,75 @@
-<div class="container">
-    admin-tool-products works!
-</div>
+<div *ngIf="response" class="container pt-3">
+  <h3>Product admin panel</h3>
+  <hr/>
+  <div class="row pt-3">
+    <div class="col-10 d-flex">
+      <div class="form-group d-flex align-items-center"> <!-- Use align-items-center to vertically center content -->
+        <input class="form-control-sm" [(ngModel)]="request.SearchString" placeholder="Search" type="search" id="example-search-input">
+        <button class="btn btn-sm btn-primary" (click)="getData()">Search</button>
+        <button class="btn btn-sm btn-warning" (click)="resetSearchString()">Reset</button>
+      </div>
+    </div>
+    <div class="col-2 d-flex justify-content-end">
+      <div>
+        <button (click)="addEditProduct(newItem)" class="btn-sm btn-primary">Add product</button>
+      </div>
+    </div>
+  </div>
+  <!-- <ngx-datatable class="material" [rows]="response.Items" [columns]="columns" [columnMode]="'force'"
+  [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="response.Size"
+  [count]="response.TotalItems" (page)="onPageChange($event)">
+  
+</ngx-datatable> -->
+    <div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Category</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of response.Items">
+            <td>{{ product.Name }}</td>
+            <td>{{ product.Price }}</td>
+            <td>{{ product.Category?.Name || "" }}</td>
+            <td>{{ (product.DateCreated || "" | dateConverter) || "/" }}</td>
+            <td>
+                <button class="btn-sm btn-success" 
+                (click)="openPhotoModal(product.Image, product.Id)">View photo</button>
+            </td>
+            <td>
+                <button (click)="addEditProduct(product)" class="btn-sm btn-warning">Edit</button>
+            </td>
+            <td>
+                <button  (click)="deleteProduct(product?.Id)" class="btn-sm btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   <div class="row">
+    <div class="col">
+      <ngb-pagination
+      [(page)]="response.CurrentPage" 
+      [pageSize]="response.Size" 
+      [collectionSize]="response.TotalItems" 
+      [rotate]="true" 
+      [boundaryLinks]="true"
+      (pageChange)="onPageChange($event)"
+      ></ngb-pagination>
+    </div>
+    <mat-form-field>
+      <mat-label>Page Size</mat-label>
+      <mat-select [(value)]="response.Size" (selectionChange)="onPageSizeChange($event.value)">
+        <mat-option *ngFor="let option of pagination" [value]="option">{{ option }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+   </div>
+  </div>
+

@@ -33,4 +33,9 @@ export class ProductService {
       return null;
     }
   }
+
+  addImageToProduct(id:string,base64: string){
+    return this.http.post<string | boolean>(this.baseApi+"AddImageToProduct", {id:id, image:base64});
+  }
+
 }

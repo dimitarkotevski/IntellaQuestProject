@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Mapping;
 using IntellaQuest.Domain;
+using NHibernate.Type;
 
 namespace IntellaQuest.Data.NHibernate.Mapping
 {
@@ -17,7 +18,11 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Map(c => c.Description);
             Map(c => c.Price);
             Map(c => c.Created);
-            Map(c => c.Image);
+            Map(c => c.Image)
+                .CustomType<BinaryBlobType>() // Or another appropriate binary type
+                .Length(int.MaxValue)
+                .Nullable()
+                .LazyLoad();
 
             References(x => x.Category)
                 .Column("CategoryId")

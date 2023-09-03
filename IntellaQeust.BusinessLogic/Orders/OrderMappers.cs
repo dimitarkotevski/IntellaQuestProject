@@ -16,7 +16,7 @@ namespace IntellaQeust.BusinessLogic.Mappers
             {
                 Id=model.Id,
                 OrderName= model.OrderName,
-                User = model.ShoppingCart.User.MapToLookupViewModel(),
+                User = model.ShoppingCart.User.MapToLookupUsernameViewModel(),
                 ShoppingCart = new LookupViewModel
                 {
                     Id = model.ShoppingCart.Id,
@@ -55,6 +55,12 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 OrderStatus = model.OrderStatus,
                 Products = model.ShoppingCart.ShoppingCartDetails.Select(x => x.MapToViewModel()).ToList(),
                 TotalAmount =model.TotalAmount,
+                ShoppingCart = model.ShoppingCart != null ? new LookupViewModel
+                {
+                    Id = model.ShoppingCart.Id,
+                    Name = model.ShoppingCart.Name,
+                    Status = true
+                } : null,
                 PaymentType = model.PaymentType
             };
         }

@@ -64,7 +64,7 @@ namespace IntellaQuest.Web.Controllers
         {
             return Json(_userService.Get(id));
         }
-        public ActionResult SetUserDetails(UserDetailsModel model)
+        public ActionResult SetUserDetails(UserViewModel model)
         {
             _userService.Update(model);
             return Json(true);
@@ -79,6 +79,12 @@ namespace IntellaQuest.Web.Controllers
             var amount = _userService.GetAmountMoneyOfUser(userId);
             return Json(amount);
         }
+        public ActionResult DeletePayment(Guid userId)
+        {
+            _userService.DeletePayment(userId);
+            return Json(true);
+        }
+        
         #endregion
     }
     public class MyJwtTokenCustomAuthorize : AuthorizeAttribute

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthentificationService } from 'src/app/authentification/authentification.service';
 
 @Component({
   selector: 'app-admin-tool',
@@ -11,10 +12,16 @@ export class AdminToolComponent implements OnInit {
   activeAdminTool = ''
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthentificationService
     ) { }
 
   ngOnInit(): void {
+
+    if(this.authService.getRole() != 'admin'){
+      this.router.navigate(['error-404']);
+    }
+
     if(this.activeAdminTool===''){
       this.router.navigate(['admin-tool/products']);
     }

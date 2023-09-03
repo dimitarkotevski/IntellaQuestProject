@@ -7,6 +7,8 @@ using System;
 using IntellaQuest.Data.NHibernate.Repositories;
 using IntellaQuest.Repository.Repositories;
 using IntellaQeust.BusinessLogic.Mappers;
+using System.Collections.Generic;
+using FluentNHibernate.Conventions;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -54,7 +56,10 @@ namespace IntellaQuest.BusinessLogic.Services
 
                 var userShoppingCart = _shoppingCartRepository.FindBy(x => x.User == user && x.Active == true);
 
-
+                if (userShoppingCart == null)
+                {
+                    throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.NOT_FOUNG);
+                }
                 return userShoppingCart.MapToViewModel();
             }
         }
@@ -63,46 +68,73 @@ namespace IntellaQuest.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
+                Random random = new Random();
                 var user = _userRepository.FindBy(userId);
                 if (user == null)
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+
                 var product = _productRepository.FindBy(productId);
                 if (product == null)
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
+
                 ShoppingCart shoppingCart;
-                shoppingCart = _shoppingCartRepository.FindBy(x => x.User.Id == userId && x.Active == true);
+                shoppingCart = _shoppingCartRepository.FindBy(x => x.User == user && x.Active == true);
                 if (shoppingCart == null)
-                    throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.NOT_FOUNG);
-
-                var exist = _shoppingCartDetailRepository.CheckExist(x =>
-                    x.Product == product &&
-                    x.ShoppingCart == shoppingCart &&
-                    x.ShoppingCart.User == user);
-
-                if (exist)
                 {
-                    var shoppingDetail = _shoppingCartDetailRepository.FindBy(x =>
-                    x.Product == product &&
-                    x.ShoppingCart == shoppingCart &&
-                    x.ShoppingCart.User == user);
+                    int randomNumber = random.Next();
 
-                    shoppingDetail.Quantity++;
+                    shoppingCart = new ShoppingCart
+                    {
+                        User = user,
+                        Active = true,
+                        Name = "Cart#" + randomNumber.ToString()
+                    };
 
-                    _shoppingCartDetailRepository.Update(shoppingDetail);
+                    _shoppingCartRepository.Add(shoppingCart);
                     _unitOfWork.Commit();
-                }
-                else
-                {
+
                     var shoppingCartDetail = new ShoppingCartDetail
                     {
                         Product = product,
-                        ShoppingCart = shoppingCart,
+                        ShoppingCart = shoppingCart, // Assign the shopping cart instance
                         Quantity = quality
                     };
 
                     _shoppingCartDetailRepository.Add(shoppingCartDetail);
-
                     _unitOfWork.Commit();
+                }
+                else
+                {
+                    var exist = _shoppingCartDetailRepository.CheckExist(x =>
+                                    x.Product == product &&
+                                    x.ShoppingCart == shoppingCart &&
+                                    x.ShoppingCart.User == user);
+
+                    if (exist)
+                    {
+                        var shoppingDetail = _shoppingCartDetailRepository.FindBy(x =>
+                                    x.Product == product &&
+                                    x.ShoppingCart == shoppingCart &&
+                                    x.ShoppingCart.User == user);
+
+                        shoppingDetail.Quantity++;
+
+                        _shoppingCartDetailRepository.Update(shoppingDetail);
+                        _unitOfWork.Commit();
+                    }
+                    else
+                    {
+                        var shoppingCartDetail = new ShoppingCartDetail
+                        {
+                            Product = product,
+                            ShoppingCart = shoppingCart,
+                            Quantity = quality
+                        };
+
+                        _shoppingCartDetailRepository.Add(shoppingCartDetail);
+
+                        _unitOfWork.Commit();
+                    }
                 }
             }
         }

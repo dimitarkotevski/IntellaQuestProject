@@ -9,8 +9,11 @@ import { CategoryService } from 'src/app/category-products/category.service';
   styleUrls: ['./categories-navbar.component.css']
 })
 export class CategoriesNavbarComponent implements OnInit {
+
   @Input() categoryNavBar?: boolean;
+  
   categories?: CategoryViewModel[] | null | undefined;
+
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {

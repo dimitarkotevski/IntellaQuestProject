@@ -29,7 +29,21 @@ namespace IntellaQuest.BusinessLogic.ViewModels
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
     }
-    [Validator(typeof(UserViewModelValidator))]
+
+    public class UserGridModel
+    {
+        public Guid Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Address { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string ZipCode { get; set; }
+        public string Role { get; set; }
+    }
+    //[Validator(typeof(UserViewModelValidator))]
     public class UserViewModel
     {
         public Guid Id { get; set; }
@@ -39,6 +53,10 @@ namespace IntellaQuest.BusinessLogic.ViewModels
         public string Username { get; set; }
         public string Password { get; set; }
         public string Address { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string ZipCode { get; set; }
+        public string Role { get; set; }
         public IList<ProductViewModel> FavouriteProducts { get; set; }
         public IList<LookupViewModel> Orders { get; set; }
         public PaymentsViewModel Payment { get; set; }
@@ -57,6 +75,8 @@ namespace IntellaQuest.BusinessLogic.ViewModels
         public string State { get; set; }
         public string City { get; set; }
         public string ZipCode { get; set; }
+        public LookupViewModel Role { get; set; }
+        public PaymentsProfileViewModel Payment { get; set; }
     }
 
     public class UserTokenInformation

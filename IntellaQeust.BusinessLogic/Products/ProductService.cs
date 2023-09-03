@@ -279,11 +279,12 @@ namespace IntellaQuest.BusinessLogic.Services
             {
                 var category = _categoryRepository.FindBy(categoryId);
                 var listOfBrands = _categoryRepository.GetProductsByCategory(category)
-                            .Select(x => x.Name.Substring(0, x.Name.IndexOf(" ")))
-                            .Distinct().ToList(); 
-                            //_productsRepository.All().Select(x => x.Name.Substring(0,x.Name.IndexOf(" "))).ToList();
+                    .Select(x => x.Name.Split(' ')[0]) // Get the first word of the name
+                    .ToList();
 
-                return listOfBrands;
+                var distinctBrands = listOfBrands.Distinct().ToList();
+
+                return distinctBrands;
             }
         }
         #endregion

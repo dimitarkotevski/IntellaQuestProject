@@ -32,7 +32,6 @@ export class AddEditProductDialogComponent implements OnInit {
       this.title = "Add"
     }
 
-    console.log(this.model.Category)
     this.categoryService.getAllCategories().subscribe((response: ResponseModel<CategoryViewModel>)=>{
       if(response.Items){
         console.log(response.Items)
@@ -40,11 +39,6 @@ export class AddEditProductDialogComponent implements OnInit {
         console.log(this.categories);
       }
     })
-  }
-
-  changeCategori(item : LookupViewModel){
-    console.log(item)
-    this.model.Category = item;
   }
 
 }

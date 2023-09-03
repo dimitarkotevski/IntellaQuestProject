@@ -6,6 +6,7 @@ export class OrderViewModel{
     Id?: string
     OrderName?:string
     ShoppingCart?: LookupViewModel
+    User?: LookupViewModel
     OrderStatus?: OrderStatus
     TotalAmount?: number
     PaymentType?: PaymentType

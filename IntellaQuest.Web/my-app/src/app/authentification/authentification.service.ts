@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserTokenInfo } from '../models/login/user-token-info';
 import { UserDetails } from '../models/login/user-details';
 import { UserRegister } from '../models/register/register-user';
+import { ChangePasswordViewModel } from '../models/change-password-view-model';
 
 
 @Injectable({
@@ -23,7 +24,7 @@ export class AuthentificationService {
     return this.http.post<UserDetails>(`${this.baseApi}/GetUserDetails/${id}`, null);
   }
   updateUserDetails(userDetails:UserDetails){
-    return this.http.post(`${this.baseApi}/UserDetails`, {model:userDetails});
+    return this.http.post(`${this.baseApi}/SetUserDetails`, {model:userDetails});
   }
   getLoggedUsername() : string | undefined {
     return localStorage.getItem('username') || undefined;
@@ -37,6 +38,9 @@ export class AuthentificationService {
           localStorage.setItem('username', response.Username);
           localStorage.setItem('token', response.Token);
           localStorage.setItem('role',response.Role);
+          // if(localStorage.getItem('role')== 'admin'){
+          //   localStorage.setItem('accessToAdminTool',true);
+          // }
           return true;
         }
         return false;
@@ -51,6 +55,9 @@ export class AuthentificationService {
   }
   getLoggedUserId(): string | null {
     return localStorage.getItem('id') || null;
+  }
+  getRole(){
+    return localStorage.getItem('role') || null;
   }
   getToken(): string | null  {
     return localStorage.getItem('token') || null;
@@ -88,6 +95,14 @@ export class AuthentificationService {
     }else{
       return null;
     }
+  }
+
+  changePassword(changepasswordModel :ChangePasswordViewModel){
+    return this.http.post(`${this.baseApi}/ChangePassword`, {model:changepasswordModel});
+  }
+
+  deletePayment(userId: string) {
+    return this.http.post(`${this.baseApi}/DeletePayment`, {userId : userId});
   }
 
 }

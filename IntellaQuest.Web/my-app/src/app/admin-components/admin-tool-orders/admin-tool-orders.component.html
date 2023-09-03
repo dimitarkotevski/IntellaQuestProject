@@ -6,8 +6,8 @@
             <th scope="col">Order Name</th>
             <th scope="col">User Name</th>
             <th scope="col">Shopping Cart</th>
-            <th scope="col">Order Status</th>
             <th scope="col">Total Amount</th>
+            <th scope="col">Order Status</th>
             <th scope="col">Payment Type</th>
             <th scope="col">Date Created</th>
           </tr>
@@ -17,20 +17,44 @@
             <td>{{ order.OrderName }}</td>
             <td>{{ order.User?.Name || '/' }}</td>
             <td>{{ order.ShoppingCart?.Name || "" }}</td>
-            <td>{{ order.OrderStatus | orderStatus }}</td>
-            <td>{{ order.TotalAmount }}</td>
+            <td>${{ order.TotalAmount }}</td>
             <td>
-                {{ order.PaymentType || "" }}
+              <span *ngIf="order.OrderStatus == 0" class="bg-danger p-2">{{ order.OrderStatus | orderStatus }}</span>
+              <span *ngIf="order.OrderStatus == 1" class="bg-warning p-2">{{ order.OrderStatus | orderStatus }}</span>
+              <span *ngIf="order.OrderStatus == 2" class="bg-info p-2">{{ order.OrderStatus | orderStatus }}</span>
+              <span *ngIf="order.OrderStatus == 3" class="bg-success p-2">{{ order.OrderStatus | orderStatus }}</span>
+            </td>
+            <td>
+              <span *ngIf="order.PaymentType == 0" class="bg-info p-2">{{ order.PaymentType | paymentType }}</span>
+              <span *ngIf="order.PaymentType == 1" class="bg-dark p-2">{{ order.PaymentType | paymentType }} </span>
             </td>
             <td *ngIf="order.DateCreated">{{ (order.DateCreated | dateConverter) || '/'}}</td>
-            <td>
-              <button class="edit-button">Edit</button>
+          <td>
+              <button (click)="addEditOrder(order)" class="btn-sm btn-warning">Edit</button>
           </td>
           <td>
-              <button class="delete-button">Delete</button>
+              <button  (click)="deleteOrder(order?.Id)" class="btn-sm btn-danger">Delete</button>
           </td>
-          </tr>
+        </tr>
         </tbody>
       </table>
+      <div class="row">
+        <div class="col">
+          <ngb-pagination
+          [(page)]="response.CurrentPage" 
+          [pageSize]="response.Size" 
+          [collectionSize]="response.TotalItems" 
+          [rotate]="true" 
+          [boundaryLinks]="true"
+          (pageChange)="onPageChange($event)"
+          ></ngb-pagination>
+        </div>
+        <mat-form-field>
+          <mat-label>Page Size</mat-label>
+          <mat-select [(value)]="response.Size" (selectionChange)="onPageSizeChange($event.value)">
+            <mat-option *ngFor="let option of pagination" [value]="option">{{ option }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+       </div>
     </div>
   </div>

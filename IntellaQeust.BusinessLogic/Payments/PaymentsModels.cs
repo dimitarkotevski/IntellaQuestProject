@@ -14,6 +14,13 @@ namespace IntellaQeust.BusinessLogic.ViewModels
         public DateTime ExpirationDate { get; set; }
         public string SecurityCode { get; set; }
     }
+
+    public class PaymentsProfileViewModel
+    {
+        public Guid Id { get; set; }
+        public string CardHolder { get; set; }
+        public string CardNumber { get; set; }
+    }
     public class PaymentsViewModelInfo
     {
         public Guid Id { get; set; }

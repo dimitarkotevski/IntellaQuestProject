@@ -4,6 +4,8 @@ import { OrderService } from '../customer-components/order-components/order.serv
 import { ShoppingCartService } from '../customer-components/cart-components/shopping-cart.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { YesNoDialogComponent } from '../customer-components/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
   selector: 'app-cart',
@@ -15,9 +17,11 @@ export class CartComponent implements OnInit {
   @Input() shoppingCart?: any;
 
   isLoading: boolean = true;
+  error: string = "";
 
   constructor(
     private router: Router,
+    private dialog: MatDialog,
     private toastr: ToastrService,
     private orderService: OrderService,
     private authService: AuthentificationService,
@@ -36,6 +40,9 @@ export class CartComponent implements OnInit {
   refreshState(): void {
     this.shoppingCartService.GetUserCartProducts(this.authService.getLoggedUserId())?.subscribe((res) => {
       this.shoppingCart = res;
+      this.isLoading = false;
+    },(error)=>{
+      this.error = error;
       this.isLoading = false;
     });
   }
@@ -57,9 +64,21 @@ export class CartComponent implements OnInit {
   }
 
   MakeOrder(shoppingCartId:string){
-    this.orderService.MakeAnOrder(shoppingCartId,this.authService.getLoggedUserId() || "").subscribe(()=>{
-      window.location.replace("my-order");
-    })
+    let text = "Do you want to make an order?"
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      data: { text },
+      width: '500px', // Set the width of the modal
+      panelClass: 'custom-modalbox'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result){
+        this.orderService.MakeAnOrder(shoppingCartId,this.authService.getLoggedUserId() || "").subscribe(()=>{
+          window.location.replace("my-order");
+        })
+      }else{
+        console.log("no")
+      }
+    });
   }
 
 }

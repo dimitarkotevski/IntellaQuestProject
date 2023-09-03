@@ -83,6 +83,12 @@ namespace IntellaQuest.Web.Controllers
             return Json(new { success = true });
         }
 
+        public ActionResult MakeAPay(OrderViewModel model)
+        {
+            _orderService.MakeAPay(model);
+            return Json(new { success = true });
+        }
+
         #endregion
     }
 }

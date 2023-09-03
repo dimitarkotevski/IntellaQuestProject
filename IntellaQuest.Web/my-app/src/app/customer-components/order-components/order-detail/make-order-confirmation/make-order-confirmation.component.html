@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Pay an order</h1>
+<div mat-dialog-content>
+    <form>
+        <div class="row">
+            <div class="col-6 form-outline mb-4">
+                <label for="first_name" class="form-label">Order name</label>
+                <input disabled name="first_name" [(ngModel)]="orderViewModel.OrderName" type="text" class="form-control" />
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-6 form-outline mb-4">
+                <label for="first_name" class="form-label">Total amount</label>
+                <input disabled name="first_name" [(ngModel)]="orderViewModel.TotalAmount" type="number" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="order_status" class="form-label">Order status:</label>
+                <select disabled name="order_status" class="form-select form-control" [(ngModel)]="orderViewModel.OrderStatus">
+                  <option value="0">Canceled</option>
+                  <option value="1">OnHold</option>
+                  <option value="2">PendingPayment</option>
+                  <option value="3">Completed</option>
+                </select>
+            </div>
+
+            <div class="col-6">
+                <label for="payment_type" class="form-label">Payment type:</label>
+                <select name="payment_type" class="form-select form-control" [(ngModel)]="orderViewModel.PaymentType">
+                  <option value="0">Cash</option>
+                  <option value="1">Card</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div style="float:right;margin:20px;">
+    <input class="btn btn-danger m-1" type="button" value="Pay"  [mat-dialog-close]="orderViewModel">
+    <input class="btn btn-outline-primary m-1" type="button" value="Cancel"  [mat-dialog-close]="false">
+</div>

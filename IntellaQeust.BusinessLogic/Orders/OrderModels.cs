@@ -28,6 +28,7 @@ namespace IntellaQeust.BusinessLogic.ViewModels
         public OrderStatus OrderStatus { get; set; }
         public PaymentType PaymentType { get; set; }
         public double TotalAmount { get; set; }
+        public LookupViewModel ShoppingCart { get; set; }
     }
     public class OrderGridViewModel
     {

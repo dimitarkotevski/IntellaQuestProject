@@ -51,10 +51,12 @@ import { YesNoDialogComponent } from './customer-components/yes-no-dialog/yes-no
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-// import { MatTableModule } from '@angular/material/table';
-// import { MatPaginatorModule } from '@angular/material/paginator';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material/input';
+import { PaymentStatusPipe } from './utils/payment-status.pipe';
+import { AddEditOrderComponent } from './admin-components/admin-tool-orders/add-edit-order/add-edit-order.component';
+import { AddEditUserComponent } from './admin-components/admin-tool-users/add-edit-user/add-edit-user.component';
+import { MakeOrderConfirmationComponent } from './customer-components/order-components/order-detail/make-order-confirmation/make-order-confirmation.component';
+import { AddPaymentComponent } from './profile/add-payment/add-payment.component';
+
 
 const routes: Routes = [
 ];
@@ -96,6 +98,11 @@ const routes: Routes = [
     PhotoDialogComponent,
     AddEditProductDialogComponent,
     YesNoDialogComponent,
+    PaymentStatusPipe,
+    AddEditOrderComponent,
+    AddEditUserComponent,
+    MakeOrderConfirmationComponent,
+    AddPaymentComponent,
   ],
   imports: [
     BrowserModule,

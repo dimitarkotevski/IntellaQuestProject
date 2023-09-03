@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>{{title}}
+  <hr />
+</h1>
+
+<div mat-dialog-content>
+  <form>
+    <div class="row">
+      <div class="col-6 form-outline mb-4">
+        <label for="first_name" class="form-label">First name</label>
+        <input name="first_name" [(ngModel)]="model.FirstName" type="text" class="form-control" />
+      </div>
+
+      <div class="col-6 form-outline mb-4">
+        <label for="last_name" class="form-label">Last name</label>
+        <input name="last_name" [(ngModel)]="model.LastName" type="tel" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6 form-outline mb-4">
+        <label for="email" class="form-label">Email</label>
+        <input name="email" [(ngModel)]="model.Email" type="email" class="form-control" />
+      </div>
+      <div class="col-6 form-outline mb-4">
+        <label for="username" class="form-label">Username</label>
+        <input name="username" [(ngModel)]="model.Username" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div *ngIf="title == 'Add'" class="row">
+      <div class="col-6 form-outline mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input name="password" [(ngModel)]="model.Password" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3 form-outline mb-4">
+        <label for="address" class="form-label">Address</label>
+        <input name="address" [(ngModel)]="model.Address" type="text" class="form-control" />
+      </div>
+      <div class="col-3 form-outline mb-4">
+        <label for="city" class="form-label">City</label>
+        <input name="city" [(ngModel)]="model.City" type="text" class="form-control" />
+      </div>
+      <div class="col-3 form-outline mb-4">
+        <label for="state" class="form-label">State</label>
+        <input name="state" [(ngModel)]="model.State" type="text" class="form-control" />
+      </div>
+      <div class="col-3 form-outline mb-4">
+        <label for="zip_code" class="form-label">Zip code</label>
+        <input name="zip_code" [(ngModel)]="model.ZipCode" type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="w-50">
+      <label for="description" class="form-label">Pick Role</label>
+      <select [selectedIndex]="model.Role" class="form-select form-control" [(ngModel)]="model.Role">
+        <option value="admin">ADMIN</option>
+        <option value="user">USER</option>
+      </select>
+    </div>
+
+    <!-- <div>{{model.Role | json}}</div> -->
+
+  </form>
+</div>
+<div style="float:right;margin:20px;">
+  <input class="btn btn-danger" type="button" value="Save" [mat-dialog-close]="model">
+</div>

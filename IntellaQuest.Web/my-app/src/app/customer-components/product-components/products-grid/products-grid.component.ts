@@ -38,8 +38,8 @@ export class ProductsGridComponent implements OnInit {
       }
 
   ngOnInit(): void {
-    console.log(this.orderProducts);
-    console.log(this.type);
+    // console.log(this.orderProducts);
+    // console.log(this.type);
   }
 
   addToFavourite(productId: string | undefined){

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { OrderViewModel } from 'src/app/admin-components/admin-tool-models/order-view-model';
 
 @Injectable({
     providedIn: 'root'
@@ -25,5 +26,10 @@ export class OrderService{
             {shoppingCartId: shoppingCartId,
                 userId: userId
             })
+    }
+
+    MakeAPay(order : OrderViewModel){
+        return this.http.post<any>(this.baseApi+'/MakeAPay',
+            { model: order })
     }
 }

@@ -20,7 +20,7 @@ export class AdminToolProductService {
     return this.http.post<ResponseModel<ProductGridModel>>(this.baseApi+"All", request);
   }
   getById(id:string){
-    return this.http.post<ProductViewModel>(this.baseApi+"Get",{Id:id})
+    return this.http.post(this.baseApi+"Get",{Id:id})
   }
   create(model: ProductViewModel){
     return this.http.post(this.baseApi+"Create",{model:model})

@@ -18,7 +18,6 @@ export class OrderGridComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.GetUserNotActiveOrders(this.authService.getLoggedUserId()).subscribe((res:ResponseListModel<OrderGridViewModel>)=>{
-      console.log(res);
       this.orders = res.Items;
     })
   }

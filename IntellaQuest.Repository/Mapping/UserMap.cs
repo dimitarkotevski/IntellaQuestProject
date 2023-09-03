@@ -78,12 +78,12 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             References(x=>x.Role)
                 .Column("RoleId")
                 .Access
-                .CamelCaseField(Prefix.Underscore).Cascade.All();
+                .CamelCaseField(Prefix.Underscore);
 
             HasMany(x => x.Orders)
                 .Inverse()
                 .Cascade.AllDeleteOrphan()
-                .KeyColumn("UsersId").LazyLoad();
+                .KeyColumn("UserId").LazyLoad();
 
             HasMany(x => x.FavouriteProducts)
                 .Inverse()

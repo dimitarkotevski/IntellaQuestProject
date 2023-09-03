@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { YesNoDialogComponent } from 'src/app/customer-components/yes-no-dialog/yes-no-dialog.component';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { AuthentificationService } from 'src/app/authentification/authentification.service';
 
 @Component({
   selector: 'app-admin-tool-products',
@@ -35,9 +37,11 @@ export class AdminToolProductsComponent implements OnInit {
   pagination: number[] = [5 , 10, 20, 50, 100]
 
   constructor(
-    private adminToolProductService: AdminToolProductService,
+    private router: Router,
     private dialog: MatDialog,
     private toastr: ToastrService,
+    private authService: AuthentificationService,
+    private adminToolProductService: AdminToolProductService,
     ) { 
       this.request = new RequestModel();
       this.response = new ResponseModel<ProductGridModel>()
@@ -45,6 +49,10 @@ export class AdminToolProductsComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+    if(this.authService.getRole() != 'admin'){
+      this.router.navigate(['error-404']);
+    }
 
     this.request = {
       PageNeeded: 1,

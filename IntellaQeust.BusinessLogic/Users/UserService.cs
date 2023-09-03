@@ -30,12 +30,13 @@ namespace IntellaQuest.BusinessLogic.Services
         void Registration(UserRegistrationViewModel registrationModel);
         UserTokenInformation Login(UserLoginViewModel loginModel);
         void UpdatePassword(ChangePasswordUserViewModel model);
-        ResponseModel<UserViewModel> GetAll(RequestModel request);
+        ResponseModel<UserGridModel> GetAll(RequestModel request);
         UserDetailsModel Get(Guid Id);
         bool Create(UserViewModel model);
-        void Update(UserDetailsModel model);
+        void Update(UserViewModel model);
         void Delete(Guid Id);
         double GetAmountMoneyOfUser(Guid userId);
+        void DeletePayment(Guid userId);
     }
     public class UserService : IUserService
     {
@@ -43,6 +44,7 @@ namespace IntellaQuest.BusinessLogic.Services
         private readonly IRoleRepository _roleRepository;
         private readonly IUserRepository _userRepository;
         private readonly IOrderRepository _orderRepository;
+        private readonly IPaymentRepository _paymentRepository;
         private readonly IProductRepository _productRepository;
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IShoppingCartDetailRepository _shoppingCartDetailRepository;
@@ -52,6 +54,7 @@ namespace IntellaQuest.BusinessLogic.Services
                     IUserRepository userRepository, 
                     IRoleRepository roleRepository,
                     IOrderRepository orderRepository, 
+                    IPaymentRepository paymentRepository,
                     IProductRepository productRepository,
                     IShoppingCartRepository shoppingCartRepository,
                     IShoppingCartDetailRepository shoppingCartDetailRepository
@@ -61,6 +64,7 @@ namespace IntellaQuest.BusinessLogic.Services
             _roleRepository = roleRepository;
             _userRepository = userRepository;
             _orderRepository = orderRepository;
+            _paymentRepository = paymentRepository;
             _productRepository = productRepository;
             _shoppingCartRepository = shoppingCartRepository;
             _shoppingCartDetailRepository = shoppingCartDetailRepository;
@@ -191,15 +195,15 @@ namespace IntellaQuest.BusinessLogic.Services
 
         #region ADMIN 
 
-        public ResponseModel<UserViewModel> GetAll(RequestModel request)
+        public ResponseModel<UserGridModel> GetAll(RequestModel request)
         {
             return FilterAndPage(request);
         }
-        private ResponseModel<UserViewModel> FilterAndPage(RequestModel request)
+        private ResponseModel<UserGridModel> FilterAndPage(RequestModel request)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                ResponseModel<UserViewModel> response = new ResponseModel<UserViewModel>();
+                ResponseModel<UserGridModel> response = new ResponseModel<UserGridModel>();
                 IQueryable<User> listUsersForFiltering = _userRepository.All();
 
                 if (!string.IsNullOrEmpty(request.SearchString))
@@ -208,7 +212,9 @@ namespace IntellaQuest.BusinessLogic.Services
                         .Where(x => (
                             x.FirstName.Contains(request.SearchString) ||
                             x.LastName.Contains(request.SearchString)) ||
-                            (x.LastName + " " + x.FirstName).Equals(request.SearchString));
+                            (x.LastName + " " + x.FirstName).Equals(request.SearchString) 
+                            || x.Email.Contains(request.SearchString) 
+                            || x.Username.Contains(request.SearchString));
                 }
                 if (!string.IsNullOrEmpty(request.EmailEnding))
                 {
@@ -301,7 +307,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 response.CurrentPage = request.PageNeeded;
                 response.Items = listUsersForFiltering
                                     .Skip((response.CurrentPage - 1) * response.Size)
-                                    .Take(response.Size).Select(x => x.MapToViewModel()).ToList();
+                                    .Take(response.Size).Select(x => x.MapToGridModel()).ToList();
                 response.TotalItems = listUsersForFiltering.Count();
 
                 _unitOfWork.Commit();
@@ -315,7 +321,20 @@ namespace IntellaQuest.BusinessLogic.Services
             
             if (_userRepository.CheckExist(x => x.Username == model.Username))
                 throw new BllException(string.Format(ShopExceptionMassages.UserExceptionMassages.USERNAME_ALREADY_EXIST, model.Username));
-            
+
+            Role role=null;
+            if(model.Role!= null)
+            {
+                if(model.Role == "admin")
+                {
+                    role = _roleRepository.GetAdminRole();
+                }
+                else
+                {
+                    role = _roleRepository.GetUserRole();
+                }
+            }
+
             using (_unitOfWork.BeginTransaction())
             {
                 var userEntity = new User
@@ -325,17 +344,21 @@ namespace IntellaQuest.BusinessLogic.Services
                     Email = model.Email,
                     Username = model.Username,
                     Password = PasswordEncryption.Encryption(model.Password),
+                    Role = role != null ? role : _roleRepository.GetUserRole(),
+                    FavouriteProducts = null,
+                    Orders = null,
+                    Payment = null
                 };
                 _userRepository.Add(userEntity);
                 _unitOfWork.Commit();
                 return true;
             }
         }
-        public void Delete(Guid userId)
+        public void Delete(Guid Id)
         {
             using (_unitOfWork.BeginTransaction())
             {
-                _userRepository.Delete(userId);
+                _userRepository.Delete(Id);
                 _unitOfWork.Commit();
             }
         }
@@ -350,7 +373,7 @@ namespace IntellaQuest.BusinessLogic.Services
                 return user.MapToUserDetailModel();
             }
         }
-        public void Update(UserDetailsModel model)
+        public void Update(UserViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
             {
@@ -369,6 +392,49 @@ namespace IntellaQuest.BusinessLogic.Services
                 user.City = model.City;
                 user.State = model.State;
                 user.ZipCode = model.ZipCode;
+
+                if(model.Password != null)
+                {
+                    user.Password = PasswordEncryption.Encryption(model.Password);
+                }
+
+                if(model.Role != null)
+                {
+                    if(model.Role == "admin")
+                    {
+                        user.Role = _roleRepository.GetAdminRole();
+                    }
+                    else
+                    {
+                        user.Role = _roleRepository.GetUserRole();
+                    }
+                }
+
+                _userRepository.Update(user);
+                _unitOfWork.Commit();
+            }
+        }
+
+        public void DeletePayment(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var user = _userRepository.FindBy(userId);
+                if(user == null)
+                {
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                var paymentId = user.Payment.Id;
+                user.Payment = null;
+
+                var payment = _paymentRepository.FindBy(paymentId);
+                if(payment == null)
+                {
+                    throw new BllException(ShopExceptionMassages.PaymentExceptionMassages.NOT_FOUND);
+                }
+
+                _paymentRepository.Delete(payment);
 
                 _userRepository.Update(user);
                 _unitOfWork.Commit();

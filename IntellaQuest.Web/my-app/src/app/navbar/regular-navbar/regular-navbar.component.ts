@@ -17,6 +17,7 @@ export class RegularNavbarComponent implements OnInit {
   
   categories?: CategoryViewModel[] | null | undefined;
   username?: string;
+  canAccessToAdminTool: boolean = false;
   amount: any;
   id?: string | null;
 
@@ -30,6 +31,11 @@ export class RegularNavbarComponent implements OnInit {
   ngOnInit(): void {
     this.username = this.authService.getLoggedUsername();
     this.id = this.authService.getLoggedUserId();
+
+    if(this.authService.getRole() == 'admin'){
+      this.canAccessToAdminTool = true;
+    }
+
     this.authService.getAmountMoneyOfUser(this.id)?.subscribe(res=>{
       if(res === 0){
         this.amount = null;

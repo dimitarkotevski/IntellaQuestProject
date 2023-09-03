@@ -12,9 +12,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  categories?: CategoryViewModel[] | null | undefined;
+
   @Input() isUserAuthenticated?: boolean;
   @Input() refreshState: EventEmitter<any>;
+
+  categories?: CategoryViewModel[] | null | undefined;
   categoryNavBar = true;
   username?: string;
   id?: string | null;

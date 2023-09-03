@@ -2,6 +2,7 @@
 {
     public static class ShopExceptionMassages
     {
+
         public static class UserExceptionMassages
         {
             public static string ID_NOT_FOUND_EXCEPTION = "User with Id: {0} not found";
@@ -19,6 +20,8 @@
 
             public static string USERNAME_IS_REQUIRED = "Username is required";
             public static string PASSWORD_IS_REQUIRED = "Password is required";
+
+            public static string NOT_AMOUNT_OF_MONEY = "Not amount of money account";
         }
         public static class CategoriesExceptionMassages
         {
@@ -51,6 +54,10 @@
         {
             public static string NOT_FOUNG = "Shopping cart not found";
             public static string DETAIL_NOT_FOUND_EXCEPTION = "Shopping detail not found";
+        }
+        public static class PaymentExceptionMassages
+        {
+            public static string NOT_FOUND = "Payment not found";
         }
     }
 }

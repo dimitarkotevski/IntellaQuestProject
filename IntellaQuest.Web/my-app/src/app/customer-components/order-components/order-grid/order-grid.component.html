@@ -1,16 +1,9 @@
 <div class="container">
-    <app-breadcrumb [isItem]="false" [itemDetail]="'My orders'"></app-breadcrumb>
+    <app-breadcrumb [isItem]="false" [itemDetail]="'My old orders'"></app-breadcrumb>
+    
     <div class="card">
         <div *ngIf="orders" class="card-body">
-            <h1>Order</h1>
-            <hr/>
-            <!-- <div class="row" *ngFor="let order of orders">{{order.OrderStatus}}</div> -->
-        </div>
-    </div>
-    <br/>
-    <div class="card">
-        <div *ngIf="orders" class="card-body">
-            <h1>My orders</h1>
+            <h1>My old orders</h1>
             <!-- <div class="row" *ngFor="let order of orders">{{order.OrderStatus}}</div> -->              
               <table class="table table-responsive-md table-hover">
                 <thead>

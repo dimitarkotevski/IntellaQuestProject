@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { countries } from '../countries/countries';
 import { UserDetails } from '../models/login/user-details';
 import { AuthentificationService } from '../authentification/authentification.service';
+import { ChangePasswordViewModel } from '../models/change-password-view-model';
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +15,11 @@ export class SettingsComponent implements OnInit {
   activeTab: string = 'account';
   userDetails?: UserDetails;
 
-  constructor( private authService: AuthentificationService,private toastr: ToastrService ) { }
+  changePasswordViewModel: ChangePasswordViewModel;
+
+  constructor( private authService: AuthentificationService,private toastr: ToastrService ) { 
+    this.changePasswordViewModel = new ChangePasswordViewModel();
+  }
 
   ngOnInit(): void {
     this.authService.getUserDetails(this.authService.getLoggedUserId()).subscribe((response:UserDetails)=>{
@@ -30,5 +35,14 @@ export class SettingsComponent implements OnInit {
 
   switchTab(tab: string) {
     this.activeTab = tab;
+  }
+
+  changePassword(){
+    this.changePasswordViewModel.Id = this.authService.getLoggedUserId() || undefined;
+    if(this.changePasswordViewModel.Id && this.changePasswordViewModel.OldPassword != "" && this.changePasswordViewModel.NewPassword != ""){
+      this.authService.changePassword(this.changePasswordViewModel).subscribe(()=>{
+        this.toastr.success("Successfully changed password");
+      })
+    }
   }
 }

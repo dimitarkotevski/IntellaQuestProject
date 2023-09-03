@@ -87,7 +87,7 @@ namespace IntellaQuest.Data.NHibernate.ConfigurationRepository
 
         public T FindBy(Expression<Func<T, bool>> expression)
         {
-            return FilterBy(expression).Single();
+            return FilterBy(expression).SingleOrDefault();
         }
 
         public T FindBy(Guid id)

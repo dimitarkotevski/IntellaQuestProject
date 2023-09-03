@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-yes-no-dialog',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class YesNoDialogComponent implements OnInit {
 
-  constructor() { }
+  @Input() text: string;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+      ) { 
+        this.text = data.text
+      }
 
   ngOnInit(): void {
   }

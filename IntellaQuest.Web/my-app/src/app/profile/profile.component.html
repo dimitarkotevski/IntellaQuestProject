@@ -74,7 +74,23 @@
             <div class="card-body">
                 <h1>Payment info</h1>
                 <hr/>
-                <div>No Payment Information Available</div>
+                <div class="row" *ngIf="userDetails.Payment">
+                  <div class="col-lg-6">
+                    <b>Card holder:</b> {{userDetails.Payment.CardHolder}} <br/>
+                    <b>Card number</b> {{userDetails.Payment.CardNumber}}
+                  </div>
+                  <div class="col-lg-6 right-solid-text">
+                    <div><button (click)="deletePayment(userDetails.Id)" class="btn solid_hover_color h-75">Remove payment here</button></div>
+                  </div>
+                </div>
+                <div *ngIf="!userDetails.Payment" class="row">
+                  <div class="col-6 pt-2">
+                    <div>No Payment Information Available</div>
+                  </div>
+                  <div class="col-6 right-solid-text">
+                    <div><button (click)="addPayment()" class="btn solid_hover_color h-75">Add payment here</button></div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>

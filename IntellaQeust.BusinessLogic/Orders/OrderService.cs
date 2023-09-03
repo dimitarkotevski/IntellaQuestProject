@@ -12,6 +12,7 @@ using IntellaQeust.BusinessLogic.ViewModels;
 using IntellaQeust.BusinessLogic.Mappers;
 using IntellaQuest.Domain.Enums;
 using IntellaQuest.Domain.Enum;
+using System.Collections.Generic;
 
 namespace IntellaQuest.BusinessLogic.Services
 {
@@ -22,12 +23,13 @@ namespace IntellaQuest.BusinessLogic.Services
         Guid Create(OrderViewModel model);
         void Update(OrderViewModel model);
         void Delete(Guid Id);
-        bool CheckUserExists(User user);
-
+        void ChangeOrderStatus(Guid orderId, OrderStatus orderStatus);
         ResponseListModel<OrderGridViewModel> GetUserNotActiveOrders(Guid userId);
         OrderViewModelWithProducts GetUserActiveOrder(Guid userId);
         void CancelActiveOrder(Guid orderId);
+        List<OrderViewModelWithProducts> GetUserOtherOrders(Guid userId);
         void MakeAnOrder(Guid shoppingCartId,Guid userId);
+        void MakeAPay(OrderViewModel order);
 
     }
     public class OrderService : IOrderService
@@ -53,10 +55,7 @@ namespace IntellaQuest.BusinessLogic.Services
         }
 
         #region CRUD ADMIN
-        public bool CheckUserExists(User user)
-        {
-            return _orderRepository.CheckExist(x => x.User == user);
-        }
+
         public Guid Create(OrderViewModel model)
         {
             using (_unitOfWork.BeginTransaction())
@@ -74,8 +73,10 @@ namespace IntellaQuest.BusinessLogic.Services
                 var order = new Order
                 {
                     User =user,
-                    //ShoppingCart =user.ShoppingCart,
+                    //ShoppingCart = model.ShoppingCart,
                     OrderStatus =model.OrderStatus,
+                    PaymentType = model.PaymentType,
+
                 };
                 _orderRepository.Add(order);
                 _unitOfWork.Commit();
@@ -199,8 +200,8 @@ namespace IntellaQuest.BusinessLogic.Services
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
                 
-                //entityOrder.ShoppingCart = user.ShoppingCart;
-                entityOrder.User = user;
+                entityOrder.OrderStatus = model.OrderStatus;
+                entityOrder.PaymentType = model.PaymentType;
                 entityOrder.OrderStatus = model.OrderStatus;
                 
                 _orderRepository.Update(entityOrder);
@@ -215,7 +216,13 @@ namespace IntellaQuest.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus == OrderStatus.Completed)
+                var user = _userRepository.FindBy(userId);
+                if(user == null)
+                {
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                var userOrder = _orderRepository.FilterBy(x => x.User == user && x.OrderStatus != OrderStatus.OnHold)
                     ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
 
                 return new ResponseListModel<OrderGridViewModel>
@@ -230,7 +237,7 @@ namespace IntellaQuest.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
-                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus != OrderStatus.Completed).FirstOrDefault()
+                var userOrder = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus == OrderStatus.OnHold).FirstOrDefault()
                     ?? throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
 
                 userOrder.TotalAmount = userOrder.ShoppingCart.ShoppingCartDetails.Select(x=>x.Product.Price * x.Quantity).Sum();
@@ -239,6 +246,22 @@ namespace IntellaQuest.BusinessLogic.Services
                 _unitOfWork.Commit();
 
                 return userOrder.MapToViewModelWithProducts();
+            }
+        }
+
+        public List<OrderViewModelWithProducts> GetUserOtherOrders(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var user = _userRepository.FindBy(userId);
+                if(user == null)
+                {
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                var userOrders = _orderRepository.FilterBy(x => x.User.Id == userId && x.OrderStatus == OrderStatus.Completed);
+
+                return userOrders.Select(x=>x.MapToViewModelWithProducts()).ToList();
             }
         }
 
@@ -258,6 +281,7 @@ namespace IntellaQuest.BusinessLogic.Services
         {
             using (_unitOfWork.BeginTransaction())
             {
+                Random random = new Random();
                 var shoppingCart = _shoppingCartRepository.FindBy(shoppingCartId)
                     ?? throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.DETAIL_NOT_FOUND_EXCEPTION);
 
@@ -266,10 +290,26 @@ namespace IntellaQuest.BusinessLogic.Services
 
                 if(_orderRepository.CheckExist(x=>x.User == user && x.ShoppingCart == shoppingCart))
                 {
-                    return;
+                    var order = _orderRepository.FindBy(x => x.User == user && x.ShoppingCart == shoppingCart);
+                    if(order == null)
+                    {
+                        throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
+                    }
+
+                    order.ShoppingCart = shoppingCart;
+                    order.User = user;
+                    order.DateCreated = DateTime.Now;
+                    order.TotalAmount = shoppingCart.ShoppingCartDetails.Select(x => x.Product.Price * x.Quantity).Sum();
+                    order.OrderStatus = OrderStatus.OnHold;
+                    order.PaymentType = PaymentType.Cash;
+
+                    _orderRepository.Update(order);
+                    _unitOfWork.Commit();
                 }
                 else
                 {
+                    int randomNumber = random.Next();
+                    string number = randomNumber.ToString();
                     Order order = new Order
                     {
                         ShoppingCart = shoppingCart,
@@ -277,11 +317,117 @@ namespace IntellaQuest.BusinessLogic.Services
                         PaymentType = PaymentType.Cash,
                         DateCreated = DateTime.Now,
                         TotalAmount = shoppingCart.ShoppingCartDetails.Select(x=>x.Product.Price * x.Quantity).Sum(),
-                        OrderName = "Order#11111",
+                        OrderName = "Order#" + number,
                         OrderStatus = OrderStatus.OnHold
                     };
                     _orderRepository.Add(order);
                     _unitOfWork.Commit();
+                }
+            }
+        }
+
+        public void ChangeOrderStatus(Guid orderId, OrderStatus orderStatus)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var order = _orderRepository.FindBy(orderId);
+                if(order == null)
+                {
+                    throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                order.OrderStatus = orderStatus;
+
+                _orderRepository.Update(order);
+                _unitOfWork.Commit();
+            }
+        }
+
+        public void MakeAPay(OrderViewModel model)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                Random random = new Random();
+
+                var order = _orderRepository.FindBy(model.Id);
+                if(order == null)
+                {
+                    throw new BllException(ShopExceptionMassages.OrderExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                var shoppingCart = _shoppingCartRepository.FindBy(model.ShoppingCart.Id);
+                if (order == null)
+                {
+                    throw new BllException(ShopExceptionMassages.ShoppingCartExceptionMassages.NOT_FOUNG);
+                }
+
+                var user = _userRepository.FindBy(shoppingCart.User.Id);
+                if (user == null)
+                {
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                if (model.PaymentType == PaymentType.Cash)
+                {
+                    order.PaymentType = PaymentType.Cash;
+                    order.OrderStatus = OrderStatus.PendingPayment;
+
+                    shoppingCart.Active = false;
+
+                    int randomNumber = random.Next();
+
+                    var newShoppingCartForUser = new ShoppingCart
+                    {
+                        User = user,
+                        Active = true,
+                        Name = "Cart#" + randomNumber.ToString()
+                    };
+
+                    _shoppingCartRepository.Add(newShoppingCartForUser);
+                    _shoppingCartRepository.Update(shoppingCart);
+
+                    _orderRepository.Update(order);
+                    _unitOfWork.Commit();
+                }
+                else if(model.PaymentType == PaymentType.Card)
+                {
+                    if(order.TotalAmount > user.Amount)
+                    {
+                        order.OrderStatus = OrderStatus.PendingPayment;
+
+                        _orderRepository.Update(order);
+                        _unitOfWork.Commit();
+                    }
+                    else
+                    {
+                        user.Amount = user.Amount - order.TotalAmount;
+
+                        order.OrderStatus = OrderStatus.Completed;
+                        order.PaymentType = PaymentType.Card; 
+                    
+                        shoppingCart.Active = false;
+
+                        int randomNumber = random.Next();
+
+                        var newShoppingCartForUser = new ShoppingCart
+                        {
+                            User = user,
+                            Active = true,
+                            Name = "Cart#" + randomNumber.ToString()
+                        };
+
+                        _shoppingCartRepository.Add(newShoppingCartForUser);
+                        _shoppingCartRepository.Update(shoppingCart);
+
+                        _orderRepository.Update(order);
+
+                        _userRepository.Update(user);
+                        _unitOfWork.Commit();
+                    }
+                }
+                else
+                {
+                    // DO NOTHING
                 }
             }
         }

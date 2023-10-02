@@ -24,8 +24,6 @@ namespace IntellaQeust.BusinessLogic.Mappers
                 CardNumber = payment.CardNumber,
                 ExpirationDate = payment.ExpirationDate,
                 SecurityCode = payment.SecurityCode,
-                FirstName = payment.FirstName,
-                LastName = payment.LastName,
                 City = payment.City,
                 BillingAddress = payment.BillingAdress,
                 ZipPostalCode = payment.ZipPostalCode,

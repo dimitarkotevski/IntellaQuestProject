@@ -55,8 +55,9 @@ namespace IntellaQuest.BusinessLogic.Mappers
                 Payment = user.Payment != null ? new IntellaQeust.BusinessLogic.ViewModels.PaymentsProfileViewModel
                 {
                     Id = user.Payment.Id,
-                    CardHolder = user.Payment.FirstName + " " + user.Payment.LastName,
-                    CardNumber = "**** **** **** " + user.Payment.CardNumber.Substring(user.Payment.CardNumber.Length - 4).ToString()
+                    CardHolder = user.Payment.CardHolder,
+                    CardNumber = "**** **** **** " + user.Payment.CardNumber.Substring(user.Payment.CardNumber.Length - 4).ToString(),
+                    ExpirationDate = user.Payment.ExpirationDate.Month + "/" + user.Payment.ExpirationDate.Year % 2000,
 
                 } : null,
             };

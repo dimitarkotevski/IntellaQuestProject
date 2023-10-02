@@ -66,10 +66,10 @@ namespace IntellaQuest.Web.Controllers
         [HttpPost]
         public ActionResult Edit(ProductViewModel model)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return Json(ModelState.Values);
-            }
+            }*/
             _productsService.Update(model);
             return Json(new {success= true});
         }

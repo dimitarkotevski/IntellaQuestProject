@@ -16,9 +16,6 @@
                 <a [ngClass]="{ 'solid-active': activeTab === 'password' }" class="list-group-item btn left-solid-text nav-link" (click)="switchTab('password')">
                   Change Password
                 </a>
-                <a [ngClass]="{ 'solid-active': activeTab === 'deleteaccount' }" class="list-group-item btn left-solid-text nav-link" (click)="switchTab('deleteaccount')">
-                  Delete account
-                </a>
               </div>
             </div>
         </div>
@@ -126,16 +123,7 @@
                 </div>
               </div>
               <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'deleteaccount' }" id="deleteaccount">
-                <div class="card">
-                    <div class="card-body">
-                        <h1>Password</h1>
-                        <hr>
-                            <div class="form-group">
-                                <label for="inputPasswordCurrent">Delete account</label>
-                                <input type="password" class="form-control" id="inputPasswordCurrent">
-                            </div>
-                    </div>
-                </div>
+
               </div>
             </div>
         </div>

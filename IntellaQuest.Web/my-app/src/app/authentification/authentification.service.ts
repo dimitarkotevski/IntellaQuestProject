@@ -6,12 +6,14 @@ import { UserTokenInfo } from '../models/login/user-token-info';
 import { UserDetails } from '../models/login/user-details';
 import { UserRegister } from '../models/register/register-user';
 import { ChangePasswordViewModel } from '../models/change-password-view-model';
+import { PaymentInfoViewModel } from '../models/payment-info-view-model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthentificationService {
+  
 
   private baseApi = 'api/Identity';
 
@@ -38,9 +40,6 @@ export class AuthentificationService {
           localStorage.setItem('username', response.Username);
           localStorage.setItem('token', response.Token);
           localStorage.setItem('role',response.Role);
-          // if(localStorage.getItem('role')== 'admin'){
-          //   localStorage.setItem('accessToAdminTool',true);
-          // }
           return true;
         }
         return false;
@@ -99,6 +98,10 @@ export class AuthentificationService {
 
   changePassword(changepasswordModel :ChangePasswordViewModel){
     return this.http.post(`${this.baseApi}/ChangePassword`, {model:changepasswordModel});
+  }
+
+  addPayment(model : PaymentInfoViewModel) {
+    return this.http.post(`${this.baseApi}/AddPayment`, { userId: this.getLoggedUserId()  ,model : model});
   }
 
   deletePayment(userId: string) {

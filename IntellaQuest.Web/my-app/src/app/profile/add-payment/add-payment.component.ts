@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PaymentInfoViewModel } from 'src/app/models/payment-info-view-model';
 
 @Component({
   selector: 'app-add-payment',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPaymentComponent implements OnInit {
 
-  constructor() { }
+  model: PaymentInfoViewModel
+
+  firstFourDigit: string="";
+  secondFourDigit: string="";
+  thirdFourDigit: string="";
+  fourthFourDigit: string="";
+
+  dateString: string = "";
+
+  constructor() { 
+    this.model = new PaymentInfoViewModel()
+  }
 
   ngOnInit(): void {
   }
 
+  makeCardNumber(){
+    this.model.CardNumber = this.firstFourDigit+this.secondFourDigit+this.thirdFourDigit+this.fourthFourDigit
+    this.model.ExpirationDate = new Date(this.dateString).toISOString();
+  }
 }

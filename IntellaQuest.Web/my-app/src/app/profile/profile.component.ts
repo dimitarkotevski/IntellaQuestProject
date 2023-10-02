@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { YesNoDialogComponent } from '../customer-components/yes-no-dialog/yes-no-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { AddPaymentComponent } from './add-payment/add-payment.component';
+import { PaymentInfoViewModel } from '../models/payment-info-view-model';
 
 
 @Component({
@@ -37,12 +38,12 @@ export class ProfileComponent implements OnInit {
       panelClass: 'custom-modalbox'
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result : PaymentInfoViewModel) => {
       if(result){
-        // this.authService.deletePayment(userId).subscribe(()=>{
-        //   this.toastr.success("Success deleted payment")
-        //   window.location.reload();
-        // })
+        this.authService.addPayment(result).subscribe(()=>{
+          this.toastr.success("Success deleted payment")
+          window.location.reload();
+        })
       }else{
       }
     });
@@ -53,7 +54,7 @@ export class ProfileComponent implements OnInit {
       const text = "Do you want to delete payment?";
       const dialogRef = this.dialog.open(YesNoDialogComponent, {
         data: { text },
-        width: '100%', // Set the width of the modal
+        width: '500px', // Set the width of the modal
         panelClass: 'custom-modalbox'
       });
     

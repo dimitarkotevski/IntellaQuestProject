@@ -71,7 +71,7 @@ export class AdminToolProductsComponent implements OnInit {
   openPhotoModal(data64: string,id : string): void {
     const dialogRef = this.dialog.open(PhotoDialogComponent, {
       data: { data64, id},
-      width: '100%', // Set the width of the modal
+      width: '600px', // Set the width of the modal
       panelClass: 'custom-modalbox'
     });
   
@@ -82,7 +82,7 @@ export class AdminToolProductsComponent implements OnInit {
   addEditProduct(product?: ProductViewModel){
     const dialogRef = this.dialog.open(AddEditProductDialogComponent, {
       data: { product },
-      width: '100%', // Set the width of the modal
+      width: '600px', // Set the width of the modal
       panelClass: 'custom-modalbox'
     });
   

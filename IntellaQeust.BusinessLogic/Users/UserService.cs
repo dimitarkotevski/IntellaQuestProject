@@ -36,6 +36,7 @@ namespace IntellaQuest.BusinessLogic.Services
         void Update(UserViewModel model);
         void Delete(Guid Id);
         double GetAmountMoneyOfUser(Guid userId);
+        void AddPayment(Guid userId, PaymentsViewModelInfo model);
         void DeletePayment(Guid userId);
     }
     public class UserService : IUserService
@@ -192,6 +193,65 @@ namespace IntellaQuest.BusinessLogic.Services
                 return user.Amount;
             }
         }
+
+        #region Payment
+        public void DeletePayment(Guid userId)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var user = _userRepository.FindBy(userId);
+                if (user == null)
+                {
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                var paymentId = user.Payment.Id;
+                user.Payment = null;
+
+                var payment = _paymentRepository.FindBy(paymentId);
+                if (payment == null)
+                {
+                    throw new BllException(ShopExceptionMassages.PaymentExceptionMassages.NOT_FOUND);
+                }
+
+                _paymentRepository.Delete(payment);
+
+                _userRepository.Update(user);
+                _unitOfWork.Commit();
+            }
+        }
+
+        public void AddPayment(Guid userId, PaymentsViewModelInfo model)
+        {
+            using (_unitOfWork.BeginTransaction())
+            {
+                var user = _userRepository.FindBy(userId);
+                if(user == null)
+                {
+                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
+                }
+
+                if(user.Payment == null)
+                {
+                    var payment = new Payment
+                    {
+                        CardHolder = model.CardHolder,
+                        CardNumber = model.CardNumber,
+                        ExpirationDate = model.ExpirationDate,
+                        SecurityCode = model.SecurityCode,
+                    };
+
+                    user.Payment = payment;
+
+                    _paymentRepository.Add(payment);
+                    _userRepository.Update(user);
+
+                    _unitOfWork.Commit();
+                }
+            }
+        }
+
+        #endregion
 
         #region ADMIN 
 
@@ -409,32 +469,6 @@ namespace IntellaQuest.BusinessLogic.Services
                         user.Role = _roleRepository.GetUserRole();
                     }
                 }
-
-                _userRepository.Update(user);
-                _unitOfWork.Commit();
-            }
-        }
-
-        public void DeletePayment(Guid userId)
-        {
-            using (_unitOfWork.BeginTransaction())
-            {
-                var user = _userRepository.FindBy(userId);
-                if(user == null)
-                {
-                    throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
-                }
-
-                var paymentId = user.Payment.Id;
-                user.Payment = null;
-
-                var payment = _paymentRepository.FindBy(paymentId);
-                if(payment == null)
-                {
-                    throw new BllException(ShopExceptionMassages.PaymentExceptionMassages.NOT_FOUND);
-                }
-
-                _paymentRepository.Delete(payment);
 
                 _userRepository.Update(user);
                 _unitOfWork.Commit();

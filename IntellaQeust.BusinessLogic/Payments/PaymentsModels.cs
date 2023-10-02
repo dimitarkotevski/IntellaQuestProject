@@ -20,15 +20,15 @@ namespace IntellaQeust.BusinessLogic.ViewModels
         public Guid Id { get; set; }
         public string CardHolder { get; set; }
         public string CardNumber { get; set; }
+        public string ExpirationDate { get; set; }
     }
     public class PaymentsViewModelInfo
     {
         public Guid Id { get; set; }
         public string CardNumber { get; set; }
+        public string CardHolder { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string SecurityCode { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string City { get; set; }
         public string BillingAddress { get; set; }
         public string ZipPostalCode { get; set; }

@@ -51,7 +51,7 @@ export class AdminToolOrdersComponent implements OnInit {
   addEditOrder(order?: OrderGridViewModel){
     const dialogRef = this.dialog.open(AddEditOrderComponent, {
       data: { order },
-      width: '100%', // Set the width of the modal
+      width: '500px', // Set the width of the modal
       panelClass: 'custom-modalbox'
     });
   

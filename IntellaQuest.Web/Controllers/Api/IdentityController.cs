@@ -1,4 +1,5 @@
-﻿using IntellaQuest.BusinessLogic.Services;
+﻿using IntellaQeust.BusinessLogic.ViewModels;
+using IntellaQuest.BusinessLogic.Services;
 using IntellaQuest.BusinessLogic.ViewModels;
 using IntellaQuest.Domain;
 using IntellaQuest.Web.Controllers.Api;
@@ -78,6 +79,12 @@ namespace IntellaQuest.Web.Controllers
         {
             var amount = _userService.GetAmountMoneyOfUser(userId);
             return Json(amount);
+        }
+
+        public ActionResult AddPayment(Guid userId, PaymentsViewModelInfo model)
+        {
+            _userService.AddPayment(userId,model);
+            return Json(true);
         }
         public ActionResult DeletePayment(Guid userId)
         {

@@ -8,8 +8,7 @@ namespace IntellaQuest.Domain
         private string _cardNumber;
         private DateTime _expirationDate;
         private string _securityCode;
-        private string _firstName;
-        private string _lastName;
+        private string _cardHolder;
         private string _city;
         private string _billingAdress;
         private string _zipPostalCode;
@@ -36,15 +35,10 @@ namespace IntellaQuest.Domain
             get => _securityCode;
             set => _securityCode = value;
         }
-        public virtual string FirstName
+        public virtual string CardHolder
         {
-            get => _firstName;
-            set => _firstName = value;
-        }
-        public virtual string LastName
-        {
-            get => _lastName;
-            set => _lastName = value;
+            get => _cardHolder;
+            set => _cardHolder = value;
         }
         public virtual string City
         {

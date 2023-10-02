@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace IntellaQeust.BusinessLogic.ViewModels
 {
-    [Validator(typeof(ProductsViewModelValidator))]
+/*    [Validator(typeof(ProductsViewModelValidator))]*/    
     public class ProductViewModel
     {
         public Guid? Id { get; set; }

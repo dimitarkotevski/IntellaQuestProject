@@ -18,8 +18,7 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Map(p => p.CardNumber);
             Map(p => p.ExpirationDate);
             Map(p => p.SecurityCode);
-            Map(p => p.FirstName);
-            Map(p => p.LastName);
+            Map(p => p.CardHolder);
             Map(p => p.City);
             Map(p => p.BillingAdress);
             Map(p => p.ZipPostalCode);

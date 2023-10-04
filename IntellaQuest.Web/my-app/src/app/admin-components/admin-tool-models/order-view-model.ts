@@ -10,5 +10,5 @@ export class OrderViewModel{
     OrderStatus?: OrderStatus
     TotalAmount?: number
     PaymentType?: PaymentType
-    DateCreated?: Date
+    DateCreated?: string | undefined
 }

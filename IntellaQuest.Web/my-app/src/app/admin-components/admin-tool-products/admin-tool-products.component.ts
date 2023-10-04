@@ -32,7 +32,7 @@ export class AdminToolProductsComponent implements OnInit {
   // ]
   request: RequestModel;
   response: ResponseModel<ProductGridModel>
-  newItem?: ProductViewModel;
+  newItem: ProductViewModel;
 
   pagination: number[] = [5 , 10, 20, 50, 100]
 

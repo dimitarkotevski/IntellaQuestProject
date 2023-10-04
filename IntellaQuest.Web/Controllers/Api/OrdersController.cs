@@ -40,10 +40,10 @@ namespace IntellaQuest.Web.Controllers
         [HttpPost]
         public ActionResult Edit(OrderViewModel model)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return Json(ModelState.Values);
-            }
+            }*/
             _orderService.Update(model);
             return Json(new { success = true });
         }

@@ -118,7 +118,11 @@ namespace IntellaQuest.BusinessLogic.Services
                 if (!string.IsNullOrEmpty(request.SearchString))
                 {
                     ordersListForFiltering = ordersListForFiltering
-                                        .Where(x => x.User.FirstName.Contains(request.SearchString));
+                                        .Where(x => x.User.FirstName.Contains(request.SearchString)  || 
+                                                    x.User.LastName.Contains(request.SearchString) || 
+                                                    x.User.Username.Contains(request.SearchString) ||
+                                                    x.OrderName.Contains(request.SearchString) || 
+                                                    x.ShoppingCart.Name.Contains(request.SearchString));
                 }
 
 

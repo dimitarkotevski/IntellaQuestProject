@@ -1,4 +1,22 @@
 <div class="container">
+
+  <h3>Order admin panel</h3>
+  <hr/>
+  <div class="row pt-3">
+    <div class="col-10 d-flex">
+      <div class="form-group d-flex align-items-center"> <!-- Use align-items-center to vertically center content -->
+        <input class="form-control-sm" [(ngModel)]="request.SearchString" placeholder="Search" type="search" id="example-search-input">
+        <button class="btn btn-sm btn-primary" (click)="getData()">Search</button>
+        <button class="btn btn-sm btn-warning" (click)="resetSearchString()">Reset</button>
+      </div>
+    </div>
+    <!-- <div class="col-2 d-flex justify-content-end">
+      <div>
+        <button (click)="addEditOrder(newItem)" class="btn-sm btn-primary">Add order</button>
+      </div>
+    </div> -->
+  </div>
+
     <div>
       <table class="table table-hover">
         <thead>
@@ -33,8 +51,8 @@
             </span>
             </td>
             <td>
-              <span *ngIf="order.PaymentType == 0" class="bg-info p-2">{{ order.PaymentType | paymentType }}</span>
-              <span *ngIf="order.PaymentType == 1" class="bg-dark text-white p-2">{{ order.PaymentType | paymentType }} </span>
+              <span *ngIf="order.PaymentType == 0" class="bg-info p-2 align-content-center">{{ order.PaymentType | paymentType }}</span>
+              <span *ngIf="order.PaymentType == 1" class="bg-dark text-white p-2 align-content-center">{{ order.PaymentType | paymentType }} </span>
             </td>
             <td *ngIf="order.DateCreated">{{ (order.DateCreated | dateConverter) || '/'}}</td>
           <td>

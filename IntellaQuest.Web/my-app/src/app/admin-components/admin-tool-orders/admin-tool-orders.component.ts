@@ -20,6 +20,7 @@ export class AdminToolOrdersComponent implements OnInit {
 
   request: RequestModel;
   response: ResponseModel<OrderGridViewModel>
+  newItem: OrderViewModel;
 
   pagination: number[] = [5 , 10, 20, 50, 100]
 
@@ -32,6 +33,7 @@ export class AdminToolOrdersComponent implements OnInit {
     ) { 
       this.request = new RequestModel();
       this.response = new ResponseModel<OrderGridViewModel>()
+      this.newItem = new OrderViewModel();
     }
 
   ngOnInit(): void {
@@ -71,13 +73,9 @@ export class AdminToolOrdersComponent implements OnInit {
       }
     });
     //No need admin to add orders
-    // this.newItem = {
-    //   Id: undefined,
-    //   Name: "",
-    //   Price: undefined,
-    //   Description: "",
-    //   Category: undefined
-    // };
+    this.newItem = {
+      Id: undefined,
+    };
   }
 
   deleteOrder(id:string | undefined){

@@ -9,11 +9,11 @@ namespace IntellaQuest.Data.NHibernate.Mapping
             Schema("dbo");
             Table("Users");
 
-            Id(c => c.Id);
+            Id(c => c.Id); // .Colum("UserId")
 
             #region Attributes
 
-            Map(c => c.FirstName)
+            Map(c => c.FirstName) // _firstName
                 .Column("FirstName")
                 .Access.CamelCaseField(Prefix.Underscore)
                 .Not.Nullable();
@@ -70,7 +70,6 @@ namespace IntellaQuest.Data.NHibernate.Mapping
 
 
             References(x => x.Payment)
-                //.PropertyRef("Id")
                 .Column("PaymentId")
                 .Access
                 .CamelCaseField(Prefix.Underscore).Cascade.All();
@@ -85,10 +84,18 @@ namespace IntellaQuest.Data.NHibernate.Mapping
                 .Cascade.AllDeleteOrphan()
                 .KeyColumn("UserId").LazyLoad();
 
-            HasMany(x => x.FavouriteProducts)
-                .Inverse()
-                .Cascade.AllDeleteOrphan()
-                .KeyColumn("UserId").LazyLoad();
+
+            HasManyToMany(x => x.FavouriteProducts).Schema("dbo").Table("Favourite")
+               .ParentKeyColumn("UserId")
+               .ChildKeyColumn("ProductId")
+               .Access.CamelCaseField(Prefix.Underscore);
+
+
+
+            /*HasMany(x => x.FavouriteProducts)
+               .Inverse()
+               .Cascade.AllDeleteOrphan()
+               .KeyColumn("UserId").LazyLoad();*/
 
             #endregion
 

@@ -404,8 +404,11 @@ namespace IntellaQuest.BusinessLogic.Services
                     Email = model.Email,
                     Username = model.Username,
                     Password = PasswordEncryption.Encryption(model.Password),
+                    State = model.State,
+                    ZipCode = model.ZipCode,
+                    Address = model.Address,
                     Role = role != null ? role : _roleRepository.GetUserRole(),
-                    FavouriteProducts = null,
+                    //FavouriteProducts = new List<FavouriteProducts>(),
                     Orders = null,
                     Payment = null
                 };
@@ -430,7 +433,9 @@ namespace IntellaQuest.BusinessLogic.Services
                 if (user == null)
                     throw new BllException(ShopExceptionMassages.UserExceptionMassages.NOT_FOUND_EXCEPTION);
 
-                return user.MapToUserDetailModel();
+                var mappedUser = user.MapToUserDetailModel();
+
+                return mappedUser;
             }
         }
         public void Update(UserViewModel model)
@@ -475,6 +480,7 @@ namespace IntellaQuest.BusinessLogic.Services
             }
         }
 
+        //
         //public void SetUserDetails(UserDetailsModel model)
         //{
         //    using (_unitOfWork.BeginTransaction())

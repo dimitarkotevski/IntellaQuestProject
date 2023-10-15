@@ -75,8 +75,6 @@ export class CartComponent implements OnInit {
         this.orderService.MakeAnOrder(shoppingCartId,this.authService.getLoggedUserId() || "").subscribe(()=>{
           window.location.replace("my-order");
         })
-      }else{
-        console.log("no")
       }
     });
   }

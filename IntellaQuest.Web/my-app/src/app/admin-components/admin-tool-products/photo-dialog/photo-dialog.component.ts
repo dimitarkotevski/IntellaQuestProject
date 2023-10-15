@@ -48,7 +48,6 @@ export class PhotoDialogComponent implements OnInit {
         this.selectedFileBase64 = e.target.result;
         this.selectedFileBase64 = this.selectedFileBase64.replace(/^data:image\/\w+;base64,/, '');
         this.photoUrl = this.selectedFileBase64;
-        console.log(this.selectedFileBase64);
         this.addPhotoButton = true;
       };
       reader.readAsDataURL(this.selectedFile);

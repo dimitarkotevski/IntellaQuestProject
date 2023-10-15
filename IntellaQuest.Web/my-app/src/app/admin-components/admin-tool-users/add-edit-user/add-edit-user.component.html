@@ -30,24 +30,27 @@
     <div *ngIf="title == 'Add'" class="row">
       <div class="col-6 form-outline mb-4">
         <label for="password" class="form-label">Password</label>
-        <input name="password" [(ngModel)]="model.Password" type="text" class="form-control" />
+        <input name="password" [(ngModel)]="model.Password" type="password" class="form-control" />
       </div>
     </div>
 
     <div class="row">
-      <div class="col-3 form-outline mb-4">
+      <div class="col-6 form-outline mb-4">
         <label for="address" class="form-label">Address</label>
         <input name="address" [(ngModel)]="model.Address" type="text" class="form-control" />
       </div>
-      <div class="col-3 form-outline mb-4">
+      <div class="col-6 form-outline mb-4">
         <label for="city" class="form-label">City</label>
         <input name="city" [(ngModel)]="model.City" type="text" class="form-control" />
       </div>
-      <div class="col-3 form-outline mb-4">
+    </div>
+
+    <div class="row">
+      <div class="col-6 form-outline mb-4">
         <label for="state" class="form-label">State</label>
         <input name="state" [(ngModel)]="model.State" type="text" class="form-control" />
       </div>
-      <div class="col-3 form-outline mb-4">
+      <div class="col-6 form-outline mb-4">
         <label for="zip_code" class="form-label">Zip code</label>
         <input name="zip_code" [(ngModel)]="model.ZipCode" type="text" class="form-control" />
       </div>

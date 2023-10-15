@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IntellaQuest.BusinessLogic.ViewModels
 {
-
     public class UserRegistrationViewModel
     {
         public string Email { get; set; }
@@ -77,6 +76,7 @@ namespace IntellaQuest.BusinessLogic.ViewModels
         public string ZipCode { get; set; }
         public LookupViewModel Role { get; set; }
         public PaymentsProfileViewModel Payment { get; set; }
+        public List<LookupViewModel> FavouriteProdutcs { get; set; }
     }
 
     public class UserTokenInformation

@@ -60,6 +60,12 @@ namespace IntellaQuest.BusinessLogic.Mappers
                     ExpirationDate = user.Payment.ExpirationDate.Month + "/" + user.Payment.ExpirationDate.Year % 2000,
 
                 } : null,
+                FavouriteProdutcs = user.FavouriteProducts.Select(x=> new LookupViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Status = true
+                }).ToList()
             };
         }
         public static LookupViewModel MapToLookupViewModel(this User user)

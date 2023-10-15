@@ -22,7 +22,6 @@ export class SideFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.category)
     this.productService.GetAllBrands(this.category)?.subscribe((res)=>{
       this.brands = res;
     })
@@ -46,7 +45,6 @@ export class SideFilterComponent implements OnInit {
   }
 
   onChange(event: any) {
-    console.log(event.target.value)
     if(event.target.checked){
       this.filter.push(event.target.value);
     }else{

@@ -123,8 +123,6 @@ export class AdminToolProductsComponent implements OnInit {
             this.toastr.success("Success deleted product")
             this.getData()
           })
-        }else{
-          console.log("no")
         }
       });
     }

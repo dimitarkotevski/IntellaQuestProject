@@ -60,7 +60,7 @@ export class AdminToolUsersComponent implements OnInit {
   addEditUser(user:UserGridModel){
     const dialogRef = this.dialog.open(AddEditUserComponent, {
       data: { user },
-      width: '100%', // Set the width of the modal
+      width: '700px', // Set the width of the modal
       panelClass: 'custom-modalbox'
     });
   
@@ -107,8 +107,6 @@ export class AdminToolUsersComponent implements OnInit {
             this.toastr.success("Success deleted user")
             this.getData()
           })
-        }else{
-          console.log("no")
         }
       });
     }

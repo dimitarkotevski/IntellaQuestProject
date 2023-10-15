@@ -33,7 +33,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToFavourite(Id:string | undefined){
-    console.log("in favourite")
     this.message = 'Success message';
     this.type = 'success';
   }

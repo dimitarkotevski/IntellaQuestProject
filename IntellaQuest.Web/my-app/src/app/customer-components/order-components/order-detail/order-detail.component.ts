@@ -41,8 +41,6 @@ export class OrderDetailComponent implements OnInit {
          this.orderService.MakeAPay(order).subscribe(()=>{
            window.location.replace("my-order");
          })
-      }else{
-        console.log("no")
       }
     });
   }
@@ -60,8 +58,6 @@ export class OrderDetailComponent implements OnInit {
         // this.orderService.CancelActiveOrder(orderId).subscribe(()=>{
         //   window.location.replace("my-order");
         // })
-      }else{
-        // console.log("no")
       }
     });
   }

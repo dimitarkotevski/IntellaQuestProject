@@ -66,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ 5758);
 /* harmony import */ var src_app_models_order_grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/models/order-grid */ 500);
-/* harmony import */ var src_app_models_lookup_view_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/models/lookup-view-model */ 646);
+/* harmony import */ var src_app_models_lookup_view_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/models/lookup-view-model */ 3154);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 3184);
 /* harmony import */ var _admin_tool_order_service_admin_tool_order_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../admin-tool-order-service/admin-tool-order.service */ 3374);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 6362);
@@ -534,9 +534,6 @@ class AdminToolOrdersComponent {
                         this.getData();
                     });
                 }
-                else {
-                    console.log("no");
-                }
             });
         }
     }
@@ -714,9 +711,7 @@ class AddEditProductDialogComponent {
         }
         this.categoryService.getAllCategories().subscribe((response) => {
             if (response.Items) {
-                console.log(response.Items);
                 this.categories = response.Items;
-                console.log(this.categories);
             }
         });
     }
@@ -1050,9 +1045,6 @@ class AdminToolProductsComponent {
                         this.getData();
                     });
                 }
-                else {
-                    console.log("no");
-                }
             });
         }
     }
@@ -1134,7 +1126,6 @@ class PhotoDialogComponent {
                 this.selectedFileBase64 = e.target.result;
                 this.selectedFileBase64 = this.selectedFileBase64.replace(/^data:image\/\w+;base64,/, '');
                 this.photoUrl = this.selectedFileBase64;
-                console.log(this.selectedFileBase64);
                 this.addPhotoButton = true;
             };
             reader.readAsDataURL(this.selectedFile);
@@ -1199,10 +1190,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function AddEditUserComponent_div_23_Template(rf, ctx) { if (rf & 1) {
     const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 2)(1, "div", 3)(2, "label", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 2)(1, "div", 3)(2, "label", 28);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Password");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "input", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "input", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_div_23_Template_input_ngModelChange_4_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r2); const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r1.model.Password = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
 } if (rf & 2) {
@@ -1226,7 +1217,7 @@ class AddEditUserComponent {
     }
 }
 AddEditUserComponent.ɵfac = function AddEditUserComponent_Factory(t) { return new (t || AddEditUserComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_1__.MAT_DIALOG_DATA)); };
-AddEditUserComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AddEditUserComponent, selectors: [["app-add-edit-user"]], inputs: { model: "model" }, decls: 51, vars: 13, consts: [["mat-dialog-title", ""], ["mat-dialog-content", ""], [1, "row"], [1, "col-6", "form-outline", "mb-4"], ["for", "first_name", 1, "form-label"], ["name", "first_name", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "last_name", 1, "form-label"], ["name", "last_name", "type", "tel", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "email", 1, "form-label"], ["name", "email", "type", "email", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "username", 1, "form-label"], ["name", "username", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["class", "row", 4, "ngIf"], [1, "col-3", "form-outline", "mb-4"], ["for", "address", 1, "form-label"], ["name", "address", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "city", 1, "form-label"], ["name", "city", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "state", 1, "form-label"], ["name", "state", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "zip_code", 1, "form-label"], ["name", "zip_code", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "w-50"], ["for", "description", 1, "form-label"], [1, "form-select", "form-control", 3, "selectedIndex", "ngModel", "ngModelChange"], ["value", "admin"], ["value", "user"], [2, "float", "right", "margin", "20px"], ["type", "button", "value", "Save", 1, "btn", "btn-danger", 3, "mat-dialog-close"], ["for", "password", 1, "form-label"], ["name", "password", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"]], template: function AddEditUserComponent_Template(rf, ctx) { if (rf & 1) {
+AddEditUserComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AddEditUserComponent, selectors: [["app-add-edit-user"]], inputs: { model: "model" }, decls: 52, vars: 13, consts: [["mat-dialog-title", ""], ["mat-dialog-content", ""], [1, "row"], [1, "col-6", "form-outline", "mb-4"], ["for", "first_name", 1, "form-label"], ["name", "first_name", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "last_name", 1, "form-label"], ["name", "last_name", "type", "tel", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "email", 1, "form-label"], ["name", "email", "type", "email", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "username", 1, "form-label"], ["name", "username", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["class", "row", 4, "ngIf"], ["for", "address", 1, "form-label"], ["name", "address", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "city", 1, "form-label"], ["name", "city", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "state", 1, "form-label"], ["name", "state", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "zip_code", 1, "form-label"], ["name", "zip_code", "type", "text", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "w-50"], ["for", "description", 1, "form-label"], [1, "form-select", "form-control", 3, "selectedIndex", "ngModel", "ngModelChange"], ["value", "admin"], ["value", "user"], [2, "float", "right", "margin", "20px"], ["type", "button", "value", "Save", 1, "btn", "btn-danger", 3, "mat-dialog-close"], ["for", "password", 1, "form-label"], ["name", "password", "type", "password", 1, "form-control", 3, "ngModel", "ngModelChange"]], template: function AddEditUserComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h1", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "hr");
@@ -1256,43 +1247,43 @@ AddEditUserComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODUL
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_input_ngModelChange_22_listener($event) { return ctx.model.Username = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](23, AddEditUserComponent_div_23_Template, 5, 1, "div", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 2)(25, "div", 13)(26, "label", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "div", 2)(25, "div", 3)(26, "label", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "Address");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "input", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "input", 14);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_input_ngModelChange_28_listener($event) { return ctx.model.Address = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "div", 13)(30, "label", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "div", 3)(30, "label", 15);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](31, "City");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "input", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "input", 16);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_input_ngModelChange_32_listener($event) { return ctx.model.City = $event; });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "div", 13)(34, "label", 18);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, "State");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "input", 19);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_input_ngModelChange_36_listener($event) { return ctx.model.State = $event; });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "div", 13)(38, "label", 20);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, "Zip code");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "input", 21);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_input_ngModelChange_40_listener($event) { return ctx.model.ZipCode = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](41, "div", 22)(42, "label", 23);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](43, "Pick Role");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "div", 2)(34, "div", 3)(35, "label", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](36, "State");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "select", 24);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_select_ngModelChange_44_listener($event) { return ctx.model.Role = $event; });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](45, "option", 25);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](46, "ADMIN");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "input", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_input_ngModelChange_37_listener($event) { return ctx.model.State = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](38, "div", 3)(39, "label", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](40, "Zip code");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "option", 26);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](48, "USER");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](41, "input", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_input_ngModelChange_41_listener($event) { return ctx.model.ZipCode = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](42, "div", 21)(43, "label", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](44, "Pick Role");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](45, "select", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function AddEditUserComponent_Template_select_ngModelChange_45_listener($event) { return ctx.model.Role = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](46, "option", 24);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](47, "ADMIN");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](48, "option", 25);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](49, "USER");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "div", 27);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](50, "input", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "div", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](51, "input", 27);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
@@ -1311,7 +1302,7 @@ AddEditUserComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODUL
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.model.Address);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.model.City);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.model.State);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.model.ZipCode);
@@ -1508,7 +1499,7 @@ class AdminToolUsersComponent {
     addEditUser(user) {
         const dialogRef = this.dialog.open(_add_edit_user_add_edit_user_component__WEBPACK_IMPORTED_MODULE_4__.AddEditUserComponent, {
             data: { user },
-            width: '100%',
+            width: '700px',
             panelClass: 'custom-modalbox'
         });
         dialogRef.afterClosed().subscribe((result) => {
@@ -1555,9 +1546,6 @@ class AdminToolUsersComponent {
                         this.getData();
                     });
                 }
-                else {
-                    console.log("no");
-                }
             });
         }
     }
@@ -1577,7 +1565,7 @@ class AdminToolUsersComponent {
 AdminToolUsersComponent.ɵfac = function AdminToolUsersComponent_Factory(t) { return new (t || AdminToolUsersComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_8__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_10__.ToastrService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](src_app_authentification_authentification_service__WEBPACK_IMPORTED_MODULE_5__.AuthentificationService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_admin_tool_user_service_admin_tool_user_service__WEBPACK_IMPORTED_MODULE_6__.AdminToolUserService)); };
 AdminToolUsersComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineComponent"]({ type: AdminToolUsersComponent, selectors: [["app-admin-tool-users"]], decls: 51, vars: 9, consts: [[1, "container"], [1, "row", "pt-3"], [1, "col-10", "d-flex"], [1, "form-group", "d-flex", "align-items-center"], ["placeholder", "Search", "type", "search", "id", "example-search-input", 1, "form-control-sm", 3, "ngModel", "ngModelChange"], [1, "btn", "btn-sm", "btn-primary", 3, "click"], [1, "btn", "btn-sm", "btn-warning", 3, "click"], [1, "col-2", "d-flex", "justify-content-end"], [1, "btn-sm", "btn-primary", 3, "click"], [1, "table", "table-hover", "table-sm"], ["scope", "col"], [4, "ngFor", "ngForOf"], [1, "row"], [1, "col"], [3, "page", "pageSize", "collectionSize", "rotate", "boundaryLinks", "pageChange"], [3, "value", "valueChange", "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], [1, "btn-sm", "btn-warning", 3, "click"], [1, "btn-sm", "btn-danger", 3, "click"], [3, "value"]], template: function AdminToolUsersComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div", 0)(1, "h3");
-        _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](2, "Product admin panel");
+        _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](2, "User admin panel");
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](3, "hr");
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](4, "div", 1)(5, "div", 2)(6, "div", 3)(7, "input", 4);
@@ -2498,9 +2486,6 @@ class CartComponent {
                     window.location.replace("my-order");
                 });
             }
-            else {
-                console.log("no");
-            }
         });
     }
 }
@@ -3398,9 +3383,6 @@ class OrderDetailComponent {
                     window.location.replace("my-order");
                 });
             }
-            else {
-                console.log("no");
-            }
         });
     }
     CancelOrder(orderId) {
@@ -3415,9 +3397,6 @@ class OrderDetailComponent {
                 // this.orderService.CancelActiveOrder(orderId).subscribe(()=>{
                 //   window.location.replace("my-order");
                 // })
-            }
-            else {
-                // console.log("no")
             }
         });
     }
@@ -3747,7 +3726,6 @@ class ProductDetailComponent {
         });
     }
     addToFavourite(Id) {
-        console.log("in favourite");
         this.message = 'Success message';
         this.type = 'success';
     }
@@ -4021,8 +3999,6 @@ class ProductsGridComponent {
         }
     }
     ngOnInit() {
-        // console.log(this.orderProducts);
-        // console.log(this.type);
     }
     addToFavourite(productId) {
         var userId = this.authService.getLoggedUserId();
@@ -4164,7 +4140,6 @@ class SideFilterComponent {
     ;
     ngOnInit() {
         var _a;
-        console.log(this.category);
         (_a = this.productService.GetAllBrands(this.category)) === null || _a === void 0 ? void 0 : _a.subscribe((res) => {
             this.brands = res;
         });
@@ -4186,7 +4161,6 @@ class SideFilterComponent {
         this.refreshState.emit(this.filterProducts);
     }
     onChange(event) {
-        console.log(event.target.value);
         if (event.target.checked) {
             this.filter.push(event.target.value);
         }
@@ -4639,7 +4613,6 @@ class HomeComponent {
         this.router.navigate(["sort/" + url]);
     }
     addToFavourite(Id) {
-        console.log("in favourite");
         this.message = 'Success message';
         this.type = 'success';
     }
@@ -4760,7 +4733,7 @@ var PaymentType;
 
 /***/ }),
 
-/***/ 646:
+/***/ 3154:
 /*!*********************************************!*\
   !*** ./src/app/models/lookup-view-model.ts ***!
   \*********************************************/
@@ -5030,7 +5003,6 @@ class NavbarComponent {
         else {
             this.categoryNavBar = true;
         }
-        console.log(this.categoryNavBar);
     }
 }
 NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_authentification_authentification_service__WEBPACK_IMPORTED_MODULE_0__.AuthentificationService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_category_products_category_service__WEBPACK_IMPORTED_MODULE_1__.CategoryService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_5__.ToastrService)); };

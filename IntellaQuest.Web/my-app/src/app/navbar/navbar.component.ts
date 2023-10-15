@@ -46,6 +46,5 @@ export class NavbarComponent implements OnInit {
     }else{
       this.categoryNavBar=true;
     }
-    console.log(this.categoryNavBar);
   }
 }

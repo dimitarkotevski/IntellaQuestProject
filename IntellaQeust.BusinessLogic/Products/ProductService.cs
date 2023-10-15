@@ -124,7 +124,6 @@ namespace IntellaQuest.BusinessLogic.Services
                 {
                     throw new BllException(ShopExceptionMassages.ProductsExceptionMassages.NOT_FOUND_EXCEPTION);
                 }
-                _unitOfWork.Commit();
 
                 return productEntity.MapToViewModel();
             }
@@ -239,7 +238,7 @@ namespace IntellaQuest.BusinessLogic.Services
                         listProductForFiltering = _shoppingCartDetailRepository.All().Select(x => x.Product);
                         break;
                     case "Newest":
-                        listProductForFiltering = listProductForFiltering.OrderBy(x => x.Created);
+                        listProductForFiltering = listProductForFiltering.OrderByDescending(x => x.Created);
                         break;
                     case "PriceLow":
                         listProductForFiltering = listProductForFiltering.OrderBy(x => x.Price);

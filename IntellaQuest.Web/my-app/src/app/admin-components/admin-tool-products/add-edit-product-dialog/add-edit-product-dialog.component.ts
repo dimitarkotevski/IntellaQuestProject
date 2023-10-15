@@ -34,9 +34,7 @@ export class AddEditProductDialogComponent implements OnInit {
 
     this.categoryService.getAllCategories().subscribe((response: ResponseModel<CategoryViewModel>)=>{
       if(response.Items){
-        console.log(response.Items)
         this.categories = response.Items;
-        console.log(this.categories);
       }
     })
   }

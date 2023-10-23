@@ -110,7 +110,7 @@ const routes: Routes = [
     FormsModule,
     AppRoutingModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
+      timeOut: 5000,
       positionClass: 'toast-top-right',
       preventDuplicates: false,
     }),
@@ -119,10 +119,6 @@ const routes: Routes = [
     NgbModule,
     MatSelectModule,
     NgxDatatableModule
-    // MatTableModule,
-    // MatPaginatorModule,
-    // MatFormFieldModule,
-    // MatInputModule,
   ],
   exports:[
     MatDialogModule

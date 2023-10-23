@@ -1953,7 +1953,7 @@ AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_45__["ɵ�
             _angular_forms__WEBPACK_IMPORTED_MODULE_49__.FormsModule,
             _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
             ngx_toastr__WEBPACK_IMPORTED_MODULE_50__.ToastrModule.forRoot({
-                timeOut: 2000,
+                timeOut: 5000,
                 positionClass: 'toast-top-right',
                 preventDuplicates: false,
             }),
@@ -1962,10 +1962,6 @@ AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_45__["ɵ�
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_53__.NgbModule,
             _angular_material_select__WEBPACK_IMPORTED_MODULE_54__.MatSelectModule,
             _swimlane_ngx_datatable__WEBPACK_IMPORTED_MODULE_55__.NgxDatatableModule
-            // MatTableModule,
-            // MatPaginatorModule,
-            // MatFormFieldModule,
-            // MatInputModule,
         ], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_52__.MatDialogModule] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_45__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent,
         _home_home_component__WEBPACK_IMPORTED_MODULE_2__.HomeComponent,
@@ -2013,12 +2009,7 @@ AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_45__["ɵ�
         _angular_material_dialog__WEBPACK_IMPORTED_MODULE_52__.MatDialogModule,
         _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_53__.NgbModule,
         _angular_material_select__WEBPACK_IMPORTED_MODULE_54__.MatSelectModule,
-        _swimlane_ngx_datatable__WEBPACK_IMPORTED_MODULE_55__.NgxDatatableModule
-        // MatTableModule,
-        // MatPaginatorModule,
-        // MatFormFieldModule,
-        // MatInputModule,
-    ], exports: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_52__.MatDialogModule] }); })();
+        _swimlane_ngx_datatable__WEBPACK_IMPORTED_MODULE_55__.NgxDatatableModule], exports: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_52__.MatDialogModule] }); })();
 _angular_core__WEBPACK_IMPORTED_MODULE_45__["ɵɵsetComponentScope"](_favourite_favourite_component__WEBPACK_IMPORTED_MODULE_6__.FavouriteComponent, [_customer_components_breadcrumb_breadcrumb_component__WEBPACK_IMPORTED_MODULE_18__.BreadcrumbComponent, _angular_common__WEBPACK_IMPORTED_MODULE_56__.NgIf, _customer_components_product_components_products_grid_products_grid_component__WEBPACK_IMPORTED_MODULE_26__.ProductsGridComponent,
     _customer_components_loading_components_loading_grid_loading_grid_component__WEBPACK_IMPORTED_MODULE_24__.LoadingGridComponent], []);
 
@@ -2392,13 +2383,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function CartComponent_div_2_div_2_Template(rf, ctx) { if (rf & 1) {
     const _r5 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div", 7)(1, "div", 8)(2, "button", 9)(3, "h5");
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](4, "Delete all products");
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()()();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](5, "div", 10)(6, "button", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("click", function CartComponent_div_2_div_2_Template_button_click_6_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r5); const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"](2); return ctx_r4.MakeOrder(ctx_r4.shoppingCart.Id); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](7, "h5");
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](8, "Order here");
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div", 7)(1, "div", 8)(2, "button", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("click", function CartComponent_div_2_div_2_Template_button_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r5); const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"](2); return ctx_r4.MakeOrder(ctx_r4.shoppingCart.Id); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](3, "h5");
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](4, "Order here");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()()()();
 } }
 function CartComponent_div_2_Template(rf, ctx) { if (rf & 1) {
@@ -2406,7 +2394,7 @@ function CartComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div")(1, "app-products-grid", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("refreshState", function CartComponent_div_2_Template_app_products_grid_refreshState_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r7); const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"](); return ctx_r6.refreshState(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](2, CartComponent_div_2_div_2_Template, 9, 0, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](2, CartComponent_div_2_div_2_Template, 5, 0, "div", 6);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
@@ -2416,18 +2404,18 @@ function CartComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("ngIf", ctx_r0.shoppingCart.ShoppingCartDetails.length > 0);
 } }
 function CartComponent_app_loading_grid_3_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](0, "app-loading-grid", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](0, "app-loading-grid", 10);
 } if (rf & 2) {
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("isGridLoading", false);
 } }
 function CartComponent_div_4_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div", 0)(1, "div", 13)(2, "div", 14)(3, "div", 15)(4, "div", 16);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](5, "i", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div", 0)(1, "div", 11)(2, "div", 12)(3, "div", 13)(4, "div", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](5, "i", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](6, "div", 18)(7, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](6, "div", 16)(7, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](8, "List of cart product is empty!");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](9, "a", 19)(10, "strong");
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](9, "a", 17)(10, "strong");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](11, "Keep buying");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()()()()()()();
 } }
@@ -2490,7 +2478,7 @@ class CartComponent {
     }
 }
 CartComponent.ɵfac = function CartComponent_Factory(t) { return new (t || CartComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_8__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_10__.ToastrService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_customer_components_order_components_order_service__WEBPACK_IMPORTED_MODULE_1__.OrderService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_authentification_authentification_service__WEBPACK_IMPORTED_MODULE_2__.AuthentificationService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_customer_components_cart_components_shopping_cart_service__WEBPACK_IMPORTED_MODULE_3__.ShoppingCartService)); };
-CartComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineComponent"]({ type: CartComponent, selectors: [["app-cart"]], inputs: { shoppingCart: "shoppingCart" }, decls: 5, vars: 5, consts: [[1, "container"], [3, "isItem", "itemDetail"], [4, "ngIf"], [3, "isGridLoading", 4, "ngIf"], ["class", "container", 4, "ngIf"], [3, "type", "shoppingCart", "refreshState"], ["class", "row", 4, "ngIf"], [1, "row"], [1, "my-5", "col-md-6", "col-lg-6"], [1, "btn", "w-75", "btn-danger"], [1, "my-5", "col-md-6", "col-lg-6", "right-solid-text"], ["data-toggle", "modal", "data-target", "#orderMaking", 1, "btn", "w-75", "solid-button-order", 3, "click"], [3, "isGridLoading"], [1, "text-center"], [1, "card", 2, "text-align", "-webkit-center"], [1, "card-body"], [1, "circle"], [1, "fa-5x", "fa-solid", "fa-bag-shopping"], [1, "p-3"], ["href", "/", 1, "solid_color"]], template: function CartComponent_Template(rf, ctx) { if (rf & 1) {
+CartComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineComponent"]({ type: CartComponent, selectors: [["app-cart"]], inputs: { shoppingCart: "shoppingCart" }, decls: 5, vars: 5, consts: [[1, "container"], [3, "isItem", "itemDetail"], [4, "ngIf"], [3, "isGridLoading", 4, "ngIf"], ["class", "container", 4, "ngIf"], [3, "type", "shoppingCart", "refreshState"], ["class", "row", 4, "ngIf"], [1, "row"], [1, "pt-lg-3", "pull-right"], ["data-toggle", "modal", "data-target", "#orderMaking", 1, "btn", "solid-button-order", 3, "click"], [3, "isGridLoading"], [1, "text-center"], [1, "card", 2, "text-align", "-webkit-center"], [1, "card-body"], [1, "circle"], [1, "fa-5x", "fa-solid", "fa-bag-shopping"], [1, "p-3"], ["href", "/", 1, "solid_color"]], template: function CartComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](1, "app-breadcrumb", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](2, CartComponent_div_2_Template, 3, 3, "div", 2);
@@ -3291,9 +3279,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _yes_no_dialog_yes_no_dialog_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../yes-no-dialog/yes-no-dialog.component */ 8082);
 /* harmony import */ var _make_order_confirmation_make_order_confirmation_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./make-order-confirmation/make-order-confirmation.component */ 5588);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 2816);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/dialog */ 5758);
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/dialog */ 5758);
 /* harmony import */ var _order_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../order.service */ 818);
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-toastr */ 4101);
 /* harmony import */ var src_app_authentification_authentification_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/authentification/authentification.service */ 3101);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ 6362);
 /* harmony import */ var _product_components_products_grid_products_grid_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../product-components/products-grid/products-grid.component */ 8748);
@@ -3360,18 +3348,15 @@ function OrderDetailComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()();
 } }
 class OrderDetailComponent {
-    constructor(router, dialog, orderService, authService) {
-        this.router = router;
+    constructor(dialog, orderService, toasterService, authentificationService) {
         this.dialog = dialog;
         this.orderService = orderService;
-        this.authService = authService;
+        this.toasterService = toasterService;
+        this.authentificationService = authentificationService;
     }
     ngOnInit() {
     }
     Confirmation(order) {
-        // let user = new LookupViewModel();
-        // user.Id = this.authService.getLoggedUserId() || "";
-        // order.User = user;
         const dialogRef = this.dialog.open(_make_order_confirmation_make_order_confirmation_component__WEBPACK_IMPORTED_MODULE_1__.MakeOrderConfirmationComponent, {
             data: { order },
             width: '500px',
@@ -3380,8 +3365,9 @@ class OrderDetailComponent {
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
                 this.orderService.MakeAPay(order).subscribe(() => {
-                    window.location.replace("my-order");
+                    this.activeOrder = null;
                 });
+                this.toasterService.success("Your order has been aproved and the product/s will be sent to the address that you put into profile");
             }
         });
     }
@@ -3394,14 +3380,14 @@ class OrderDetailComponent {
         });
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
-                // this.orderService.CancelActiveOrder(orderId).subscribe(()=>{
-                //   window.location.replace("my-order");
-                // })
+                this.orderService.CancelActiveOrder(orderId).subscribe(() => {
+                    window.location.replace("my-order");
+                });
             }
         });
     }
 }
-OrderDetailComponent.ɵfac = function OrderDetailComponent_Factory(t) { return new (t || OrderDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_8__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_order_service__WEBPACK_IMPORTED_MODULE_2__.OrderService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](src_app_authentification_authentification_service__WEBPACK_IMPORTED_MODULE_3__.AuthentificationService)); };
+OrderDetailComponent.ɵfac = function OrderDetailComponent_Factory(t) { return new (t || OrderDetailComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_8__.MatDialog), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_order_service__WEBPACK_IMPORTED_MODULE_2__.OrderService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_9__.ToastrService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](src_app_authentification_authentification_service__WEBPACK_IMPORTED_MODULE_3__.AuthentificationService)); };
 OrderDetailComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineComponent"]({ type: OrderDetailComponent, selectors: [["app-order-detail"]], inputs: { activeOrder: "activeOrder" }, decls: 3, vars: 2, consts: [[1, "card"], [4, "ngIf"], [1, "card-body"], [1, "row"], [1, "col-6"], [1, "col-6", "right-solid-text"], [1, "btn", "solid_hover_color", "h-75", 3, "click"], [3, "type", "orderProducts"], ["type", "button", 1, "btn", "solid_hover_color", "w-100", "h-100", 3, "click"]], template: function OrderDetailComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](1, OrderDetailComponent_div_1_Template, 30, 10, "div", 1);
@@ -4102,7 +4088,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 3184);
 /* harmony import */ var src_app_models_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/models/request */ 1874);
 /* harmony import */ var _product_components_product_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../product-components/product.service */ 3299);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 6362);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ 587);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 6362);
+
 
 
 
@@ -4173,26 +4161,32 @@ class SideFilterComponent {
         this.filterProducts.SearchList = this.filter;
         this.refreshState.emit(this.filterProducts);
     }
+    searchPrice() {
+        this.refreshState.emit(this.filterProducts);
+    }
 }
 SideFilterComponent.ɵfac = function SideFilterComponent_Factory(t) { return new (t || SideFilterComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_product_components_product_service__WEBPACK_IMPORTED_MODULE_1__.ProductService)); };
-SideFilterComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: SideFilterComponent, selectors: [["app-side-filter"]], inputs: { category: "category", brands: "brands" }, outputs: { refreshState: "refreshState" }, decls: 39, vars: 2, consts: [["id", "accordion"], [1, "card"], [1, "card-header", "p-0"], [1, "mb-0"], ["aria-expanded", "true", 1, "btn", "solid-color-a", "left-solid-text", "w-100"], [1, "card-body"], [1, "row"], [1, "col-5"], [1, "input-group"], [1, "py-2"], ["type", "text", "name", "price", "placeholder", "From", 1, "form-control"], [1, "col-1"], ["type", "text", "name", "price", "placeholder", "To", 1, "form-control"], [1, "col-12", "py-3"], [1, "btn", "solid_button", "solid_button", "w-75"], [1, "btn", "solid-color-a", "left-solid-text", "w-100"], [1, "fa-solid", "fa-list-radio"], [1, "form-check"], [4, "ngFor", "ngForOf"], [4, "ngIf"], ["type", "checkbox", 1, "form-check-input", 3, "id", "name", "value", "change"], [3, "for"]], template: function SideFilterComponent_Template(rf, ctx) { if (rf & 1) {
+SideFilterComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: SideFilterComponent, selectors: [["app-side-filter"]], inputs: { category: "category", brands: "brands" }, outputs: { refreshState: "refreshState" }, decls: 39, vars: 4, consts: [["id", "accordion"], [1, "card"], [1, "card-header", "p-0"], [1, "mb-0"], ["aria-expanded", "true", 1, "btn", "solid-color-a", "left-solid-text", "w-100"], [1, "card-body"], [1, "row"], [1, "col-5"], [1, "input-group"], [1, "py-2"], ["type", "text", "name", "price", "placeholder", "From", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "col-1"], ["type", "text", "name", "price", "placeholder", "To", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "col-12", "py-3"], [1, "btn", "solid_button", "solid_button", "w-75", 3, "click"], [1, "btn", "solid-color-a", "left-solid-text", "w-100"], [1, "fa-solid", "fa-list-radio"], [1, "form-check"], [4, "ngFor", "ngForOf"], [4, "ngIf"], ["type", "checkbox", 1, "form-check-input", 3, "id", "name", "value", "change"], [3, "for"]], template: function SideFilterComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div")(1, "div", 0)(2, "div", 1)(3, "div", 2)(4, "h5", 3)(5, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](6, " Price ");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](7, "div")(8, "div", 5)(9, "div", 6)(10, "div", 7)(11, "div", 8)(12, "span", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](13, "$");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](14, "input", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](14, "input", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("ngModelChange", function SideFilterComponent_Template_input_ngModelChange_14_listener($event) { return ctx.filterProducts.PriceFrom = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](15, "div", 11)(16, "div", 8)(17, "span", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](18, "-");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](19, "div", 7)(20, "div", 8)(21, "span", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](22, "$");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](23, "input", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()()()();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](23, "input", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("ngModelChange", function SideFilterComponent_Template_input_ngModelChange_23_listener($event) { return ctx.filterProducts.PriceTo = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()()()()();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](24, "div", 6)(25, "div", 13)(26, "button", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function SideFilterComponent_Template_button_click_26_listener() { return ctx.searchPrice(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](27, "Search");
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()()();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](28, "div", 1)(29, "div", 2)(30, "h5", 3)(31, "div", 15);
@@ -4205,11 +4199,15 @@ SideFilterComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](38, SideFilterComponent_div_38_Template, 1, 0, "div", 19);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](37);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.filterProducts.PriceFrom);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.filterProducts.PriceTo);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](14);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.brands);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.brands);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzaWRlLWZpbHRlci5jb21wb25lbnQuY3NzIn0= */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgModel, _angular_common__WEBPACK_IMPORTED_MODULE_4__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_4__.NgIf], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzaWRlLWZpbHRlci5jb21wb25lbnQuY3NzIn0= */"] });
 
 
 /***/ }),
@@ -4240,7 +4238,7 @@ class YesNoDialogComponent {
 YesNoDialogComponent.ɵfac = function YesNoDialogComponent_Factory(t) { return new (t || YesNoDialogComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_1__.MAT_DIALOG_DATA)); };
 YesNoDialogComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: YesNoDialogComponent, selectors: [["app-yes-no-dialog"]], inputs: { text: "text" }, decls: 7, vars: 3, consts: [["mat-dialog-title", ""], ["mat-dialog-content", ""], [2, "float", "right", "margin", "20px"], ["type", "button", "value", "Yes", 1, "btn", "btn-danger", "m-1", 3, "mat-dialog-close"], ["type", "button", "value", "No", 1, "btn", "btn-outline-primary", "m-1", 3, "mat-dialog-close"]], template: function YesNoDialogComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h1", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Deleting item");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Confirm dialog");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
@@ -4378,7 +4376,9 @@ class FavouriteComponent {
         this.refreshState();
     }
     refreshState() {
-        this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((response) => {
+        this.favouriteProductService
+            .GetFavouriteProducts(this.authService.getLoggedUserId())
+            .subscribe((response) => {
             this.responseModel = response;
             this.isLoading = false;
         });
@@ -4388,7 +4388,9 @@ class FavouriteComponent {
         if (id) {
             (_a = this.favouriteProductService.DeleteFavouriteProduct(this.authService.getLoggedUserId(), id)) === null || _a === void 0 ? void 0 : _a.subscribe(() => {
                 this.toastr.success("Success deleted favourite product");
-                this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result) => {
+                this.favouriteProductService
+                    .GetFavouriteProducts(this.authService.getLoggedUserId())
+                    .subscribe((result) => {
                     this.responseModel = result;
                 });
             });

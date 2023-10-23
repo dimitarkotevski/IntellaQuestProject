@@ -37,7 +37,9 @@ export class FavouriteComponent implements OnInit, OnChanges {
   }
 
   refreshState(){
-    this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((response:ResponseListModel<ProductGridModel>)=>{
+    this.favouriteProductService
+      .GetFavouriteProducts(this.authService.getLoggedUserId())
+      .subscribe((response:ResponseListModel<ProductGridModel>)=>{
       this.responseModel = response;
       this.isLoading = false;
     })
@@ -47,7 +49,9 @@ export class FavouriteComponent implements OnInit, OnChanges {
     if(id){
       this.favouriteProductService.DeleteFavouriteProduct(this.authService.getLoggedUserId(),id)?.subscribe(()=>{
         this.toastr.success("Success deleted favourite product");
-        this.favouriteProductService.GetFavouriteProducts(this.authService.getLoggedUserId()).subscribe((result:ResponseListModel<ProductGridModel>)=>{
+        this.favouriteProductService
+          .GetFavouriteProducts(this.authService.getLoggedUserId())
+          .subscribe((result:ResponseListModel<ProductGridModel>)=>{
           this.responseModel = result;
         })
       })

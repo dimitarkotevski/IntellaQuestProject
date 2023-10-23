@@ -29,10 +29,10 @@ namespace IntellaQuest.Web.Controllers
         [HttpPost]
         public ActionResult Create(UserViewModel model)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return Json(ModelState.Values);
-            }
+            }*/
             _usersService.Create(model);
             return Json(new { success = true });
         }

@@ -21,10 +21,14 @@
         </li>
       </ul>
 
+      <!-- show product after the come from backend -->
       <app-products-grid *ngIf="!isLoading" 
             [hasRemoveProductButton]="false" 
             [type]="'home'"
-            [products]="products"></app-products-grid>
+            [products]="products">
+      </app-products-grid>
+
+      <!-- while products are loading from backend -->
       <app-loading-grid *ngIf="isLoading" ></app-loading-grid>
 
     </div> 

@@ -19,6 +19,7 @@
               <div class="input-group">
                 <span class="py-2">$</span
                 ><input
+                [(ngModel)]="filterProducts.PriceFrom"
                   type="text"
                   name="price"
                   class="form-control"
@@ -37,6 +38,7 @@
               <div class="input-group">
                 <span class="py-2">$</span
                 ><input
+                [(ngModel)]="filterProducts.PriceTo"
                   type="text"
                   name="price"
                   class="form-control"
@@ -49,7 +51,7 @@
       </div>
       <div class="row">
         <div class="col-12 py-3">
-          <button class="btn solid_button solid_button w-75">Search</button>
+          <button class="btn solid_button solid_button w-75" (click)="searchPrice()" >Search</button>
         </div>
       </div>
     </div>

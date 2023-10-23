@@ -253,6 +253,11 @@ namespace IntellaQuest.BusinessLogic.Services
 
                     }
 
+                    if ((request.PriceFrom != null && request.PriceTo != null) && (request.PriceFrom < request.PriceTo))
+                    {
+                        queryCategoryProducts = queryCategoryProducts.Where(x=>x.Price>=request.PriceFrom && x.Price<request.PriceTo);
+                    }
+
                 }
 
                 response.Items = queryCategoryProducts.Select(x => x.MapToViewModel()).ToList();

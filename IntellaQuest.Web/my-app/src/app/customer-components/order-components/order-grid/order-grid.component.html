@@ -21,10 +21,14 @@
                     <td *ngIf="order.DateCreated">{{(order.DateCreated | dateConverter) || '/'}}</td>
                     <td>{{order.NumberOfProducts}}</td>
                     <td>${{order.TotalAmount?.toFixed(2) || '/'}}</td>
-                    <td *ngIf="order.OrderStatus == 0" class="bg-danger text-white text-center">{{order.OrderStatus | orderStatus}}</td>
-                    <td *ngIf="order.OrderStatus == 1" class="bg-info text-white text-center">{{order.OrderStatus | orderStatus}}</td>
-                    <td *ngIf="order.OrderStatus == 2" class="bg-warning text-white text-center">{{order.OrderStatus | orderStatus}}</td>
-                    <td *ngIf="order.OrderStatus == 3" class="bg-success text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                    <td *ngIf="order.OrderStatus == 0" 
+                        class="bg-danger text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                    <td *ngIf="order.OrderStatus == 1" 
+                        class="bg-info text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                    <td *ngIf="order.OrderStatus == 2" 
+                        class="bg-warning text-white text-center">{{order.OrderStatus | orderStatus}}</td>
+                    <td *ngIf="order.OrderStatus == 3" 
+                        class="bg-success text-white text-center">{{order.OrderStatus | orderStatus}}</td>
                   </tr>
                 </tbody>
               </table>

@@ -57,6 +57,8 @@ export class SideFilterComponent implements OnInit {
     this.refreshState.emit(this.filterProducts);
   }
 
-  
+  searchPrice(){
+    this.refreshState.emit(this.filterProducts);
+  }
 
 }

@@ -8,11 +8,8 @@
     <app-products-grid [type]="'cart'" [shoppingCart]="shoppingCart" (refreshState)="refreshState()">
     </app-products-grid>
     <div *ngIf="shoppingCart.ShoppingCartDetails.length>0" class="row">
-      <div class="my-5 col-md-6 col-lg-6">
-        <button class="btn w-75 btn-danger"><h5>Delete all products</h5></button>
-      </div>
-      <div class="my-5 col-md-6 col-lg-6 right-solid-text">
-        <button class="btn w-75 solid-button-order" data-toggle="modal" data-target="#orderMaking" (click)="MakeOrder(shoppingCart.Id)" ><h5>Order here</h5></button>
+      <div class="pt-lg-3 pull-right">
+        <button class="btn solid-button-order" data-toggle="modal" data-target="#orderMaking" (click)="MakeOrder(shoppingCart.Id)" ><h5>Order here</h5></button>
       </div>
     </div>
   </div>

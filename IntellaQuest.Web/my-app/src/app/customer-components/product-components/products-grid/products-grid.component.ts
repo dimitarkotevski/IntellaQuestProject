@@ -47,7 +47,7 @@ export class ProductsGridComponent implements OnInit {
       window.location.replace('/login')
     }
     if(productId){
-      this.favouriteProductService.AddFavouriteProducts(userId,productId).subscribe(
+      this.favouriteProductService.addFavouriteProducts(userId,productId).subscribe(
       ()=>{
         this.toastr.success("Product added!");
       },
@@ -72,7 +72,7 @@ export class ProductsGridComponent implements OnInit {
 
   deleteFavouriteProduct(id:string | undefined){
     if(id){
-      this.favouriteProductService.DeleteFavouriteProduct(this.authService.getLoggedUserId(),id)?.subscribe(()=>{
+      this.favouriteProductService.deleteFavouriteProduct(this.authService.getLoggedUserId(),id)?.subscribe(()=>{
         this.toastr.success("Success deleted favourite product");
         this.refresh();
       })

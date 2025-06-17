@@ -1,1 +1,1 @@
-# IntellaQuestProject
+# Online shopping web site
